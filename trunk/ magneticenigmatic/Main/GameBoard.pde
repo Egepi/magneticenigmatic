@@ -65,7 +65,7 @@ class GameBoard
     }
     tileBoard[3][4] = new Tile(1);
     tileBoard[4][4] = new Tile(1);
-    tileBoard[5][4] = new Tile(1);
+    tileBoard[6][4] = new Tile(1);
   }
   
   public int getBoardHeight()
