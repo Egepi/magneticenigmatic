@@ -54,6 +54,4 @@ class Tile
   {
     this.tileType = newType;
   }
-
-    
 }
