@@ -18,7 +18,7 @@ Basic clears:
 		  O O 
 	
 	  X
-	X X		- Mirror L shaped
+	X X		- Y reflected L shaped
 	
 		if this occurs check the O's for same color
 
@@ -28,7 +28,7 @@ Basic clears:
 		  O O 
 	
 	X X
-	X
+	X		- X reflected L shaped
 		
 		if this occurs check the O's for same color
 
@@ -39,7 +39,7 @@ Basic clears:
 	
 	
 	X X
-	  X
+	  X		- X and Y reflected L shaped
 	 
 		if this occurs check the O's for same color
 
