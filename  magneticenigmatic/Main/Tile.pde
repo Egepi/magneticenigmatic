@@ -49,6 +49,11 @@ class Tile
   {
     return this.tileType;
   }
+  
+  public void setTileType(int newType)
+  {
+    this.tileType = newType;
+  }
 
     
 }
