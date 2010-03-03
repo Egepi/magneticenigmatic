@@ -23,6 +23,7 @@ void draw()
   //Prints the board on the screen.
   theBoard.drawBoard();
   checkWin();
+
 }
 
   void checkWin()
@@ -51,3 +52,9 @@ void draw()
      }
     }    
   }
+  
+public void  mouseClicked()
+{
+    theBoard.tileBoard[6][4] = new Tile(0);
+    theBoard.tileBoard[5][4] = new Tile(1);
+}
