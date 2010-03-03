@@ -28,15 +28,26 @@ void draw()
   void checkWin()
   {
     Tile tempTile;
-    for(int i = 0; i < theBoard.boardHeight-1; i++)
+    
+    for(int i = 0; i < theBoard.boardHeight-2; i++)
     {
-      for(int j = 0; j < theBoard.boardWidth-1; j++)
+      for(int j = 0; j < theBoard.boardWidth; j++)
       {
+        
         tempTile = theBoard.tileBoard[i][j];
-        if(tempTile.getTileType() == theBoard.tileBoard[i+1][j].getTileType())
+        if(!(tempTile.getTileType() == 0))
         {
-          
+          if(tempTile.getTileType() == theBoard.tileBoard[i+1][j].getTileType())
+          {
+            if(tempTile.getTileType() == theBoard.tileBoard[i+2][j].getTileType())
+            {
+              print("3 OF A KIND!");
+              theBoard.tileBoard[i][j].setTileType(0);
+              theBoard.tileBoard[i+1][j].setTileType(0);
+              theBoard.tileBoard[i+2][j].setTileType(0);
+            }
+          }
         }
-      }
+     }
     }    
   }
