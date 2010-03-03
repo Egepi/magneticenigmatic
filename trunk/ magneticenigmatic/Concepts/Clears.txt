@@ -1,0 +1,61 @@
+Basic clears:
+	X X X 	- three in a row horizontal
+	
+		if this occurs check the O's for same color
+		
+		  O O O
+		O X X X O
+		  O O O
+	
+	X
+	X X 	- L shaped 3
+		
+		if this occurs check the O's for same color
+
+		  O	
+		O X O
+		O X X O 
+		  O O 
+	
+	  X
+	X X		- Mirror L shaped
+	
+		if this occurs check the O's for same color
+
+		  	O
+		  O X O
+		O X X O 
+		  O O 
+	
+	X X
+	X
+		
+		if this occurs check the O's for same color
+
+		  O	O
+		O X X O
+		O X O 
+		  O 
+	
+	
+	X X
+	  X
+	 
+		if this occurs check the O's for same color
+
+		  O	O
+		O X X O
+		  O X O 
+		    O
+			
+			
+	For cases of 5 or greater check neighbors of the 4th one found as follows(Z's):
+	
+		  O	O
+		O X X O
+		  O X O 
+		  Z X Z
+			Z
+	If 5th was found then do same for 6th and so on.
+
+	
