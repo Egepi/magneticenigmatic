@@ -22,4 +22,5 @@ void draw()
   background(50,125,150);
   //Prints the board on the screen.
   theBoard.drawBoard();
+  theBoard.checkWin();
 }
