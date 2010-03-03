@@ -20,7 +20,7 @@ class GameBoard
   {
     boardWidth = theWidth;
     boardHeight = theHeight;
-    tileBoard = new Tile[boardWidth][boardHeight];
+    tileBoard = new Tile[boardHeight][boardWidth];
   }
   
   /************************************************************
