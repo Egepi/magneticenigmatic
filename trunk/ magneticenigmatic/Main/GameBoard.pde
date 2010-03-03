@@ -36,7 +36,10 @@ class GameBoard
     {
       for(int y = 0; y < boardWidth; y++)
       {
-        image(tileBoard[x][y].getTileImage(),tempX,tempY,50,50);
+        if(tileBoard[x][y].getTileType() != 0)
+        {
+          image(tileBoard[x][y].getTileImage(),tempX,tempY,50,50);
+        }
         tempX = tempX + 52;
       }
       tempY = tempY + 52;
