@@ -22,5 +22,21 @@ void draw()
   background(50,125,150);
   //Prints the board on the screen.
   theBoard.drawBoard();
-  theBoard.checkWin();
+  checkWin();
 }
+
+  void checkWin()
+  {
+    Tile tempTile;
+    for(int i = 0; i < theBoard.boardHeight-1; i++)
+    {
+      for(int j = 0; j < theBoard.boardWidth-1; j++)
+      {
+        tempTile = theBoard.tileBoard[i][j];
+        if(tempTile.getTileType() == theBoard.tileBoard[i+1][j].getTileType())
+        {
+          
+        }
+      }
+    }    
+  }

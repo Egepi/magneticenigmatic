@@ -6,8 +6,8 @@
 */
 class GameBoard
 {
-  private int boardWidth;
-  private int boardHeight;
+  public int boardWidth;
+  public int boardHeight;
   Tile tileBoard[][]; 
   
   /************************************************************
@@ -64,19 +64,5 @@ class GameBoard
     tileBoard[4][4] = new Tile(1);
   }
   
-  void checkWin()
-  {
-    Tile tempTile;
-    for(int i = 0; i < boardHeight-1; i++)
-    {
-      for(int j = 0; j < boardWidth-1; j++)
-      {
-        tempTile = tileBoard[i][j];
-        if(tempTile.getTileType() == tileBoard[i+1][j].getTileType())
-        {
-          
-        }
-      }
-    }    
-  }
+
 }
