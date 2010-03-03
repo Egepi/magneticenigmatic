@@ -6,9 +6,9 @@
 */
 class GameBoard
 {
-  public int boardWidth;
-  public int boardHeight;
-  Tile tileBoard[][]; 
+  private int boardWidth;
+  private int boardHeight;
+  private Tile tileBoard[][]; 
   
   /************************************************************
   * Constructor for a GameBoard, sets the width and height of board.
@@ -64,5 +64,19 @@ class GameBoard
     tileBoard[4][4] = new Tile(1);
   }
   
+  public int getBoardHeight()
+  {
+    return boardHeight;
+  }
+  
+  public int getBoardWidth()
+  {
+    return boardWidth;
+  }
+  
+  public Tile[][] getGameBoard()
+  {
+    return tileBoard;
+  }
 
 }
