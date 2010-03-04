@@ -2,29 +2,24 @@
  * Authors: Jeremy Meador, Todd Silvia, 
  *          Karan Chakrapani, Lee Vanderlick
  * Date: March 3, 2010
- * Class - Tile: <Description goes here>
+ * Class - Tile: Tiles are the pieces of the puzzle. Tiles are not aware of where they are, only of what type they are and what state they are in.
 */
 class Tile
 {
-  private int TILE_WIDTH = 50;
-  private int TILE_HEIGHT = 50;
+  //private int TILE_WIDTH = 50;  All tiles should be square and 
+  //private int TILE_HEIGHT = 50; have identical dimensions; unnec. var.
   private PImage tileImage;
   private int tileType;
+  private boolean isMoving;
   
   /************************************************************
   * Constructor for Tile class.
   */  
   Tile(int theType)
   {
-    if(theType == 1)
-    {
-      tileImage = loadImage("diamond.jpg");
-    }
-    else if(theType == 2)
-    {
-      tileImage = loadImage("ruby.jpg");
-    }
+    tileImage = tileImageType[theType];
     tileType = theType;
+    isMoving = false; //Set to true when tile is animating (falling or swapping)
   }
   
   /************************************************************
@@ -32,15 +27,6 @@ class Tile
   *
   * Author: Todd Silvia
   */  
-  public int getTileHeight()
-  {
-    return this.TILE_HEIGHT;
-  }
-  
-  public int getTileWidth()
-  {
-    return this.TILE_WIDTH;
-  }
   
   public PImage getTileImage()
   {
@@ -60,5 +46,10 @@ class Tile
   public void setTileType(int newType)
   {
     this.tileType = newType;
+  }
+  
+  public boolean swappable()
+  {
+    return (!isMoving);
   }
 }
