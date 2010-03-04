@@ -16,7 +16,14 @@ class Tile
   */  
   Tile(int theType)
   {
-    tileImage = loadImage("diamond.jpg");
+    if(theType == 1)
+    {
+      tileImage = loadImage("diamond.jpg");
+    }
+    else if(theType == 2)
+    {
+      tileImage = loadImage("ruby.jpg");
+    }
     tileType = theType;
   }
   
