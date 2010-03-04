@@ -6,8 +6,8 @@
 */
 class GameBoard
 {
-  private int boardWidth;
-  private int boardHeight;
+//private int boardWidth;  Use MAX_R and TPR instead
+//private int boardHeight; These names are short because they will be used often
   private Tile tileBoard[][]; 
   
   /************************************************************
@@ -18,9 +18,7 @@ class GameBoard
   */
   GameBoard(int theWidth, int theHeight)
   {
-    boardWidth = theWidth;
-    boardHeight = theHeight;
-    tileBoard = new Tile[boardHeight][boardWidth];
+    tileBoard = new Tile[theWidth][theHeight];
   }
   
   /************************************************************
@@ -32,17 +30,17 @@ class GameBoard
   {
     int tempX = 0;
     int tempY = 0;
-    for(int x = 0; x < boardHeight; x++)
+    for(int x = 0; x < MAX_R; x++)
     {
-      for(int y = 0; y < boardWidth; y++)
+      for(int y = 0; y < TPR; y++)
       {
         if(tileBoard[x][y].getTileType() != 0)
         {
-          image(tileBoard[x][y].getTileImage(),tempX,tempY,50,50);
+          image(tileBoard[x][y].getTileImage(),tempX,tempY,TILE_SIZE,TILE_SIZE);
         }
-        tempX = tempX + 52;
+        tempX = tempX + TILE_SIZE;
       }
-      tempY = tempY + 52;
+      tempY = tempY + TILE_SIZE;
       tempX = 0;
     }
   }
@@ -56,33 +54,65 @@ class GameBoard
   */
   void generateBoard()
   {
-    for(int i = 0; i < boardHeight; i++)
+    for(int i = 0; i < MAX_R; i++)
     {
-      for(int j = 0; j < boardWidth; j++)
+      for(int j = 0; j < TPR; j++)
       {
-        tileBoard[i][j] = new Tile(0);
+        tileBoard[i][j] = new Tile(int(random(1,TILE_TYPES)));
       }
     }
-    tileBoard[3][4] = new Tile(1);
+    /*tileBoard[3][4] = new Tile(1);
     tileBoard[4][4] = new Tile(1);
     tileBoard[6][4] = new Tile(1);
     theBoard.tileBoard[1][1] = new Tile(2);
-    theBoard.tileBoard[7][7] = new Tile(2);
+    theBoard.tileBoard[7][7] = new Tile(2);*/
   }
   
-  public int getBoardHeight()
+  /************************************************************
+  * Checks to make sure tiles can be swapped, then swaps two adjacent tiles
+  *
+  * Author: JM
+  */
+  public boolean swap(int a, int b, int row) //Swap tile at xcoord a with tile at xcoord b on a row
   {
-    return boardHeight;
+    if ((a < 0)||(a>=TPR)||(b < 0)||(b>=TPR)||(row < 0)||(row >=MAX_R)) //if a, b, or row are out of range
+      return false; //tell caller swap did not succeed
+    if ((tileAt(a,row) == null)||(tileAt(b,row) == null)) //if these tiles somehow don't exist
+      return false;
+    if (abs(a-b)!=1) //if a is not adjacent to b
+      return false;
+    if (!((tileAt(a,row).swappable())&&(tileAt(b,row).swappable()))) //if either block is not swappable
+      return false;
+    //Play fancy animation for which the duration is the time that the tile is not swappable.  
+    Tile temp = tileAt(b,row);
+    tileBoard[b][row] = tileAt(a,row);
+    tileBoard[a][row] = temp;
+    return true;
   }
   
-  public int getBoardWidth()
+  public boolean swap(Selector s1, Selector s2) //attempt to swap the selected tiles if the selectors are on the same row
   {
-    return boardWidth;
+    if (s1.getY() != s2.getY())
+      return false;
+    return swap(s1.getX(),s2.getX(),s1.getY());
   }
+    
+    
   
   public Tile[][] getGameBoard()
   {
     return tileBoard;
   }
+  
+  private Tile tileAt(int x, int y) //alternative for getting a tile
+  {
+    return tileBoard[x][y];   
+  }
+  
+  private Tile tileAt(Selector s) //alternative for getting a tile
+  {
+    return tileBoard[s.getX()][s.getY()];   
+  }
+    
 
 }
