@@ -13,10 +13,10 @@ void getTouches() {
       if ( curTouch != null){
         //Grab Data
         float xCoord = curTouch.getXPos() * width;    
-        float yCoord = curTouch.getYPos() * height;
-        int newx, newy;
-        newx = int(yCoord/TILE_SIZE);
-        newy = int(xCoord/TILE_SIZE);
+        float yCoord = height - curTouch.getYPos() * height;
+        int newx, newy;        
+        newx = int((yCoord-PUZZLE_ORIGIN_Y)/TILE_SIZE);
+        newy = int((xCoord-PUZZLE_ORIGIN_X)/TILE_SIZE);
         if (sel1.getX() == -1)
           sel1.setSelector(newx,newy);
         else if (sel1.isEqual(newx,newy))
