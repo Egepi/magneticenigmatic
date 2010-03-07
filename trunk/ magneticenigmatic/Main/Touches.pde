@@ -1,7 +1,5 @@
 
 void getTouches() {
-  //if (touchList.size() == 0)
-      // elec.close();
   if ( ! tacTile.managedListIsEmpty() ){
 
     touchList = tacTile.getManagedList();

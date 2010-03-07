@@ -26,10 +26,10 @@ class GameBoard
   *
   * Author: Todd Silvia
   */
-  void drawBoard()
+  public void drawBoard()
   {
-    int tempX = (screen.width/2) - ((MAX_R * TILE_SIZE)/2);
-    int tempY = (screen.height/2) - ((TPR * TILE_SIZE)/2);
+    int tempX = PUZZLE_ORIGIN_X;
+    int tempY = PUZZLE_ORIGIN_Y;
     for(int x = 0; x < TPR; x++)
     {
       for(int y = 0; y < MAX_R; y++)
@@ -41,7 +41,7 @@ class GameBoard
         tempX = tempX + TILE_SIZE;
       }
       tempY = tempY + TILE_SIZE;
-      tempX = (screen.width/2) - ((MAX_R * TILE_SIZE)/2);
+      tempX = PUZZLE_ORIGIN_X;
     }
   }
   
@@ -52,7 +52,7 @@ class GameBoard
   *
   * Author: Todd Silvia
   */
-  void generateBoard()
+  public void generateBoard()
   {
     for(int i = 0; i < TPR; i++)
     {
@@ -93,6 +93,54 @@ class GameBoard
   }
     
     
+  /************************************************************
+  * Iterates through all the blocks and checks to see if they should fall
+  *
+  * Author: JM
+  */  
+  public void gravity(){
+    for (int x=0; x<TPR; x++)
+      for (int y=0; y<MAX_R; y++)
+      {
+        if (tileBoard[x][y].getTileType() == EMPTY)
+          fallTiles(x,y,lineOfGravity); 
+      }
+  }
+  
+ 
+  /************************************************************
+  * Takes coordinates of an empty space (x,y) and a line which the blocks are attracted to (g) and incremements the blocks from one end of the puzzle to y on row x horizontally by one meant to be called multiple times in one instance
+  * Returns false if the block is not an empty space or if no blocks fall
+  *
+  * Author: JM
+  */
+  public boolean fallTiles(int x, int y, int g) //
+  {
+    int lesser,greater,iter;
+    boolean blockHasFallen = false;
+    if (tileBoard[x][y].getTileType() != EMPTY)
+      return blockHasFallen;
+    int furthest,nearest;
+    if (g > y) {
+      nearest = y-1; //the first block to iterate
+      furthest = -1; //the one beyond the last block (out of array bounds)
+      iter = -1; //the direction the iterator needs to go
+    }
+    else{
+      nearest = y+1;
+      furthest = MAX_R;
+      iter = 1;
+    }
+    int j;
+    for (j=nearest; j!=furthest; j+=iter)
+    {
+      tileBoard[x][j-iter] = tileBoard[x][j];
+      if (tileBoard[x][j].getTileType() != EMPTY)
+        blockHasFallen = true;
+    }
+    tileBoard[x][j-iter] = new Tile(EMPTY);
+    return blockHasFallen;
+  }
   
   public Tile[][] getGameBoard()
   {

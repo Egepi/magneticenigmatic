@@ -34,11 +34,15 @@ int msgPort = 7340;
  * Constants library (Do tweaking here, do not hardcode values)
  */
  
- //Board and tile size
+ //Board and tile size (careful with the commas here, I kept getting unexpected token errors because of having semi-colons instead of commas)
  
- static final int TPR = 15, //Tiles per row
-                MAX_R = 20; //Maximum number of rows
-                //TILE_SIZE = 50;
+ static final int TPR = 8, //Tiles per row
+                MAX_R = 17, //Maximum number of rows
+                PUZZLE_WIDTH = 400,
+                TILE_SIZE = PUZZLE_WIDTH/TPR;
+                
+final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
+          PUZZLE_ORIGIN_Y = (screen.height/2) - ((TPR * TILE_SIZE)/2);
 
 //Implementation for dynamic based size?
 //This works but really not what you want on a rectangular screen.
@@ -49,7 +53,7 @@ int msgPort = 7340;
 
 //Implementation for tiles per row based size
 //This forces there to be tiles from edge to edge on the short edge.
-int TILE_SIZE = int(screen.height/TPR);
+
                 
 //Gameplay variables (change difficulty here)
  static final int TILE_TYPES = 6; //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
@@ -60,6 +64,11 @@ int TILE_SIZE = int(screen.height/TPR);
                      TILE3 = "Green.png",
                      TILE4 = "Purple.png",
                      TILE5 = "White.png";
+                     
+//For the sake of readability and code comprehension
+
+ static final int EMPTY = 0;
+                   
                       
 /**************************************************************
  * Global variable declarations
@@ -73,6 +82,8 @@ int TILE_SIZE = int(screen.height/TPR);
  GameBoard theBoard;
  
  Selector sel1, sel2;
+ 
+ int lineOfGravity = MAX_R/2 + 1;
 
 void setup()
 {
@@ -103,6 +114,7 @@ void draw()
   background(50,125,150);
   //Prints the board on the screen.
   getInput();
+  boardFSM(); //board finite state machine
   theBoard.drawBoard();
   checkWin();
 }
@@ -135,14 +147,13 @@ void draw()
   
 void getInput()
 {
-    //theBoard.swap(6,5,4);
     if (connectToTacTile)
       getTouches();
     else if (mousePressed)
     {
        int newx, newy;
-       newx = mouseY/TILE_SIZE;
-       newy = mouseX/TILE_SIZE;
+       newx = (mouseY-PUZZLE_ORIGIN_Y)/TILE_SIZE;
+       newy = (mouseX-PUZZLE_ORIGIN_X)/TILE_SIZE;
        if (sel1.getX() == -1)
          sel1.setSelector(newx,newy);
        else if (sel1.isEqual(newx,newy))
@@ -155,4 +166,9 @@ void getInput()
          sel2.reset();
        }
     }
+}
+
+void boardFSM()
+{
+  theBoard.gravity();
 }
