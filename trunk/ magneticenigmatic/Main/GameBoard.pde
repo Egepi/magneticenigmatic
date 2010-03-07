@@ -146,6 +146,10 @@ class GameBoard
   {
     return tileBoard;
   }
+  public void setGameBoard(Tile[][] theBoard)
+  {
+    tileBoard = theBoard;
+  }
   
   private Tile tileAt(int x, int y) //alternative for getting a tile
   {
@@ -156,6 +160,89 @@ class GameBoard
   {
     return tileBoard[s.getX()][s.getY()];   
   }
-    
+  /************************************************************
+  * Parses the baord for any groups of 3+ tiles and clears them
+  *
+  *
+  * Author: Karan Chakrapani
+  */ 
+  void checkClears()
+  {
 
+    Tile tempTile;
+    
+    for(int i = 0; i < TPR; i++)
+    {
+      for(int j = 0; j < MAX_R; j++)
+      {
+        tempTile = tileBoard[i][j];
+        
+        
+        /*
+         * Horizontal 3 and 4 check
+         */
+        if(!(tempTile.getTileType() == 0))
+        {
+          if((i+1 < TPR) &&(tempTile.getTileType() == tileBoard[i+1][j].getTileType()))
+          {
+            if((i+2 < TPR) && (tempTile.getTileType() == tileBoard[i+2][j].getTileType()))
+            {
+              if((i+3 < TPR) && (tempTile.getTileType() == tileBoard[i+3][j].getTileType()))
+              {
+                //Debug code
+                print("\n4 tiles cleared Horizontally of type: " + tempTile.getTileType());   
+                tileBoard[i][j].setTileType(0);
+                tileBoard[i+1][j].setTileType(0);
+                tileBoard[i+2][j].setTileType(0);
+                tileBoard[i+3][j].setTileType(0);             
+              }
+              else
+              {
+                //Debug code
+                print("\n3 tiles cleared Horizontally of type: " + tempTile.getTileType());                
+                tileBoard[i][j].setTileType(0);
+                tileBoard[i+1][j].setTileType(0);
+                tileBoard[i+2][j].setTileType(0);
+              }
+            }
+          }
+        }
+        
+        
+        /*
+         * Vertical 3 and 4 check
+         */
+        if(!(tempTile.getTileType() == 0))
+        {
+          if((j+1 < TPR) &&(tempTile.getTileType() == tileBoard[i][j+1].getTileType()))
+          {
+            if((j+2 < TPR) && (tempTile.getTileType() == tileBoard[i][j+2].getTileType()))
+            {
+              if((j+3 < TPR) && (tempTile.getTileType() == tileBoard[i][j+3].getTileType()))
+              {
+                //Debug code
+                print("\n4 tiles cleared Verically   of type: " + tempTile.getTileType());            
+                tileBoard[i][j].setTileType(0);
+                tileBoard[i][j+1].setTileType(0);
+                tileBoard[i][j+2].setTileType(0);
+                tileBoard[i][j+3].setTileType(0);
+              }
+              else
+              {
+                //Debug code
+                print("\n3 tiles cleared Vertically   of type: " + tempTile.getTileType());
+                tileBoard[i][j].setTileType(0);
+                tileBoard[i][j+1].setTileType(0);
+                tileBoard[i][j+2].setTileType(0);
+
+              }
+            }
+          }
+        }        
+        
+        
+     }
+    }
+    //set tileboard back into gameboard   
+  }
 }

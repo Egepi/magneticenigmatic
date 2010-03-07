@@ -116,34 +116,9 @@ void draw()
   getInput();
   boardFSM(); //board finite state machine
   theBoard.drawBoard();
-  checkWin();
 }
 
-  void checkWin()
-  {
-    Tile tempTile;
-    
-    for(int i = 0; i < TPR-2; i++)
-    {
-      for(int j = 0; j < MAX_R; j++)
-      {
-        
-        tempTile = theBoard.tileBoard[i][j];
-        if(!(tempTile.getTileType() == 0))
-        {
-          if(tempTile.getTileType() == theBoard.tileBoard[i+1][j].getTileType())
-          {
-            if(tempTile.getTileType() == theBoard.tileBoard[i+2][j].getTileType())
-            {
-              theBoard.tileBoard[i][j].setTileType(0);
-              theBoard.tileBoard[i+1][j].setTileType(0);
-              theBoard.tileBoard[i+2][j].setTileType(0);
-            }
-          }
-        }
-     }
-    }    
-  }
+
   
 void getInput()
 {
@@ -170,5 +145,7 @@ void getInput()
 
 void boardFSM()
 {
+  theBoard.checkClears();
   theBoard.gravity();
+  theBoard.checkClears();
 }
