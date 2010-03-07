@@ -36,12 +36,20 @@ int msgPort = 7340;
  
  //Board and tile size
  
- static final int TPR = 10, //Tiles per row
-                MAX_R = 10; //Maximum number of rows
-                int TILE_SIZE = 50;
+ static final int TPR = 15, //Tiles per row
+                MAX_R = 20; //Maximum number of rows
+                //TILE_SIZE = 50;
+
+//Implementation for dynamic based size?
+//This works but really not what you want on a rectangular screen.
 //int numTiles = TPR*MAX_R;
-//int areaOfTile = int(sqrt(screen.width*screen.height));
-//int TILE_SIZE = areaOfTile/numTiles;
+//int areaOverall = screen.width*screen.height;
+//int tileArea = areaOverall/numTiles;
+//int TILE_SIZE = int(sqrt(tileArea)) - 10;
+
+//Implementation for tiles per row based size
+//This forces there to be tiles from edge to edge on the short edge.
+int TILE_SIZE = int(screen.height/TPR);
                 
 //Gameplay variables (change difficulty here)
  static final int TILE_TYPES = 6; //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
@@ -68,7 +76,6 @@ int msgPort = 7340;
 
 void setup()
 {
-  print("TILE_SIZE:" + TILE_SIZE);
   if (connectToTacTile)
     startTactile();
   //Load resources into memory
@@ -97,16 +104,16 @@ void draw()
   //Prints the board on the screen.
   getInput();
   theBoard.drawBoard();
-  //checkWin();
+  checkWin();
 }
 
   void checkWin()
   {
     Tile tempTile;
     
-    for(int i = 0; i < MAX_R-2; i++)
+    for(int i = 0; i < TPR-2; i++)
     {
-      for(int j = 0; j < TPR; j++)
+      for(int j = 0; j < MAX_R; j++)
       {
         
         tempTile = theBoard.tileBoard[i][j];
@@ -116,7 +123,6 @@ void draw()
           {
             if(tempTile.getTileType() == theBoard.tileBoard[i+2][j].getTileType())
             {
-              print("3 OF A KIND!");
               theBoard.tileBoard[i][j].setTileType(0);
               theBoard.tileBoard[i+1][j].setTileType(0);
               theBoard.tileBoard[i+2][j].setTileType(0);
