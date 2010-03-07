@@ -36,10 +36,13 @@ int msgPort = 7340;
  
  //Board and tile size
  
- static final int TPR = 8, //Tiles per row
-                MAX_R = 8, //Maximum number of rows
-           TILE_SIZE = 50;
-           
+ static final int TPR = 10, //Tiles per row
+                MAX_R = 10; //Maximum number of rows
+                int TILE_SIZE = 50;
+//int numTiles = TPR*MAX_R;
+//int areaOfTile = int(sqrt(screen.width*screen.height));
+//int TILE_SIZE = areaOfTile/numTiles;
+                
 //Gameplay variables (change difficulty here)
  static final int TILE_TYPES = 6; //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
 
@@ -65,6 +68,7 @@ int msgPort = 7340;
 
 void setup()
 {
+  print("TILE_SIZE:" + TILE_SIZE);
   if (connectToTacTile)
     startTactile();
   //Load resources into memory
@@ -87,6 +91,7 @@ void setup()
 
 void draw()
 {
+  
   //Arbitrary background color for the time being.
   background(50,125,150);
   //Prints the board on the screen.
