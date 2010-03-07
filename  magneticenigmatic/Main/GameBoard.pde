@@ -8,7 +8,7 @@ class GameBoard
 {
 //private int boardWidth;  Use MAX_R and TPR instead
 //private int boardHeight; These names are short because they will be used often
-  private Tile tileBoard[][]; 
+  public Tile tileBoard[][]; 
   
   /************************************************************
   * Constructor for a GameBoard, sets the width and height of board.
@@ -28,11 +28,11 @@ class GameBoard
   */
   void drawBoard()
   {
-    int tempX = 0;
-    int tempY = 0;
-    for(int x = 0; x < MAX_R; x++)
+    int tempX = (screen.width/2) - ((MAX_R * TILE_SIZE)/2);
+    int tempY = (screen.height/2) - ((TPR * TILE_SIZE)/2);
+    for(int x = 0; x < TPR; x++)
     {
-      for(int y = 0; y < TPR; y++)
+      for(int y = 0; y < MAX_R; y++)
       {
         if(tileBoard[x][y].getTileType() != 0)
         {
@@ -41,7 +41,7 @@ class GameBoard
         tempX = tempX + TILE_SIZE;
       }
       tempY = tempY + TILE_SIZE;
-      tempX = 0;
+      tempX = (screen.width/2) - ((MAX_R * TILE_SIZE)/2);
     }
   }
   
@@ -54,18 +54,13 @@ class GameBoard
   */
   void generateBoard()
   {
-    for(int i = 0; i < MAX_R; i++)
+    for(int i = 0; i < TPR; i++)
     {
-      for(int j = 0; j < TPR; j++)
+      for(int j = 0; j < MAX_R; j++)
       {
         tileBoard[i][j] = new Tile(int(random(1,TILE_TYPES)));
       }
     }
-    /*tileBoard[3][4] = new Tile(1);
-    tileBoard[4][4] = new Tile(1);
-    tileBoard[6][4] = new Tile(1);
-    theBoard.tileBoard[1][1] = new Tile(2);
-    theBoard.tileBoard[7][7] = new Tile(2);*/
   }
   
   /************************************************************
