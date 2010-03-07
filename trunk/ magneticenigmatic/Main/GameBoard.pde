@@ -214,14 +214,14 @@ class GameBoard
          */
         if(!(tempTile.getTileType() == 0))
         {
-          if((j+1 < TPR) &&(tempTile.getTileType() == tileBoard[i][j+1].getTileType()))
+          if((j+1 < MAX_R) &&(tempTile.getTileType() == tileBoard[i][j+1].getTileType()))
           {
-            if((j+2 < TPR) && (tempTile.getTileType() == tileBoard[i][j+2].getTileType()))
+            if((j+2 < MAX_R) && (tempTile.getTileType() == tileBoard[i][j+2].getTileType()))
             {
-              if((j+3 < TPR) && (tempTile.getTileType() == tileBoard[i][j+3].getTileType()))
+              if((j+3 < MAX_R) && (tempTile.getTileType() == tileBoard[i][j+3].getTileType()))
               {
                 //Debug code
-                print("\n4 tiles cleared Verically   of type: " + tempTile.getTileType());            
+                print("\n4 tiles cleared Vertically   of type: " + tempTile.getTileType());            
                 tileBoard[i][j].setTileType(0);
                 tileBoard[i][j+1].setTileType(0);
                 tileBoard[i][j+2].setTileType(0);
