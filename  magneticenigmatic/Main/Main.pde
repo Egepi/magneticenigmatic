@@ -43,17 +43,7 @@ int msgPort = 7340;
                 
 final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
           PUZZLE_ORIGIN_Y = (screen.height/2) - ((TPR * TILE_SIZE)/2);
-
-//Implementation for dynamic based size?
-//This works but really not what you want on a rectangular screen.
-//int numTiles = TPR*MAX_R;
-//int areaOverall = screen.width*screen.height;
-//int tileArea = areaOverall/numTiles;
-//int TILE_SIZE = int(sqrt(tileArea)) - 10;
-
-//Implementation for tiles per row based size
-//This forces there to be tiles from edge to edge on the short edge.
-
+          
                 
 //Gameplay variables (change difficulty here)
  static final int TILE_TYPES = 6; //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
