@@ -5,9 +5,12 @@
  * Class - GameBoard: <Description goes here>
 */
 
-static final int ACTIVE = 1;
+
 
 class Momentum {
+  static final int ACTIVE = 1,
+                   INACTIVE = 0; 
+  
   private double v; //v stands for velocity (scale: -100 to 100 % of MAX_V)
   private double y; // the relative location (0 is center)
   private int state;
