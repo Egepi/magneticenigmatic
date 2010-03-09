@@ -126,10 +126,47 @@ class GameBoard
       furthest = -1; //the one beyond the last block (out of array bounds)
       iter = -1; //the direction the iterator needs to go
     }
-    else{
+    else if(g < y ){
       nearest = y+1;
       furthest = MAX_R;
       iter = 1;
+    }
+    else
+    {
+      int topSide = 0;
+      int bottomSide = 0;
+      for(int i = 0; i < TPR/2; i++)
+      {
+        for(int j = 0; j < MAX_R/2; j++)
+        {
+          if(tileBoard[i][j].getTileType() != 0)
+          {
+            topSide++;
+          }
+        }
+      }
+      for(int i = (TPR/2)+1; i < TPR-1; i++)
+      {
+        for(int j = (MAX_R/2)+1; j < MAX_R-1; j++)
+        {
+          if(tileBoard[i][j].getTileType() != 0)
+          {
+            bottomSide++;
+          }
+        }
+      }
+      if(topSide > bottomSide)
+      {
+        nearest = y-1; //the first block to iterate
+        furthest = -1; //the one beyond the last block (out of array bounds)
+        iter = -1; //the direction the iterator needs to go
+      }
+      else
+      {
+        nearest = y+1;
+        furthest = MAX_R;
+        iter = 1;        
+      }
     }
     int j;
     for (j=nearest; j!=furthest; j+=iter)
