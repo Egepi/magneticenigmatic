@@ -8,7 +8,7 @@ class GameBoard
 {
 //private int boardWidth;  Use MAX_R and TPR instead
 //private int boardHeight; These names are short because they will be used often
-  public Tile tileBoard[][];
+  public Tile tileBoard[][]; 
   
   /************************************************************
   * Constructor for a GameBoard, sets the width and height of board.
@@ -19,7 +19,6 @@ class GameBoard
   GameBoard(int theWidth, int theHeight)
   {
     tileBoard = new Tile[theWidth][theHeight];
-    
   }
   
   /************************************************************
@@ -29,7 +28,7 @@ class GameBoard
   */
   public void drawBoard()
   {
-    int tempX = PUZZLE_ORIGIN_X;
+    int tempX = PUZZLE_ORIGIN_X+(int)(theMomentum.incrementY());
     int tempY = PUZZLE_ORIGIN_Y;
     for(int x = 0; x < TPR; x++)
     {
@@ -42,7 +41,7 @@ class GameBoard
         tempX = tempX + TILE_SIZE;
       }
       tempY = tempY + TILE_SIZE;
-      tempX = PUZZLE_ORIGIN_X;
+      tempX = PUZZLE_ORIGIN_X+(int)(theMomentum.getY());
     }
   }
   
@@ -127,47 +126,10 @@ class GameBoard
       furthest = -1; //the one beyond the last block (out of array bounds)
       iter = -1; //the direction the iterator needs to go
     }
-    else if(g < y ){
+    else{
       nearest = y+1;
       furthest = MAX_R;
       iter = 1;
-    }
-    else
-    {
-      int topSide = 0;
-      int bottomSide = 0;
-      for(int i = 0; i < TPR/2; i++)
-      {
-        for(int j = 0; j < MAX_R/2; j++)
-        {
-          if(tileBoard[i][j].getTileType() != 0)
-          {
-            topSide++;
-          }
-        }
-      }
-      for(int i = (TPR/2)+1; i < TPR-1; i++)
-      {
-        for(int j = (MAX_R/2)+1; j < MAX_R-1; j++)
-        {
-          if(tileBoard[i][j].getTileType() != 0)
-          {
-            bottomSide++;
-          }
-        }
-      }
-      if(topSide > bottomSide)
-      {
-        nearest = y-1; //the first block to iterate
-        furthest = -1; //the one beyond the last block (out of array bounds)
-        iter = -1; //the direction the iterator needs to go
-      }
-      else
-      {
-        nearest = y+1;
-        furthest = MAX_R;
-        iter = 1;        
-      }
     }
     int j;
     for (j=nearest; j!=furthest; j+=iter)
@@ -235,6 +197,10 @@ class GameBoard
                   clears.add(tileBoard[i+1][j]);
                   clears.add(tileBoard[i+3][j]);
                   clears.add(tileBoard[i+4][j]);
+                  if (j > lineOfGravity)
+                     theMomentum.increaseMomentum(-1);
+                  else   
+                     theMomentum.increaseMomentum(1);       
                 }
                 else
                 {
@@ -244,6 +210,10 @@ class GameBoard
                   clears.add(tileBoard[i+1][j]);
                   clears.add(tileBoard[i+2][j]);
                   clears.add(tileBoard[i+3][j]);
+                  if (j > lineOfGravity)
+                     theMomentum.increaseMomentum(-1);
+                  else   
+                     theMomentum.increaseMomentum(1);       
                 }             
               }
               else
@@ -253,6 +223,10 @@ class GameBoard
                   clears.add(tileBoard[i][j]);
                   clears.add(tileBoard[i+1][j]);
                   clears.add(tileBoard[i+2][j]);
+                  if (j > lineOfGravity)
+                     theMomentum.increaseMomentum(-1);
+                  else   
+                     theMomentum.increaseMomentum(1);                         
               }
             }
           }
@@ -277,7 +251,11 @@ class GameBoard
                   clears.add(tileBoard[i][j]);
                   clears.add(tileBoard[i][j+1]);
                   clears.add(tileBoard[i][j+3]);
-                  clears.add(tileBoard[i][j+4]);              
+                  clears.add(tileBoard[i][j+4]);
+                  if (j+10 > lineOfGravity)
+                     theMomentum.increaseMomentum(-1);
+                  else   
+                     theMomentum.increaseMomentum(1);                    
                 }
                 else
                 {
@@ -287,6 +265,10 @@ class GameBoard
                   clears.add(tileBoard[i][j+1]);
                   clears.add(tileBoard[i][j+2]);
                   clears.add(tileBoard[i][j+3]);   
+                  if (j+10 > lineOfGravity)
+                     theMomentum.increaseMomentum(-1);
+                  else   
+                     theMomentum.increaseMomentum(1);     
                 }
               }
               else
@@ -296,18 +278,19 @@ class GameBoard
                 clears.add(tileBoard[i][j]);
                 clears.add(tileBoard[i][j+1]);
                 clears.add(tileBoard[i][j+2]);  
+                if (j+10 > lineOfGravity)
+                  theMomentum.increaseMomentum(-1);
+                else   
+                  theMomentum.increaseMomentum(1);     
               }
             }
           }
-        }        
-            
+        }                
+       }
      }
      for(int k=0; k<clears.size(); k++)
      {
        clears.get(k).setTileType(0);
      }
-    
-  }
-    //set tileboard back into gameboard   
   }
 }

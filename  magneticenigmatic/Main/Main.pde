@@ -48,7 +48,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                 
 //Gameplay variables (change difficulty here)
  static final int TILE_TYPES = 6, //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
-                  MAX_V = 5;
+                  MAX_V = 2;
 
 //Images
  static final String TILE1 = "Red.png",
