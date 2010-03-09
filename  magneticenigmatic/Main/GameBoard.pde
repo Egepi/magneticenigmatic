@@ -34,9 +34,10 @@ class GameBoard
     {
       for(int y = 0; y < MAX_R; y++)
       {
+        tileBoard[x][y].action();
         if(tileBoard[x][y].getTileType() != 0)
         {
-          image(tileBoard[x][y].getTileImage(),tempX,tempY,TILE_SIZE,TILE_SIZE);
+          tileBoard[x][y].drawTile(tempX,tempY);
         }
         tempX = tempX + TILE_SIZE;
       }
@@ -78,10 +79,11 @@ class GameBoard
       return false;
     if (!((tileAt(a,row).swappable())&&(tileAt(b,row).swappable()))) //if either block is not swappable
       return false;
-    //Play fancy animation for which the duration is the time that the tile is not swappable.  
     Tile temp = tileAt(b,row);
     tileBoard[b][row] = tileAt(a,row);
     tileBoard[a][row] = temp;
+    tileBoard[b][row].animate(b-a,0);
+    tileBoard[a][row].animate(a-b,0);
     return true;
   }
   
@@ -120,6 +122,8 @@ class GameBoard
     boolean blockHasFallen = false;
     if (tileBoard[x][y].getTileType() != EMPTY)
       return blockHasFallen;
+    if (!tileBoard[x][y].swappable())
+      return blockHasFallen;
     int furthest,nearest;
     if (g > y) {
       nearest = y-1; //the first block to iterate
@@ -134,7 +138,10 @@ class GameBoard
     int j;
     for (j=nearest; j!=furthest; j+=iter)
     {
+      if (!tileBoard[x][j].swappable())
+        break;
       tileBoard[x][j-iter] = tileBoard[x][j];
+      tileBoard[x][j-iter].animate(0,-iter);
       if (tileBoard[x][j].getTileType() != EMPTY)
         blockHasFallen = true;
     }
@@ -183,13 +190,13 @@ class GameBoard
          */
         if(!(tempTile.getTileType() == 0))
         {
-          if((i+1 < TPR) &&(tempTile.getTileType() == tileBoard[i+1][j].getTileType()))
+          if((i+1 < TPR) && (tileBoard[i+1][j].swappable()) &&(tempTile.getTileType() == tileBoard[i+1][j].getTileType()))
           {
-            if((i+2 < TPR) && (tempTile.getTileType() == tileBoard[i+2][j].getTileType()))
+            if((i+2 < TPR) && (tileBoard[i+2][j].swappable()) && (tempTile.getTileType() == tileBoard[i+2][j].getTileType()))
             {
-              if((i+3 < TPR) && (tempTile.getTileType() == tileBoard[i+3][j].getTileType()))
+              if((i+3 < TPR) && (tileBoard[i+3][j].swappable()) && (tempTile.getTileType() == tileBoard[i+3][j].getTileType()))
               {
-                if((i+4 < TPR) && (tempTile.getTileType() == tileBoard[i+4][j].getTileType()))
+                if((i+4 < TPR) && (tileBoard[i+4][j].swappable()) && (tempTile.getTileType() == tileBoard[i+4][j].getTileType()))
                 {
                   //Debug code
                   print("\n5 tiles cleared Horizontally of type: " + tempTile.getTileType());   
@@ -238,13 +245,13 @@ class GameBoard
          */
         if(!(tempTile.getTileType() == 0))
         {
-          if((j+1 < MAX_R) &&(tempTile.getTileType() == tileBoard[i][j+1].getTileType()))
+          if((j+1 < MAX_R) && (tileBoard[i][j+1].swappable()) &&(tempTile.getTileType() == tileBoard[i][j+1].getTileType()))
           {
-            if((j+2 < MAX_R) && (tempTile.getTileType() == tileBoard[i][j+2].getTileType()))
+            if((j+2 < MAX_R) && (tileBoard[i][j+2].swappable()) && (tempTile.getTileType() == tileBoard[i][j+2].getTileType()))
             {
-              if((j+3 < MAX_R) && (tempTile.getTileType() == tileBoard[i][j+3].getTileType()))
+              if((j+3 < MAX_R) && (tileBoard[i][j+3].swappable()) && (tempTile.getTileType() == tileBoard[i][j+3].getTileType()))
               {
-                if((j+4 < MAX_R) && (tempTile.getTileType() == tileBoard[i][j+4].getTileType()))
+                if((j+4 < MAX_R) && (tileBoard[i][j+4].swappable()) && (tempTile.getTileType() == tileBoard[i][j+4].getTileType()))
                 {
                   //Debug code
                   print("\n5 tiles cleared Vertically   of type: " + tempTile.getTileType());            
@@ -252,7 +259,7 @@ class GameBoard
                   clears.add(tileBoard[i][j+1]);
                   clears.add(tileBoard[i][j+3]);
                   clears.add(tileBoard[i][j+4]);
-                  if (j+10 > lineOfGravity)
+                  if (j+2 > lineOfGravity)
                      theMomentum.increaseMomentum(-1);
                   else   
                      theMomentum.increaseMomentum(1);                    
@@ -265,7 +272,7 @@ class GameBoard
                   clears.add(tileBoard[i][j+1]);
                   clears.add(tileBoard[i][j+2]);
                   clears.add(tileBoard[i][j+3]);   
-                  if (j+10 > lineOfGravity)
+                  if (j+2 > lineOfGravity)
                      theMomentum.increaseMomentum(-1);
                   else   
                      theMomentum.increaseMomentum(1);     
@@ -278,7 +285,7 @@ class GameBoard
                 clears.add(tileBoard[i][j]);
                 clears.add(tileBoard[i][j+1]);
                 clears.add(tileBoard[i][j+2]);  
-                if (j+10 > lineOfGravity)
+                if (j+1 > lineOfGravity)
                   theMomentum.increaseMomentum(-1);
                 else   
                   theMomentum.increaseMomentum(1);     
@@ -290,6 +297,7 @@ class GameBoard
      }
      for(int k=0; k<clears.size(); k++)
      {
+       
        clears.get(k).setTileType(0);
      }
   }
