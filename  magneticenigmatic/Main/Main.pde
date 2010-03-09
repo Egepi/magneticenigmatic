@@ -42,11 +42,13 @@ int msgPort = 7340;
                 TILE_SIZE = PUZZLE_WIDTH/TPR;
                 
 final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
-          PUZZLE_ORIGIN_Y = (screen.height/2) - ((TPR * TILE_SIZE)/2);
+          PUZZLE_ORIGIN_Y = (screen.height/2) - ((TPR * TILE_SIZE)/2),
+          HALF_MARK = (screen.width/2);
           
                 
 //Gameplay variables (change difficulty here)
- static final int TILE_TYPES = 6; //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
+ static final int TILE_TYPES = 6, //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
+                  MAX_V = 5;
 
 //Images
  static final String TILE1 = "Red.png",
@@ -70,13 +72,14 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  PImage[] tileImageType = new PImage[TILE_TYPES];
  
  GameBoard theBoard;
- 
+ Momentum theMomentum;
  Selector sel1, sel2;
  
  int lineOfGravity = MAX_R/2 + 1;
 
 void setup()
 {
+  startClock();
   if (connectToTacTile)
     startTactile();
   //Load resources into memory
@@ -95,6 +98,7 @@ void setup()
   //Making the board the game will be played on.
   theBoard = new GameBoard(TPR, MAX_R);
   theBoard.generateBoard();
+  theMomentum = new Momentum();
 }
 
 void draw()
@@ -108,6 +112,9 @@ void draw()
   theBoard.drawBoard();
 }
 
+void startClock() {
+  
+}
 
   
 void getInput()
@@ -118,7 +125,7 @@ void getInput()
     {
        int newx, newy;
        newx = (mouseY-PUZZLE_ORIGIN_Y)/TILE_SIZE;
-       newy = (mouseX-PUZZLE_ORIGIN_X)/TILE_SIZE;
+       newy = (mouseX-PUZZLE_ORIGIN_X-(int)(theMomentum.getY()))/TILE_SIZE;
        if (sel1.getX() == -1)
          sel1.setSelector(newx,newy);
        else if (sel1.isEqual(newx,newy))
