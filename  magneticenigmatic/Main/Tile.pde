@@ -36,30 +36,48 @@ class Tile
     {
       tileType = 0;
       state = EMPTY;
+      isMoving = false;
     }
     else if (state == ANIMATING)
     {
-      if (abs((float)ax)>=0.001)
+      if (abs((float)ax)>=0)
       {
         if (ax < 0)
-           ax += 0.01;
-        if (ax > 0)
-           ax -= 0.01;   
-        //print(ax);   
+        {
+           ax += 0.01*MAX_TILE_V*timeDifference()/10;
+           if (ax > 0)
+             ax = 0;
+        }
+        else
+        {
+           ax -= 0.01*MAX_TILE_V*timeDifference()/10;
+           if (ax < 0)
+             ax = 0;
+        }  
       }
-      if (abs((float)ay)>=0.001)
+      if (abs((float)ax)>=0)
       {
         if (ay < 0)
-           ay += 0.01;
-        if (ay > 0)
-           ay -= 0.01;   
-        //print(ay);   
+        {
+           ay += 0.01*MAX_TILE_V*timeDifference()/10;
+           if (ay > 0)
+             ay = 0;
+        }
+        else
+        {
+           ay -= 0.01*MAX_TILE_V*timeDifference()/10;
+           if (ay < 0)
+             ay = 0;
+        }  
       }
       if ((abs((float)ax)<=0.001)&&(abs((float)ay)<=0.001))
       {
-        isMoving = false;
         state = IDLE;
       }
+    }
+    else if (state == IDLE)
+    {
+      isMoving = false;
     }
   }
   
@@ -71,10 +89,13 @@ class Tile
   }
   
   public void drawTile(int tempX, int tempY) {
-    image(tileImage,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),TILE_SIZE,TILE_SIZE);
+    if (tileImage != null)
+      image(tileImage,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),TILE_SIZE,TILE_SIZE);
   }
   
   public void mark() {
+    if (state == ANIMATING)
+      print("unacceptable state change");
     if (state == MARKED)
       state = DOUBLE_MARKED;
     else
@@ -84,6 +105,11 @@ class Tile
   public boolean swappable()
   {
     return (!isMoving);
+  }
+  
+  public boolean isMarked()
+  {
+    return (state == MARKED);
   }
   
   /************************************************************

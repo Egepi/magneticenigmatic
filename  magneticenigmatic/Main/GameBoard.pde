@@ -35,10 +35,10 @@ class GameBoard
       for(int y = 0; y < MAX_R; y++)
       {
         tileBoard[x][y].action();
-        if(tileBoard[x][y].getTileType() != 0)
-        {
+     //   if(tileBoard[x][y].getTileType() != 0)
+     //   {
           tileBoard[x][y].drawTile(tempX,tempY);
-        }
+     //   }
         tempX = tempX + TILE_SIZE;
       }
       tempY = tempY + TILE_SIZE;
@@ -78,6 +78,8 @@ class GameBoard
     if (abs(a-b)!=1) //if a is not adjacent to b
       return false;
     if (!((tileAt(a,row).swappable())&&(tileAt(b,row).swappable()))) //if either block is not swappable
+      return false;
+    if ((tileAt(a,row).getTileType() == 0)&&(tileAt(b,row).getTileType() == 0))
       return false;
     Tile temp = tileAt(b,row);
     tileBoard[b][row] = tileAt(a,row);
@@ -138,7 +140,7 @@ class GameBoard
     int j;
     for (j=nearest; j!=furthest; j+=iter)
     {
-      if (!tileBoard[x][j].swappable())
+      if ((!tileBoard[x][j].swappable())||(tileBoard[x][j].getTileType() == 0))
         break;
       tileBoard[x][j-iter] = tileBoard[x][j];
       tileBoard[x][j-iter].animate(0,-iter);
@@ -172,7 +174,7 @@ class GameBoard
   *
   *
   * Author: Karan Chakrapani
-  */ 
+  */
   public void checkClears()
   {
     ArrayList<Tile> clears = new ArrayList();
@@ -301,4 +303,31 @@ class GameBoard
        clears.get(k).setTileType(0);
      }
   }
+  
+  /*public void checkClears() {
+    Tile t1, t2;
+    for(int i = 0; i < TPR; i++)
+    {
+      for(int j = 0; j < MAX_R; j++)
+      {
+        if (!tileBoard[i][j].isMarked())
+        {
+          t1 = tileBoard[i][j];
+          t2 = tileBoard[i][j];
+          int k = i;
+          while (t1.getTileType() == t2.getTileType())
+          {
+            k++;
+            t2 = tileBoard[k][j];
+            if ((k-i)>3)
+          }
+        }
+  }
+  
+  public boolean checkDirection(int type, int direction, int count) {
+    if (direction == 0)
+    {
+      if (
+    }
+  }*/
 }

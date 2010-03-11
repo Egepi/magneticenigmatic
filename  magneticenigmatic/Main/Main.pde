@@ -38,7 +38,7 @@ int msgPort = 7340;
  
  static final int TPR = 8, //Tiles per row
                 MAX_R = 17, //Maximum number of rows
-                PUZZLE_WIDTH = 400,
+                PUZZLE_WIDTH = 500,
                 TILE_SIZE = PUZZLE_WIDTH/TPR;
                 
 final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
@@ -46,12 +46,14 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
           HALF_MARK = (screen.width/2);
           
                 
-//Gameplay variables (change difficulty here)
+//Gameplay variables (change difficulty or speed here)
  static final int TILE_TYPES = 6, //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
-                  MAX_V = 2;
+                  MAX_V = 2,
+                  MAX_TILE_V = 2;
 
 //Images
- static final String TILE1 = "Red.png",
+ static final String TILE0 = null,
+                     TILE1 = "Red.png",
                      TILE2 = "Blue.png",
                      TILE3 = "Green.png",
                      TILE4 = "Purple.png",
@@ -74,6 +76,8 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  GameBoard theBoard;
  Momentum theMomentum;
  Selector sel1, sel2;
+ int gameStartTime, frameStartTime, frameEndTime;
+ 
  
  int lineOfGravity = MAX_R/2 + 1;
 
@@ -85,13 +89,16 @@ void setup()
   //Load resources into memory
   sel1 = new Selector();
   sel2 = new Selector();
-  tileImageType[0] = null;
+  if (TILE0 != null) //for debugging purposes, this may be an actual image for making empty tiles visible.
+    tileImageType[0] = loadImage(TILE0);
+  else
+    tileImageType[0] = null; 
   tileImageType[1] = loadImage(TILE1);
   tileImageType[2] = loadImage(TILE2);
   tileImageType[3] = loadImage(TILE3);
   tileImageType[4] = loadImage(TILE4);
   tileImageType[5] = loadImage(TILE5);
-//tileImageType[6] = loadImage("");
+  //tileImageType[6] = loadImage("");
   
   size(screen.width, screen.height);
   
@@ -103,7 +110,8 @@ void setup()
 
 void draw()
 {
-  
+  frameStartTime = frameEndTime;
+  frameEndTime = millis();
   //Arbitrary background color for the time being.
   background(50,125,150);
   //Prints the board on the screen.
@@ -113,7 +121,8 @@ void draw()
 }
 
 void startClock() {
-  
+  gameStartTime = millis();
+  frameStartTime = gameStartTime;
 }
 
   
@@ -140,9 +149,14 @@ void getInput()
     }
 }
 
+int timeDifference() {
+  print (frameEndTime-frameStartTime + " " );
+  return frameEndTime-frameStartTime;
+}
+
 void boardFSM()
 {
-  theBoard.checkClears();
+  //theBoard.checkClears();
   theBoard.gravity();
   theBoard.checkClears();
 }
