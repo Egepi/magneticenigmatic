@@ -1,12 +1,22 @@
+/* Project: POL
+ * Authors: Jeremy Meador, Todd Silvia, 
+ *          Karan Chakrapani, Lee Vanderlick
+ * Date: March 3, 2010
+ * Class - GameFSM: <Description goes here>
+*/
 class GameFSM {
   private int stateId;
   PImage startButton;
+  /************************************************************
+  */
   public GameFSM()
   {
     stateId = 1;
     startButton = loadImage("start.png");
   }
   
+  /************************************************************
+  */
   public void startState()
   {
     int startX = screen.width/2 - startButton.width/2;
@@ -19,13 +29,13 @@ class GameFSM {
         int xCoord = mouseX;
         int yCoord = mouseY;
         if((xCoord >= startX)&&(xCoord <= (startX + startButton.width)))
-          {
+        {
             if((yCoord >= startY)&&(yCoord <= (startY + startButton.height)))
             {
               stateId = stateId + 1;
               return;
             }
-          }
+        }
       }
     }
         
@@ -34,13 +44,9 @@ class GameFSM {
       touchList = tacTile.getManagedList();
     
       // Cycle though the touches 
-    
       for ( int index = 0; index < touchList.size(); index ++ ){
-      
         Touches curTouch = (Touches) touchList.get(index);   
-
         if ( curTouch != null){
-          //Grab Data
           float xCoord = curTouch.getXPos() * width;    
           float yCoord = height - curTouch.getYPos() * height;
           if((xCoord >= startX)&&(xCoord <= (startX + startButton.width)))
@@ -57,9 +63,53 @@ class GameFSM {
     return;
   }
   
+  /************************************************************
+  */
   public void gameState()
   {
-    /* Get input */
+    gameGetInput();           //Get player(s) touch input
+    theBoard.gravity();       //Apply gravity where needed
+    theBoard.checkClears();   //Check for clears to be made
+    theBoard.drawBoard();     //Draw the board
+  }
+  
+  /************************************************************
+  */
+  public void endRound()
+  {
+    
+  }
+  
+  /************************************************************
+  */
+  public void endGame()
+  {
+    
+
+  }
+  
+  /************************************************************
+  */
+  public int getId()
+  {
+    return stateId;
+  }
+  
+  /************************************************************
+  */
+  public void action()
+  {
+    if(stateId == 1)
+      startState();
+    else if(stateId == 2)
+      gameState();
+    return;
+  }
+  
+  /************************************************************
+  */
+  void gameGetInput()
+  {
     if (connectToTacTile)
       getTouches();
     else if (mousePressed)
@@ -79,40 +129,5 @@ class GameFSM {
          sel2.reset();
        }
     }
-    /* end getInput */
-    
-    theBoard.gravity();
-    theBoard.checkClears();
-    theBoard.drawBoard();
-    
-  }
-  
-  public void endRound()
-  {
-    
-  }
-  
-  public void endGame()
-  {
-    
-
-  }
-  
-  public int getId()
-  {
-    return stateId;
-  }
-  
-  public void action()
-  {
-    if(stateId == 1)
-    {
-      startState();
-    }
-    else if(stateId == 2)
-    {
-      gameState();
-    }
-    return;
   }
 }
