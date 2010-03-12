@@ -9,6 +9,7 @@ class GameBoard
 //private int boardWidth;  Use MAX_R and TPR instead
 //private int boardHeight; These names are short because they will be used often
   public Tile tileBoard[][]; 
+  public ArrayList clears;
   
   /************************************************************
   * Constructor for a GameBoard, sets the width and height of board.
@@ -59,7 +60,7 @@ class GameBoard
     {
       for(int j = 0; j < MAX_R; j++)
       {
-        tileBoard[i][j] = new Tile(int(random(1,TILE_TYPES)));
+        tileBoard[i][j] = new Tile(int(random(1,TILE_COLORS)));
       }
     }
   }
@@ -177,7 +178,7 @@ class GameBoard
   */
   public void checkClears()
   {
-    ArrayList<Tile> clears = new ArrayList();
+    clears = new ArrayList();
     Tile tempTile;
     
     
@@ -300,7 +301,7 @@ class GameBoard
      for(int k=0; k<clears.size(); k++)
      {
        
-       clears.get(k).setTileType(0);
+       ((Tile)clears.get(k)).setTileType(0);
      }
   }
   
@@ -330,4 +331,8 @@ class GameBoard
       if (
     }
   }*/
+  
+  
+  
+  
 }
