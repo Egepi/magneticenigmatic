@@ -47,9 +47,10 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
           
                 
 //Gameplay variables (change difficulty or speed here)
- static final int TILE_TYPES = 6, //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
+ static final int TILE_TYPES = 7, //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
                   MAX_V = 2,
-                  MAX_TILE_V = 2;
+                  MAX_TILE_V = 2,
+                  TILE_COLORS = 6;
 
 //Images
  static final String TILE0 = null,
@@ -57,7 +58,8 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                      TILE2 = "Blue.png",
                      TILE3 = "Green.png",
                      TILE4 = "Purple.png",
-                     TILE5 = "White.png";
+                     TILE5 = "White.png",
+                     TILE6 = "icecube.png";
                      
 //For the sake of readability and code comprehension
 
@@ -98,7 +100,7 @@ void setup()
   tileImageType[3] = loadImage(TILE3);
   tileImageType[4] = loadImage(TILE4);
   tileImageType[5] = loadImage(TILE5);
-  //tileImageType[6] = loadImage("");
+  tileImageType[6] = loadImage(TILE6);
   
   size(screen.width, screen.height);
   
@@ -150,13 +152,12 @@ void getInput()
 }
 
 int timeDifference() {
-  print (frameEndTime-frameStartTime + " " );
+  //print (frameEndTime-frameStartTime + " " );
   return frameEndTime-frameStartTime;
 }
 
 void boardFSM()
 {
-  //theBoard.checkClears();
   theBoard.gravity();
   theBoard.checkClears();
 }
