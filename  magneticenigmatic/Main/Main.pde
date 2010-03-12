@@ -78,6 +78,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  GameBoard theBoard;
  Momentum theMomentum;
  Selector sel1, sel2;
+ GameFSM theGameFSM;
  int gameStartTime, frameStartTime, frameEndTime;
  
  
@@ -108,6 +109,7 @@ void setup()
   theBoard = new GameBoard(TPR, MAX_R);
   theBoard.generateBoard();
   theMomentum = new Momentum();
+  theGameFSM = new GameFSM();
 }
 
 void draw()
@@ -116,10 +118,11 @@ void draw()
   frameEndTime = millis();
   //Arbitrary background color for the time being.
   background(50,125,150);
+  theGameFSM.action();
   //Prints the board on the screen.
-  getInput();
-  boardFSM(); //board finite state machine
-  theBoard.drawBoard();
+  //getInput();
+  //boardFSM(); //board finite state machine
+  //theBoard.drawBoard();
 }
 
 void startClock() {
