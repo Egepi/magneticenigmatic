@@ -116,13 +116,8 @@ void draw()
 {
   frameStartTime = frameEndTime;
   frameEndTime = millis();
-  //Arbitrary background color for the time being.
-  background(50,125,150);
+  background(50,125,150); //Arbitrary background color for the time being.
   theGameFSM.action();
-  //Prints the board on the screen.
-  //getInput();
-  //boardFSM(); //board finite state machine
-  //theBoard.drawBoard();
 }
 
 void startClock() {
@@ -130,37 +125,7 @@ void startClock() {
   frameStartTime = gameStartTime;
 }
 
-  
-void getInput()
-{
-    if (connectToTacTile)
-      getTouches();
-    else if (mousePressed)
-    {
-       int newx, newy;
-       newx = (mouseY-PUZZLE_ORIGIN_Y)/TILE_SIZE;
-       newy = (mouseX-PUZZLE_ORIGIN_X-(int)(theMomentum.getY()))/TILE_SIZE;
-       if (sel1.getX() == -1)
-         sel1.setSelector(newx,newy);
-       else if (sel1.isEqual(newx,newy))
-         ; // do nothing if mouse is at something already selected
-       else
-       {
-         sel2.setSelector(newx,newy);
-         theBoard.swap(sel1,sel2);
-         sel1.reset();
-         sel2.reset();
-       }
-    }
-}
-
 int timeDifference() {
   //print (frameEndTime-frameStartTime + " " );
   return frameEndTime-frameStartTime;
-}
-
-void boardFSM()
-{
-  theBoard.gravity();
-  theBoard.checkClears();
 }
