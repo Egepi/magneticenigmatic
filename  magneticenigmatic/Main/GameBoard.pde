@@ -332,6 +332,82 @@ class GameBoard
     }
   }*/
   
+public void evaluateClears()
+{
+	clears = new ArrayList();
+	Tile clearSet[] = new Tile[5];
+    Tile tempTile;
+        
+    for(int i = 0; i < TPR; i++)
+    {
+      for(int j = 0; j < MAX_R; j++)
+      {
+        tempTile = tileBoard[i][j];
+		int combo = 1;
+
+        for(int counter =1; counter<5; counter++)
+        {
+          if((i+counter < TPR) && (tileBoard[i+counter][j].swappable()) &&(tempTile.getTileType() == tileBoard[i+counter][j].getTileType()))
+          {
+            combo++;
+          }
+          else
+          {
+            break;
+          } 
+        }
+        if(combo>2)
+        {
+          print("\n" + combo + " tiles cleared Horizontally of type: " + tempTile.getTileType()); 
+          for (int k = 0; k < combo; k++)
+          {
+            clearSet[k] = tileBoard[i+k][j];
+          }
+		  clears.add(clearSet);
+		  clearSet[0] = null;
+		  clearSet[1] = null;
+		  clearSet[2] = null;
+		  clearSet[3] = null;
+		  clearSet[4] = null;
+          combo = 0;
+        } 
+      }
+    }
+    doClears();
+}
+public void doClears()
+{
+    boolean clearThis = false;
+	Tile tempTiles[];
+	for(int i = 0; i<clears.size(); i++)
+	{
+		tempTiles = (Tile[])clears.get(i);
+		for (int j = 0; j < 5; j++)
+		{
+			if(tempTiles[j].swappable())
+			{
+				clearThis = true;
+			}
+			else
+			{
+				clearThis = false;
+			}
+		}
+		
+		if (clearThis)
+		{
+			tempTiles[0].setTileType(0);
+			tempTiles[1].setTileType(0);
+			tempTiles[2].setTileType(0);
+			tempTiles[3].setTileType(0);
+			tempTiles[4].setTileType(0);
+			clearThis = false;
+		}
+            
+		
+		
+	}
+}
   
   
   
