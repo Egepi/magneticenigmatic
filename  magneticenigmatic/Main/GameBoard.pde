@@ -176,10 +176,11 @@ class GameBoard
   *
   * Author: Karan Chakrapani
   */
-  public void checkClears()
+  public boolean checkClears()
   {
     clears = new ArrayList();
     Tile tempTile;
+    boolean returner = false;
     
     
     for(int i = 0; i < TPR; i++)
@@ -300,9 +301,16 @@ class GameBoard
      }
      for(int k=0; k<clears.size(); k++)
      {
-       
-       ((Tile)clears.get(k)).setTileType(0);
+       if(((Tile)clears.get(k)).getTileType() == 0)
+       {
+       }
+       else
+       {
+         ((Tile)clears.get(k)).setTileType(0);
+         returner = true;
+       }
      }
+     return returner;
   }
   
   /*public void checkClears() {
@@ -334,8 +342,8 @@ class GameBoard
   
 public void evaluateClears()
 {
-	clears = new ArrayList();
-	Tile clearSet[] = new Tile[5];
+    clears = new ArrayList();
+    Tile clearSet[] = new Tile[5];
     Tile tempTile;
         
     for(int i = 0; i < TPR; i++)
@@ -343,11 +351,13 @@ public void evaluateClears()
       for(int j = 0; j < MAX_R; j++)
       {
         tempTile = tileBoard[i][j];
-		int combo = 1;
-
+        int combo = 1;
+        
+        
+        //Horizontal clears
         for(int counter =1; counter<5; counter++)
         {
-          if((i+counter < TPR) && (tileBoard[i+counter][j].swappable()) &&(tempTile.getTileType() == tileBoard[i+counter][j].getTileType()))
+          if((i+counter < TPR) &&(tempTile.getTileType() == tileBoard[i+counter][j].getTileType()))
           {
             combo++;
           }
@@ -358,7 +368,7 @@ public void evaluateClears()
         }
         if(combo>2)
         {
-          print("\n" + combo + " tiles cleared Horizontally of type: " + tempTile.getTileType()); 
+          //print("\n" + combo + " tiles cleared Horizontally of type: " + tempTile.getTileType()); 
           for (int k = 0; k < combo; k++)
           {
             clearSet[k] = tileBoard[i+k][j];
@@ -369,8 +379,36 @@ public void evaluateClears()
 		  clearSet[2] = null;
 		  clearSet[3] = null;
 		  clearSet[4] = null;
-          combo = 0;
-        } 
+          combo = 1;
+        }
+        //Vertical Clears
+	for(int counter = 1; counter<5; counter++)
+        {
+          if((j+counter < MAX_R) &&(tempTile.getTileType() == tileBoard[i][j+counter].getTileType()))
+          {
+            combo++;
+          }
+          else
+          {
+            break;
+          } 
+        }
+        if(combo>2)
+        {
+          //print("\n" + combo + " tiles cleared Vertically of type: " + tempTile.getTileType()); 
+          for (int k = 0; k < combo; k++)
+          {
+            clearSet[k] = tileBoard[i][j+k];
+          }
+		  clears.add(clearSet);
+		  clearSet[0] = null;
+		  clearSet[1] = null;
+		  clearSet[2] = null;
+		  clearSet[3] = null;
+		  clearSet[4] = null;
+          combo = 1;
+        }
+ 
       }
     }
     doClears();
@@ -382,20 +420,25 @@ public void doClears()
 	for(int i = 0; i<clears.size(); i++)
 	{
 		tempTiles = (Tile[])clears.get(i);
-		for (int j = 0; j < 5; j++)
+		for (int j = 0; j < tempTiles.length; j++)
 		{
-			if(tempTiles[j].swappable())
+                       // print("\n" + (tempTiles[j].getTileType()) );
+			if((tempTiles[j] != null) && (!tempTiles[j].swappable()))
 			{
+                               // print("\nCHECKING TRUUUUUU ARE U FUKCING HERE?"); 
 				clearThis = true;
 			}
 			else
 			{
+                             // print("\n CHECKING FALSEI ARE U FUKCING HERE?");
 				clearThis = false;
+                                break;
 			}
 		}
 		
 		if (clearThis)
 		{
+                        print("\nARE U FUKCING HERE?"); 
 			tempTiles[0].setTileType(0);
 			tempTiles[1].setTileType(0);
 			tempTiles[2].setTileType(0);
