@@ -193,13 +193,13 @@ class GameBoard
          */
         if(!(tempTile.getTileType() == 0))
         {
-          if((i+1 < TPR) && (tileBoard[i+1][j].swappable()) &&(tempTile.getTileType() == tileBoard[i+1][j].getTileType()))
+          if((i+1 < TPR)  &&(tempTile.getTileType() == tileBoard[i+1][j].getTileType()))
           {
-            if((i+2 < TPR) && (tileBoard[i+2][j].swappable()) && (tempTile.getTileType() == tileBoard[i+2][j].getTileType()))
+            if((i+2 < TPR)  && (tempTile.getTileType() == tileBoard[i+2][j].getTileType()))
             {
-              if((i+3 < TPR) && (tileBoard[i+3][j].swappable()) && (tempTile.getTileType() == tileBoard[i+3][j].getTileType()))
+              if((i+3 < TPR)  && (tempTile.getTileType() == tileBoard[i+3][j].getTileType()))
               {
-                if((i+4 < TPR) && (tileBoard[i+4][j].swappable()) && (tempTile.getTileType() == tileBoard[i+4][j].getTileType()))
+                if((i+4 < TPR)  && (tempTile.getTileType() == tileBoard[i+4][j].getTileType()))
                 {
                   //Debug code
                   print("\n5 tiles cleared Horizontally of type: " + tempTile.getTileType());   
@@ -248,13 +248,13 @@ class GameBoard
          */
         if(!(tempTile.getTileType() == 0))
         {
-          if((j+1 < MAX_R) && (tileBoard[i][j+1].swappable()) &&(tempTile.getTileType() == tileBoard[i][j+1].getTileType()))
+          if((j+1 < MAX_R) &&(tempTile.getTileType() == tileBoard[i][j+1].getTileType()))
           {
-            if((j+2 < MAX_R) && (tileBoard[i][j+2].swappable()) && (tempTile.getTileType() == tileBoard[i][j+2].getTileType()))
+            if((j+2 < MAX_R) && (tempTile.getTileType() == tileBoard[i][j+2].getTileType()))
             {
-              if((j+3 < MAX_R) && (tileBoard[i][j+3].swappable()) && (tempTile.getTileType() == tileBoard[i][j+3].getTileType()))
+              if((j+3 < MAX_R) && (tempTile.getTileType() == tileBoard[i][j+3].getTileType()))
               {
-                if((j+4 < MAX_R) && (tileBoard[i][j+4].swappable()) && (tempTile.getTileType() == tileBoard[i][j+4].getTileType()))
+                if((j+4 < MAX_R)  && (tempTile.getTileType() == tileBoard[i][j+4].getTileType()))
                 {
                   //Debug code
                   print("\n5 tiles cleared Vertically   of type: " + tempTile.getTileType());            
