@@ -128,6 +128,11 @@ class Tile
     this.tileImage = tempImage;
   }
   
+  public void setTileImage(int tempImage)
+  {
+    this.tileImage = tileImageType[tempImage];
+  }
+  
   public int getTileType()
   {
     return this.tileType;
