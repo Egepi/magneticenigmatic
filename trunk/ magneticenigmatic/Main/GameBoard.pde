@@ -206,6 +206,8 @@ class GameBoard
                   print("\n5 tiles cleared Horizontally of type: " + tempTile.getTileType());   
                   clears.add(tileBoard[i][j]);
                   clears.add(tileBoard[i+1][j]);
+                  tileBoard[i][j+2].setTileType(6);
+                  tileBoard[i][j+2].setTileImage(6);
                   clears.add(tileBoard[i+3][j]);
                   clears.add(tileBoard[i+4][j]);
                   if (j > lineOfGravity)
@@ -261,6 +263,8 @@ class GameBoard
                   print("\n5 tiles cleared Vertically   of type: " + tempTile.getTileType());            
                   clears.add(tileBoard[i][j]);
                   clears.add(tileBoard[i][j+1]);
+                  tileBoard[i][j+2].setTileType(6);
+                  tileBoard[i][j+2].setTileImage(6);
                   clears.add(tileBoard[i][j+3]);
                   clears.add(tileBoard[i][j+4]);
                   if (j+2 > lineOfGravity)
