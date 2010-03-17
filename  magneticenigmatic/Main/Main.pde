@@ -1,3 +1,8 @@
+import ddf.minim.*;
+import ddf.minim.signals.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+
 /* Project: POL
  * Authors: Jeremy Meador, Todd Silvia, 
  *          Karan Chakrapani, Lee Vanderlick
@@ -13,7 +18,6 @@ import hypermedia.net.*;
 import tacTile.net.*;
 import processing.net.*;
 import TouchEvents.*;
-import ddf.minim.*;
 
 /**************************************************************
  * Tactile stuff
@@ -80,12 +84,14 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  Selector sel1, sel2;
  GameFSM theGameFSM;
  int gameStartTime, frameStartTime, frameEndTime;
+ Minim minim;  //Used for playing sound
  
  
  int lineOfGravity = MAX_R/2 + 1;
 
 void setup()
 {
+  minim = new Minim(this);
   startClock();
   if (connectToTacTile)
     startTactile();
