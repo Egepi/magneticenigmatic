@@ -7,12 +7,14 @@
 class GameFSM {
   private int stateId;
   PImage startButton;
+  GameSounds clearSound;
   /************************************************************
   */
   public GameFSM()
   {
     stateId = 1;
     startButton = loadImage("start.png");
+    clearSound = new GameSounds("splat.wav");
   }
   
   /************************************************************
@@ -67,9 +69,14 @@ class GameFSM {
   */
   public void gameState()
   {
+    clearSound.stopIfOver();
     gameGetInput();           //Get player(s) touch input
     theBoard.gravity();       //Apply gravity where needed
-    theBoard.checkClears();   //Check for clears to be made
+    boolean playSound = theBoard.checkClears();   //Check for clears to be made
+    if(playSound == true)
+    {
+      clearSound.play();
+    }
     theBoard.drawBoard();     //Draw the board
   }
   
