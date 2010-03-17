@@ -51,7 +51,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
           
                 
 //Gameplay variables (change difficulty or speed here)
- static final int TILE_TYPES = 7, //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
+ static final int TILE_TYPES = 11, //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
                   MAX_V = 0,
                   MAX_TILE_V = 2,
                   TILE_COLORS = 6;
@@ -63,7 +63,11 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                      TILE3 = "Green.png",
                      TILE4 = "Purple.png",
                      TILE5 = "White.png",
-                     TILE6 = "icecube.png";
+                     TILE6 = "fire.png",
+                     TILE7 = "icecube.png",
+                     TILE8 = "clover.png",
+                     TILE9 = "grapes.png",
+                     TILE10 = "star.png";
                      
 //For the sake of readability and code comprehension
 
@@ -108,6 +112,10 @@ void setup()
   tileImageType[4] = loadImage(TILE4);
   tileImageType[5] = loadImage(TILE5);
   tileImageType[6] = loadImage(TILE6);
+  tileImageType[7] = loadImage(TILE7);
+  tileImageType[8] = loadImage(TILE8);
+  tileImageType[9] = loadImage(TILE9);
+  tileImageType[10] = loadImage(TILE10);
   
   size(screen.width, screen.height);
   
