@@ -18,6 +18,7 @@ import hypermedia.net.*;
 import tacTile.net.*;
 import processing.net.*;
 import TouchEvents.*;
+import java.util.ArrayList;
 
 /**************************************************************
  * Tactile stuff
@@ -41,20 +42,23 @@ int msgPort = 7340;
  //Board and tile size (careful with the commas here, I kept getting unexpected token errors because of having semi-colons instead of commas)
  
  static final int TPR = 8, //Tiles per row
-                MAX_R = 17, //Maximum number of rows
-                PUZZLE_WIDTH = 500,
-                TILE_SIZE = PUZZLE_WIDTH/TPR;
+                  MAX_R = 17, //Maximum number of rows
+                  PUZZLE_WIDTH = 500,
+                  TILE_SIZE = PUZZLE_WIDTH/TPR;
                 
 final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
           PUZZLE_ORIGIN_Y = (screen.height/2) - ((TPR * TILE_SIZE)/2),
           HALF_MARK = (screen.width/2);
           
                 
-//Gameplay variables (change difficulty or speed here)
+//Gameplay variables (change difficulty, speed, and other settings here)
  static final int TILE_TYPES = 11, //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
-                  MAX_V = 0,
+                  MAX_V = 2,
                   MAX_TILE_V = 2,
                   TILE_COLORS = 6;
+ static final boolean MOMENTUM_ON = true,
+                      ANIMATIONS_ON = true;
+                      
 
 //Images
  static final String TILE0 = null,
@@ -71,7 +75,9 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                      
 //For the sake of readability and code comprehension
 
- static final int EMPTY = 0;
+ static final int EMPTY = 0,
+                  HORIZONTAL = 0,
+                  VERTICAL = 1; 
                    
                       
 /**************************************************************
@@ -141,5 +147,35 @@ void startClock() {
 
 int timeDifference() {
   //print (frameEndTime-frameStartTime + " " );
-  return frameEndTime-frameStartTime;
+  return (frameEndTime-frameStartTime);
 }
+ //------------------------CHAIN
+/*
+static Chain getLargerChain(Chain c1, Chain c2)
+  {
+    if (c1 == null)
+      return c2;
+    else if (c2 == null)
+      return c1;  
+    if (c1.getCount() >= c2.getCount())
+      return c1;
+    return c2;   
+  }
+
+static Chain getLargestChain(ArrayList al) 
+  {
+    int largest = 0; 
+    Chain c = null, 
+              temp;
+    for (int j=0;j<al.size();j++)
+    {
+      if (al.get(j) != null)
+      {
+        temp = (Chain)al.get(j);
+        if (temp.getCount() > largest)
+          c = temp; 
+      }
+    }
+    return c;  
+  }
+  */
