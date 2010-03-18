@@ -72,11 +72,12 @@ class GameFSM {
     clearSound.stopIfOver();
     gameGetInput();           //Get player(s) touch input
     theBoard.gravity();       //Apply gravity where needed
-    boolean playSound = theBoard.checkClears();   //Check for clears to be made
-    if(playSound == true)
+    //boolean playSound = theBoard.checkClears();   //Check for clears to be made
+    theBoard.clearer();
+    /*if(playSound == true)
     {
       clearSound.play();
-    }
+    }*/
     theBoard.drawBoard();     //Draw the board
   }
   

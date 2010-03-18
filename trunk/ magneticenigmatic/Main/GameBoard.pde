@@ -85,6 +85,10 @@ class GameBoard
     Tile temp = tileAt(b,row);
     tileBoard[b][row] = tileAt(a,row);
     tileBoard[a][row] = temp;
+     //------------------------CHAIN
+    //Chain c = new Chain();
+    //tileBoard[b][row].setChain(c);
+    //tileBoard[a][row].setChain(c);
     tileBoard[b][row].animate(b-a,0);
     tileBoard[a][row].animate(a-b,0);
     return true;
@@ -143,12 +147,13 @@ class GameBoard
     {
       if ((!tileBoard[x][j].swappable())||(tileBoard[x][j].getTileType() == 0))
         break;
+      //tileBoard[x][j].setChain(getLargerChain(tileBoard[x][j-iter].getChain(),tileBoard[x][j].getChain()));  
       tileBoard[x][j-iter] = tileBoard[x][j];
       tileBoard[x][j-iter].animate(0,-iter);
       if (tileBoard[x][j].getTileType() != EMPTY)
         blockHasFallen = true;
     }
-    tileBoard[x][j-iter] = new Tile(EMPTY);
+    tileBoard[x][j-iter] = new Tile(EMPTY); // space from which last block fell
     return blockHasFallen;
   }
   
@@ -169,6 +174,94 @@ class GameBoard
   private Tile tileAt(Selector s) //alternative for getting a tile
   {
     return tileBoard[s.getX()][s.getY()];   
+  }
+  
+  
+  public void clearer()
+  {
+    int c, thisType;
+    Tile thisTile;
+    //ArrayList cl = new ArrayList();
+    for(int i = 0; i < TPR; i++)
+    {
+      for(int j = 0; j < MAX_R; j++)
+      {
+        thisTile = tileAt(i,j);
+        if ((thisTile.getTileType()!=EMPTY)&&(thisTile.swappable())&&(!thisTile.isMarked()))
+        {
+          thisType = thisTile.getTileType();
+          c = directionalCheck(i,j,thisType,HORIZONTAL,1);//,cl);
+          if (c >= 5){
+            tileBoard[i+2][j].convertToPowerup();
+          }
+          c = directionalCheck(i,j,thisType,VERTICAL,1);//,cl);
+          if (c >= 5){
+            tileBoard[i][j+2].convertToPowerup();
+          }
+        }
+        
+      }
+    }   
+    //cl.clear();    
+  }
+  
+  private int directionalCheck(int x, int y, int type, int direction, int n) {//, ArrayList cl) {
+    int c;
+    Tile thisTile = tileAt(x,y);
+    //cl.add(thisTile.getChain());
+    if(direction == HORIZONTAL)
+    {
+      if (x+1 >= TPR)
+        return n;
+      if (thisTile.isMatch(tileAt(x+1,y))) // also checks if other tile is 
+      {
+        c = directionalCheck(x+1,y,type,HORIZONTAL,n+1);//,cl);
+      }
+      else
+      {
+        c = n;    
+      }
+      if (c >= 3)
+      {
+        if (c==n){
+          //Chain z = (Chain)getLargestChain(cl);
+          //cl.clear();
+          //cl.add(z);
+        } //This should only run for the last block in a combo, it gets the largest chainID and empties everything but this chain in the array list.
+        //thisTile.setChain((Chain)cl.get(0)); 
+        thisTile.mark();
+      }
+      else
+      {
+        //cl.remove(this);
+      }
+      
+      return c;   
+    }
+    else if(direction == VERTICAL)
+    {
+      if (y+1 >= MAX_R)
+        return n;
+      if (thisTile.isMatch(tileAt(x,y+1))) // also checks if other tile is swappable
+        c = directionalCheck(x,y+1,type,VERTICAL,n+1);//,cl);
+      else
+        c = n;
+      if (c >= 3)
+      {
+        if (c==n){
+           //------------------------CHAIN
+          //Chain z = (Chain)getLargestChain(cl);
+          //cl.clear();
+          //cl.add(z);
+        } //This should only run for the last block in a combo, it gets the largest chainID and empties everything but this chain in the array list.
+        //thisTile.setChain((Chain)cl.get(0)); 
+        thisTile.mark();
+      }
+      return c;   
+    }
+    else
+      println("Bad directionalCheck call, check direction parameter");
+    return n;  
   }
   /************************************************************
   * Parses the board for any groups of 3+ tiles and clears them
@@ -323,32 +416,6 @@ class GameBoard
      return returner;
   }
   
-  /*public void checkClears() {
-    Tile t1, t2;
-    for(int i = 0; i < TPR; i++)
-    {
-      for(int j = 0; j < MAX_R; j++)
-      {
-        if (!tileBoard[i][j].isMarked())
-        {
-          t1 = tileBoard[i][j];
-          t2 = tileBoard[i][j];
-          int k = i;
-          while (t1.getTileType() == t2.getTileType())
-          {
-            k++;
-            t2 = tileBoard[k][j];
-            if ((k-i)>3)
-          }
-        }
-  }
-  
-  public boolean checkDirection(int type, int direction, int count) {
-    if (direction == 0)
-    {
-      if (
-    }
-  }*/
   
 public void evaluateClears()
 {
@@ -435,7 +502,7 @@ public void doClears()
                        // print("\n" + (tempTiles[j].getTileType()) );
 			if((tempTiles[j] != null) && (!tempTiles[j].swappable()))
 			{
-                               // print("\nCHECKING TRUUUUUU ARE U FUKCING HERE?"); 
+                               //coding rage? // print("\nCHECKING TRUUUUUU ARE U FUKCING HERE?"); 
 				clearThis = true;
 			}
 			else

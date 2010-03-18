@@ -23,7 +23,7 @@ class Momentum {
   }
   
   public double incrementY() {
-    if (state == ACTIVE) {
+    if ((state == ACTIVE)&&(MOMENTUM_ON)){
         y += v*MAX_V*0.01; 
     }
     return y;

@@ -18,6 +18,7 @@ class Tile
   private int tileType;
   private boolean isMoving;
   private int state;
+  //private Chain chainID;
   private double ax,ay; //ax is the horizontal offset, ay is the vertical offset (viewing from short side of table)
   
   /************************************************************
@@ -28,6 +29,7 @@ class Tile
     tileImage = tileImageType[theType];
     tileType = theType;
     isMoving = false; //Set to true when tile is animating (falling or swapping)
+    //chainID = null;
     state = IDLE;
   }
   
@@ -78,14 +80,32 @@ class Tile
     else if (state == IDLE)
     {
       isMoving = false;
+       //------------------------CHAIN
+       /*
+      if (chainID != null)
+        chainID.deassociateWithTile(this);
+      chainID = null;*/  
+    }
+    else if (state == EMPTY)
+    {
+       //------------------------CHAIN
+      /*
+      if (chainID != null)
+        chainID.deassociateWithTile(this);
+      chainID = null;  */
     }
   }
   
   public void animate(int dx, int dy) {
-    state = ANIMATING;
-    isMoving = true;
-    ax = (double)dx;
-    ay = (double)dy;
+    if (ANIMATIONS_ON) {
+      state = ANIMATING;
+      isMoving = true;
+      ax = (double)dx;
+      ay = (double)dy;
+    }
+    else {
+      state = IDLE;
+    }
   }
   
   public void drawTile(int tempX, int tempY) {
@@ -100,6 +120,12 @@ class Tile
       state = DOUBLE_MARKED;
     else
       state = MARKED;  
+  }
+  
+  public void convertToPowerup() {
+    tileType += 5;
+    setTileImage(tileType);
+    state = IDLE;
   }
   
   public boolean swappable()
@@ -133,6 +159,16 @@ class Tile
     this.tileImage = tileImageType[tempImage];
   }
   
+  public boolean isMatch(Tile other) {
+    return ((isMatch(other.tileType))&&(other.swappable()));
+  }
+  
+  public boolean isMatch(int type){
+    if (type == tileType)
+      return true;
+    return false;  
+  }
+  
   public int getTileType()
   {
     return this.tileType;
@@ -142,6 +178,19 @@ class Tile
   {
     this.tileType = newType;
   }
+  
+ //------------------------CHAIN
+  /*public Chain getChain()
+  {
+    return chainID;
+  }
+  
+  public void setChain(Chain c)
+  {
+    chainID = c;
+   // if (!c.contains(this))
+      chainID.associateWithTile(this);
+  }*/
   
   
 }
