@@ -539,12 +539,12 @@ public void doClears()
                        // print("\n" + (tempTiles[j].getTileType()) );
 			if((tempTiles[j] != null) && (!tempTiles[j].swappable()))
 			{
-                               //coding rage? // print("\nCHECKING TRUUUUUU ARE U FUKCING HERE?"); 
+                               
 				clearThis = true;
 			}
 			else
 			{
-                             // print("\n CHECKING FALSEI ARE U FUKCING HERE?");
+                             
 				clearThis = false;
                                 break;
 			}
@@ -552,7 +552,6 @@ public void doClears()
 		
 		if (clearThis)
 		{
-                        print("\nARE U FUKCING HERE?"); 
 			tempTiles[0].setTileType(0);
 			tempTiles[1].setTileType(0);
 			tempTiles[2].setTileType(0);
