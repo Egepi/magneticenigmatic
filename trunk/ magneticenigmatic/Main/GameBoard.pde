@@ -243,8 +243,8 @@ class GameBoard
     if(direction == HORIZONTAL)
     {
       if (x+1 >= TPR)
-        return n;
-      if (thisTile.isMatch(tileAt(x+1,y))) // also checks if other tile is 
+        c = n;
+      else if (thisTile.isMatch(tileAt(x+1,y))) // also checks if other tile is 
       {
         c = directionalCheck(x+1,y,type,HORIZONTAL,n+1);//,cl);
       }
@@ -272,8 +272,8 @@ class GameBoard
     else if(direction == VERTICAL)
     {
       if (y+1 >= MAX_R)
-        return n;
-      if (thisTile.isMatch(tileAt(x,y+1))) // also checks if other tile is swappable
+        c = n;
+      else if (thisTile.isMatch(tileAt(x,y+1))) // also checks if other tile is swappable
         c = directionalCheck(x,y+1,type,VERTICAL,n+1);//,cl);
       else
         c = n;
