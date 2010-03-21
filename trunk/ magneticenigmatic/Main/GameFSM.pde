@@ -79,6 +79,14 @@ class GameFSM {
       clearSound.play();
     }*/
     theBoard.drawBoard();     //Draw the board
+    //Check if either player lost
+    if (theBoard.checkLoss() > 0)
+    {
+      stateId ++;
+      return;
+    }
+    
+         
   }
   
   /************************************************************
@@ -111,6 +119,8 @@ class GameFSM {
       startState();
     else if(stateId == 2)
       gameState();
+    else if(stateId == 3)
+       endRound(); 
     return;
   }
   
