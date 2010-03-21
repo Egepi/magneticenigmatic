@@ -135,6 +135,7 @@ void setup()
 
 void draw()
 {
+  //print("\n0,0: " + theBoard.tileBoard[0][0].getTileType() + "     0,1: " + theBoard.tileBoard[0][1].getTileType());
   frameStartTime = frameEndTime;
   frameEndTime = millis();
   background(50,125,150); //Arbitrary background color for the time being.

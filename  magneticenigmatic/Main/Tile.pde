@@ -20,6 +20,7 @@ class Tile
   private int state;
   //private Chain chainID;
   private double ax,ay; //ax is the horizontal offset, ay is the vertical offset (viewing from short side of table)
+  private int myX;
   
   /************************************************************
   * Constructor for Tile class.
@@ -101,10 +102,13 @@ class Tile
   }
   
   public void drawTile(int tempX, int tempY) {
+    myX = tempX-(int)(ay*TILE_SIZE);
     if (tileImage != null)
+    {
       image(tileImage,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),TILE_SIZE,TILE_SIZE);
+    }
   }
-  
+    
   public void mark() {
     if (state == ANIMATING)
       print("unacceptable state change");
@@ -169,6 +173,11 @@ class Tile
   public void setTileType(int newType)
   {
     this.tileType = newType;
+  }
+  
+  public int getMyX()
+  {
+    return myX;
   }
   
  //------------------------CHAIN

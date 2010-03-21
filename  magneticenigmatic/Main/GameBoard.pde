@@ -294,6 +294,30 @@ class GameBoard
       println("Bad directionalCheck call, check direction parameter");
     return n;  
   }
+  
+  
+  public int checkLoss()
+  {
+    if(this.tileBoard[0][0].getMyX() == 0)
+    {
+      //Debugging   
+      //print("\nplayer 1 loss");
+      return 1;
+    }
+    if(this.tileBoard[0][MAX_R-1].getMyX() == 0)
+    {
+      //Debugging
+      //print("\nplayer 2 loss");
+      return 2;
+    }
+    //Debugging
+    print("\nno loss");
+    return 0;
+  }
+  
+  
+  
+  
   /************************************************************
   * Parses the board for any groups of 3+ tiles and clears them
   *
