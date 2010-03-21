@@ -146,24 +146,18 @@ class GameBoard
     {
       int topSide = 0;
       int bottomSide = 0;
-      for(int i = 0; i < TPR/2; i++)
+      for(int j = 0; j < MAX_R/2; j++)
       {
-        for(int j = 0; j < MAX_R/2; j++)
+        if(tileBoard[x][j].getTileType() != 0)
         {
-          if(tileBoard[i][j].getTileType() != 0)
-          {
-            topSide++;
-          }
+          topSide++;
         }
       }
-      for(int i = (TPR/2)+1; i < TPR-1; i++)
+      for(int j = (MAX_R/2)+1; j < MAX_R-1; j++)
       {
-        for(int j = (MAX_R/2)+1; j < MAX_R-1; j++)
+        if(tileBoard[x][j].getTileType() != 0)
         {
-          if(tileBoard[i][j].getTileType() != 0)
-          {
-            bottomSide++;
-          }
+          bottomSide++;
         }
       }
       if(topSide > bottomSide)
@@ -306,7 +300,7 @@ class GameBoard
   *
   * Author: Karan Chakrapani
   */
-  public boolean checkClears()
+  /*public boolean checkClears()
   {
     clears = new ArrayList();
     Tile tempTile;
@@ -319,9 +313,6 @@ class GameBoard
       {
         tempTile = tileBoard[i][j];
         
-        /*
-         * Horizontal 3 and 4 and 5 check
-         */
         if(!(tempTile.getTileType() == 0))
         {
           if((i+1 < TPR)  &&(tempTile.getTileType() == tileBoard[i+1][j].getTileType()))
@@ -355,7 +346,7 @@ class GameBoard
                   clears.add(tileBoard[i+1][j]);
                   clears.add(tileBoard[i+2][j]);
                   clears.add(tileBoard[i+3][j]);
-                  if (j > lineOfGravity)
+                  if (j > lineOf)
                      theMomentum.increaseMomentum(-1);
                   else   
                      theMomentum.increaseMomentum(1);       
@@ -377,10 +368,7 @@ class GameBoard
           }
         }
         
-        
-        /*
-         * Vertical 3 and 4 and 5 check
-         */
+
         if(!(tempTile.getTileType() == 0))
         {
           if((j+1 < MAX_R) &&(tempTile.getTileType() == tileBoard[i][j+1].getTileType()))
@@ -452,9 +440,9 @@ class GameBoard
      }
      return returner;
   }
+*/  
   
-  
-public void evaluateClears()
+/*public void evaluateClears()
 {
     clears = new ArrayList();
     Tile clearSet[] = new Tile[5];
@@ -563,7 +551,7 @@ public void doClears()
 		
 		
 	}
-}
+}*/
   
   
   
