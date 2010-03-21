@@ -37,7 +37,7 @@ class Tile
     if ((state == MARKED)||(state == DOUBLE_MARKED))
     {
       tileType = 0;
-      state = EMPTY;
+      state = IDLE;
       isMoving = false;
     }
     else if (state == ANIMATING)
@@ -85,14 +85,6 @@ class Tile
       if (chainID != null)
         chainID.deassociateWithTile(this);
       chainID = null;*/  
-    }
-    else if (state == EMPTY)
-    {
-       //------------------------CHAIN
-      /*
-      if (chainID != null)
-        chainID.deassociateWithTile(this);
-      chainID = null;  */
     }
   }
   
