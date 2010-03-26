@@ -11,14 +11,13 @@ class Tile
   static final int DOUBLE_MARKED = 3,
                    ANIMATING = 2,
                    MARKED = 1,
-                   IDLE = 0,
-                   EMPTY = -1; 
+                   IDLE = 0;
   
   private PImage tileImage;
   private int tileType;
   private boolean isMoving;
   private int state;
-  //private Chain chainID;
+  private Chain chainID;
   private double ax,ay; //ax is the horizontal offset, ay is the vertical offset (viewing from short side of table)
   private int myX;
   
@@ -30,7 +29,7 @@ class Tile
     tileImage = tileImageType[theType];
     tileType = theType;
     isMoving = false; //Set to true when tile is animating (falling or swapping)
-    //chainID = null;
+    chainID = null;
     state = IDLE;
   }
   
@@ -75,6 +74,8 @@ class Tile
       }
       if ((abs((float)ax)<=0.001)&&(abs((float)ay)<=0.001))
       {
+        ax = 0;
+        ay = 0;
         state = IDLE;
       }
     }
@@ -106,6 +107,8 @@ class Tile
     if (tileImage != null)
     {
       image(tileImage,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),TILE_SIZE,TILE_SIZE);
+      if (chainID != null)
+        line(tempX+10,tempY+10,chainList.indexOf(chainID)*20+10,10); 
     }
   }
     
@@ -170,6 +173,11 @@ class Tile
     return this.tileType;
   }
   
+  public Chain getChainID()
+  {
+    return chainID;
+  }
+  
   public void setTileType(int newType)
   {
     this.tileType = newType;
@@ -179,19 +187,6 @@ class Tile
   {
     return myX;
   }
-  
- //------------------------CHAIN
-  /*public Chain getChain()
-  {
-    return chainID;
-  }
-  
-  public void setChain(Chain c)
-  {
-    chainID = c;
-   // if (!c.contains(this))
-      chainID.associateWithTile(this);
-  }*/
   
   
 }
