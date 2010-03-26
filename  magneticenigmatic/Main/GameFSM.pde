@@ -74,11 +74,13 @@ class GameFSM {
     theBoard.gravity();       //Apply gravity where needed
     //boolean playSound = theBoard.checkClears();   //Check for clears to be made
     theBoard.clearer();
+    
     /*if(playSound == true)
     {
       clearSound.play();
     }*/
-    theBoard.drawBoard();     //Draw the board
+    theBoard.drawBoard();  //Draw the board
+    drawChains();    
     //Check if either player lost
     if (theBoard.checkLoss() > 0)
     {
@@ -146,6 +148,14 @@ class GameFSM {
          sel1.reset();
          sel2.reset();
        }
+    }
+  }
+  
+  void drawChains() {
+    for (int j=0;j<chainList.size();j++)
+    {
+      rect(j*20,0,20,20);
+      
     }
   }
 }
