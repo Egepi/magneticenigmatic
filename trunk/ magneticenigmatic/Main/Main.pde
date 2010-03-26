@@ -42,7 +42,7 @@ int msgPort = 7340;
  //Board and tile size (careful with the commas here, I kept getting unexpected token errors because of having semi-colons instead of commas)
  
  static final int TPR = 8, //Tiles per row
-                  MAX_R = 5, //Maximum number of rows
+                  MAX_R = 17, //Maximum number of rows
                   PUZZLE_WIDTH = 500,
                   TILE_SIZE = PUZZLE_WIDTH/TPR;
                 
@@ -61,7 +61,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                       
 
 //Images
- static final String TILE0 = null,
+ static final String TILE0 = "diamond.jpg",
                      TILE1 = "Red.png",
                      TILE2 = "Blue.png",
                      TILE3 = "Green.png",

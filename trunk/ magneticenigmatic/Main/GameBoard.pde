@@ -9,6 +9,7 @@ class GameBoard
 //private int boardWidth;  Use MAX_R and TPR instead
 //private int boardHeight; These names are short because they will be used often
   public Tile tileBoard[][];
+  private Chain ch; //sorry for the global, I couldn't figure out another way to get chains working properly. :(
   
   /************************************************************
   * Constructor for a GameBoard, sets the width and height of board.
@@ -192,13 +193,19 @@ class GameBoard
       Tile emptyTile = tileBoard[x][j-iter];
       if ((!fallingTile.swappable())||(fallingTile.getTileType() == 0))
         break;
-      Chain c = emptyTile.getChainID();
-      if (c!=null)
-        c.addTile(fallingTile);
+      Chain ftc = emptyTile.getChainID();
+      Chain etc = fallingTile.getChainID();
+      if (ftc != null)
+      {
+        Chain largest = ftc.getLargerChain(etc);
+        ftc.addTile(fallingTile);
+      }
       tileBoard[x][j-iter] = fallingTile; //Moves the falling tile into the empty tile's spot
-      fallingTile.animate(0,-iter); //Animated the falling tile to make it look as if it is falling from its original location
+      fallingTile.animate(0,-iter); //Animates the falling tile to make it look as if it is falling from its original location
       if (tileBoard[x][j].getTileType() != EMPTY)
         blockHasFallen = true;
+      if (emptyTile.getTileType() == 0)  
+        emptyTile.delete();  
     }
     tileBoard[x][j-iter] = new Tile(EMPTY); // space from which last block fell
     return blockHasFallen;
@@ -228,7 +235,7 @@ class GameBoard
   {
     int c, thisType;
     Tile thisTile;
-    ArrayList cl = new ArrayList();
+    ch = null;
     for(int i = 0; i < TPR; i++)
     {
       for(int j = 0; j < MAX_R; j++)
@@ -237,31 +244,44 @@ class GameBoard
         if ((thisTile.getTileType()!=EMPTY)&&(thisTile.swappable())&&(!thisTile.isMarked()))
         {
           thisType = thisTile.getTileType();
-          c = directionalCheck(i,j,thisType,HORIZONTAL,1,cl);
+          c = directionalCheck(i,j,thisType,HORIZONTAL,1);
+          if (c >=3 )
+          {
+            if (ch != null)
+              ch.incrementChain();
+          }
           if (c >= 5){
             tileBoard[i+2][j].convertToPowerup();
           }
-          c = directionalCheck(i,j,thisType,VERTICAL,1,cl);
+          c = directionalCheck(i,j,thisType,VERTICAL,1);
+          if (c >=3 )
+          {
+            if (ch != null)
+              ch.incrementChain();
+          }
           if (c >= 5){
             tileBoard[i][j+2].convertToPowerup();
           }
+          
         }
         
       }
-    }   
-    cl.clear();    
+    }
   }
   
-  private int directionalCheck(int x, int y, int type, int direction, int n, ArrayList cl) {
+  private int directionalCheck(int x, int y, int type, int direction, int n) {
     int c;
     Tile thisTile = tileAt(x,y);
-    cl.add(thisTile.getChainID());
+    if (ch == null)
+      ch = thisTile.getChainID();
+    else
+      ch = ch.getLargerChain(thisTile.getChainID());  
     if(direction == HORIZONTAL)
     {
       if (x+1 >= TPR)
         c = n;
       else if (thisTile.isMatch(tileAt(x+1,y))) // also checks if other tile is 
-        c = directionalCheck(x+1,y,type,HORIZONTAL,n+1,cl);
+        c = directionalCheck(x+1,y,type,HORIZONTAL,n+1);
       else
         c = n;    
     }
@@ -270,7 +290,7 @@ class GameBoard
       if (y+1 >= MAX_R)
         c = n;
       else if (thisTile.isMatch(tileAt(x,y+1))) // also checks if other tile is swappable
-        c = directionalCheck(x,y+1,type,VERTICAL,n+1,cl);
+        c = directionalCheck(x,y+1,type,VERTICAL,n+1);
       else
         c = n;
     }
@@ -280,28 +300,11 @@ class GameBoard
     }
     
     if (c >= 3)
-      {
-        if (c==n){
-          if (!cl.isEmpty())
-          {
-            Chain z = (Chain)cl.get(0);
-            if (z!=null)
-            {
-              z = z.getLargestChain(cl);
-              cl.add(z);
-            }
-          }
-          //cl.clear();
-          //cl.add(z);
-        } //This should only run for the last block in a combo, it gets the largest chainID and empties everything but this chain in the array list.
-        //thisTile.setChain((Chain)cl.get(0)); 
-        thisTile.mark();
-      }
-      else
-      {
-        //cl.remove(this);
-      }
-      
+    {
+      if (ch != null)
+        ch.addTile(thisTile);
+      thisTile.mark();
+    }
       return c; 
   }
   
@@ -314,14 +317,14 @@ class GameBoard
       //print("\nplayer 1 loss");
       return 1;
     }
-    if(this.tileBoard[0][MAX_R-1].getMyX() == 0)
+    if(this.tileBoard[0][MAX_R-1].getMyX() == screen.width)
     {
       //Debugging
       //print("\nplayer 2 loss");
       return 2;
     }
     //Debugging
-    print("\nno loss");
+    //print("\nno loss");
     return 0;
   }
   

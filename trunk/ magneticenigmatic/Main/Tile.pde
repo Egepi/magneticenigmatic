@@ -8,14 +8,15 @@
 
 class Tile
 {
-  static final int DOUBLE_MARKED = 3,
-                   ANIMATING = 2,
+  static final int DONE_ANIMATING = 4,
+                   ANIMATING = 3,
+                   DOUBLE_MARKED = 2,
                    MARKED = 1,
                    IDLE = 0;
   
   private PImage tileImage;
   private int tileType;
-  private boolean isMoving;
+  private boolean isMoving, isIdle;
   private int state;
   private Chain chainID;
   private double ax,ay; //ax is the horizontal offset, ay is the vertical offset (viewing from short side of table)
@@ -28,6 +29,7 @@ class Tile
   {
     tileImage = tileImageType[theType];
     tileType = theType;
+    isIdle = true;
     isMoving = false; //Set to true when tile is animating (falling or swapping)
     chainID = null;
     state = IDLE;
@@ -37,8 +39,7 @@ class Tile
     if ((state == MARKED)||(state == DOUBLE_MARKED))
     {
       tileType = 0;
-      state = IDLE;
-      isMoving = false;
+      state = DONE_ANIMATING;
     }
     else if (state == ANIMATING)
     {
@@ -76,17 +77,18 @@ class Tile
       {
         ax = 0;
         ay = 0;
-        state = IDLE;
+        state = DONE_ANIMATING;
       }
+    }
+    else if (state == DONE_ANIMATING)
+    {
+      isMoving = false;
+      state = IDLE;
     }
     else if (state == IDLE)
     {
+      isIdle = true;
       isMoving = false;
-       //------------------------CHAIN
-       /*
-      if (chainID != null)
-        chainID.deassociateWithTile(this);
-      chainID = null;*/  
     }
   }
   
@@ -94,11 +96,12 @@ class Tile
     if (ANIMATIONS_ON) {
       state = ANIMATING;
       isMoving = true;
+      isIdle = false;
       ax = (double)dx;
       ay = (double)dy;
     }
     else {
-      state = IDLE;
+      state = DONE_ANIMATING;
     }
   }
   
@@ -107,9 +110,10 @@ class Tile
     if (tileImage != null)
     {
       image(tileImage,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),TILE_SIZE,TILE_SIZE);
-      if (chainID != null)
-        line(tempX+10,tempY+10,chainList.indexOf(chainID)*20+10,10); 
+      
     }
+    if (chainID != null)
+        line(tempX+10,tempY+10,chainList.indexOf(chainID)*20+10,10); 
   }
     
   public void mark() {
@@ -130,6 +134,11 @@ class Tile
   public boolean swappable()
   {
     return (!isMoving);
+  }
+  
+  public boolean isIdle()
+  {
+    return (isIdle);
   }
   
   public boolean isMarked()
@@ -172,6 +181,15 @@ class Tile
   {
     return this.tileType;
   }
+  public int getState()
+  {
+    return this.state;
+  }
+  
+  public void setChainID(Chain c)
+  {
+    chainID = c;
+  }
   
   public Chain getChainID()
   {
@@ -186,6 +204,15 @@ class Tile
   public int getMyX()
   {
     return myX;
+  }
+  
+  public void delete()
+  {
+    state = IDLE;
+    tileType = 0;
+    if (chainID != null)
+      chainID.removeTile(this);
+    chainID = null;
   }
   
   

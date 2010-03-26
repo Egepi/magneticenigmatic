@@ -37,7 +37,7 @@ class Chain
 
   public void addTile(Tile z)
   {
-    z.chainID = this;
+    z.setChainID(this);
     tiles.add(z);
   }
   
@@ -45,19 +45,27 @@ class Chain
   {
     for (int j = 0; j<z.length; j++)
     {
-      z[j].chainID = this;
+      z[j].setChainID(this);
       tiles.add(z[j]);
     } 
   }
-
+  public void removeTile(Tile t)
+  {
+    tiles.remove(tiles.indexOf(t));
+  }
+  
+  
   public void removeIdleTiles()
   {
     Tile t;
     for (int j = tiles.size()-1; j>=0; j--)
     {
       t = (Tile)tiles.get(j);
-      if (t.swappable())
+      if (t.isIdle())
+      {
         tiles.remove(j);
+        t.setChainID(null);
+      }
     }  
   }
 
@@ -73,10 +81,16 @@ class Chain
     {
       int c = count;
       count = 0;
+      print("Chain redeemed with " + count + " combo(s)");
+      chainList.remove(chainList.indexOf(this));
       return c;
     }
     else
+    {
+      Tile t = (Tile)tiles.get(0);
+      println ("Contains " + tiles.size() + " tiles. " + t.getState());
       return 0;
+    }
   }
   
   public int getSomeY() { //dummy function for debugging
