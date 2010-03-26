@@ -155,6 +155,9 @@ class GameFSM {
     for (int j=0;j<chainList.size();j++)
     {
       rect(j*20,0,20,20);
+      Chain ch = (Chain)chainList.get(j);
+      ch.removeIdleTiles();
+      ch.redeemChain();
       
     }
   }
