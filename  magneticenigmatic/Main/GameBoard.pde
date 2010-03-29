@@ -9,7 +9,6 @@ class GameBoard
 //private int boardWidth;  Use MAX_R and TPR instead
 //private int boardHeight; These names are short because they will be used often
   public Tile tileBoard[][];
-  private Chain ch; //sorry for the global, I couldn't figure out another way to get chains working properly. :(
   
   /************************************************************
   * Constructor for a GameBoard, sets the width and height of board.
@@ -204,8 +203,8 @@ class GameBoard
       fallingTile.animate(0,-iter); //Animates the falling tile to make it look as if it is falling from its original location
       if (tileBoard[x][j].getTileType() != EMPTY)
         blockHasFallen = true;
-      if (emptyTile.getTileType() == 0)  
-        emptyTile.delete();  
+      //if (emptyTile.getTileType() == 0)  
+      //  emptyTile.delete();  
     }
     tileBoard[x][j-iter] = new Tile(EMPTY); // space from which last block fell
     return blockHasFallen;
@@ -214,6 +213,19 @@ class GameBoard
   public Tile[][] getGameBoard()
   {
     return tileBoard;
+  }
+  
+  public boolean isNotInPuzzle(Tile t)
+  {
+    for(int i = 0; i < TPR; i++)
+    {
+      for(int j = 0; j < MAX_R; j++)
+      { 
+        if (tileAt(i,j) == t)
+          return false;
+      }
+    }
+    return true;
   }
   public void setGameBoard(Tile[][] theBoard)
   {
@@ -233,9 +245,7 @@ class GameBoard
   
   public void clearer()
   {
-    int c, thisType;
     Tile thisTile;
-    ch = null;
     for(int i = 0; i < TPR; i++)
     {
       for(int j = 0; j < MAX_R; j++)
@@ -243,33 +253,86 @@ class GameBoard
         thisTile = tileAt(i,j);
         if ((thisTile.getTileType()!=EMPTY)&&(thisTile.swappable())&&(!thisTile.isMarked()))
         {
-          thisType = thisTile.getTileType();
-          c = directionalCheck(i,j,thisType,HORIZONTAL,1);
-          if (c >=3 )
-          {
-            if (ch != null)
-              ch.incrementChain();
-          }
-          if (c >= 5){
-            tileBoard[i+2][j].convertToPowerup();
-          }
-          c = directionalCheck(i,j,thisType,VERTICAL,1);
-          if (c >=3 )
-          {
-            if (ch != null)
-              ch.incrementChain();
-          }
-          if (c >= 5){
-            tileBoard[i][j+2].convertToPowerup();
-          }
-          
+          directionalCheck(i,j);
         }
         
       }
     }
   }
+  private void directionalCheck(int x, int y)
+  {
+    int nx = x;
+    int ny = y;
+    int c = 1;
+    Chain ch = null;
+    Tile temp = tileAt(x,y);
+    ArrayList tiles = new ArrayList();
+    tiles.add(temp);
+    while ((nx+1 < TPR)&&(temp.isMatch(tileAt(nx+1,y))))
+    {
+      c++;
+      
+      if (ch == null)
+        ch = temp.getChainID();
+      else
+        ch = ch.getLargerChain(temp.getChainID());
+      temp = tileAt(nx+1,y);
+      tiles.add(temp);
+      nx+=1;
+    }
+    if (c >= 3)
+    {
+      for (int j=0;j<tiles.size();j++)
+      {
+        temp = (Tile)tiles.get(j);
+        if (ch != null)
+          ch.addTile(temp);
+        temp.mark();
+      }
+      if (c>=5)
+      {
+        temp = (Tile)tiles.get(tiles.size()/2);
+        temp.convertToPowerup();
+      }
+      if (ch != null)
+        ch.incrementChain();
+    } 
+    c=1;
+    ch = null;
+    tiles.clear();
+    temp = tileAt(x,y);
+    tiles.add(temp);
+    while ((ny+1 < MAX_R)&&(temp.isMatch(tileAt(x,ny+1))))
+    {
+      c++;
+      if (ch == null)
+        ch = temp.getChainID();
+      else
+        ch = ch.getLargerChain(temp.getChainID());
+      temp = tileAt(x,ny+1);
+      tiles.add(temp);
+      ny+=1;
+    } 
+    if (c >= 3)
+    {
+      for (int j=0;j<tiles.size();j++)
+      {
+        temp = (Tile)tiles.get(j);
+        if (ch != null)
+          ch.addTile(temp);
+        temp.mark();
+      }
+      if (c>=5)
+      {
+        temp = (Tile)tiles.get(tiles.size()/2);
+        temp.convertToPowerup();
+      }
+      if (ch != null)
+        ch.incrementChain();
+    } 
+  }
   
-  private int directionalCheck(int x, int y, int type, int direction, int n) {
+  /*private int directionalCheck(int x, int y, int type, int direction, int n) {
     int c;
     Tile thisTile = tileAt(x,y);
     if (ch == null)
@@ -302,11 +365,14 @@ class GameBoard
     if (c >= 3)
     {
       if (ch != null)
+      {
+        print("awesome");
         ch.addTile(thisTile);
+      }
       thisTile.mark();
     }
       return c; 
-  }
+  }*/
   
   
   public int checkLoss()

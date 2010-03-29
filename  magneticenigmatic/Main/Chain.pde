@@ -66,6 +66,11 @@ class Chain
         tiles.remove(j);
         t.setChainID(null);
       }
+      else if (theBoard.isNotInPuzzle(t))
+      {
+        tiles.remove(j);
+        t.setChainID(null);
+      }
     }  
   }
 
@@ -88,7 +93,7 @@ class Chain
     else
     {
       Tile t = (Tile)tiles.get(0);
-      println ("Contains " + tiles.size() + " tiles. " + t.getState());
+      //println ("Contains " + tiles.size() + " tiles. " + t.getState());
       return 0;
     }
   }
