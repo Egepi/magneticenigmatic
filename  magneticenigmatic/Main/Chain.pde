@@ -3,11 +3,13 @@ class Chain
 {
   private Player p;
   private int count;
+  private int total;
   private ArrayList tiles;
 
   public Chain(Player pParam)
   {
     count = 0;
+    total = 0;
     p = pParam;
     tiles = new ArrayList();
   }
@@ -39,6 +41,7 @@ class Chain
   {
     z.setChainID(this);
     tiles.add(z);
+    total++;
   }
   
   public void addTiles(Tile[] z)
@@ -47,6 +50,7 @@ class Chain
     {
       z[j].setChainID(this);
       tiles.add(z[j]);
+      total++;
     } 
   }
   public void removeTile(Tile t)
@@ -86,7 +90,9 @@ class Chain
     {
       int c = count;
       count = 0;
-      print("Chain redeemed with " + count + " combo(s)");
+      if (c==0)
+        println("No combos, " + total + " tiles associated.");
+      println("Chain redeemed with " + c + " combo(s), " + total);
       chainList.remove(chainList.indexOf(this));
       return c;
     }

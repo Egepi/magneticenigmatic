@@ -264,19 +264,18 @@ class GameBoard
     int nx = x;
     int ny = y;
     int c = 1;
-    Chain ch = null;
     Tile temp = tileAt(x,y);
+    Chain ch = temp.getChainID();
     ArrayList tiles = new ArrayList();
     tiles.add(temp);
     while ((nx+1 < TPR)&&(temp.isMatch(tileAt(nx+1,y))))
     {
       c++;
-      
+      temp = tileAt(nx+1,y);
       if (ch == null)
         ch = temp.getChainID();
       else
         ch = ch.getLargerChain(temp.getChainID());
-      temp = tileAt(nx+1,y);
       tiles.add(temp);
       nx+=1;
     }
@@ -298,18 +297,18 @@ class GameBoard
         ch.incrementChain();
     } 
     c=1;
-    ch = null;
+    ch = temp.getChainID();
     tiles.clear();
     temp = tileAt(x,y);
     tiles.add(temp);
     while ((ny+1 < MAX_R)&&(temp.isMatch(tileAt(x,ny+1))))
     {
       c++;
+      temp = tileAt(x,ny+1);
       if (ch == null)
         ch = temp.getChainID();
       else
         ch = ch.getLargerChain(temp.getChainID());
-      temp = tileAt(x,ny+1);
       tiles.add(temp);
       ny+=1;
     } 
