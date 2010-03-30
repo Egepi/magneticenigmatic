@@ -81,7 +81,7 @@ class GameFSM {
     }*/
     theBoard.drawBoard();  //Draw the board
     drawChains();    
-    if (rowTimeDifference() > 10000)
+    if ((rowTimeDifference() > 10000)&&(ROW_GENERATION_ON))
     {
       lastRowTime += 10000;
       theBoard.generateRow();
@@ -159,7 +159,10 @@ class GameFSM {
   void drawChains() {
     for (int j=0;j<chainList.size();j++)
     {
-      rect(j*20,0,20,20);
+      if (DEBUG_MODE_ON)
+      {
+        rect(j*20,0,20,20);
+      }
       Chain ch = (Chain)chainList.get(j);
       ch.removeIdleTiles();
       ch.redeemChain();

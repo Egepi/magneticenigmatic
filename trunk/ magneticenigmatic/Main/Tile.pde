@@ -112,7 +112,7 @@ class Tile
       image(tileImage,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),TILE_SIZE,TILE_SIZE);
       
     }
-    if (chainID != null)
+    if ((chainID != null)&&(DEBUG_MODE_ON))
         line(tempX+10,tempY+10,chainList.indexOf(chainID)*20+10,10); 
   }
     

@@ -97,7 +97,7 @@ class GameBoard
     {
         temp = new Tile(int(random(1,TILE_COLORS)));
         tileBoard[i][j] = temp;
-        temp.animate(2*(4-i),8);
+        temp.animate(newRowAnimationX(i),newRowAnimationY(i));
         Chain newCh = new Chain(player1);
         newCh.addTile(temp);
     }
@@ -124,10 +124,20 @@ class GameBoard
     {
         temp = new Tile(int(random(1,TILE_COLORS)));
         tileBoard[i][j] = temp;
-        temp.animate(2*(4-i),-8);
+        temp.animate(newRowAnimationX(i),-newRowAnimationY(i));
         Chain newCh = new Chain(player1);
         newCh.addTile(temp);
     }
+  }
+  
+  public int newRowAnimationX(int i) //Animation formulas
+  {
+    return 2*(4-i);
+  }
+  
+  public int newRowAnimationY(int i)
+  {
+    return 8;
   }
   
   /************************************************************
