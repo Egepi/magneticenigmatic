@@ -3,15 +3,16 @@ class Chain
 {
   private Player p;
   private int count;
-  private int total;
+  private int totalTiles;
   private ArrayList tiles;
 
   public Chain(Player pParam)
   {
     count = 0;
-    total = 0;
+    totalTiles = 0;
     p = pParam;
     tiles = new ArrayList();
+    chainList.add(this);
   }
   
   public Chain getLargerChain (Chain other) {
@@ -41,7 +42,6 @@ class Chain
   {
     z.setChainID(this);
     tiles.add(z);
-    total++;
   }
   
   public void addTiles(Tile[] z)
@@ -50,7 +50,6 @@ class Chain
     {
       z[j].setChainID(this);
       tiles.add(z[j]);
-      total++;
     } 
   }
   public void removeTile(Tile t)
@@ -83,6 +82,12 @@ class Chain
     count++;
     return count;
   }
+  
+  public int increaseTotal(int x)
+  {
+    totalTiles+=x;
+    return totalTiles;
+  }
 
   public int redeemChain() 
   {
@@ -90,9 +95,11 @@ class Chain
     {
       int c = count;
       count = 0;
-      if (c==0)
-        println("No combos, " + total + " tiles associated.");
-      println("Chain redeemed with " + c + " combo(s), " + total);
+      println("Chain redeemed with " + c + " combo(s) for " + p.getName() + ".");
+      if (p == player1)
+        theMomentum.increaseMomentum(totalTiles*totalTiles*MOMENTUM_COEFF);
+      else if (p == player2)
+        theMomentum.increaseMomentum(-totalTiles*totalTiles*MOMENTUM_COEFF);  
       chainList.remove(chainList.indexOf(this));
       return c;
     }

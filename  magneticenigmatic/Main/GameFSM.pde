@@ -81,6 +81,11 @@ class GameFSM {
     }*/
     theBoard.drawBoard();  //Draw the board
     drawChains();    
+    if (rowTimeDifference() > 10000)
+    {
+      lastRowTime += 10000;
+      theBoard.generateRow();
+    }
     //Check if either player lost
     if (theBoard.checkLoss() > 0)
     {

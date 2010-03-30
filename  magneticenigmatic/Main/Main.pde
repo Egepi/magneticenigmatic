@@ -42,7 +42,8 @@ int msgPort = 7340;
  //Board and tile size (careful with the commas here, I kept getting unexpected token errors because of having semi-colons instead of commas)
  
  static final int TPR = 8, //Tiles per row
-                  MAX_R = 17, //Maximum number of rows
+                  MAX_R = 51, //Maximum number of rows
+                  START_R = 17, //Number of rows to start with
                   PUZZLE_WIDTH = 500,
                   TILE_SIZE = PUZZLE_WIDTH/TPR;
                 
@@ -56,6 +57,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                   MAX_V = 2,
                   MAX_TILE_V = 2,
                   TILE_COLORS = 6;
+ static final double MOMENTUM_COEFF = 0.25;
  static final boolean MOMENTUM_ON = true,
                       ANIMATIONS_ON = true;
                       
@@ -90,12 +92,13 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  PImage[] tileImageType = new PImage[TILE_TYPES];
  
  GameBoard theBoard;
- Player player1, player2;
+ Player player1 = new Player("Player 1");
+ Player player2 = new Player("Player 2");
  Momentum theMomentum;
  ArrayList chainList = new ArrayList();
  Selector sel1, sel2;
  GameFSM theGameFSM;
- int gameStartTime, frameStartTime, frameEndTime;
+ int gameStartTime, frameStartTime, frameEndTime, lastRowTime;
  Minim minim;  //Used for playing sound
  
  
@@ -146,11 +149,16 @@ void draw()
 
 void startClock() {
   gameStartTime = millis();
+  lastRowTime = millis();
   frameStartTime = gameStartTime;
 }
 
 int timeDifference() {
   //print (frameEndTime-frameStartTime + " " );
   return (frameEndTime-frameStartTime);
+}
+
+int rowTimeDifference() {
+  return (millis()-lastRowTime);
 }
 

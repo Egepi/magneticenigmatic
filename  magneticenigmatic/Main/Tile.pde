@@ -181,6 +181,11 @@ class Tile
   {
     return this.tileType;
   }
+  
+  public boolean isEmpty()
+  {
+    return (this.tileType==0);
+  }
   public int getState()
   {
     return this.state;

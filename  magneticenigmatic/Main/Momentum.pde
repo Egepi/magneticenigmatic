@@ -29,7 +29,8 @@ class Momentum {
     return y;
   }
   
-  public double increaseMomentum(int x) {
+  public double increaseMomentum(double x) 
+  {
     v += x;
     return v;
   }

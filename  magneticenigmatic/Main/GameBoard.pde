@@ -19,6 +19,13 @@ class GameBoard
   GameBoard(int theWidth, int theHeight)
   {
     tileBoard = new Tile[theWidth][theHeight];
+    for(int i = 0; i < TPR; i++)
+    {
+      for(int j = 0; j < MAX_R; j++)
+      {
+        tileBoard[i][j] = new Tile(0);
+      }
+    }
   }
   
   /************************************************************
@@ -57,10 +64,69 @@ class GameBoard
   {
     for(int i = 0; i < TPR; i++)
     {
-      for(int j = 0; j < MAX_R; j++)
+      for(int j = lineOfGravity-START_R/2; j < lineOfGravity+START_R/2; j++)
       {
         tileBoard[i][j] = new Tile(int(random(1,TILE_COLORS)));
       }
+    }
+  }
+  
+  public void generateRow()
+  {
+    boolean rowIsEmpty = true;
+    Tile temp;
+    int j = 0;
+    
+    //Player 1
+    while (rowIsEmpty)
+    {
+      for(int i = 0; i < TPR; i++)
+      {
+        if (!tileBoard[i][j].isEmpty())
+        {
+          rowIsEmpty = false;
+          break;
+        }
+      }
+      j++;
+    }
+    j-=2;
+    if (j<0)
+      j=0;
+    for(int i = 0; i < TPR; i++)
+    {
+        temp = new Tile(int(random(1,TILE_COLORS)));
+        tileBoard[i][j] = temp;
+        temp.animate(2*(4-i),8);
+        Chain newCh = new Chain(player1);
+        newCh.addTile(temp);
+    }
+    
+    //Player 2
+    j=MAX_R-1;
+    rowIsEmpty=true;
+    while (rowIsEmpty)
+    {
+      for(int i = 0; i < TPR; i++)
+      {
+        if (!tileBoard[i][j].isEmpty())
+        {
+          rowIsEmpty = false;
+          break;
+        }
+      }
+      j--;
+    }
+    j+=2;
+    if (j>=MAX_R)
+      j = MAX_R-1;
+    for(int i = 0; i < TPR; i++)
+    {
+        temp = new Tile(int(random(1,TILE_COLORS)));
+        tileBoard[i][j] = temp;
+        temp.animate(2*(4-i),-8);
+        Chain newCh = new Chain(player1);
+        newCh.addTile(temp);
     }
   }
   
@@ -91,7 +157,6 @@ class GameBoard
     {
       c = new Chain(player2);
     }
-    chainList.add(c);
     Tile temp = tileAt(b,row);
     tileBoard[b][row] = tileAt(a,row);
     tileBoard[a][row] = temp;
@@ -314,6 +379,7 @@ class GameBoard
     } 
     if (c >= 3)
     {
+      
       for (int j=0;j<tiles.size();j++)
       {
         temp = (Tile)tiles.get(j);
@@ -327,7 +393,10 @@ class GameBoard
         temp.convertToPowerup();
       }
       if (ch != null)
+      {
+        ch.increaseTotal(c);
         ch.incrementChain();
+      }
     } 
   }
   
@@ -378,14 +447,12 @@ class GameBoard
   {
     if(this.tileBoard[0][0].getMyX() == 0)
     {
-      //Debugging   
-      //print("\nplayer 1 loss");
+      println(player1.getName() + " loses...");
       return 1;
     }
     if(this.tileBoard[0][MAX_R-1].getMyX() == screen.width)
     {
-      //Debugging
-      //print("\nplayer 2 loss");
+      println(player2.getName() + " loses...");
       return 2;
     }
     //Debugging

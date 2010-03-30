@@ -5,10 +5,12 @@ class Player
   private int blockStateModifier;
   //Statistics
   private int statSwaps, statClears, statChains, statPowerups;
+  private String name;
   
-  
-  public Player()
+  public Player(String n)
   {
+    name  = n;
+    
     speedModifier = 1;
     blockStateModifier = 0;
     
@@ -16,5 +18,10 @@ class Player
     statClears = 0;
     statChains = 0;
     statPowerups = 0;
+  }
+  
+  public String getName()
+  {
+    return name;
   }
 }
