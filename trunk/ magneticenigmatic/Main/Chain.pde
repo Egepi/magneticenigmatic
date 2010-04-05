@@ -115,3 +115,4 @@ class Chain
     return 10;
   }
 }
+
