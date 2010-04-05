@@ -458,14 +458,40 @@ GameBoard(int theWidth, int theHeight)
   
   public int checkLoss()
   {
-    print("\n" +tileBoard[0][0].getMyX());
-    print("\n" +tileBoard[0][MAX_R-1].getMyX());
-    if(this.tileBoard[0][0].getMyX() == 0)
+    //print("\n" +tileBoard[0][0].getMyX());
+    ///print("\n" +tileBoard[0][MAX_R-1].getMyX());
+    Tile tempLeft = null;
+    Tile tempRight = null;
+    for(int i = 0; i < MAX_R/2; i++)
+    {
+      for(int j = 0; j < TPR; j++)
+      {
+        if(this.tileBoard[j][i].getTileType() != 0 && this.tileBoard[j][i].isIdle()) 
+        {
+          tempLeft = tileBoard[j][i];
+          i = MAX_R;
+          break;
+        }
+      }
+    }
+    for(int i = MAX_R-1; i > MAX_R/2; i--)
+    {
+      for(int j = 0; j < TPR; j++)
+      {
+        if(this.tileBoard[j][i].getTileType() != 0 && this.tileBoard[j][i].isIdle()) 
+        {
+          tempRight = tileBoard[j][i];
+          i = 0;
+          break;
+        }
+      }
+    }
+    if(tempLeft.getMyX() < 0)
     {
       println(player1.getName() + " loses...");
       return 1;
     }
-    if(this.tileBoard[0][MAX_R-1].getMyX() == screen.width)
+    if(tempRight.getMyX() > screen.width - TILE_SIZE)
     {
       println(player2.getName() + " loses...");
       return 2;
