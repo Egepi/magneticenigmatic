@@ -105,11 +105,13 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  int middleX;
  
  int lineOfGravity = MAX_R/2;
+ PFont font1;
  
 
 void setup()
 {
   minim = new Minim(this);
+  font1 = loadFont("Font1_B48.vlw");
   startClock();
   if (connectToTacTile)
     startTactile();
