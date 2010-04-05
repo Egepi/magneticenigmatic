@@ -42,7 +42,7 @@ int msgPort = 7340;
  //Board and tile size (careful with the commas here, I kept getting unexpected token errors because of having semi-colons instead of commas)
  
  static final int TPR = 8, //Tiles per row
-                  MAX_R = 51, //Maximum number of rows
+                  MAX_R = 31, //Maximum number of rows
                   START_R = 17, //Number of rows to start with
                   PUZZLE_WIDTH = 500,
                   TILE_SIZE = PUZZLE_WIDTH/TPR;
@@ -57,7 +57,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                   MAX_V = 2,
                   MAX_TILE_V = 2,
                   TILE_COLORS = 6;
- static final double MOMENTUM_COEFF = 0.10;
+ static final double MOMENTUM_COEFF = 0.90;
  static final boolean DEBUG_MODE_ON = false,
                       MOMENTUM_ON = true,
                       ANIMATIONS_ON = true,
@@ -65,7 +65,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                       
 
 //Images
- static final String TILE0 = null,//"diamond.jpg",
+ static final String TILE0 = "star.png",//"diamond.jpg",
                      TILE1 = "Red.png",
                      TILE2 = "Blue.png",
                      TILE3 = "Green.png",
@@ -102,7 +102,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  GameFSM theGameFSM;
  int gameStartTime, frameStartTime, frameEndTime, lastRowTime;
  Minim minim;  //Used for playing sound
- 
+ int middleX;
  
  int lineOfGravity = MAX_R/2;
  

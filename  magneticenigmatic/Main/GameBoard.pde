@@ -16,17 +16,18 @@ class GameBoard
   *
   * Author: Todd Silvia
   */
-  GameBoard(int theWidth, int theHeight)
-  {
-    tileBoard = new Tile[theWidth][theHeight];
-    for(int i = 0; i < TPR; i++)
-    {
-      for(int j = 0; j < MAX_R; j++)
-      {
-        tileBoard[i][j] = new Tile(0);
-      }
-    }
-  }
+GameBoard(int theWidth, int theHeight)
+{
+   middleX = ((width/2) - (TILE_SIZE/2));
+   tileBoard = new Tile[theWidth][theHeight];
+   for(int i = 0; i < TPR; i++)
+   {
+     for(int j = 0; j < MAX_R; j++)
+     {
+       tileBoard[i][j] = new Tile(0);
+     }
+   }
+}
   
   /************************************************************
   * Traverses the entire GameBoard and prints it to the screen.
@@ -51,6 +52,8 @@ class GameBoard
       tempY = tempY + TILE_SIZE;
       tempX = PUZZLE_ORIGIN_X+(int)(theMomentum.getY());
     }
+  fill(255,0,0,63);
+   rect(middleX + (int)(theMomentum.incrementY()), 0, TILE_SIZE, height);
   }
   
   /************************************************************
@@ -455,6 +458,8 @@ class GameBoard
   
   public int checkLoss()
   {
+    print("\n" +tileBoard[0][0].getMyX());
+    print("\n" +tileBoard[0][MAX_R-1].getMyX());
     if(this.tileBoard[0][0].getMyX() == 0)
     {
       println(player1.getName() + " loses...");
