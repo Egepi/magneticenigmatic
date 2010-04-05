@@ -42,7 +42,7 @@ int msgPort = 7340;
  //Board and tile size (careful with the commas here, I kept getting unexpected token errors because of having semi-colons instead of commas)
  
  static final int TPR = 8, //Tiles per row
-                  MAX_R = 51, //Maximum number of rows
+                  MAX_R = 31, //Maximum number of rows
                   START_R = 17, //Number of rows to start with
                   PUZZLE_WIDTH = 500,
                   TILE_SIZE = PUZZLE_WIDTH/TPR;
