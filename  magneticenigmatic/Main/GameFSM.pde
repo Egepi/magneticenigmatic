@@ -23,7 +23,7 @@ class GameFSM {
   {
     int startX = screen.width/2 - startButton.width/2;
     int startY = screen.height/2 - startButton.height/2;
-    image(startButton, startX, startY);  
+    image(startButton, startX, startY);
     if( ! connectToTacTile)
     {
       if(mousePressed)
@@ -67,8 +67,20 @@ class GameFSM {
   
   /************************************************************
   */
+  public void optionsState()
+  {    
+    strokeWeight(4);
+    line((width/2 - 500), 500, (width/2 + 500), 500);
+    strokeWeight(0);  
+    stateId++;
+  }
+  
+  /************************************************************
+  */
   public void gameState()
   {
+    textFont(font1);
+    text("Player 1", (width/2 + 100), 10);
     clearSound.stopIfOver();
     gameGetInput();           //Get player(s) touch input
     theBoard.gravity();       //Apply gravity where needed
@@ -122,13 +134,13 @@ class GameFSM {
   */
   public void action()
   {
-    if(stateId == 1)
-      startState();
-    else if(stateId == 2)
-      gameState();
-    else if(stateId == 3)
-       endRound(); 
-    return;
+    switch(stateId) {
+      case 1: startState(); break;
+      case 2: optionsState(); break;
+      case 3: gameState(); break;
+      case 4: endRound(); break;
+      default: break;
+    }
   }
   
   /************************************************************
