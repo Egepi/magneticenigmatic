@@ -52,8 +52,9 @@ GameBoard(int theWidth, int theHeight)
       tempY = tempY + TILE_SIZE;
       tempX = PUZZLE_ORIGIN_X+(int)(theMomentum.getY());
     }
-  fill(255,0,0,63);
+   fill(255,0,0,63);
    rect(middleX + (int)(theMomentum.incrementY()), 0, TILE_SIZE, height);
+   fill(0,0,0,255);
   }
   
   /************************************************************
@@ -331,7 +332,7 @@ GameBoard(int theWidth, int theHeight)
         thisTile = tileAt(i,j);
         if ((thisTile.getTileType()!=EMPTY)&&(thisTile.swappable())&&(!thisTile.isMarked()))
         {
-          directionalCheck(i,j);
+         directionalCheck(i,j);
         }
         
       }
@@ -410,7 +411,7 @@ GameBoard(int theWidth, int theHeight)
         ch.increaseTotal(c);
         ch.incrementChain();
       }
-    } 
+    }
   }
   
   /*private int directionalCheck(int x, int y, int type, int direction, int n) {
