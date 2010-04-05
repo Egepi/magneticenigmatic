@@ -25,3 +25,4 @@ class GameSounds //extends Minim
     minim.stop();
   }
 }
+

@@ -111,7 +111,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
 void setup()
 {
   minim = new Minim(this);
-  font1 = loadFont("Font1_B48.vlw");
+  font1 = loadFont("ArialNarrow-48.vlw");
   startClock();
   if (connectToTacTile)
     startTactile();
