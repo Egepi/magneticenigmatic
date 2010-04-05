@@ -87,12 +87,11 @@ class GameFSM {
       theBoard.generateRow();
     }
     //Check if either player lost
-    /*if (theBoard.checkLoss() > 0)
+    if (theBoard.checkLoss() > 0)
     {
       stateId ++;
       return;
     }
-    */
     
          
   }
