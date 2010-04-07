@@ -1,10 +1,13 @@
 class Player
 {
   //Modifiers
-  private int speedModifier;
-  private int blockStateModifier;
+  public double speedModifier;
+  public int speedEffectDuration;
+  public int blindEffectDuration;
+  public boolean blind;
+  public boolean freeze;
   //Statistics
-  private int statSwaps, statClears, statChains, statPowerups;
+  public int statSwaps, statClears, statChains, statPowerups;
   private String name;
   
   public Player(String n)
@@ -12,8 +15,10 @@ class Player
     name  = n;
     
     speedModifier = 1;
-    blockStateModifier = 0;
-    
+    speedEffectDuration = -1;
+    blind = false;
+    blindEffectDuration = -1;
+    freeze = false;
     statSwaps = 0;
     statClears = 0;
     statChains = 0;
@@ -23,6 +28,18 @@ class Player
   public String getName()
   {
     return name;
+  }
+  
+  public void drawPlayer()
+  {
+    if (speedEffectDuration > 0)
+      speedEffectDuration -= timeDifference();
+    else
+      speedModifier = 1;
+    if (blindEffectDuration > 0) 
+      blindEffectDuration -= timeDifference();
+    else
+      blind = false;
   }
 }
 

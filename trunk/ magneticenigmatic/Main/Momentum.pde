@@ -24,7 +24,7 @@ class Momentum {
   
   public double incrementY() {
     if ((state == ACTIVE)&&(MOMENTUM_ON)){
-        y += v*MAX_V*0.01; 
+        y += v*MAX_V*0.0001; 
     }
     return y;
   }
@@ -32,6 +32,10 @@ class Momentum {
   public double increaseMomentum(double x) 
   {
     v += x;
+    if (v > MAX_V)
+      v = MAX_V;
+    else if (v < -MAX_V)
+      v = -MAX_V;  
     return v;
   }
   

@@ -93,6 +93,8 @@ class GameFSM {
     }*/
     theBoard.drawBoard();  //Draw the board
     drawChains();    
+    player1.drawPlayer();
+    player2.drawPlayer();
     if ((rowTimeDifference() > 10000)&&(ROW_GENERATION_ON))
     {
       lastRowTime += 10000;
