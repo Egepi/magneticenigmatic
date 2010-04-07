@@ -18,7 +18,7 @@ class GameBoard
   */
 GameBoard(int theWidth, int theHeight)
 {
-   middleX = ((width/2) - (TILE_SIZE/2));
+   //middleX = ((width/2) - (TILE_SIZE/2));
    tileBoard = new Tile[theWidth][theHeight];
    for(int i = 0; i < TPR; i++)
    {
@@ -38,22 +38,26 @@ GameBoard(int theWidth, int theHeight)
   {
     int tempX = PUZZLE_ORIGIN_X+(int)(theMomentum.incrementY());
     int tempY = PUZZLE_ORIGIN_Y;
+    boolean blind;
     for(int x = 0; x < TPR; x++)
     {
       for(int y = 0; y < MAX_R; y++)
       {
         tileBoard[x][y].action();
-     //   if(tileBoard[x][y].getTileType() != 0)
-     //   {
-          tileBoard[x][y].drawTile(tempX,tempY);
-     //   }
+        blind = false;
+        Player p = playerAtY(y);
+        if (p!= null)
+        {
+          blind = p.blind;
+        }
+        tileBoard[x][y].drawTile(tempX,tempY,blind);
         tempX = tempX + TILE_SIZE;
       }
       tempY = tempY + TILE_SIZE;
       tempX = PUZZLE_ORIGIN_X+(int)(theMomentum.getY());
     }
    fill(255,0,0,63);
-   rect(middleX + (int)(theMomentum.incrementY()), 0, TILE_SIZE, height);
+   rect(PUZZLE_ORIGIN_X + lineOfGravity*TILE_SIZE + (int)(theMomentum.incrementY()), 0, TILE_SIZE, height);
    fill(0,0,0,255);
   }
   
@@ -151,6 +155,7 @@ GameBoard(int theWidth, int theHeight)
   */
   public boolean swap(int a, int b, int row) //Swap tile at xcoord a with tile at xcoord b on a row
   {
+    Player p = null;
     if ((a < 0)||(a>=TPR)||(b < 0)||(b>=TPR)||(row < 0)||(row >=MAX_R)||(row == lineOfGravity)) //if a, b, or row are out of range
       return false; //tell caller swap did not succeed
     if ((tileAt(a,row) == null)||(tileAt(b,row) == null)) //if these tiles somehow don't exist
@@ -165,12 +170,13 @@ GameBoard(int theWidth, int theHeight)
 
     if (row < lineOfGravity)
     {
-      c = new Chain(player1);
+      p = player1;
     }   
-    else //(row < lineOfGravity)
+    else //(row > lineOfGravity)
     {
-      c = new Chain(player2);
+      p = player2;
     }
+    c = new Chain(p);
     Tile temp = tileAt(b,row);
     tileBoard[b][row] = tileAt(a,row);
     tileBoard[a][row] = temp;
@@ -179,8 +185,8 @@ GameBoard(int theWidth, int theHeight)
     chainTiles[0] = tileBoard[b][row];
     chainTiles[1] = tileBoard[a][row];
     c.addTiles(chainTiles);
-    tileBoard[b][row].animate(b-a,0);
-    tileBoard[a][row].animate(a-b,0);
+    tileBoard[b][row].animate(b-a,0,p.speedModifier);
+    tileBoard[a][row].animate(a-b,0,p.speedModifier);
     
     return true;
   }
@@ -321,6 +327,14 @@ GameBoard(int theWidth, int theHeight)
     return tileBoard[s.getX()][s.getY()];   
   }
   
+  private Player playerAtY(int y)
+  {
+    if (y > lineOfGravity)
+      return player2;
+    if (y < lineOfGravity)
+      return player1;  
+    return null;  
+  }
   
   public void clearer()
   {
@@ -363,9 +377,14 @@ GameBoard(int theWidth, int theHeight)
       for (int j=0;j<tiles.size();j++)
       {
         temp = (Tile)tiles.get(j);
+        Player p = null;
         if (ch != null)
+        {
           ch.addTile(temp);
+          p = ch.getPlayer();
+        }
         temp.mark();
+        activatePowerup(temp,p);
       }
       if (c>=5)
       {
@@ -373,7 +392,10 @@ GameBoard(int theWidth, int theHeight)
         temp.convertToPowerup();
       }
       if (ch != null)
+      {
+        ch.increaseTotal(c);
         ch.incrementChain();
+      }
     } 
     c=1;
     ch = temp.getChainID();
@@ -397,9 +419,14 @@ GameBoard(int theWidth, int theHeight)
       for (int j=0;j<tiles.size();j++)
       {
         temp = (Tile)tiles.get(j);
+        Player p = null;
         if (ch != null)
+        {
           ch.addTile(temp);
+          p = ch.getPlayer();
+        }
         temp.mark();
+        activatePowerup(temp,p);
       }
       if (c>=5)
       {
@@ -412,6 +439,49 @@ GameBoard(int theWidth, int theHeight)
         ch.incrementChain();
       }
     }
+  }
+  
+  private void activatePowerup(Tile t, Player p) 
+  {
+    int effect = t.getPowerUpEffect();
+    if ((effect == NONE)||(p == null))
+      return;
+    if (effect == SLOW)
+    {
+      otherPlayer(p).speedModifier = 0.5;
+      otherPlayer(p).speedEffectDuration = 10000;
+    }
+    if (effect == FAST)
+    {
+      p.speedModifier = 2;
+      p.speedEffectDuration = 10000;
+    }
+    if (effect == STEAL)
+    {
+      if (p==player1)
+        lineOfGravity += 1;
+      if (p==player2)
+        lineOfGravity -= 1; 
+    }
+    if (effect == BLIND)
+    {
+      otherPlayer(p).blind = true;
+      otherPlayer(p).blindEffectDuration = 10000;
+    }
+    if (effect == FREEZE)
+    {
+      otherPlayer(p).freeze = true;
+    }
+        
+  }
+  
+  private Player otherPlayer(Player p)
+  {
+    if (p == player1)
+      return player2;
+    if (p == player2)
+      return player1;  
+    return null;
   }
   
   /*private int directionalCheck(int x, int y, int type, int direction, int n) {

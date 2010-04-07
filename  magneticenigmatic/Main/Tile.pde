@@ -21,6 +21,7 @@ class Tile
   private Chain chainID;
   private double ax,ay; //ax is the horizontal offset, ay is the vertical offset (viewing from short side of table)
   private int myX;
+  private double speedModifier;
   
   /************************************************************
   * Constructor for Tile class.
@@ -33,6 +34,7 @@ class Tile
     isMoving = false; //Set to true when tile is animating (falling or swapping)
     chainID = null;
     state = IDLE;
+    speedModifier = 1.0;
   }
   
   public void action() {
@@ -47,13 +49,13 @@ class Tile
       {
         if (ax < 0)
         {
-           ax += 0.01*MAX_TILE_V*timeDifference()/10;
+           ax += 0.001*MAX_TILE_V*timeDifference()*speedModifier;
            if (ax > 0)
              ax = 0;
         }
         else
         {
-           ax -= 0.01*MAX_TILE_V*timeDifference()/10;
+           ax -= 0.001*MAX_TILE_V*timeDifference()*speedModifier;
            if (ax < 0)
              ax = 0;
         }  
@@ -62,13 +64,13 @@ class Tile
       {
         if (ay < 0)
         {
-           ay += 0.01*MAX_TILE_V*timeDifference()/10;
+           ay += 0.001*MAX_TILE_V*timeDifference()*speedModifier;
            if (ay > 0)
              ay = 0;
         }
         else
         {
-           ay -= 0.01*MAX_TILE_V*timeDifference()/10;
+           ay -= 0.001*MAX_TILE_V*timeDifference()*speedModifier;
            if (ay < 0)
              ay = 0;
         }  
@@ -105,12 +107,21 @@ class Tile
     }
   }
   
-  public void drawTile(int tempX, int tempY) {
+  public void animate(int dx, int dy, double modifier) {
+    animate(dx,dy);
+    speedModifier = modifier;
+  }
+  
+  public void drawTile(int tempX, int tempY, boolean blind) {
     myX = tempX-(int)(ay*TILE_SIZE);
-    if (tileImage != null)
+    if ((!blind)&&(tileImage != null))
     {
       image(tileImage,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),TILE_SIZE,TILE_SIZE);
       
+    }
+    else if ((blind)&&(tileImage != null))
+    {
+      image(colorlessTile,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),TILE_SIZE,TILE_SIZE);
     }
     if ((chainID != null)&&(DEBUG_MODE_ON))
         line(tempX+10,tempY+10,chainList.indexOf(chainID)*20+10,10); 
@@ -128,7 +139,8 @@ class Tile
   public void convertToPowerup() {
     tileType += 5;
     setTileImage(tileType);
-    state = IDLE;
+    state = DONE_ANIMATING;
+    isIdle = false;
   }
   
   public boolean swappable()
@@ -174,6 +186,8 @@ class Tile
   public boolean isMatch(int type){
     if (type == tileType)
       return true;
+    if ((tileType>0)&&(type>0)&&(tileType%5 == type%5))
+      return true;
     return false;  
   }
   
@@ -209,6 +223,13 @@ class Tile
   public int getMyX()
   {
     return myX;
+  }
+  
+  public int getPowerUpEffect()
+  {
+    if (tileType <= 5)
+      return NONE;
+    return NONE+tileType;  
   }
   
   public void delete()

@@ -54,10 +54,10 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                 
 //Gameplay variables (change difficulty, speed, and other settings here)
  static final int TILE_TYPES = 11, //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
-                  MAX_V = 2,
+                  MAX_V = 100,
                   MAX_TILE_V = 2,
                   TILE_COLORS = 6;
- static final double MOMENTUM_COEFF = 0.10;
+ static final double MOMENTUM_COEFF = 0.04;
  static final boolean DEBUG_MODE_ON = false,
                       MOMENTUM_ON = true,
                       ANIMATIONS_ON = true,
@@ -75,13 +75,21 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                      TILE7 = "icecube.png",
                      TILE8 = "clover.png",
                      TILE9 = "grapes.png",
-                     TILE10 = "star.png";
+                     TILE10 = "star.png",
+                     CLTILE = "Colorless_patternless.png";
                      
 //For the sake of readability and code comprehension
 
  static final int EMPTY = 0,
                   HORIZONTAL = 0,
-                  VERTICAL = 1; 
+                  VERTICAL = 1,
+                  NONE = 100,
+                  SLOW = 108,
+                  FAST = 106,
+                  STEAL = 110,
+                  
+                  BLIND = 109,
+                  FREEZE = 107; 
                    
                       
 /**************************************************************
@@ -92,7 +100,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  
 
  PImage[] tileImageType = new PImage[TILE_TYPES];
- 
+ PImage colorlessTile = new PImage();
  GameBoard theBoard;
  Player player1 = new Player("Player 1");
  Player player2 = new Player("Player 2");
@@ -102,7 +110,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  GameFSM theGameFSM;
  int gameStartTime, frameStartTime, frameEndTime, lastRowTime;
  Minim minim;  //Used for playing sound
- int middleX;
+ //int middleX;
  
  int lineOfGravity = MAX_R/2;
  PFont font1;
@@ -132,6 +140,7 @@ void setup()
   tileImageType[8] = loadImage(TILE8);
   tileImageType[9] = loadImage(TILE9);
   tileImageType[10] = loadImage(TILE10);
+  colorlessTile = loadImage(CLTILE);
   
   size(screen.width, screen.height);
   

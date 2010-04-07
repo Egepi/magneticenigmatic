@@ -111,6 +111,11 @@ class Chain
     }
   }
   
+  public Player getPlayer()
+  {
+    return p;
+  }
+  
   public int getSomeY() { //dummy function for debugging
     return 10;
   }
