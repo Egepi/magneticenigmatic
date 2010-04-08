@@ -9,6 +9,8 @@ class GameFSM {
   PImage startButton;
   GameSounds clearSound;
   float theta = 0;
+  int MIDDLE_L = (width/2)/2;
+  int MIDDLE_R = (width/2) + MIDDLE_L;
   /************************************************************
   */
   public GameFSM()
@@ -86,16 +88,23 @@ class GameFSM {
   public void gameState()
   {
     textFont(font1);
-    text("Player 1", (width/2 + 100), 45);
-    text("Player 2", (width/2 - 250), 45);
+    text("Player 1", MIDDLE_L-50, 45);
+    text("Player 2", MIDDLE_R - 50, 45);
     
     pushMatrix();
-    //translate(width*2, height*2);
-    translate(width/2, 100);
-    rotate(radians(45));
-    text("Player 1", 100, 40);
-    text("Player 2", 100, height - 20);
+    translate(MIDDLE_L - 50, height - 70);
+    rotate(PI);
+    textAlign(CENTER);
+    text("Player 1", 0, 0);
     popMatrix();
+    
+    pushMatrix();
+    translate(MIDDLE_R-50, height - 70);
+    rotate(PI);
+    textAlign(CENTER);
+    text("Player 2", 0, 0);
+    popMatrix();
+    
     clearSound.stopIfOver();
     gameGetInput();           //Get player(s) touch input
     theBoard.gravity();       //Apply gravity where needed
@@ -106,7 +115,7 @@ class GameFSM {
     {
       clearSound.play();
     }*/
-    //theBoard.drawBoard();  //Draw the board
+    theBoard.drawBoard();  //Draw the board
     drawChains();    
     player1.drawPlayer();
     player2.drawPlayer();
@@ -199,4 +208,3 @@ class GameFSM {
     }
   }
 }
-
