@@ -71,6 +71,14 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                       ROW_GENERATION_ON = true;
                       
 
+/*Type of touch code
+  1 - original selector - drag working no multi
+  2 - 2 finger touch swap - multi but no drag
+  3 - in work implementation for both to work
+*/
+static final int TOUCH_TYPE = 1;
+
+
 //Images
  static final String TILE0 = null,//"diamond.jpg",
                      TILE1 = "Red.png",
