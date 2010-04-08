@@ -56,8 +56,15 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  static final int TILE_TYPES = 11, //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
                   MAX_V = 100,
                   MAX_TILE_V = 2,
-                  TILE_COLORS = 6;
- static final double MOMENTUM_COEFF = 0.04;
+                  TILE_COLORS = 6,
+                  SPEED_POWERUP_DURATION = 10000, //millis
+                  SLOW_POWERUP_DURATION = 10000, // millis
+                  STEAL_POWERUP_NUMBER_OF_ROWS = 1,
+                  BLIND_POWERUP_DURATION = 5000,
+                  FREEZE_POWERUP_NUMBER_OF_ROWS = 1;
+ static final double MOMENTUM_COEFF = 0.04,
+                     SPEED_POWERUP_MULTIPLIER = 2.0,
+                     SLOW_POWERUP_MULTIPLIER = 0.5;
  static final boolean DEBUG_MODE_ON = false,
                       MOMENTUM_ON = true,
                       ANIMATIONS_ON = true,
@@ -87,7 +94,6 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                   SLOW = 108,
                   FAST = 106,
                   STEAL = 110,
-                  
                   BLIND = 109,
                   FREEZE = 107; 
                    
