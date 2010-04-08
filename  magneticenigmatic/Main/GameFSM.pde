@@ -8,6 +8,7 @@ class GameFSM {
   private int stateId;
   PImage startButton;
   GameSounds clearSound;
+  float theta = 0;
   /************************************************************
   */
   public GameFSM()
@@ -23,7 +24,12 @@ class GameFSM {
   {
     int startX = screen.width/2 - startButton.width/2;
     int startY = screen.height/2 - startButton.height/2;
-    image(startButton, startX, startY);
+    pushMatrix();
+    translate(width/2, height/2);
+    rotate(theta);
+    image(startButton, -startButton.width/2, -startButton.height/2);
+    theta = theta + 0.05;
+    popMatrix();
     if( ! connectToTacTile)
     {
       if(mousePressed)
@@ -34,7 +40,7 @@ class GameFSM {
         {
             if((yCoord >= startY)&&(yCoord <= (startY + startButton.height)))
             {
-              stateId = stateId + 1;
+              stateId++;
               return;
             }
         }
@@ -80,7 +86,16 @@ class GameFSM {
   public void gameState()
   {
     textFont(font1);
-    text("Player 1", (width/2 + 100), 10);
+    text("Player 1", (width/2 + 100), 45);
+    text("Player 2", (width/2 - 250), 45);
+    
+    pushMatrix();
+    //translate(width*2, height*2);
+    translate(width/2, 100);
+    rotate(radians(45));
+    text("Player 1", 100, 40);
+    text("Player 2", 100, height - 20);
+    popMatrix();
     clearSound.stopIfOver();
     gameGetInput();           //Get player(s) touch input
     theBoard.gravity();       //Apply gravity where needed
@@ -91,7 +106,7 @@ class GameFSM {
     {
       clearSound.play();
     }*/
-    theBoard.drawBoard();  //Draw the board
+    //theBoard.drawBoard();  //Draw the board
     drawChains();    
     player1.drawPlayer();
     player2.drawPlayer();
