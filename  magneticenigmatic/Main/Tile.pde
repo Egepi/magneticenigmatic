@@ -30,9 +30,9 @@ class Tile
   {
     tileImage = tileImageType[theType];
     tileType = theType;
-    isIdle = true;
+    isIdle = true; //Set to true when tile is swapping or will not be falling in the next frame
     isMoving = false; //Set to true when tile is animating (falling or swapping)
-    chainID = null;
+    chainID = null; //Chain currently associated with this tile
     state = IDLE;
     speedModifier = 1.0;
   }
@@ -82,10 +82,10 @@ class Tile
         state = DONE_ANIMATING;
       }
     }
-    else if (state == DONE_ANIMATING)
+    else if (state == DONE_ANIMATING) //DONE_ANIMATING and IDLE need to be different so a chain can tell the difference between a tile in transition and a tile that is truly not going to move again.
     {
-      isMoving = false;
-      state = IDLE;
+      isMoving = false; //Tile is NOT idle yet because it could still fall further
+      state = IDLE; //If the tile is still falling the state should go back to ANIMATING before the next frame
     }
     else if (state == IDLE)
     {
@@ -126,12 +126,13 @@ class Tile
     if ((chainID != null)&&(DEBUG_MODE_ON))
         line(tempX+10,tempY+10,chainList.indexOf(chainID)*20+10,10); 
   }
-    
-  public void mark() {
+  
+ 
+  public void mark() {  //Mark this tile to be cleared
     if (state == ANIMATING)
-      print("unacceptable state change");
-    if (state == MARKED)
-      state = DOUBLE_MARKED;
+      print("unacceptable state change"); //Shouldn't happen
+    if ((state == MARKED)||(state == DOUBLE_MARKED))
+      state = DOUBLE_MARKED;  //This tile has been marked more than once
     else
       state = MARKED;  
   }

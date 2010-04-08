@@ -336,6 +336,11 @@ GameBoard(int theWidth, int theHeight)
     return null;  
   }
   
+  /************************************************************
+  * This function goes through every tile on a game board and runs a directionalCheck() on it.
+  *
+  * Author: JM
+  */
   public void clearer()
   {
     Tile thisTile;
@@ -352,51 +357,64 @@ GameBoard(int theWidth, int theHeight)
       }
     }
   }
+  
+  /************************************************************
+  * Starting at the specified tile, this function check to the right and down (viewing from a computer screen) for matching tiles.
+  * if 3 or more are detected, it marks the tiles to be cleared.
+  *
+  * Author: JM
+  */
   private void directionalCheck(int x, int y)
   {
-    int nx = x;
+    int nx = x; 
     int ny = y;
-    int c = 1;
-    Tile temp = tileAt(x,y);
-    Chain ch = temp.getChainID();
-    ArrayList tiles = new ArrayList();
-    tiles.add(temp);
-    while ((nx+1 < TPR)&&(temp.isMatch(tileAt(nx+1,y))))
+    int c = 1; //This is the matching tile combination total, it starts at one, because there will always be one tile of this color
+    Tile temp = tileAt(x,y); //temp starts at the tile specified in the paramter
+    Chain ch = temp.getChainID(); //We need the chainID of each tile so we can determine which has the higher priority, this is just the first one for comparison (ch can be null)
+    ArrayList tiles = new ArrayList(); //tiles will hold our combination so we can access them anywhere in the function
+    tiles.add(temp); // Adds the first tile to the arraylist
+    
+    //Check row clears
+    while ((nx+1 < TPR)&&(temp.isMatch(tileAt(nx+1,y)))) //While the coordinates are inbounds and the next tile over is a match
     {
       c++;
       temp = tileAt(nx+1,y);
+      //This If-Else gets the chain ID with the highest priority, or highest total number of blocks. Turn on debug mode to see this in action.
       if (ch == null)
         ch = temp.getChainID();
       else
         ch = ch.getLargerChain(temp.getChainID());
-      tiles.add(temp);
+      tiles.add(temp); //Adds our new tile to the arraylist
       nx+=1;
     }
+    //Check a row clear for 3 or more tiles
     if (c >= 3)
     {
-      for (int j=0;j<tiles.size();j++)
+      for (int j=0;j<tiles.size();j++) //iterates through the tiles
       {
         temp = (Tile)tiles.get(j);
         Player p = null;
-        if (ch != null)
+        if (ch != null) //You need these statewments or else you get nasty errors
         {
-          ch.addTile(temp);
-          p = ch.getPlayer();
+          ch.addTile(temp); 
+          p = ch.getPlayer(); //Gets the player associates with the chain
         }
-        temp.mark();
-        activatePowerup(temp,p);
+        temp.mark(); //Marks the tile to be cleared (see the Tile FSM for case state==MARKED)
+        activatePowerup(temp,p); //Activates any powerup tiles in the combo, does nothing if it isnt a powerup tile
       }
+      //Check a row clear for 5 or more tiles, creates a powerup
       if (c>=5)
       {
-        temp = (Tile)tiles.get(tiles.size()/2);
+        temp = (Tile)tiles.get(tiles.size()/2); //Picks the middle tile
         temp.convertToPowerup();
       }
       if (ch != null)
       {
-        ch.increaseTotal(c);
-        ch.incrementChain();
+        ch.increaseTotal(c); //Adds c tiles to the chain
+        ch.incrementChain(); //Adds 1 combo to the chain
       }
     } 
+    //Check a column clear for 3 or more tiles, reset all values, does essentially the same thing as the row check
     c=1;
     ch = temp.getChainID();
     tiles.clear();
@@ -444,7 +462,7 @@ GameBoard(int theWidth, int theHeight)
   private void activatePowerup(Tile t, Player p) 
   {
     int effect = t.getPowerUpEffect();
-    if ((effect == NONE)||(p == null))
+    if ((effect == NONE)||(p == null)) //Do nothing if there is not a plyer associated with this or if the block isn't a powerup
       return;
     if (effect == SLOW)
     {
@@ -486,6 +504,7 @@ GameBoard(int theWidth, int theHeight)
     return null;
   }
   
+  //Old recursive version
   /*private int directionalCheck(int x, int y, int type, int direction, int n) {
     int c;
     Tile thisTile = tileAt(x,y);
