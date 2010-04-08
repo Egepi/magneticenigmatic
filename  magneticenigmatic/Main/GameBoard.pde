@@ -448,29 +448,31 @@ GameBoard(int theWidth, int theHeight)
       return;
     if (effect == SLOW)
     {
-      otherPlayer(p).speedModifier = 0.5;
-      otherPlayer(p).speedEffectDuration = 10000;
+      otherPlayer(p).speedModifier = SLOW_POWERUP_MULTIPLIER;
+      otherPlayer(p).speedEffectDuration = SLOW_POWERUP_DURATION;
     }
     if (effect == FAST)
     {
-      p.speedModifier = 2;
-      p.speedEffectDuration = 10000;
+      p.speedModifier = SPEED_POWERUP_MULTIPLIER;
+      p.speedEffectDuration = SPEED_POWERUP_DURATION;
     }
     if (effect == STEAL)
     {
       if (p==player1)
-        lineOfGravity += 1;
+        lineOfGravity += STEAL_POWERUP_NUMBER_OF_ROWS;
       if (p==player2)
-        lineOfGravity -= 1; 
+        lineOfGravity -= STEAL_POWERUP_NUMBER_OF_ROWS; 
     }
     if (effect == BLIND)
     {
       otherPlayer(p).blind = true;
-      otherPlayer(p).blindEffectDuration = 10000;
+      otherPlayer(p).blindEffectDuration = BLIND_POWERUP_DURATION;
     }
     if (effect == FREEZE)
     {
       otherPlayer(p).freeze = true;
+      //not implemented yet
+      //should make the next blocks that come in for opp. player appear differently when they come in from outside the puzzle and he/she won't be able to move them for a while
     }
         
   }
