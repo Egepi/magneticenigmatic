@@ -18,7 +18,7 @@ class Chain
   public Chain getLargerChain (Chain other) {
     if (other == null)
       return this;
-    if (count >= other.count)
+    if (totalTiles >= other.totalTiles)
       return this;
     return other;
   }
@@ -30,7 +30,7 @@ class Chain
     for (int j=1;j<cl.size();j++)
     {
       nextChain = (Chain)cl.get(j);
-      if (nextChain.count > largestChain.count)
+      if (nextChain.totalTiles > largestChain.totalTiles)
       {
         largestChain = nextChain;
       }
