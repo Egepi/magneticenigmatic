@@ -112,6 +112,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  Player player2 = new Player("Player 2");
  Momentum theMomentum;
  ArrayList chainList = new ArrayList();
+ ArrayList selList = new ArrayList();
  Selector sel1, sel2;
  GameFSM theGameFSM;
  int gameStartTime, frameStartTime, frameEndTime, lastRowTime;
