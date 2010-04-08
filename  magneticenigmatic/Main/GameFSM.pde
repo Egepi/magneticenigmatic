@@ -11,6 +11,7 @@ class GameFSM {
   float theta = 0;
   int MIDDLE_L = (width/2)/2;
   int MIDDLE_R = (width/2) + MIDDLE_L;
+  AudioPlayer player;
   /************************************************************
   */
   public GameFSM()
@@ -18,6 +19,8 @@ class GameFSM {
     stateId = 1;
     startButton = loadImage("start.png");
     clearSound = new GameSounds("splat.wav");
+    player = minim.loadFile("Rest.mp3");
+    player.play();
   }
   
   /************************************************************
