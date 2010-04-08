@@ -14,6 +14,12 @@ class Selector{
     coordy = -1;
   }
   
+  public Selector(int x, int y)
+  {
+    coordx = x;
+    coordy = y;
+  }
+  
   public void setSelector(int x, int y) {
     coordx = x;
     coordy = y;
