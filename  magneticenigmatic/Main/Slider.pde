@@ -12,7 +12,7 @@ public class Slider {
     this.initValue = theInit;
   }
   
-  public getCurrValue()
+  public int getCurrValue()
   {
     return this.currValue;
   }
