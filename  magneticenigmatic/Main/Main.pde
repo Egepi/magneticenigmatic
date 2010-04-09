@@ -125,7 +125,9 @@ static final int TOUCH_TYPE = 1;
  GameFSM theGameFSM;
  int gameStartTime, frameStartTime, frameEndTime, lastRowTime;
  Minim minim;  //Used for playing sound
- //int middleX;
+ AudioPlayer swap1;
+ AudioPlayer swap2;
+
  
  int lineOfGravity = MAX_R/2;
  PFont font1;
@@ -134,6 +136,8 @@ static final int TOUCH_TYPE = 1;
 void setup()
 {
   minim = new Minim(this);
+  swap1 = minim.loadFile("sh_ku02.wav");
+  swap2 = minim.loadFile("sh_ku03.wav");
   font1 = loadFont("ArialNarrow-48.vlw");
   startClock();
   if (connectToTacTile)
