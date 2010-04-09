@@ -118,6 +118,7 @@ void touchesTwo()
 }
 void compareTouches()
 {
+  int theRand;
   int i,j;
   Selector selA, selB;
   for(i = 0; i < selList.size()-1; i++)
@@ -132,6 +133,17 @@ void compareTouches()
         {
           if(theBoard.swap(selA, selB))
           {
+            theRand = (int)(random(2));
+            if(theRand == 0)
+            {
+              swap1.play();
+              swap1.rewind();
+            }
+            else
+            {
+              swap2.play();
+              swap2.rewind();
+            }
             //selList.remove(i);
             //selList.remove(j);
           }

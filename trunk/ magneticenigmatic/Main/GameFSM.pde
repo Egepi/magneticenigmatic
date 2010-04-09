@@ -11,7 +11,7 @@ class GameFSM {
   float theta = 0;
   int MIDDLE_L = (width/2)/2;
   int MIDDLE_R = (width/2) + MIDDLE_L;
-  AudioPlayer player;
+  AudioPlayer backGround;
   /************************************************************
   */
   public GameFSM()
@@ -19,8 +19,8 @@ class GameFSM {
     stateId = 1;
     startButton = loadImage("start.png");
     clearSound = new GameSounds("splat.wav");
-    player = minim.loadFile("Rest.mp3");
-    player.play();
+    backGround = minim.loadFile("zone_nebula_nomad.wav");
+    backGround.loop();
   }
   
   /************************************************************
@@ -130,7 +130,7 @@ class GameFSM {
     //Check if either player lost
     if (theBoard.checkLoss() > 0)
     {
-      stateId ++;
+      //stateId ++;
       return;
     }
     
@@ -176,6 +176,7 @@ class GameFSM {
   */
   void gameGetInput()
   {
+    int theRand;
     if (connectToTacTile)
       getTouches();
     else if (mousePressed)
@@ -193,6 +194,17 @@ class GameFSM {
          theBoard.swap(sel1,sel2);
          sel1.reset();
          sel2.reset();
+            theRand = (int)(random(2));
+            if(theRand == 0)
+            {
+              swap1.play();
+              swap1.rewind();
+            }
+            else
+            {
+              swap2.play();
+              swap2.rewind();
+            }
        }
     }
   }
