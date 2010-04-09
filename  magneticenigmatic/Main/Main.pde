@@ -76,7 +76,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
   2 - 2 finger touch swap - multi but no drag
   3 - in work implementation for both to work
 */
-static final int TOUCH_TYPE = 1;
+static final int TOUCH_TYPE = 2;
 
 
 //Images
