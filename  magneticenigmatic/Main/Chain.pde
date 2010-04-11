@@ -55,6 +55,7 @@ class Chain
   public void removeTile(Tile t)
   {
     tiles.remove(tiles.indexOf(t));
+    t.setChainID(null);
   }
   
   
@@ -64,12 +65,7 @@ class Chain
     for (int j = tiles.size()-1; j>=0; j--)
     {
       t = (Tile)tiles.get(j);
-      if (t.isIdle())
-      {
-        tiles.remove(j);
-        t.setChainID(null);
-      }
-      else if (theBoard.isNotInPuzzle(t))
+      if ((t.isIdle())||(theBoard.isNotInPuzzle(t)))
       {
         tiles.remove(j);
         t.setChainID(null);
@@ -95,7 +91,7 @@ class Chain
     {
       int c = count;
       count = 0;
-      println("Chain redeemed with " + c + " combo(s) for " + p.getName() + ".");
+      println("Chain redeemed with " + c + " combo(s) and " + totalTiles+ " tiles for " + p.getName() + ".");
       if (p == player1)
         theMomentum.increaseMomentum(totalTiles*totalTiles*MOMENTUM_COEFF);
       else if (p == player2)
