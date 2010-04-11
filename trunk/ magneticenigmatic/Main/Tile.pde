@@ -11,12 +11,13 @@ class Tile
   static final int DONE_ANIMATING = 4,
                    ANIMATING = 3,
                    DOUBLE_MARKED = 2,
-                   MARKED = 1,
+                   HMARKED = 5,
+                   VMARKED = 6,
                    IDLE = 0;
   
   private PImage tileImage;
   private int tileType;
-  private boolean isMoving, isIdle;
+  private boolean isMoving, isIdle, isFrozen;
   private int state;
   private Chain chainID;
   private double ax,ay; //ax is the horizontal offset, ay is the vertical offset (viewing from short side of table)
@@ -32,13 +33,29 @@ class Tile
     tileType = theType;
     isIdle = true; //Set to true when tile is swapping or will not be falling in the next frame
     isMoving = false; //Set to true when tile is animating (falling or swapping)
+    isFrozen = false;
     chainID = null; //Chain currently associated with this tile
     state = IDLE;
     speedModifier = 1.0;
   }
   
+  Tile(int theType, boolean freeze)
+  {
+    tileImage = tileImageType[theType];
+    tileType = theType;
+    isIdle = true; //Set to true when tile is swapping or will not be falling in the next frame
+    isMoving = false; //Set to true when tile is animating (falling or swapping)
+    isFrozen = false;
+    chainID = null; //Chain currently associated with this tile
+    state = IDLE;
+    speedModifier = 1.0;
+    if (freeze)
+      isFrozen = true;
+      
+  }
+  
   public void action() {
-    if ((state == MARKED)||(state == DOUBLE_MARKED))
+    if ((state == HMARKED)||(state == VMARKED)||(state == DOUBLE_MARKED))
     {
       tileType = 0;
       state = DONE_ANIMATING;
@@ -117,7 +134,12 @@ class Tile
     if ((!blind)&&(tileImage != null))
     {
       image(tileImage,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),TILE_SIZE,TILE_SIZE);
-      
+      if (isFrozen)
+      {
+        fill(0,40,200,90);
+        rect(tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),TILE_SIZE,TILE_SIZE);
+        fill(0,0,0,255);
+      }
     }
     else if ((blind)&&(tileImage != null))
     {
@@ -128,13 +150,20 @@ class Tile
   }
   
  
-  public void mark() {  //Mark this tile to be cleared
+  public void mark(int d) {  //Mark this tile to be cleared
     if (state == ANIMATING)
       print("unacceptable state change"); //Shouldn't happen
-    if ((state == MARKED)||(state == DOUBLE_MARKED))
+    if (((d == HORIZONTAL)&&(state == VMARKED))||((d == VERTICAL)&&(state == HMARKED)))
       state = DOUBLE_MARKED;  //This tile has been marked more than once
-    else
-      state = MARKED;  
+    else if (d == HORIZONTAL)
+    {
+      state = HMARKED;  
+    }
+    else if (d == VERTICAL)
+    {
+      state = VMARKED;  
+    }
+    isIdle = false;
   }
   
   public void convertToPowerup() {
@@ -144,9 +173,14 @@ class Tile
     isIdle = false;
   }
   
-  public boolean swappable()
+  public boolean canFall()
   {
     return (!isMoving);
+  }
+  
+  public boolean swappable()
+  {
+    return ((!isMoving)&&(!isFrozen));
   }
   
   public boolean isIdle()
@@ -154,9 +188,14 @@ class Tile
     return (isIdle);
   }
   
-  public boolean isMarked()
+  public boolean isMarked(int d)
   {
-    return (state == MARKED);
+    if (state == DOUBLE_MARKED)
+      return true;
+    if (d == HORIZONTAL)
+      return (state == HMARKED);
+    //if (d == VERTICAL)
+    return (state == VMARKED);
   }
   
   /************************************************************
@@ -181,7 +220,7 @@ class Tile
   }
   
   public boolean isMatch(Tile other) {
-    return ((isMatch(other.tileType))&&(other.swappable()));
+    return ((isMatch(other.tileType))&&(other.canFall()));
   }
   
   public boolean isMatch(int type){

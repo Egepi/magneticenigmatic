@@ -20,7 +20,8 @@ class GameFSM {
     startButton = loadImage("start.png");
     clearSound = new GameSounds("splat.wav");
     backGround = minim.loadFile("zone_nebula_nomad.wav");
-    backGround.loop();
+    if (SOUNDS_ON)
+      backGround.loop();
   }
   
   /************************************************************

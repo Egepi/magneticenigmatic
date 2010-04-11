@@ -43,7 +43,7 @@ int msgPort = 7340;
  
  static final int TPR = 8, //Tiles per row
                   MAX_R = 31, //Maximum number of rows
-                  START_R = 17, //Number of rows to start with
+                  START_R = 13, //Number of rows to start with
                   PUZZLE_WIDTH = 500,
                   TILE_SIZE = PUZZLE_WIDTH/TPR;
                 
@@ -66,6 +66,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                      SPEED_POWERUP_MULTIPLIER = 2.0,
                      SLOW_POWERUP_MULTIPLIER = 0.5;
  static final boolean DEBUG_MODE_ON = false,
+                      SOUNDS_ON = false, 
                       MOMENTUM_ON = true,
                       ANIMATIONS_ON = true,
                       ROW_GENERATION_ON = true;

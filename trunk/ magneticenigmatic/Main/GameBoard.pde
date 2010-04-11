@@ -56,8 +56,9 @@ GameBoard(int theWidth, int theHeight)
       tempY = tempY + TILE_SIZE;
       tempX = PUZZLE_ORIGIN_X+(int)(theMomentum.getY());
     }
-   fill(190,190,190,63);
-   rect(PUZZLE_ORIGIN_X + lineOfGravity*TILE_SIZE + (int)(theMomentum.incrementY()), 75, TILE_SIZE, height-175);
+    
+   fill(0,0,0,128);
+   rect(PUZZLE_ORIGIN_X + lineOfGravity*TILE_SIZE + (int)(theMomentum.incrementY()), PUZZLE_ORIGIN_Y, TILE_SIZE, TILE_SIZE*TPR);
    fill(0,0,0,255);
   }
   
@@ -72,9 +73,25 @@ GameBoard(int theWidth, int theHeight)
   {
     for(int i = 0; i < TPR; i++)
     {
-      for(int j = lineOfGravity-START_R/2; j < lineOfGravity+START_R/2; j++)
+      for(int j = lineOfGravity-START_R/2; j < lineOfGravity+START_R/2+1; j++)
       {
         tileBoard[i][j] = new Tile(int(random(1,TILE_COLORS)));
+      }
+    }
+    for(int i = 0; i < TPR; i++)
+    {
+      for(int j = lineOfGravity-START_R/2; j < lineOfGravity+START_R/2+1; j++)
+      {
+        while (makesCombo(i,j) == true)
+          tileBoard[i][j] = new Tile(int(random(1,TILE_COLORS)));
+      }
+    }
+    for(int i = 0; i < TPR; i++)
+    {
+      for(int j = lineOfGravity-START_R/2; j < lineOfGravity+START_R/2+1; j++)
+      {
+        while (makesCombo(i,j) == true)
+          tileBoard[i][j] = new Tile(int(random(1,TILE_COLORS)));
       }
     }
   }
@@ -103,13 +120,13 @@ GameBoard(int theWidth, int theHeight)
       j=0;
     for(int i = 0; i < TPR; i++)
     {
-        temp = new Tile(int(random(1,TILE_COLORS)));
+        temp = new Tile(int(random(1,TILE_COLORS)),player1.freeze);
         tileBoard[i][j] = temp;
         temp.animate(newRowAnimationX(i),newRowAnimationY(i));
         Chain newCh = new Chain(player1);
         newCh.addTile(temp);
     }
-    
+    player1.freeze = false;
     //Player 2
     j=MAX_R-1;
     rowIsEmpty=true;
@@ -130,12 +147,13 @@ GameBoard(int theWidth, int theHeight)
       j = MAX_R-1;
     for(int i = 0; i < TPR; i++)
     {
-        temp = new Tile(int(random(1,TILE_COLORS)));
+        temp = new Tile(int(random(1,TILE_COLORS)),player2.freeze);
         tileBoard[i][j] = temp;
         temp.animate(newRowAnimationX(i),-newRowAnimationY(i));
-        Chain newCh = new Chain(player1);
+        Chain newCh = new Chain(player2);
         newCh.addTile(temp);
     }
+    player2.freeze = false;
   }
   
   public int newRowAnimationX(int i) //Animation formulas
@@ -226,7 +244,7 @@ GameBoard(int theWidth, int theHeight)
     boolean blockHasFallen = false;
     if (tileBoard[x][y].getTileType() != EMPTY)
       return blockHasFallen;
-    if (!tileBoard[x][y].swappable())
+    if (!tileBoard[x][y].canFall())
       return blockHasFallen;
     int furthest,nearest;
     if (g > y) {
@@ -275,7 +293,7 @@ GameBoard(int theWidth, int theHeight)
     {
       Tile fallingTile = tileBoard[x][j];
       Tile emptyTile = tileBoard[x][j-iter];
-      if ((!fallingTile.swappable())||(fallingTile.getTileType() == 0))
+      if ((!fallingTile.canFall())||(fallingTile.getTileType() == 0))
         break;
       Chain ftc = emptyTile.getChainID();
       Chain etc = fallingTile.getChainID();
@@ -349,22 +367,25 @@ GameBoard(int theWidth, int theHeight)
       for(int j = 0; j < MAX_R; j++)
       {
         thisTile = tileAt(i,j);
-        if ((thisTile.getTileType()!=EMPTY)&&(thisTile.swappable())&&(!thisTile.isMarked()))
+        if ((thisTile.getTileType()!=EMPTY)&&(thisTile.canFall())&&(!thisTile.isMarked(HORIZONTAL)))
         {
-         directionalCheck(i,j);
+         directionalCheck(i,j,HORIZONTAL);
         }
-        
+        if ((thisTile.getTileType()!=EMPTY)&&(thisTile.canFall())&&(!thisTile.isMarked(VERTICAL)))
+        {
+         directionalCheck(i,j,VERTICAL);
+        }
       }
     }
   }
   
   /************************************************************
-  * Starting at the specified tile, this function check to the right and down (viewing from a computer screen) for matching tiles.
+  * Starting at the specified tile, this function checks vertically or horizonatally for matching tiles.
   * if 3 or more are detected, it marks the tiles to be cleared.
   *
   * Author: JM
   */
-  private void directionalCheck(int x, int y)
+  private void directionalCheck(int x, int y,int d) //returns true if there is a clear
   {
     int nx = x; 
     int ny = y;
@@ -373,91 +394,114 @@ GameBoard(int theWidth, int theHeight)
     Chain ch = temp.getChainID(); //We need the chainID of each tile so we can determine which has the higher priority, this is just the first one for comparison (ch can be null)
     ArrayList tiles = new ArrayList(); //tiles will hold our combination so we can access them anywhere in the function
     tiles.add(temp); // Adds the first tile to the arraylist
-    
-    //Check row clears
+    if (d == HORIZONTAL)
+    {
+      while ((nx+1 < TPR)&&(temp.isMatch(tileAt(nx+1,y)))&&(!tileAt(nx+1,y).isMarked(d))) //While the coordinates are inbounds and the next tile over is a match
+      {
+        c++;
+        temp = tileAt(nx+1,y);
+        //This If-Else gets the chain ID with the highest priority, or highest total number of blocks. Turn on debug mode to see this in action.
+        if (ch == null)
+          ch = temp.getChainID();
+        else
+          ch = ch.getLargerChain(temp.getChainID());
+        tiles.add(temp); //Adds our new tile to the arraylist
+        nx+=1;
+      }
+      //Check a row clear for 3 or more tiles
+      if (c >= 3)
+      {
+        for (int j=0;j<tiles.size();j++) //iterates through the tiles
+        {
+          temp = (Tile)tiles.get(j);
+          Player p = null;
+          if (ch != null) //You need these statements or else you get nasty errors
+          {
+            ch.addTile(temp); 
+            p = ch.getPlayer(); //Gets the player associates with the chain
+          }
+          temp.mark(d); //Marks the tile to be cleared (see the Tile FSM for case state==MARKED)
+          activatePowerup(temp,p); //Activates any powerup tiles in the combo, does nothing if it isnt a powerup tile
+        }
+        //Check a row clear for 5 or more tiles, creates a powerup
+        if (c>=5)
+        {
+          temp = (Tile)tiles.get(tiles.size()/2); //Picks the middle tile
+          temp.convertToPowerup();
+        }
+        if (ch != null)
+        {
+          ch.increaseTotal(c); //Adds c tiles to the chain
+          ch.incrementChain(); //Adds 1 combo to the chain
+        }
+      } 
+    }
+    else
+    {
+      while ((ny+1 < MAX_R)&&(temp.isMatch(tileAt(x,ny+1)))&&(!tileAt(x,ny+1).isMarked(d)))
+      {
+        c++;
+        temp = tileAt(x,ny+1);
+        if (ch == null)
+          ch = temp.getChainID();
+        else
+          ch = ch.getLargerChain(temp.getChainID());
+        tiles.add(temp);
+        ny+=1;
+      } 
+      if (c >= 3)
+      {
+        for (int j=0;j<tiles.size();j++)
+        {
+          temp = (Tile)tiles.get(j);
+          Player p = null;
+          if (ch != null)
+          {
+            ch.addTile(temp);
+            p = ch.getPlayer();
+          }
+          temp.mark(d);
+          activatePowerup(temp,p);
+        }
+        if (c>=5)
+        {
+          temp = (Tile)tiles.get(tiles.size()/2);
+          temp.convertToPowerup();
+        }
+        if (ch != null)
+        {
+          ch.increaseTotal(c);
+          ch.incrementChain();
+        }
+      }
+    }
+  }
+  
+  private boolean makesCombo(int x, int y)
+  {
+    int nx = x; 
+    int ny = y;
+    int c = 1; //This is the matching tile combination total, it starts at one, because there will always be one tile of this color
+    Tile temp = tileAt(x,y); //temp starts at the tile specified in the paramter
     while ((nx+1 < TPR)&&(temp.isMatch(tileAt(nx+1,y)))) //While the coordinates are inbounds and the next tile over is a match
     {
       c++;
       temp = tileAt(nx+1,y);
-      //This If-Else gets the chain ID with the highest priority, or highest total number of blocks. Turn on debug mode to see this in action.
-      if (ch == null)
-        ch = temp.getChainID();
-      else
-        ch = ch.getLargerChain(temp.getChainID());
-      tiles.add(temp); //Adds our new tile to the arraylist
       nx+=1;
     }
-    //Check a row clear for 3 or more tiles
     if (c >= 3)
-    {
-      for (int j=0;j<tiles.size();j++) //iterates through the tiles
-      {
-        temp = (Tile)tiles.get(j);
-        Player p = null;
-        if (ch != null) //You need these statewments or else you get nasty errors
-        {
-          ch.addTile(temp); 
-          p = ch.getPlayer(); //Gets the player associates with the chain
-        }
-        temp.mark(); //Marks the tile to be cleared (see the Tile FSM for case state==MARKED)
-        activatePowerup(temp,p); //Activates any powerup tiles in the combo, does nothing if it isnt a powerup tile
-      }
-      //Check a row clear for 5 or more tiles, creates a powerup
-      if (c>=5)
-      {
-        temp = (Tile)tiles.get(tiles.size()/2); //Picks the middle tile
-        temp.convertToPowerup();
-      }
-      if (ch != null)
-      {
-        ch.increaseTotal(c); //Adds c tiles to the chain
-        ch.incrementChain(); //Adds 1 combo to the chain
-      }
-    } 
-    //Check a column clear for 3 or more tiles, reset all values, does essentially the same thing as the row check
-    c=1;
-    ch = temp.getChainID();
-    tiles.clear();
-    temp = tileAt(x,y);
-    tiles.add(temp);
+      return true;
+    c = 1;
     while ((ny+1 < MAX_R)&&(temp.isMatch(tileAt(x,ny+1))))
     {
       c++;
       temp = tileAt(x,ny+1);
-      if (ch == null)
-        ch = temp.getChainID();
-      else
-        ch = ch.getLargerChain(temp.getChainID());
-      tiles.add(temp);
       ny+=1;
-    } 
-    if (c >= 3)
-    {
-      
-      for (int j=0;j<tiles.size();j++)
-      {
-        temp = (Tile)tiles.get(j);
-        Player p = null;
-        if (ch != null)
-        {
-          ch.addTile(temp);
-          p = ch.getPlayer();
-        }
-        temp.mark();
-        activatePowerup(temp,p);
-      }
-      if (c>=5)
-      {
-        temp = (Tile)tiles.get(tiles.size()/2);
-        temp.convertToPowerup();
-      }
-      if (ch != null)
-      {
-        ch.increaseTotal(c);
-        ch.incrementChain();
-      }
     }
-  }
+    if (c >= 3)
+      return true;
+    return false;  
+  } 
   
   private void activatePowerup(Tile t, Player p) 
   {
@@ -578,12 +622,12 @@ GameBoard(int theWidth, int theHeight)
         }
       }
     }
-    if(tempLeft.getMyX() < 0)
+    if((tempLeft != null )&&(tempLeft.getMyX() < 0))
     {
       println(player1.getName() + " loses...");
       return 1;
     }
-    if(tempRight.getMyX() > screen.width - TILE_SIZE)
+    if((tempRight != null )&&(tempRight.getMyX() > screen.width - TILE_SIZE))
     {
       println(player2.getName() + " loses...");
       return 2;
