@@ -137,8 +137,8 @@ static final int TOUCH_TYPE = 2;
 void setup()
 {
   minim = new Minim(this);
-  swap1 = minim.loadFile("sh_ku02.wav");
-  swap2 = minim.loadFile("sh_ku03.wav");
+  swap1 = minim.loadFile("Swap_Left.wav");
+  swap2 = minim.loadFile("Swap_Right.wav");
   font1 = loadFont("ArialNarrow-48.vlw");
   startClock();
   if (connectToTacTile)

@@ -192,11 +192,11 @@ class GameFSM {
        else
        {
          sel2.setSelector(newx,newy);
-         theBoard.swap(sel1,sel2);
-         sel1.reset();
-         sel2.reset();
+         if(theBoard.swap(sel1,sel2))
+         {
+            print("\nHIIIIIIIIIIIIIIIIII:" + sel1.getY());
             theRand = (int)(random(2));
-            if(theRand == 0)
+            if(sel1.getY() < lineOfGravity)
             {
               swap1.play();
               swap1.rewind();
@@ -206,6 +206,9 @@ class GameFSM {
               swap2.play();
               swap2.rewind();
             }
+         }
+         sel1.reset();
+         sel2.reset();
        }
     }
   }
