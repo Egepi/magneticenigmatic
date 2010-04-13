@@ -29,14 +29,24 @@ class Momentum {
     return y;
   }
   
-  public double increaseMomentum(double x) 
+  private void increaseMomentum(double x) 
   {
     v += x;
     if (v > MAX_V)
       v = MAX_V;
     else if (v < -MAX_V)
       v = -MAX_V;  
-    return v;
+  }
+  
+  public void decreaseMomentum()
+  {
+    v-=(v*MOMENTUM_DECAY);
+  }
+  
+  public void evaluateChain(int comboTotal, int tileCount, int sign)
+  {
+    double x = sign*(tileCount*(1.0+(comboTotal-1.0)*PER_COMBO_BONUS))*MOMENTUM_COEFF;
+    increaseMomentum(x);
   }
   
   public double getY() {

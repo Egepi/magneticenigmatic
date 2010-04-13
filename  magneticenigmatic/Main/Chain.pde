@@ -93,9 +93,9 @@ class Chain
       count = 0;
       println("Chain redeemed with " + c + " combo(s) and " + totalTiles+ " tiles for " + p.getName() + ".");
       if (p == player1)
-        theMomentum.increaseMomentum(totalTiles*totalTiles*MOMENTUM_COEFF);
+        theMomentum.evaluateChain(c,totalTiles,1);
       else if (p == player2)
-        theMomentum.increaseMomentum(-totalTiles*totalTiles*MOMENTUM_COEFF);  
+        theMomentum.evaluateChain(c,totalTiles,-1);  
       chainList.remove(chainList.indexOf(this));
       return c;
     }
