@@ -55,10 +55,14 @@ class Tile
   }
   
   public void action() {
-    if ((state == HMARKED)||(state == VMARKED)||(state == DOUBLE_MARKED))
+    if ((state == HMARKED)||(state == VMARKED))
     {
       tileType = 0;
       state = DONE_ANIMATING;
+    }
+    else if (state == DOUBLE_MARKED)
+    {
+      convertToPowerup();
     }
     else if (state == ANIMATING)
     {
@@ -167,7 +171,8 @@ class Tile
   }
   
   public void convertToPowerup() {
-    tileType += 5;
+    if ((tileType < TILE_COLORS)&&(tileType > 0))
+      tileType += (TILE_COLORS-1);
     setTileImage(tileType);
     state = DONE_ANIMATING;
     isIdle = false;

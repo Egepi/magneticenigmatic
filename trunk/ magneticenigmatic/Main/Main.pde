@@ -64,12 +64,18 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                   FREEZE_POWERUP_NUMBER_OF_ROWS = 1;
  static final double MOMENTUM_COEFF = 0.10,
                      SPEED_POWERUP_MULTIPLIER = 2.0,
-                     SLOW_POWERUP_MULTIPLIER = 0.5;
- static final boolean DEBUG_MODE_ON = false,
+                     SLOW_POWERUP_MULTIPLIER = 0.5,
+                     MOMENTUM_DECAY = 0.15,
+                     PER_COMBO_BONUS = 0.25,
+                     TIME_BETWEEN_DECAY = 1000,
+                     TIME_BETWEEN_ROWS = 15000;
+ static final boolean INFINITE_MODE = false, //NOT CURRENTLY USED (if true, game should continue despite a player losing)
+                      DEBUG_MODE_ON = false, //if true, chain links are displayed, can also be used for other debugging purposes
                       SOUNDS_ON = false, 
                       MOMENTUM_ON = true,
                       ANIMATIONS_ON = true,
-                      ROW_GENERATION_ON = true;
+                      ROW_GENERATION_ON = true,
+                      MOMENTUM_DECAY_ON = true;
                       
 
 /*Type of touch code
@@ -124,7 +130,7 @@ static final int TOUCH_TYPE = 2;
  ArrayList selList = new ArrayList();
  Selector sel1, sel2;
  GameFSM theGameFSM;
- int gameStartTime, frameStartTime, frameEndTime, lastRowTime;
+ int gameStartTime, frameStartTime, frameEndTime, lastRowTime, lastDecayTime;
  Minim minim;  //Used for playing sound
  AudioPlayer swap1;
  AudioPlayer swap2;
@@ -137,8 +143,8 @@ static final int TOUCH_TYPE = 2;
 void setup()
 {
   minim = new Minim(this);
-  swap1 = minim.loadFile("Swap_Left.wav");
-  swap2 = minim.loadFile("Swap_Right.wav");
+  swap1 = minim.loadFile("sh_ku02.wav");
+  swap2 = minim.loadFile("sh_ku03.wav");
   font1 = loadFont("ArialNarrow-48.vlw");
   startClock();
   if (connectToTacTile)
@@ -183,6 +189,7 @@ void draw()
 void startClock() {
   gameStartTime = millis();
   lastRowTime = millis();
+  lastDecayTime = millis();
   frameStartTime = gameStartTime;
 }
 
@@ -193,5 +200,9 @@ int timeDifference() {
 
 int rowTimeDifference() {
   return (millis()-lastRowTime);
+}
+
+int decayTimeDifference() {
+  return (millis()-lastDecayTime);
 }
 

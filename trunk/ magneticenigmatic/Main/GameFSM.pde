@@ -110,11 +110,11 @@ class GameFSM {
     popMatrix();
     
     clearSound.stopIfOver();
-    gameGetInput();           //Get player(s) touch input
+    
     theBoard.gravity();       //Apply gravity where needed
     //boolean playSound = theBoard.checkClears();   //Check for clears to be made
     theBoard.clearer();
-    
+    gameGetInput();           //Get player(s) touch input
     /*if(playSound == true)
     {
       clearSound.play();
@@ -123,10 +123,15 @@ class GameFSM {
     drawChains();    
     player1.drawPlayer();
     player2.drawPlayer();
-    if ((rowTimeDifference() > 10000)&&(ROW_GENERATION_ON))
+    if ((rowTimeDifference() > TIME_BETWEEN_ROWS)&&(ROW_GENERATION_ON))
     {
-      lastRowTime += 10000;
+      lastRowTime += TIME_BETWEEN_ROWS;
       theBoard.generateRow();
+    }
+    if ((decayTimeDifference() > TIME_BETWEEN_DECAY)&&(MOMENTUM_DECAY_ON))
+    {
+      lastDecayTime += TIME_BETWEEN_DECAY;
+      theMomentum.decreaseMomentum();
     }
     //Check if either player lost
     if (theBoard.checkLoss() > 0)
@@ -192,11 +197,11 @@ class GameFSM {
        else
        {
          sel2.setSelector(newx,newy);
-         if(theBoard.swap(sel1,sel2))
-         {
-            print("\nHIIIIIIIIIIIIIIIIII:" + sel1.getY());
+         theBoard.swap(sel1,sel2);
+         sel1.reset();
+         sel2.reset();
             theRand = (int)(random(2));
-            if(sel1.getY() < lineOfGravity)
+            if(theRand == 0)
             {
               swap1.play();
               swap1.rewind();
@@ -206,9 +211,6 @@ class GameFSM {
               swap2.play();
               swap2.rewind();
             }
-         }
-         sel1.reset();
-         sel2.reset();
        }
     }
   }

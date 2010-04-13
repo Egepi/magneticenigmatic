@@ -158,12 +158,12 @@ GameBoard(int theWidth, int theHeight)
   
   public int newRowAnimationX(int i) //Animation formulas
   {
-    return 2*(4-i);
+    return 2*(TPR/2-i);
   }
   
   public int newRowAnimationY(int i)
   {
-    return 8;
+    return TPR;
   }
   
   /************************************************************
@@ -391,6 +391,7 @@ GameBoard(int theWidth, int theHeight)
     int ny = y;
     int c = 1; //This is the matching tile combination total, it starts at one, because there will always be one tile of this color
     Tile temp = tileAt(x,y); //temp starts at the tile specified in the paramter
+    Tile powerup = null;
     Chain ch = temp.getChainID(); //We need the chainID of each tile so we can determine which has the higher priority, this is just the first one for comparison (ch can be null)
     ArrayList tiles = new ArrayList(); //tiles will hold our combination so we can access them anywhere in the function
     tiles.add(temp); // Adds the first tile to the arraylist
@@ -427,7 +428,7 @@ GameBoard(int theWidth, int theHeight)
         if (c>=5)
         {
           temp = (Tile)tiles.get(tiles.size()/2); //Picks the middle tile
-          temp.convertToPowerup();
+          powerup = temp;
         }
         if (ch != null)
         {
@@ -466,7 +467,7 @@ GameBoard(int theWidth, int theHeight)
         if (c>=5)
         {
           temp = (Tile)tiles.get(tiles.size()/2);
-          temp.convertToPowerup();
+          powerup = temp;
         }
         if (ch != null)
         {
@@ -475,6 +476,8 @@ GameBoard(int theWidth, int theHeight)
         }
       }
     }
+    if (powerup != null)
+      powerup.convertToPowerup();
   }
   
   private boolean makesCombo(int x, int y)
