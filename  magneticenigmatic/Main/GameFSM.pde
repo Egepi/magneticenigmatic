@@ -172,13 +172,20 @@ class GameFSM {
   {
     //Display winner
     
-    //Show begin round 2 button
+    if(player1.getRoundsWon() == 2 || player1.getRoundsWon() == 2)
+    {
+      stateId++;
+    }
+    else
+    { 
+      //Show begin round 2 button
     
-    //when begin button clicked go to stage 3
-    theBoard = new GameBoard(TPR, MAX_R);
-    theBoard.generateBoard();
-    theMomentum = new Momentum();
-    stateId = 4;
+      //when begin button clicked go to stage 3
+      theBoard = new GameBoard(TPR, MAX_R);
+      theBoard.generateBoard();
+      theMomentum = new Momentum();
+      stateId = 4;
+    }
     
   }
   
@@ -188,10 +195,12 @@ class GameFSM {
   {
     if(player1.getRoundsWon() > player2.getRoundsWon())
     {
+      //player 1 won
       
     }
     else
     {
+      //player 2 won
     }
 
   }
@@ -227,32 +236,7 @@ class GameFSM {
       getTouches();
     else if (mousePressed)
     {
-       int newx, newy;
-       newx = (mouseY-PUZZLE_ORIGIN_Y)/TILE_SIZE;
-       newy = (mouseX-PUZZLE_ORIGIN_X-(int)(theMomentum.getY()))/TILE_SIZE;
-       if (sel1.getX() == -1)
-         sel1.setSelector(newx,newy);
-       else if (sel1.isEqual(newx,newy))
-         ; // do nothing if mouse is at something already selected
-       else
-       {
-         sel2.setSelector(newx,newy);
-         if(theBoard.swap(sel1,sel2))
-         {
-           if(sel1.getY() < lineOfGravity)
-           {
-             swap1.play();
-             swap1.rewind();
-           }
-           else
-           {
-             swap2.play();
-             swap2.rewind();
-           }
-         }
-         sel1.reset();
-         sel2.reset();
-       }
+       mouseInput();
     }
   }
   
