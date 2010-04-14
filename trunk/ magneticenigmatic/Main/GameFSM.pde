@@ -136,7 +136,7 @@ class GameFSM {
     //Check if either player lost
     if (theBoard.checkLoss() > 0)
     {
-      //stateId ++;
+      stateId ++;
       return;
     }
     
@@ -197,20 +197,21 @@ class GameFSM {
        else
        {
          sel2.setSelector(newx,newy);
-         theBoard.swap(sel1,sel2);
+         if(theBoard.swap(sel1,sel2))
+         {
+           if(sel1.getY() < lineOfGravity)
+           {
+             swap1.play();
+             swap1.rewind();
+           }
+           else
+           {
+             swap2.play();
+             swap2.rewind();
+           }
+         }
          sel1.reset();
          sel2.reset();
-            theRand = (int)(random(2));
-            if(theRand == 0)
-            {
-              swap1.play();
-              swap1.rewind();
-            }
-            else
-            {
-              swap2.play();
-              swap2.rewind();
-            }
        }
     }
   }
