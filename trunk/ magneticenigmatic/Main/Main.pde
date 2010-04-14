@@ -31,7 +31,7 @@ TouchAPI tacTile;
 ArrayList touchList = new ArrayList();
 String localMachine = "127.0.0.1";
 String tacTileMachine = "127.0.0.1";
-//Port for data transferf
+//Port for data transfer
 int dataPort = 7100;
 int msgPort = 7340;
 
@@ -81,7 +81,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
 /*Type of touch code
   1 - original selector - drag working no multi
   2 - 2 finger touch swap - multi but no drag
-  3 - in work implementation for both to work
+  3 - not implemented
 */
 static final int TOUCH_TYPE = 2;
 

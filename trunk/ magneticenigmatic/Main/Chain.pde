@@ -91,7 +91,7 @@ class Chain
     {
       int c = count;
       count = 0;
-      println("Chain redeemed with " + c + " combo(s) and " + totalTiles+ " tiles for " + p.getName() + ".");
+      //println("Chain redeemed with " + c + " combo(s) and " + totalTiles+ " tiles for " + p.getName() + ".");
       if (p == player1)
         theMomentum.evaluateChain(c,totalTiles,1);
       else if (p == player2)
