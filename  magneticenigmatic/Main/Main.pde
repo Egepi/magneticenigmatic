@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Tactile stuff
  */
  
-boolean connectToTacTile = true;
+boolean connectToTacTile = false;
 //Touch API
 TouchAPI tacTile;
 //Names of machines you might use
