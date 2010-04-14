@@ -87,6 +87,11 @@ class GameFSM {
     stateId++;
   }
   
+  public void scanState()
+  {
+    stateId++;
+  }
+  
   /************************************************************
   */
   public void gameState()
@@ -147,6 +152,15 @@ class GameFSM {
   */
   public void endRound()
   {
+    //Display winner
+    
+    //Show begin round 2 button
+    
+    //when begin button clicked go to stage 3
+    theBoard = new GameBoard(TPR, MAX_R);
+    theBoard.generateBoard();
+    theMomentum = new Momentum();
+    stateId = 4;
     
   }
   
@@ -154,7 +168,13 @@ class GameFSM {
   */
   public void endGame()
   {
-    
+    if(player1.getRoundsWon() > player2.getRoundsWon())
+    {
+      
+    }
+    else
+    {
+    }
 
   }
   
@@ -172,8 +192,10 @@ class GameFSM {
     switch(stateId) {
       case 1: startState(); break;
       case 2: optionsState(); break;
-      case 3: gameState(); break;
-      case 4: endRound(); break;
+      case 3: scanState(); break;
+      case 4: gameState(); break;
+      case 5: endRound(); break;
+      case 6: endGame(); break;
       default: break;
     }
   }

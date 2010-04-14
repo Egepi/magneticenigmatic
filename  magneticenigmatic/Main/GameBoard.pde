@@ -628,11 +628,13 @@ GameBoard(int theWidth, int theHeight)
     if((tempLeft != null )&&(tempLeft.getMyX() < 0))
     {
       println(player1.getName() + " loses...");
+      player2.setRoundsWon(player2.getRoundsWon()+1);
       return 1;
     }
     if((tempRight != null )&&(tempRight.getMyX() > screen.width - TILE_SIZE))
     {
       println(player2.getName() + " loses...");
+      player1.setRoundsWon(player1.getRoundsWon()+1);
       return 2;
     }
     //Debugging

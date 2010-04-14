@@ -9,11 +9,12 @@ class Player
   //Statistics
   public int statSwaps, statClears, statChains, statPowerups;
   private String name;
+  private int roundsWon;
   
   public Player(String n)
   {
     name  = n;
-    
+    roundsWon = 0;
     speedModifier = 1;
     speedEffectDuration = -1;
     blind = false;
@@ -40,6 +41,16 @@ class Player
       blindEffectDuration -= timeDifference();
     else
       blind = false;
+  }
+  
+  public int getRoundsWon()
+  {
+    return this.roundsWon;
+  }
+  
+  public void setRoundsWon(int inc)
+  {
+    this.roundsWon = inc;
   }
 }
 
