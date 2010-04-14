@@ -196,11 +196,18 @@ class GameFSM {
     if(player1.getRoundsWon() > player2.getRoundsWon())
     {
       //player 1 won
+      print(player1.getName() + " wins the game!!!");
       
+    }
+    else if(player2.getRoundsWon() > player1.getRoundsWon())
+    {
+      //player 2 won
+      print(player2.getName() + " wins the game!!!");
     }
     else
     {
-      //player 2 won
+      //tie
+      print("It was a tie!");
     }
 
   }
