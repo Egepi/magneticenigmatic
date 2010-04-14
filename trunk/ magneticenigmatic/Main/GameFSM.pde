@@ -12,6 +12,8 @@ class GameFSM {
   int MIDDLE_L = (width/2)/2;
   int MIDDLE_R = (width/2) + MIDDLE_L;
   AudioPlayer backGround;
+  int plyrOneRdy = 0;
+  int plyrTwoRdy = 0;
   /************************************************************
   */
   public GameFSM()
@@ -81,15 +83,25 @@ class GameFSM {
   */
   public void optionsState()
   {    
-    strokeWeight(4);
-    line((width/2 - 500), 500, (width/2 + 500), 500);
-    strokeWeight(0);  
     stateId++;
   }
   
+  /************************************************************
+  */
   public void scanState()
   {
-    stateId++;
+    background(49,79,79);
+    strokeWeight(4);
+    line(width/2, 0, width/2, height);
+    rect((width/2 + 50), height/2 - 50, 400, 250);
+    checkScan();
+    if((plyrOneRdy == 1)&&(plyrTwoRdy == 1))
+    {
+      print("HELLO THERE WORLD THINGY\n");
+      stateId++;
+    }
+    //stroke(1);
+//    stateId++;
   }
   
   /************************************************************
@@ -251,4 +263,43 @@ class GameFSM {
       
     }
   }
+  
+  void checkScan()
+  {
+    int rightScan = 0;
+    int leftScan = 0;
+    if ( ! tacTile.managedListIsEmpty() ){
+
+    touchList = tacTile.getManagedList();
+    // Cycle though the touches 
+
+    for ( int index = 0; index < touchList.size(); index ++ )
+    {
+
+      Touches curTouch = (Touches) touchList.get(index);   
+
+      if ( curTouch != null)
+      {
+        //Grab Data
+        float xCoord = curTouch.getXPos() * width;    
+        float yCoord = height - curTouch.getYPos() * height;
+
+        if(xCoord > width/2)
+          rightScan++;
+        else if(xCoord < width/2)
+          leftScan++;
+
+        //Grab the Intensity!!!
+        //float intensity = curTouch.getIntensity();
+
+        //get finger ID
+        //int finger = curTouch.getFinger();
+      }
+    }
+    if(rightScan >= 6)
+      plyrOneRdy = 1;
+    if(leftScan >= 6)
+      plyrTwoRdy = 1;
+    }
+  }//End checkScan
 }
