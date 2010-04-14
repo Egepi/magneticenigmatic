@@ -93,7 +93,13 @@ class GameFSM {
     background(49,79,79);
     strokeWeight(4);
     line(width/2, 0, width/2, height);
+    strokeWeight(1);
     rect((width/2 + 50), height/2 - 50, 400, 250);
+    if(connectToTacTile == false)
+    {
+      stateId++;
+      return;
+    }
     checkScan();
     if((plyrOneRdy == 1)&&(plyrTwoRdy == 1))
     {
