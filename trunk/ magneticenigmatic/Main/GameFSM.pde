@@ -14,6 +14,8 @@ class GameFSM {
   AudioPlayer backGround;
   int plyrOneRdy = 0;
   int plyrTwoRdy = 0;
+  int rightScanX = width/2;
+  int leftScanX = width/2;
   /************************************************************
   */
   public GameFSM()
@@ -103,11 +105,9 @@ class GameFSM {
     checkScan();
     if((plyrOneRdy == 1)&&(plyrTwoRdy == 1))
     {
-      print("HELLO THERE WORLD THINGY\n");
       stateId++;
     }
-    //stroke(1);
-//    stateId++;
+    print("player 1: " + plyrOneRdy + "  player 2: " + plyrTwoRdy + "\n");
   }
   
   /************************************************************
@@ -282,10 +282,13 @@ class GameFSM {
         float yCoord = height - curTouch.getYPos() * height;
 
         if(xCoord > width/2)
+        {
           rightScan++;
-        else if(xCoord < width/2)
+        }
+        if(xCoord < width/2)
+        {
           leftScan++;
-
+        }
         //Grab the Intensity!!!
         //float intensity = curTouch.getIntensity();
 
@@ -294,9 +297,58 @@ class GameFSM {
       }
     }
     if(rightScan >= 6)
-      plyrOneRdy = 1;
-    if(leftScan >= 6)
-      plyrTwoRdy = 1;
+    {
+      if(plyrTwoRdy != 1)
+      {
+                rightScanX = rightScanX + 5;
+        line(rightScanX, 0, rightScanX, height);
+        if(rightScanX >= width)
+        {
+          plyrTwoRdy = 1;
+        }
+      }
     }
+    if(leftScan >= 6)
+    {
+      if(plyrOneRdy != 1)
+      {
+        leftScanX = leftScanX - 5;
+        line(leftScanX, 0, leftScanX, height);
+        if(leftScanX <= 0)
+        {
+          plyrOneRdy = 1;
+        }
+      }
+    }
+   }
   }//End checkScan
+  
+  void startScan(int player)
+  {
+    print(player + "the player is\n");
+    strokeWeight(5);
+    fill(255,0,0);
+    if(player == 1)
+    {
+      leftScanX = leftScanX - 5;
+      line(leftScanX, 0, leftScanX, height);
+      if(leftScanX <= 0)
+      {
+        plyrOneRdy = 1;
+      }
+    }
+    if(player == 0)
+    {
+      rightScanX = rightScanX + 5;
+      line(rightScanX, 0, rightScanX, height);
+      if(rightScanX >= width)
+      {
+        plyrTwoRdy = 1;
+      }
+    }
+    strokeWeight(1);
+      
+      
+    
+  }
 }
