@@ -78,14 +78,6 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                       MOMENTUM_DECAY_ON = true;
                       
 
-/*Type of touch code
-  1 - original selector - drag working no multi
-  2 - 2 finger touch swap - multi but no drag
-  3 - not implemented
-*/
-static final int TOUCH_TYPE = 2;
-
-
 //Images
  static final String TILE0 = null,//"diamond.jpg",
                      TILE1 = "Red.png",
@@ -179,7 +171,6 @@ void setup()
 
 void draw()
 {
-  //print("\n0,0: " + theBoard.tileBoard[0][0].getTileType() + "     0,1: " + theBoard.tileBoard[0][1].getTileType());
   frameStartTime = frameEndTime;
   frameEndTime = millis();
   background(50,125,150); //Arbitrary background color for the time being.

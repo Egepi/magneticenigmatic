@@ -238,13 +238,10 @@ class GameFSM {
   */
   void gameGetInput()
   {
-    int theRand;
     if (connectToTacTile)
       getTouches();
     else if (mousePressed)
-    {
-       mouseInput();
-    }
+      mouseInput();
   }
   
   void drawChains() {
