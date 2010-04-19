@@ -17,12 +17,13 @@ class Tile
   
   private PImage tileImage;
   private int tileType;
-  private boolean isMoving, isIdle, isFrozen;
+  private boolean isMoving, isIdle, isFrozen, isSwapping, swapLeft;
   private int state;
   private Chain chainID;
-  private double ax,ay; //ax is the horizontal offset, ay is the vertical offset (viewing from short side of table)
+  private double ax,ay,dr; //ax is the horizontal offset, ay is the vertical offset (viewing from short side of table)
   private int myX;
-  private double speedModifier;
+  public int depth;
+  private double speedModifier,sizeModifier;
   
   /************************************************************
   * Constructor for Tile class.
@@ -34,6 +35,10 @@ class Tile
     isIdle = true; //Set to true when tile is swapping or will not be falling in the next frame
     isMoving = false; //Set to true when tile is animating (falling or swapping)
     isFrozen = false;
+    isSwapping = false;
+    swapLeft = false;
+    depth = 1;
+    sizeModifier = 1.0;
     chainID = null; //Chain currently associated with this tile
     state = IDLE;
     speedModifier = 1.0;
@@ -46,6 +51,10 @@ class Tile
     isIdle = true; //Set to true when tile is swapping or will not be falling in the next frame
     isMoving = false; //Set to true when tile is animating (falling or swapping)
     isFrozen = false;
+    isSwapping = false;
+    swapLeft = false;
+    depth = 1;
+    sizeModifier = 1.0;
     chainID = null; //Chain currently associated with this tile
     state = IDLE;
     speedModifier = 1.0;
@@ -66,42 +75,77 @@ class Tile
     }
     else if (state == ANIMATING)
     {
-      if (abs((float)ax)>=0)
+      if (!isSwapping)
       {
-        if (ax < 0)
+        if (abs((float)ax)>=0)
         {
-           ax += 0.001*MAX_TILE_V*timeDifference()*speedModifier;
-           if (ax > 0)
-             ax = 0;
+          if (ax < 0)
+          {
+             ax += 0.001*MAX_TILE_V*timeDifference()*speedModifier;
+             if (ax > 0)
+               ax = 0;
+          }
+          else
+          {
+             ax -= 0.001*MAX_TILE_V*timeDifference()*speedModifier;
+             if (ax < 0)
+               ax = 0;
+          }  
         }
-        else
+        if (abs((float)ax)>=0)
         {
-           ax -= 0.001*MAX_TILE_V*timeDifference()*speedModifier;
-           if (ax < 0)
-             ax = 0;
-        }  
-      }
-      if (abs((float)ax)>=0)
-      {
-        if (ay < 0)
-        {
-           ay += 0.001*MAX_TILE_V*timeDifference()*speedModifier;
-           if (ay > 0)
-             ay = 0;
+          if (ay < 0)
+          {
+             ay += 0.001*MAX_TILE_V*timeDifference()*speedModifier;
+             if (ay > 0)
+               ay = 0;
+          }
+          else
+          {
+             ay -= 0.001*MAX_TILE_V*timeDifference()*speedModifier;
+             if (ay < 0)
+               ay = 0;
+          }  
         }
-        else
+        if ((abs((float)ax)<=0.001)&&(abs((float)ay)<=0.001))
         {
-           ay -= 0.001*MAX_TILE_V*timeDifference()*speedModifier;
-           if (ay < 0)
-             ay = 0;
-        }  
+          ax = 0;
+          ay = 0;
+          state = DONE_ANIMATING;
+        }
       }
-      if ((abs((float)ax)<=0.001)&&(abs((float)ay)<=0.001))
+      else
       {
-        ax = 0;
-        ay = 0;
-        state = DONE_ANIMATING;
+        dr+=0.0031*MAX_TILE_V*timeDifference()*speedModifier;
+        if (dr < PI)
+        {
+          if (swapLeft)
+          {
+            ax = 0.5+0.5*cos((float)dr);
+            ay = -0.25*sin((float)dr);
+            sizeModifier = 1.0-ay;
+            depth = 2;
+          }
+          else
+          {
+            ax = 0.5*cos((float)dr+PI)-0.5;
+            ay = 0.25*sin((float)dr);
+            sizeModifier = 1.0-ay;
+            depth = 0;
+          }
+        }
+        if (dr >= PI)
+        {
+          dr = PI;
+          ax = 0;
+          ay = 0;
+          sizeModifier = 1.0;
+          depth = 1;
+          state = DONE_ANIMATING;
+          isSwapping = false;
+        }
       }
+      
     }
     else if (state == DONE_ANIMATING) //DONE_ANIMATING and IDLE need to be different so a chain can tell the difference between a tile in transition and a tile that is truly not going to move again.
     {
@@ -128,6 +172,26 @@ class Tile
     }
   }
   
+  public void swapAnimate(int dx, double modifier, Player p) {
+    if (ANIMATIONS_ON) {
+      state = ANIMATING;
+      isMoving = true;
+      isIdle = false;
+      ax = (double)dx;
+      ay = 0;
+      dr = 0;
+      if (dx >0)
+        swapLeft = true;
+      else
+        swapLeft = false;
+      isSwapping = true;
+      speedModifier = modifier;
+    }
+    else {
+      state = DONE_ANIMATING;
+    }
+  }
+  
   public void animate(int dx, int dy, double modifier) {
     animate(dx,dy);
     speedModifier = modifier;
@@ -137,7 +201,7 @@ class Tile
     myX = tempX-(int)(ay*TILE_SIZE);
     if ((!blind)&&(tileImage != null))
     {
-      image(tileImage,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),TILE_SIZE,TILE_SIZE);
+      image(tileImage,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),(int)(sizeModifier*TILE_SIZE),(int)(sizeModifier*TILE_SIZE));
       if (isFrozen)
       {
         fill(0,40,200,90);
@@ -147,7 +211,7 @@ class Tile
     }
     else if ((blind)&&(tileImage != null))
     {
-      image(colorlessTile,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),TILE_SIZE,TILE_SIZE);
+      image(colorlessTile,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),(int)(sizeModifier*TILE_SIZE),(int)(sizeModifier*TILE_SIZE));
     }
     if ((chainID != null)&&(DEBUG_MODE_ON))
         line(tempX+10,tempY+10,chainList.indexOf(chainID)*20+10,10); 
