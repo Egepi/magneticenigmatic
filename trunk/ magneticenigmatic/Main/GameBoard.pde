@@ -37,28 +37,36 @@ GameBoard(int theWidth, int theHeight)
   public void drawBoard()
   {
     int tempX = PUZZLE_ORIGIN_X+(int)(theMomentum.incrementY());
-    int tempY = PUZZLE_ORIGIN_Y;
+    int tempY;
     boolean blind;
-    for(int x = 0; x < TPR; x++)
+    for (int d = 0; d < 3; d++)
     {
-      for(int y = 0; y < MAX_R; y++)
-      {
-        tileBoard[x][y].action();
-        blind = false;
-        Player p = playerAtY(y);
-        if (p!= null)
-        {
-          blind = p.blind;
-        }
-        tileBoard[x][y].drawTile(tempX,tempY,blind);
-        tempX = tempX + TILE_SIZE;
-      }
-      tempY = tempY + TILE_SIZE;
       tempX = PUZZLE_ORIGIN_X+(int)(theMomentum.getY());
+      tempY = PUZZLE_ORIGIN_Y;
+      for(int x = 0; x < TPR; x++)
+      {
+        for(int y = 0; y < MAX_R; y++)
+        {
+          if (tileBoard[x][y].depth == d)
+          {
+            tileBoard[x][y].action();
+            blind = false;
+            Player p = playerAtY(y);
+            if (p!= null)
+            {
+              blind = p.blind;
+            }
+            tileBoard[x][y].drawTile(tempX,tempY,blind);
+          }
+          tempX = tempX + TILE_SIZE;
+        }
+        tempY = tempY + TILE_SIZE;
+        tempX = PUZZLE_ORIGIN_X+(int)(theMomentum.getY());
+      }
     }
     
    fill(0,0,0,128);
-   rect(PUZZLE_ORIGIN_X + lineOfGravity*TILE_SIZE + (int)(theMomentum.incrementY()), PUZZLE_ORIGIN_Y, TILE_SIZE, TILE_SIZE*TPR);
+   rect(PUZZLE_ORIGIN_X + lineOfGravity*TILE_SIZE + (int)(theMomentum.getY()), PUZZLE_ORIGIN_Y, TILE_SIZE, TILE_SIZE*TPR);
    fill(0,0,0,255);
   }
   
@@ -203,8 +211,9 @@ GameBoard(int theWidth, int theHeight)
     chainTiles[0] = tileBoard[b][row];
     chainTiles[1] = tileBoard[a][row];
     c.addTiles(chainTiles);
-    tileBoard[b][row].animate(b-a,0,p.speedModifier);
-    tileBoard[a][row].animate(a-b,0,p.speedModifier);
+    tileBoard[b][row].swapAnimate(b-a,p.speedModifier,p);
+    tileBoard[a][row].swapAnimate(a-b,p.speedModifier,p);
+    
     
     return true;
   }
