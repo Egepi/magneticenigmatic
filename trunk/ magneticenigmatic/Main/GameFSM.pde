@@ -13,10 +13,18 @@ class GameFSM {
   int plyrTwoRdy = 0;
   int rightScanX = width/2;
   int leftScanX = width/2;
+  boolean responseP1 = false;
+  boolean responseP2 = false;
+  Button cont1;
+  Button quit1;
+  Button cont2;
+  Button quit2;
+  int continueCount = 0;
   /************************************************************
   */
   public GameFSM()
   {
+    makeButtons();
     stateId = 1;
     if (SOUNDS_ON);
       //backGround.loop();
@@ -108,6 +116,7 @@ class GameFSM {
   */
   public void gameState()
   {
+
     textFont(font1); //Set font to use for following text() calls
     textAlign(CENTER);
     
@@ -190,31 +199,59 @@ class GameFSM {
     }
     else
     { 
-      float contP1Xcord = (width)*0.2;
-      float contP1Ycord = (height/2) - contP1Button.height - 50;
-      float quitP1Xcord = (width)*0.2;
-      float quitP1Ycord = (height/2) + 50;
+      if(!responseP1)
+      {
+        cont1.drawit();
+        quit1.drawit();
+      }
+      if(!responseP2)
+      {
+        cont2.drawit();
+        quit2.drawit();
+      }
       
-      float contP2Xcord = (width)*0.8 - contP2Button.width;
-      float contP2Ycord = (height/2) - contP1Button.height - 50;
-      float quitP2Xcord = (width)*0.8 - contP2Button.width;
-      float quitP2Ycord = (height/2) + 50;
+      if(!responseP1)
+      {
+        if(cont1.checkBounds() == 1)
+        {
+          responseP1 = true;
+          continueCount = continueCount + 1;
+        }
+        if(quit1.checkBounds() == 1)
+        {
+          responseP1 = true;
+        }
+      }
+      if(!responseP2)
+      {
+        if(cont2.checkBounds() == 1)
+        {
+          responseP2 = true;
+          continueCount = continueCount + 1;
+        }
+        if(quit2.checkBounds() == 1)
+        {
+          responseP2 = true;
+        }
+      }
+      if(responseP1 && responseP2)
+      {
+        if(continueCount == 2)
+        {
+          theBoard = new GameBoard(TPR, MAX_R);
+          theBoard.generateBoard();
+          theMomentum = new Momentum();
+          stateId = 4;
+          continueCount = 0;
+          responseP1 = false;
+          responseP2 = false;
+        }
+        else
+        {
+          stateId = 6;
+        }
+      }
       
-      Button cont1 = new Button(contP1Button, contP1Xcord, contP1Ycord);
-      Button quit1 = new Button(quitP1Button, quitP1Xcord, quitP1Ycord);
-      Button cont2 = new Button(contP2Button, contP2Xcord, contP2Ycord);
-      Button quit2 = new Button(quitP2Button, quitP2Xcord, quitP2Ycord);
-
-      cont1.drawit();
-      cont2.drawit();
-      quit1.drawit();
-      quit2.drawit();
-      
-      //when begin button clicked go to stage 3
-      theBoard = new GameBoard(TPR, MAX_R);
-      theBoard.generateBoard();
-      theMomentum = new Momentum();
-      //stateId = 4;
     }
     
   }
@@ -382,4 +419,24 @@ class GameFSM {
       
     
   }
+  
+  
+  void makeButtons()
+  {
+      float contP1Xcord = (width)*0.2;
+      float contP1Ycord = (height/2) - contP1Button.height - 50;
+      float quitP1Xcord = (width)*0.2;
+      float quitP1Ycord = (height/2) + 50;
+      
+      float contP2Xcord = (width)*0.8 - contP2Button.width;
+      float contP2Ycord = (height/2) - contP1Button.height - 50;
+      float quitP2Xcord = (width)*0.8 - contP2Button.width;
+      float quitP2Ycord = (height/2) + 50;
+      
+      cont1 = new Button(contP1Button, contP1Xcord, contP1Ycord);
+      quit1 = new Button(quitP1Button, quitP1Xcord, quitP1Ycord);
+      cont2 = new Button(contP2Button, contP2Xcord, contP2Ycord);
+      quit2 = new Button(quitP2Button, quitP2Xcord, quitP2Ycord);
+  }
+  
 }
