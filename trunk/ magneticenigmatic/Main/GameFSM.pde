@@ -6,11 +6,12 @@
 */
 class GameFSM {
   private int stateId;
-
+  PImage startButton;
+  GameSounds clearSound;
   float theta = 0;
   int MIDDLE_L = (width/2)/2;
   int MIDDLE_R = (width/2) + MIDDLE_L;
-  
+  AudioPlayer backGround;
   int plyrOneRdy = 0;
   int plyrTwoRdy = 0;
   int rightScanX = width/2;
@@ -20,6 +21,9 @@ class GameFSM {
   public GameFSM()
   {
     stateId = 1;
+    startButton = loadImage("start.png");
+    clearSound = new GameSounds("splat.wav");
+    backGround = minim.loadFile("zone_nebula_nomad.wav");
     if (SOUNDS_ON)
       backGround.loop();
   }
@@ -110,38 +114,29 @@ class GameFSM {
   */
   public void gameState()
   {
-    textFont(font1);
-    
-    pushMatrix();
-    rotate(PI/2);
-    text("Player 1", 100, (-width/2)+TILE_SIZE+8);
-    popMatrix();
-    text("Player 2", MIDDLE_R - 50, 45);
-    
-    pushMatrix();
-    translate(MIDDLE_L - 50, height - 70);
-    rotate(PI);
+    textFont(font1); //Set font to use for following text() calls
     textAlign(CENTER);
-    text("Player 1", 0, 0);
-    popMatrix();
     
+    /*Rotate and draw player 1 name and a timer if neeed be*/
     pushMatrix();
-    translate(MIDDLE_R-50, height - 70);
-    rotate(PI);
-    textAlign(CENTER);
-    text("Player 2", 0, 0);
-    popMatrix();
-    
-    if(timer1 >= 0)
+    rotate(PI/2); //Rotate by 90 degrees
+    if(timer1 >= 0) //Check if timer has any time left to display
     {
-      if(oldSec != second())
+      if(oldSec != second()) //Check if AT LEAST 1 second has passed
       {
         timer1--;
         oldSec = second();
       }
-      text(timer1, MIDDLE_L-40,100);
+      text(timer1, 100,(-width/2)+TILE_SIZE+65-(int)(theMomentum.getY()));  //Draw timer on board on top
+      text(timer1, 780,(-width/2)+TILE_SIZE+65-(int)(theMomentum.getY()));  //Draw timer on board on bottom
     }
+    text(player1.getName(), 100, (-width/2)+TILE_SIZE+8-(int)(theMomentum.getY())); //Don't ask how I got this number...
+    text(player1.getName(), 780,  (-width/2)+TILE_SIZE+8-(int)(theMomentum.getY()));
+    popMatrix();
     
+    /*Rotate and draw player 1 name and a timer if neeed be*/
+    pushMatrix();
+    rotate(-PI/2);
     if(timer2 >= 0)
     {
       if(oldSec !=second())
@@ -149,8 +144,12 @@ class GameFSM {
         timer2--;
         oldSec = second();
       }
-      text(timer2, MIDDLE_R- 40,100);
+      text(timer2, -100,width/2+TILE_SIZE+65+(int)(theMomentum.getY()));
+      text(timer2, -780,width/2+TILE_SIZE+65+(int)(theMomentum.getY()));
     }
+    text(player2.getName(), -100, width/2+TILE_SIZE+8+(int)(theMomentum.getY()));
+    text(player2.getName(), -780, width/2+TILE_SIZE+8+(int)(theMomentum.getY()));
+    popMatrix();
     
     clearSound.stopIfOver();
     

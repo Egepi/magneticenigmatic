@@ -526,12 +526,10 @@ GameBoard(int theWidth, int theHeight)
       otherPlayer(p).speedEffectDuration = SLOW_POWERUP_DURATION;
       if(p.name == "Player 1")
       {
-        print("play1 found\n");
         timer1 = SLOW_POWERUP_DURATION/1000;
       }
       else if(p.name == "Player 2")
       {
-        print("play2 found\n");
         timer2 = SLOW_POWERUP_DURATION/1000;
       }
       oldSec = second();
@@ -542,12 +540,10 @@ GameBoard(int theWidth, int theHeight)
       p.speedEffectDuration = SPEED_POWERUP_DURATION;
       if(p.name == "Player 1")
       {
-        print("play1 found\n");
         timer1 = SLOW_POWERUP_DURATION/1000;
       }
       else if(p.name == "Player 2")
       {
-        print("play2 found\n");
         timer2 = SLOW_POWERUP_DURATION/1000;
       }
       oldSec = second();
@@ -565,12 +561,10 @@ GameBoard(int theWidth, int theHeight)
       otherPlayer(p).blindEffectDuration = BLIND_POWERUP_DURATION;
       if(p.name == "Player 1")
       {
-        print("play1 found\n");
         timer1 = SLOW_POWERUP_DURATION/1000;
       }
       else if(p.name == "Player 2")
       {
-        print("play2 found\n");
         timer2 = SLOW_POWERUP_DURATION/1000;
       }
       oldSec = second();
