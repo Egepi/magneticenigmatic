@@ -130,6 +130,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
 int timer1 = -1;
 int timer2 = -1;
 int oldSec;
+int playerOneX = ((width/2) * -1) - TILE_SIZE;
  int lineOfGravity = MAX_R/2;
  PFont font1;
  

@@ -115,7 +115,11 @@ class GameFSM {
   public void gameState()
   {
     textFont(font1);
-    text("Player 1", MIDDLE_L-50, 45);
+    
+    pushMatrix();
+    rotate(PI/2);
+    text("Player 1", 100, (-width/2)+TILE_SIZE+8);
+    popMatrix();
     text("Player 2", MIDDLE_R - 50, 45);
     
     pushMatrix();
