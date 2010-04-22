@@ -6,12 +6,11 @@
 */
 class GameFSM {
   private int stateId;
-  PImage startButton;
-  GameSounds clearSound;
+
   float theta = 0;
   int MIDDLE_L = (width/2)/2;
   int MIDDLE_R = (width/2) + MIDDLE_L;
-  AudioPlayer backGround;
+  
   int plyrOneRdy = 0;
   int plyrTwoRdy = 0;
   int rightScanX = width/2;
@@ -21,9 +20,6 @@ class GameFSM {
   public GameFSM()
   {
     stateId = 1;
-    startButton = loadImage("start.png");
-    clearSound = new GameSounds("splat.wav");
-    backGround = minim.loadFile("zone_nebula_nomad.wav");
     if (SOUNDS_ON)
       backGround.loop();
   }
