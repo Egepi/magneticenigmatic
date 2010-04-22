@@ -132,6 +132,26 @@ class GameFSM {
     text("Player 2", 0, 0);
     popMatrix();
     
+    if(timer1 >= 0)
+    {
+      if(oldSec != second())
+      {
+        timer1--;
+        oldSec = second();
+      }
+      text(timer1, MIDDLE_L-40,100);
+    }
+    
+    if(timer2 >= 0)
+    {
+      if(oldSec !=second())
+      {
+        timer2--;
+        oldSec = second();
+      }
+      text(timer2, MIDDLE_R- 40,100);
+    }
+    
     clearSound.stopIfOver();
     
     theBoard.gravity();       //Apply gravity where needed
@@ -293,11 +313,13 @@ class GameFSM {
         //int finger = curTouch.getFinger();
       }
     }
+    fill(255,0,0);
+    strokeWeight(5);
     if(rightScan >= 6)
     {
       if(plyrTwoRdy != 1)
       {
-                rightScanX = rightScanX + 5;
+        rightScanX = rightScanX + 5;
         line(rightScanX, 0, rightScanX, height);
         if(rightScanX >= width)
         {
@@ -317,6 +339,8 @@ class GameFSM {
         }
       }
     }
+    noFill();
+    strokeWeight(1);
    }
   }//End checkScan
   

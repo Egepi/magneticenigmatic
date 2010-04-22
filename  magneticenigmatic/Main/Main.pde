@@ -127,7 +127,9 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  AudioPlayer swap1;
  AudioPlayer swap2;
 
- 
+int timer1 = -1;
+int timer2 = -1;
+int oldSec;
  int lineOfGravity = MAX_R/2;
  PFont font1;
  
