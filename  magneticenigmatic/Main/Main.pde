@@ -134,12 +134,31 @@ int oldSec;
  int lineOfGravity = MAX_R/2;
  PFont font1;
  
-
+ PImage startButton;
+ PImage contP1Button;
+ PImage contP2Button;
+ PImage quitP1Button;
+ PImage quitP2Button;
+ 
+ GameSounds clearSound;
+ AudioPlayer backGround;
+ 
 void setup()
 {
   minim = new Minim(this);
   swap1 = minim.loadFile("Swap_Left.wav");
   swap2 = minim.loadFile("Swap_Right.wav");
+  startButton = loadImage("start.png");
+  
+  contP1Button = loadImage("contP1.jpg");
+  contP2Button = loadImage("contP2.jpg");
+  quitP1Button = loadImage("quitP1.jpg");
+  quitP2Button = loadImage("quitP2.jpg");
+  
+  
+  clearSound = new GameSounds("splat.wav");
+  backGround = minim.loadFile("zone_nebula_nomad.wav");
+
   font1 = loadFont("ArialNarrow-48.vlw");
   startClock();
   if (connectToTacTile)
