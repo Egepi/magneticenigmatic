@@ -6,12 +6,9 @@
 */
 class GameFSM {
   private int stateId;
-  PImage startButton;
-  GameSounds clearSound;
   float theta = 0;
   int MIDDLE_L = (width/2)/2;
   int MIDDLE_R = (width/2) + MIDDLE_L;
-  AudioPlayer backGround;
   int plyrOneRdy = 0;
   int plyrTwoRdy = 0;
   int rightScanX = width/2;
@@ -21,11 +18,8 @@ class GameFSM {
   public GameFSM()
   {
     stateId = 1;
-    startButton = loadImage("start.png");
-    clearSound = new GameSounds("splat.wav");
-    backGround = minim.loadFile("zone_nebula_nomad.wav");
-    if (SOUNDS_ON)
-      backGround.loop();
+    if (SOUNDS_ON);
+      //backGround.loop();
   }
   
   /************************************************************
@@ -190,20 +184,37 @@ class GameFSM {
   public void endRound()
   {
     //Display winner
-    
     if(player1.getRoundsWon() == 2 || player1.getRoundsWon() == 2)
     {
       stateId++;
     }
     else
     { 
-      //Show begin round 2 button
-    
+      float contP1Xcord = (width)*0.2;
+      float contP1Ycord = (height/2) - contP1Button.height - 50;
+      float quitP1Xcord = (width)*0.2;
+      float quitP1Ycord = (height/2) + 50;
+      
+      float contP2Xcord = (width)*0.8 - contP2Button.width;
+      float contP2Ycord = (height/2) - contP1Button.height - 50;
+      float quitP2Xcord = (width)*0.8 - contP2Button.width;
+      float quitP2Ycord = (height/2) + 50;
+      
+      Button cont1 = new Button(contP1Button, contP1Xcord, contP1Ycord);
+      Button quit1 = new Button(quitP1Button, quitP1Xcord, quitP1Ycord);
+      Button cont2 = new Button(contP2Button, contP2Xcord, contP2Ycord);
+      Button quit2 = new Button(quitP2Button, quitP2Xcord, quitP2Ycord);
+
+      cont1.drawit();
+      cont2.drawit();
+      quit1.drawit();
+      quit2.drawit();
+      
       //when begin button clicked go to stage 3
       theBoard = new GameBoard(TPR, MAX_R);
       theBoard.generateBoard();
       theMomentum = new Momentum();
-      stateId = 4;
+      //stateId = 4;
     }
     
   }
