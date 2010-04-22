@@ -62,7 +62,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                   STEAL_POWERUP_NUMBER_OF_ROWS = 1,
                   BLIND_POWERUP_DURATION = 10000,
                   FREEZE_POWERUP_NUMBER_OF_ROWS = 1;
- static final double MOMENTUM_COEFF = 0.10,
+ static final double MOMENTUM_COEFF = 0.1,
                      SPEED_POWERUP_MULTIPLIER = 2.0,
                      SLOW_POWERUP_MULTIPLIER = 0.5,
                      MOMENTUM_DECAY = 0.15,
@@ -130,17 +130,9 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
 int timer1 = -1;
 int timer2 = -1;
 int oldSec;
-int playerOneX = ((width/2) * -1) - TILE_SIZE;
+//int playerOneX = (-width/2)+TILE_SIZE+8;
  int lineOfGravity = MAX_R/2;
  PFont font1;
- 
- PImage startButton;
- PImage contP1Button;
- PImage contP2Button;
- PImage quitP1Button;
- PImage quitP2Button;
- GameSounds clearSound;
- AudioPlayer backGround;
  
 
 void setup()
@@ -148,16 +140,6 @@ void setup()
   minim = new Minim(this);
   swap1 = minim.loadFile("Swap_Left.wav");
   swap2 = minim.loadFile("Swap_Right.wav");
-  startButton = loadImage("start.png");
-  
-  contP1Button = loadImage("contP1.jpg");
-  contP2Button = loadImage("contP2.jpg");
-  quitP1Button = loadImage("quitP1.jpg");
-  quitP2Button = loadImage("quitP1.jpg");
-  
-  
-  clearSound = new GameSounds("splat.wav");
-  backGround = minim.loadFile("zone_nebula_nomad.wav");
   font1 = loadFont("ArialNarrow-48.vlw");
   startClock();
   if (connectToTacTile)
