@@ -524,11 +524,33 @@ GameBoard(int theWidth, int theHeight)
     {
       otherPlayer(p).speedModifier = SLOW_POWERUP_MULTIPLIER;
       otherPlayer(p).speedEffectDuration = SLOW_POWERUP_DURATION;
+      if(p.name == "Player 1")
+      {
+        print("play1 found\n");
+        timer1 = SLOW_POWERUP_DURATION/1000;
+      }
+      else if(p.name == "Player 2")
+      {
+        print("play2 found\n");
+        timer2 = SLOW_POWERUP_DURATION/1000;
+      }
+      oldSec = second();
     }
     if (effect == FAST)
     {
       p.speedModifier = SPEED_POWERUP_MULTIPLIER;
       p.speedEffectDuration = SPEED_POWERUP_DURATION;
+      if(p.name == "Player 1")
+      {
+        print("play1 found\n");
+        timer1 = SLOW_POWERUP_DURATION/1000;
+      }
+      else if(p.name == "Player 2")
+      {
+        print("play2 found\n");
+        timer2 = SLOW_POWERUP_DURATION/1000;
+      }
+      oldSec = second();
     }
     if (effect == STEAL)
     {
@@ -541,6 +563,17 @@ GameBoard(int theWidth, int theHeight)
     {
       otherPlayer(p).blind = true;
       otherPlayer(p).blindEffectDuration = BLIND_POWERUP_DURATION;
+      if(p.name == "Player 1")
+      {
+        print("play1 found\n");
+        timer1 = SLOW_POWERUP_DURATION/1000;
+      }
+      else if(p.name == "Player 2")
+      {
+        print("play2 found\n");
+        timer2 = SLOW_POWERUP_DURATION/1000;
+      }
+      oldSec = second();
     }
     if (effect == FREEZE)
     {
