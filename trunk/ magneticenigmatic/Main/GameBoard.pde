@@ -66,7 +66,7 @@ GameBoard(int theWidth, int theHeight)
     }
     
    fill(0,0,0,128);
-   rect(PUZZLE_ORIGIN_X + lineOfGravity*TILE_SIZE + (int)(theMomentum.getY()), PUZZLE_ORIGIN_Y, TILE_SIZE, TILE_SIZE*TPR);
+   rect(PUZZLE_ORIGIN_X + lineOfGravity*TILE_SIZE + (int)(theMomentum.getY()), 0, TILE_SIZE, height);
    fill(0,0,0,255);
   }
   
