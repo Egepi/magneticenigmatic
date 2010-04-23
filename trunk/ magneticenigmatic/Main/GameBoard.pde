@@ -571,8 +571,6 @@ GameBoard(int theWidth, int theHeight)
   
   public int checkLoss()
   {
-    //print("\n" +tileBoard[0][0].getMyX());
-    ///print("\n" +tileBoard[0][MAX_R-1].getMyX());
     Tile tempLeft = null;
     Tile tempRight = null;
     for(int i = 0; i < MAX_R/2; i++)
@@ -601,15 +599,15 @@ GameBoard(int theWidth, int theHeight)
     }
     if((tempLeft != null )&&(tempLeft.getMyX() < 0))
     {
-      println(player1.getName() + " loses...");
+      println(player2.getName() + " Wins!!!");
       player2.setRoundsWon(player2.getRoundsWon()+1);
-      return 1;
+      return 2;
     }
     if((tempRight != null )&&(tempRight.getMyX() > screen.width - TILE_SIZE))
     {
-      println(player2.getName() + " loses...");
+      println(player1.getName() + " Wins!!!");
       player1.setRoundsWon(player1.getRoundsWon()+1);
-      return 2;
+      return 1;
     }
     //Debugging
     //print("\nno loss");
