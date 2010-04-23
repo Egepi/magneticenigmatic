@@ -150,10 +150,10 @@ class GameFSM {
         timer1--;
         oldSec = second();
       }
-      text(timer1, height/8,     playerOneY+65);  //Draw timer on board on top
+      text(timer1, height/8+20,     playerOneY+65);  //Draw timer on board on top
+      text(timer1, ((height/8)*7)+40, playerOneY+65);  //Draw timer on board on bottom
       image(imageTime1, height/8 - TILE_SIZE, playerOneY + 20);
       image(imageTime1, ((height/8)*7)-40, playerOneY + 20);
-      text(timer1, ((height/8)*7)+20, playerOneY+65);  //Draw timer on board on bottom
     }
     text(player1.getName(), height/8,      playerOneY+8); //Don't ask how I got this number...
     text(player1.getName(), (height/8)*7,  playerOneY+8);
@@ -171,8 +171,10 @@ class GameFSM {
         timer2--;
         oldSec = second();
       }
-      text(timer2, -height/8,     playerTwoY+65);
+      text(timer2, (-height/8)+15,     playerTwoY+65);
       text(timer2, (-height/8)*7, playerTwoY+65);
+      image(imageTime2, (-height/8)-60, playerTwoY+20);
+      image(imageTime2, ((-height/8)*7)-75, playerTwoY+25);
     }
     text(player2.getName(), -height/8,     playerTwoY+8);
     text(player2.getName(), (-height/8)*7, playerTwoY+8);
