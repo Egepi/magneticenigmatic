@@ -517,82 +517,12 @@ GameBoard(int theWidth, int theHeight)
   
   private void activatePowerup(Tile t, Player p) 
   {
-    int effect = t.getPowerUpEffect();
+    int effect = t.getPowerUpEffect();   
+    
     if ((effect == NONE)||(p == null)) //Do nothing if there is not a plyer associated with this or if the block isn't a powerup
       return;
-    if (effect == SLOW) //Green tiles
-    {
-      otherPlayer(p).speedModifier = SLOW_POWERUP_MULTIPLIER;
-      otherPlayer(p).speedEffectDuration = SLOW_POWERUP_DURATION;
-      if(p.name == "Player 1")
-      {
-        timer1 = SLOW_POWERUP_DURATION/1000;
-      }
-      else if(p.name == "Player 2")
-      {
-        timer2 = SLOW_POWERUP_DURATION/1000;
-      }
-      oldSec = second();
-    }
-    if (effect == FAST) //Red tiles
-    {
-      p.speedModifier = SPEED_POWERUP_MULTIPLIER;
-      p.speedEffectDuration = SPEED_POWERUP_DURATION;
-      if(p.name == "Player 1")
-      {
-        timer1 = SLOW_POWERUP_DURATION/1000;
-      }
-      else if(p.name == "Player 2")
-      {
-        timer2 = SLOW_POWERUP_DURATION/1000;
-      }
-      oldSec = second();
-    }
-    if (effect == STEAL) //While tiles
-    {
-      if (p==player1)
-      {
-        plyOneMove += TILE_SIZE;
-        plyTwoMove += TILE_SIZE;
-        lineOfGravity += STEAL_POWERUP_NUMBER_OF_ROWS;
-      }
-      if (p==player2)
-      {
-        plyOneMove -= TILE_SIZE;
-        plyTwoMove -= TILE_SIZE;
-        lineOfGravity -= STEAL_POWERUP_NUMBER_OF_ROWS; 
-      }
-    }
-    if (effect == BLIND) //Purple tiles
-    {
-      otherPlayer(p).blind = true;
-      otherPlayer(p).blindEffectDuration = BLIND_POWERUP_DURATION;
-      if(p.name == "Player 1")
-      {
-        timer1 = SLOW_POWERUP_DURATION/1000;
-      }
-      else if(p.name == "Player 2")
-      {
-        timer2 = SLOW_POWERUP_DURATION/1000;
-      }
-      oldSec = second();
-    }
-    if (effect == FREEZE) //Light blue tiles
-    {
-      otherPlayer(p).freeze = true;
-      //not implemented yet
-      //should make the next blocks that come in for opp. player appear differently when they come in from outside the puzzle and he/she won't be able to move them for a while
-    }
-        
-  }
-  
-  private Player otherPlayer(Player p)
-  {
-    if (p == player1)
-      return player2;
-    if (p == player2)
-      return player1;  
-    return null;
+      
+    PowerUp newPowerUp = new PowerUp(effect, p);   
   }
   
   //Old recursive version

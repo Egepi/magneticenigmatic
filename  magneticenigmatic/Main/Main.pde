@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Tactile stuff
  */
  
-boolean connectToTacTile = true;
+boolean connectToTacTile = false;
 //Touch API
 TouchAPI tacTile;
 //Names of machines you might use
@@ -120,6 +120,8 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  Momentum theMomentum;
  ArrayList chainList = new ArrayList();
  ArrayList selList = new ArrayList();
+ PowerUp[] pOneUp = new PowerUp[5];
+ PowerUp[] pTwoUp = new PowerUp[5];
  Selector sel1, sel2;
  GameFSM theGameFSM;
  int gameStartTime, frameStartTime, frameEndTime, lastRowTime, lastDecayTime;
@@ -129,9 +131,14 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
 
 int timer1 = -1;
 int timer2 = -1;
-int oldSec;
+PImage imageTime1;
+PImage imageTime2;
 int plyOneMove = 0;
 int plyTwoMove = 0;
+int oldSec;
+int numOfPowerUps;
+
+
  int lineOfGravity = MAX_R/2;
  PFont font1;
  
