@@ -166,7 +166,7 @@ void setup()
   
   
   clearSound = new GameSounds("splat.wav");
-  backGround = minim.loadFile("zone_nebula_nomad.wav");
+  backGround = minim.loadFile("POL_Balanced.mp3");
 
   font1 = loadFont("ArialNarrow-48.vlw");
   startClock();
