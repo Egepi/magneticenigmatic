@@ -137,6 +137,7 @@ int plyOneMove = 0;
 int plyTwoMove = 0;
 int oldSec;
 int numOfPowerUps;
+PImage backgroundPicture;
 
 
  int lineOfGravity = MAX_R/2;
@@ -197,13 +198,16 @@ void setup()
   theBoard.generateBoard();
   theMomentum = new Momentum();
   theGameFSM = new GameFSM();
+  backgroundPicture = loadImage("backgroundTac.png");
+  backgroundPicture.resize(width,height);
 }
 
 void draw()
 {
   frameStartTime = frameEndTime;
   frameEndTime = millis();
-  background(50,125,150); //Arbitrary background color for the time being.
+  //background(50,125,150);
+  background(backgroundPicture); //Arbitrary background color for the time being.
   theGameFSM.action();
 }
 
