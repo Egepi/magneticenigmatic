@@ -7,12 +7,6 @@
 class GameFSM {
   private int stateId;
   float theta = 0;
-  int MIDDLE_L = (width/2)/2;
-  int MIDDLE_R = (width/2) + MIDDLE_L;
-  int plyrOneRdy = 0;
-  int plyrTwoRdy = 0;
-  int rightScanX = width/2;
-  int leftScanX = width/2;
   boolean responseP1 = false;
   boolean responseP2 = false;
   Button cont1;
@@ -27,7 +21,7 @@ class GameFSM {
     makeButtons();
     stateId = 1;
     if (SOUNDS_ON);
-      //backGround.loop();
+      backGround.loop();
   }
   
   /************************************************************
@@ -350,102 +344,6 @@ class GameFSM {
       
     }
   }
-  
-  void checkScan()
-  {
-    int rightScan = 0;
-    int leftScan = 0;
-    if ( ! tacTile.managedListIsEmpty() ){
-
-    touchList = tacTile.getManagedList();
-    // Cycle though the touches 
-
-    for ( int index = 0; index < touchList.size(); index ++ )
-    {
-
-      Touches curTouch = (Touches) touchList.get(index);   
-
-      if ( curTouch != null)
-      {
-        //Grab Data
-        float xCoord = curTouch.getXPos() * width;    
-        float yCoord = height - curTouch.getYPos() * height;
-
-        if(xCoord > width/2)
-        {
-          rightScan++;
-        }
-        if(xCoord < width/2)
-        {
-          leftScan++;
-        }
-        //Grab the Intensity!!!
-        //float intensity = curTouch.getIntensity();
-
-        //get finger ID
-        //int finger = curTouch.getFinger();
-      }
-    }
-    fill(255,0,0);
-    strokeWeight(5);
-    if(rightScan >= 6)
-    {
-      if(plyrTwoRdy != 1)
-      {
-        rightScanX = rightScanX + 5;
-        line(rightScanX, 0, rightScanX, height);
-        if(rightScanX >= width)
-        {
-          plyrTwoRdy = 1;
-        }
-      }
-    }
-    if(leftScan >= 6)
-    {
-      if(plyrOneRdy != 1)
-      {
-        leftScanX = leftScanX - 5;
-        line(leftScanX, 0, leftScanX, height);
-        if(leftScanX <= 0)
-        {
-          plyrOneRdy = 1;
-        }
-      }
-    }
-    noFill();
-    strokeWeight(1);
-   }
-  }//End checkScan
-  
-  void startScan(int player)
-  {
-    print(player + "the player is\n");
-    strokeWeight(5);
-    fill(255,0,0);
-    if(player == 1)
-    {
-      leftScanX = leftScanX - 5;
-      line(leftScanX, 0, leftScanX, height);
-      if(leftScanX <= 0)
-      {
-        plyrOneRdy = 1;
-      }
-    }
-    if(player == 0)
-    {
-      rightScanX = rightScanX + 5;
-      line(rightScanX, 0, rightScanX, height);
-      if(rightScanX >= width)
-      {
-        plyrTwoRdy = 1;
-      }
-    }
-    strokeWeight(1);
-      
-      
-    
-  }
-  
   
   void makeButtons()
   {
