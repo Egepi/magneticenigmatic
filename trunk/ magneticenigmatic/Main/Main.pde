@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Tactile stuff
  */
  
-boolean connectToTacTile = false;
+boolean connectToTacTile = true;
 //Touch API
 TouchAPI tacTile;
 //Names of machines you might use
@@ -130,7 +130,8 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
 int timer1 = -1;
 int timer2 = -1;
 int oldSec;
-//int playerOneX = (-width/2)+TILE_SIZE+8;
+int plyOneMove = 0;
+int plyTwoMove = 0;
  int lineOfGravity = MAX_R/2;
  PFont font1;
  

@@ -520,7 +520,7 @@ GameBoard(int theWidth, int theHeight)
     int effect = t.getPowerUpEffect();
     if ((effect == NONE)||(p == null)) //Do nothing if there is not a plyer associated with this or if the block isn't a powerup
       return;
-    if (effect == SLOW)
+    if (effect == SLOW) //Green tiles
     {
       otherPlayer(p).speedModifier = SLOW_POWERUP_MULTIPLIER;
       otherPlayer(p).speedEffectDuration = SLOW_POWERUP_DURATION;
@@ -534,7 +534,7 @@ GameBoard(int theWidth, int theHeight)
       }
       oldSec = second();
     }
-    if (effect == FAST)
+    if (effect == FAST) //Red tiles
     {
       p.speedModifier = SPEED_POWERUP_MULTIPLIER;
       p.speedEffectDuration = SPEED_POWERUP_DURATION;
@@ -548,14 +548,22 @@ GameBoard(int theWidth, int theHeight)
       }
       oldSec = second();
     }
-    if (effect == STEAL)
+    if (effect == STEAL) //While tiles
     {
       if (p==player1)
+      {
+        plyOneMove += TILE_SIZE;
+        plyTwoMove += TILE_SIZE;
         lineOfGravity += STEAL_POWERUP_NUMBER_OF_ROWS;
+      }
       if (p==player2)
+      {
+        plyOneMove -= TILE_SIZE;
+        plyTwoMove -= TILE_SIZE;
         lineOfGravity -= STEAL_POWERUP_NUMBER_OF_ROWS; 
+      }
     }
-    if (effect == BLIND)
+    if (effect == BLIND) //Purple tiles
     {
       otherPlayer(p).blind = true;
       otherPlayer(p).blindEffectDuration = BLIND_POWERUP_DURATION;
@@ -569,7 +577,7 @@ GameBoard(int theWidth, int theHeight)
       }
       oldSec = second();
     }
-    if (effect == FREEZE)
+    if (effect == FREEZE) //Light blue tiles
     {
       otherPlayer(p).freeze = true;
       //not implemented yet
