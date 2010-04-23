@@ -24,6 +24,10 @@ class GameFSM {
       backGround.loop();
   }
   
+  public void logoState()
+  {
+    stateId++;
+  }
   /************************************************************
   */
   public void startState()
@@ -83,31 +87,7 @@ class GameFSM {
   {    
     stateId++;
   }
-  
-  /************************************************************
-  */
-  public void scanState()
-  {
-    /*
-    background(49,79,79);
-    strokeWeight(4);
-    line(width/2, 0, width/2, height);
-    strokeWeight(1);
-    rect((width/2 + 50), height/2 - 50, 400, 250);
-    if(connectToTacTile == false)
-    {
-      stateId++;
-      return;
-    }
-    checkScan();
-    if((plyrOneRdy == 1)&&(plyrTwoRdy == 1))
-    {
-      stateId++;
-    }
-    print("player 1: " + plyrOneRdy + "  player 2: " + plyrTwoRdy + "\n");
-    */
-    stateId++;
-  }
+
   
   /************************************************************
   */
@@ -261,14 +241,14 @@ class GameFSM {
           theBoard = new GameBoard(TPR, MAX_R);
           theBoard.generateBoard();
           theMomentum = new Momentum();
-          stateId = 4;
+          stateId --;
           continueCount = 0;
           responseP1 = false;
           responseP2 = false;
         }
         else
         {
-          stateId = 6;
+          stateId ++;
         }
       }
       
@@ -311,9 +291,9 @@ class GameFSM {
   public void action()
   {
     switch(stateId) {
-      case 1: startState(); break;
-      case 2: optionsState(); break;
-      case 3: scanState(); break;
+      case 1: logoState(); break;
+      case 2: startState(); break;
+      case 3: optionsState(); break;
       case 4: gameState(); break;
       case 5: endRound(); break;
       case 6: endGame(); break;
