@@ -94,6 +94,7 @@ class GameFSM {
   */
   public void scanState()
   {
+    /*
     background(49,79,79);
     strokeWeight(4);
     line(width/2, 0, width/2, height);
@@ -110,6 +111,8 @@ class GameFSM {
       stateId++;
     }
     print("player 1: " + plyrOneRdy + "  player 2: " + plyrTwoRdy + "\n");
+    */
+    stateId++;
   }
   
   /************************************************************
@@ -123,6 +126,7 @@ class GameFSM {
     /*Rotate and draw player 1 name and a timer if neeed be*/
     pushMatrix();
     rotate(PI/2); //Rotate by 90 degrees
+    int playerOneY = (-width/2)+TILE_SIZE-(int)(theMomentum.getY())-plyOneMove;
     if(timer1 >= 0) //Check if timer has any time left to display
     {
       if(oldSec != second()) //Check if AT LEAST 1 second has passed
@@ -130,16 +134,17 @@ class GameFSM {
         timer1--;
         oldSec = second();
       }
-      text(timer1, 100,(-width/2)+TILE_SIZE+65-(int)(theMomentum.getY()));  //Draw timer on board on top
-      text(timer1, 780,(-width/2)+TILE_SIZE+65-(int)(theMomentum.getY()));  //Draw timer on board on bottom
+      text(timer1, height/8,     playerOneY+65);  //Draw timer on board on top
+      text(timer1, (height/8)*7, playerOneY+65);  //Draw timer on board on bottom
     }
-    text(player1.getName(), 100, (-width/2)+TILE_SIZE+8-(int)(theMomentum.getY())); //Don't ask how I got this number...
-    text(player1.getName(), 780,  (-width/2)+TILE_SIZE+8-(int)(theMomentum.getY()));
+    text(player1.getName(), height/8,      playerOneY+8); //Don't ask how I got this number...
+    text(player1.getName(), (height/8)*7,  playerOneY+8);
     popMatrix();
     
     /*Rotate and draw player 1 name and a timer if neeed be*/
     pushMatrix();
     rotate(-PI/2);
+    int playerTwoY = width/2+TILE_SIZE+(int)(theMomentum.getY())+plyTwoMove;
     if(timer2 >= 0)
     {
       if(oldSec !=second())
@@ -147,11 +152,11 @@ class GameFSM {
         timer2--;
         oldSec = second();
       }
-      text(timer2, -100,width/2+TILE_SIZE+65+(int)(theMomentum.getY()));
-      text(timer2, -780,width/2+TILE_SIZE+65+(int)(theMomentum.getY()));
+      text(timer2, -height/8,     playerTwoY+65);
+      text(timer2, (-height/8)*7, playerTwoY+65);
     }
-    text(player2.getName(), -100, width/2+TILE_SIZE+8+(int)(theMomentum.getY()));
-    text(player2.getName(), -780, width/2+TILE_SIZE+8+(int)(theMomentum.getY()));
+    text(player2.getName(), -height/8,     playerTwoY+8);
+    text(player2.getName(), (-height/8)*7, playerTwoY+8);
     popMatrix();
     
     clearSound.stopIfOver();
