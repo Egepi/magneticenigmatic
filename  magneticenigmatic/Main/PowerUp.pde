@@ -42,6 +42,8 @@ class PowerUp {
     otherPlayer(this.player).speedModifier = SLOW_POWERUP_MULTIPLIER;
     otherPlayer(this.player).speedEffectDuration = SLOW_POWERUP_DURATION;
     picNum = 8;
+    player = otherPlayer(player);
+    slowSound.play();
     setTimer(SLOW_POWERUP_DURATION);
   }
   
@@ -56,6 +58,7 @@ class PowerUp {
     this.player.speedModifier = SPEED_POWERUP_MULTIPLIER;
     this.player.speedEffectDuration = SPEED_POWERUP_DURATION;
     picNum = 6;
+    speedSound.play();
     setTimer(SPEED_POWERUP_DURATION);
 
   }
@@ -95,6 +98,8 @@ class PowerUp {
     otherPlayer(this.player).blind = true;
     otherPlayer(this.player).blindEffectDuration = BLIND_POWERUP_DURATION;
     picNum = 9;
+    player = otherPlayer(player);
+    blindSound.play();
     setTimer(BLIND_POWERUP_DURATION);
   }
   
