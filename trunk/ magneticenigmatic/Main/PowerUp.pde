@@ -11,6 +11,7 @@ class PowerUp {
   Player player;       //Which player this powerup came from
   public int oldSec;   //Determines the current second the powerup was made or last updated
   int pTimer;          //Amount of time powerup has remaining - not applicale for all powerups
+  AudioPlayer soundEffect;
   
   /************************************************************
   * Basic constructor for new PowerUp's
@@ -43,7 +44,8 @@ class PowerUp {
     otherPlayer(this.player).speedEffectDuration = SLOW_POWERUP_DURATION;
     picNum = 8;
     player = otherPlayer(player);
-    slowSound.play();
+    soundEffect = minim.loadFile("slow.mp3");
+    soundEffect.play();
     setTimer(SLOW_POWERUP_DURATION);
   }
   
@@ -58,7 +60,8 @@ class PowerUp {
     this.player.speedModifier = SPEED_POWERUP_MULTIPLIER;
     this.player.speedEffectDuration = SPEED_POWERUP_DURATION;
     picNum = 6;
-    speedSound.play();
+    soundEffect = minim.loadFile("speedup.mp3");
+    soundEffect.play();
     setTimer(SPEED_POWERUP_DURATION);
 
   }
@@ -156,5 +159,25 @@ class PowerUp {
         //pTwoUp[0] = this;
       }
       oldSec = second();
+  }
+  
+  public void setOldSec(int theNewSec)
+  {
+    this.oldSec = theNewSec;
+  }
+  
+  public void setNewTime(int newTime)
+  {
+    this.pTimer = newTime;
+  }
+  
+  public int getOldSec()
+  {
+    return this.oldSec;
+  }
+  
+  public int getTime()
+  {
+    return this.pTimer;
   }
 }//END Class PowerUp
