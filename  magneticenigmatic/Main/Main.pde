@@ -152,7 +152,6 @@ PImage backgroundPicture;
  PImage quitP1Button;
  PImage quitP2Button;
  
- GameSounds clearSound;
  AudioPlayer backGround;
  
 void setup()
