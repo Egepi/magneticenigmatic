@@ -120,14 +120,17 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  Momentum theMomentum;
  ArrayList chainList = new ArrayList();
  ArrayList selList = new ArrayList();
- PowerUp[] pOneUp = new PowerUp[5];
- PowerUp[] pTwoUp = new PowerUp[5];
+ ArrayList pOneUp = new ArrayList();
+ ArrayList pTwoUp = new ArrayList();
  Selector sel1, sel2;
  GameFSM theGameFSM;
  int gameStartTime, frameStartTime, frameEndTime, lastRowTime, lastDecayTime;
  Minim minim;  //Used for playing sound
  AudioPlayer swap1;
  AudioPlayer swap2;
+ AudioPlayer slowSound;
+ AudioPlayer speedSound;
+ AudioPlayer blindSound;
 
 int timer1 = -1;
 int timer2 = -1;
@@ -157,6 +160,9 @@ void setup()
   minim = new Minim(this);
   swap1 = minim.loadFile("Swap_Left.wav");
   swap2 = minim.loadFile("Swap_Right.wav");
+  slowSound = minim.loadFile("slow.mp3");
+  speedSound = minim.loadFile("speedup.mp3");
+  blindSound = minim.loadFile("blind.mp3");
   startButton = loadImage("start.png");
   
   contP1Button = loadImage("contP1.jpg");
