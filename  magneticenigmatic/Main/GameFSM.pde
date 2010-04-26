@@ -14,6 +14,7 @@ class GameFSM {
   Button cont2;
   Button quit2;
   int continueCount = 0;
+  int whoWon = 0;
   /************************************************************
   */
   public GameFSM()
@@ -84,7 +85,11 @@ class GameFSM {
   /************************************************************
   */
   public void optionsState()
-  {    
+  {
+    theBoard = new GameBoard(TPR, MAX_R);
+    theBoard.generateBoard();
+    theMomentum = new Momentum();
+    startClock(); 
     stateId++;
   }
 
@@ -178,8 +183,9 @@ class GameFSM {
       lastDecayTime += TIME_BETWEEN_DECAY;
       theMomentum.decreaseMomentum();
     }
+    whoWon = theBoard.checkLoss();
     //Check if either player lost
-    if (theBoard.checkLoss() > 0)
+    if (whoWon > 0)
     {
       stateId ++;
       return;
@@ -192,12 +198,19 @@ class GameFSM {
   */
   public void endRound()
   {
-    //Display winner
-    if(player1.getRoundsWon() == 2 || player1.getRoundsWon() == 2)
+    if(whoWon == 1)
     {
-      stateId++;
+      text("Player 1 won", 500, 200);
+    }
+    else if (whoWon == 2)
+    {
+      text("Player 2 won", 500, 200);  
     }
     else
+    {
+    }
+    //Display winner
+    if(true)
     { 
       if(!responseP1)
       {
@@ -241,6 +254,7 @@ class GameFSM {
           theBoard = new GameBoard(TPR, MAX_R);
           theBoard.generateBoard();
           theMomentum = new Momentum();
+          startClock();
           stateId --;
           continueCount = 0;
           responseP1 = false;
@@ -248,35 +262,12 @@ class GameFSM {
         }
         else
         {
-          stateId ++;
+          stateId = 2;
         }
       }
       
     }
     
-  }
-  
-  /************************************************************
-  */
-  public void endGame()
-  {
-    if(player1.getRoundsWon() > player2.getRoundsWon())
-    {
-      //player 1 won
-      print(player1.getName() + " wins the game!!!");
-      
-    }
-    else if(player2.getRoundsWon() > player1.getRoundsWon())
-    {
-      //player 2 won
-      print(player2.getName() + " wins the game!!!");
-    }
-    else
-    {
-      //tie
-      print("It was a tie!");
-    }
-
   }
   
   /************************************************************
@@ -296,7 +287,6 @@ class GameFSM {
       case 3: optionsState(); break;
       case 4: gameState(); break;
       case 5: endRound(); break;
-      case 6: endGame(); break;
       default: break;
     }
   }

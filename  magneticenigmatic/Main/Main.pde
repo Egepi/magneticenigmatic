@@ -169,7 +169,7 @@ void setup()
   backGround = minim.loadFile("POL_Balanced.mp3");
 
   font1 = loadFont("ArialNarrow-48.vlw");
-  startClock();
+  
   if (connectToTacTile)
     startTactile();
   //Load resources into memory
@@ -194,9 +194,7 @@ void setup()
   size(screen.width, screen.height);
   
   //Making the board the game will be played on.
-  theBoard = new GameBoard(TPR, MAX_R);
-  theBoard.generateBoard();
-  theMomentum = new Momentum();
+
   theGameFSM = new GameFSM();
   backgroundPicture = loadImage("backgroundTac.png");
   backgroundPicture.resize(width,height);
