@@ -158,52 +158,20 @@ PImage backgroundPicture;
 void setup()
 {
   minim = new Minim(this);
-  swap1 = minim.loadFile("Swap_Left.wav");
-  swap2 = minim.loadFile("Swap_Right.wav");
-  slowSound = minim.loadFile("slow.mp3");
-  speedSound = minim.loadFile("speedup.mp3");
-  blindSound = minim.loadFile("blind.mp3");
-  startButton = loadImage("start.png");
-  
-  contP1Button = loadImage("contP1.jpg");
-  contP2Button = loadImage("contP2.jpg");
-  quitP1Button = loadImage("quitP1.jpg");
-  quitP2Button = loadImage("quitP2.jpg");
-  
-  
-  clearSound = new GameSounds("splat.wav");
-  backGround = minim.loadFile("POL_Balanced.mp3");
 
-  font1 = loadFont("ArialNarrow-48.vlw");
-  
+
   if (connectToTacTile)
     startTactile();
   //Load resources into memory
   sel1 = new Selector();
   sel2 = new Selector();
-  if (TILE0 != null) //for debugging purposes, this may be an actual image for making empty tiles visible.
-    tileImageType[0] = loadImage(TILE0);
-  else
-    tileImageType[0] = null; 
-  tileImageType[1] = loadImage(TILE1);
-  tileImageType[2] = loadImage(TILE2);
-  tileImageType[3] = loadImage(TILE3);
-  tileImageType[4] = loadImage(TILE4);
-  tileImageType[5] = loadImage(TILE5);
-  tileImageType[6] = loadImage(TILE6);
-  tileImageType[7] = loadImage(TILE7);
-  tileImageType[8] = loadImage(TILE8);
-  tileImageType[9] = loadImage(TILE9);
-  tileImageType[10] = loadImage(TILE10);
-  colorlessTile = loadImage(CLTILE);
-  
+
   size(screen.width, screen.height);
   
   //Making the board the game will be played on.
-
   theGameFSM = new GameFSM();
-  backgroundPicture = loadImage("backgroundTac.png");
-  backgroundPicture.resize(width,height);
+  theGameFSM.action();
+
 }
 
 void draw()
