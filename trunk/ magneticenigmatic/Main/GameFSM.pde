@@ -57,7 +57,6 @@ class GameFSM {
     quitP1Button = loadImage("quitP1.jpg");
     quitP2Button = loadImage("quitP2.jpg");
     
-    clearSound = new GameSounds("splat.wav");
     backGround = minim.loadFile("POL_Balanced.mp3");
 
     font1 = loadFont("ArialNarrow-48.vlw");
@@ -196,7 +195,6 @@ class GameFSM {
     text(player2.getName(), (-height/8)*7, playerTwoY+8);
     popMatrix();
     
-    clearSound.stopIfOver();
     
     theBoard.gravity();       //Apply gravity where needed
     //boolean playSound = theBoard.checkClears();   //Check for clears to be made
