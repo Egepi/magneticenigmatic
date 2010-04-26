@@ -158,6 +158,27 @@ class GameFSM {
         text(timer, (height/8)*7, playerOneY+65);        
       }
     }*/
+    /*
+    if(pOneUp.size() > 0)
+    {
+      for(int i = 0; i < pOneUp.size(); i++)
+      {
+        PowerUp temp = (PowerUp) pOneUp.get(i);
+        if(temp.getOldSec() < 0)
+        {
+          pOneUp.remove(i);
+        }
+        else if(temp.oldSec != second())
+        {
+          temp.setOldSec(second());
+          temp.setNewTime(temp.getTime() - 1);
+          text(temp.getTime(), height/8+20,     playerOneY+65);
+          text(temp.getTime(), ((height/8)*7)+40, playerOneY+65);
+          pOneUp.set(i, temp);
+        }
+      }
+    }*/
+    
     if(timer1 >= 0) //Check if timer has any time left to display
     {
       if(oldSec != second()) //Check if AT LEAST 1 second has passed
