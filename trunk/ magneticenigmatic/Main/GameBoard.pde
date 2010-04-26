@@ -521,8 +521,15 @@ GameBoard(int theWidth, int theHeight)
     
     if ((effect == NONE)||(p == null)) //Do nothing if there is not a plyer associated with this or if the block isn't a powerup
       return;
-      
-    PowerUp newPowerUp = new PowerUp(effect, p);   
+    
+    if(p == player1)
+    {
+      pOneUp.add(new PowerUp(effect, p));   
+    }
+    else
+    {
+      pTwoUp.add(new PowerUp(effect, p));
+    }
   }
   
   //Old recursive version
