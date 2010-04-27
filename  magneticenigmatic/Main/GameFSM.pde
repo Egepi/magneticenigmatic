@@ -51,7 +51,6 @@ class GameFSM {
     speedSound = minim.loadFile("speedup.mp3");
     blindSound = minim.loadFile("blind.mp3");
     
-    startButton = loadImage("start.png");
   
     contP1Button = loadImage("contP1.jpg");
     contP2Button = loadImage("contP2.jpg");
@@ -73,7 +72,13 @@ class GameFSM {
   public void startState()
   {
     background(backgroundPicture); //Arbitrary background color for the time being.
-    int startX = screen.width/2 - startButton.width/2;
+    startPlayer1.drawit();
+    startPlayer2.drawit();
+    if(startPlayer1.checkBounds() == 1)
+    {
+      stateId++;
+    }
+    /*int startX = screen.width/2 - startButton.width/2;
     int startY = screen.height/2 - startButton.height/2;
     pushMatrix();
     translate(width/2, height/2);
@@ -118,7 +123,7 @@ class GameFSM {
           }
         }
       }
-    }
+    }*/
     return;
   }
   
@@ -389,10 +394,17 @@ class GameFSM {
   
   void makeButtons()
   {
+      PImage start1 = loadImage("start_black_1.png");
+      PImage start2 = loadImage("start_black_2.png");
+      
       float contP1Xcord = (width)*0.2;
       float contP1Ycord = (height/2) - contP1Button.height - 50;
       float quitP1Xcord = (width)*0.2;
       float quitP1Ycord = (height/2) + 50;
+      
+      float start1Xcord = (width*0.15)-(start1.height)/2;
+      float start2Xcord = (width*0.85)-(start2.height)/2;
+      float startYcord = (height/2)-(start1.width)/2;
       
       float contP2Xcord = (width)*0.8 - contP2Button.width;
       float contP2Ycord = (height/2) - contP1Button.height - 50;
@@ -403,6 +415,8 @@ class GameFSM {
       quit1 = new Button(quitP1Button, quitP1Xcord, quitP1Ycord);
       cont2 = new Button(contP2Button, contP2Xcord, contP2Ycord);
       quit2 = new Button(quitP2Button, quitP2Xcord, quitP2Ycord);
+      startPlayer1 = new Button(start1, start1Xcord, startYcord);
+      startPlayer2 = new Button(start2, start2Xcord, startYcord);
   }
   
 }
