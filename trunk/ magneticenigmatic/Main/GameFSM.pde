@@ -42,7 +42,7 @@ class GameFSM {
     tileImageType[9] = loadImage(TILE9);
     tileImageType[10] = loadImage(TILE10);
     colorlessTile = loadImage(CLTILE);
-    backgroundPicture = loadImage("backgroundTac.png");
+    backgroundPicture = loadImage("background2B.png");
     backgroundPicture.resize(width,height);
     swap1 = minim.loadFile("Swap_Left.wav");
     swap2 = minim.loadFile("Swap_Right.wav");
