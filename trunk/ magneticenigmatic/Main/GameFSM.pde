@@ -74,56 +74,22 @@ class GameFSM {
     background(backgroundPicture); //Arbitrary background color for the time being.
     startPlayer1.drawit();
     startPlayer2.drawit();
-    if(startPlayer1.checkBounds() == 1)
+    if((startPlayer1.checkBounds() == 1)&&(responseP1 == false))
     {
-      stateId++;
+      responseP1 = true;
     }
-    /*int startX = screen.width/2 - startButton.width/2;
-    int startY = screen.height/2 - startButton.height/2;
-    pushMatrix();
-    translate(width/2, height/2);
-    rotate(theta);
-    image(startButton, -startButton.width/2, -startButton.height/2);
-    theta = theta + 0.05;
-    popMatrix();
-    if( ! connectToTacTile)
+    if((startPlayer2.checkBounds() == 1)&&(responseP2 == false))
     {
-      if(mousePressed)
-      {
-        int xCoord = mouseX;
-        int yCoord = mouseY;
-        if((xCoord >= startX)&&(xCoord <= (startX + startButton.width)))
-        {
-            if((yCoord >= startY)&&(yCoord <= (startY + startButton.height)))
-            {
-              stateId++;
-              return;
-            }
-        }
-      }
+      responseP2 = true;
     }
-        
-    if ((tacTile != null)&&( ! tacTile.managedListIsEmpty() )){
-
-      touchList = tacTile.getManagedList();
     
-      // Cycle though the touches 
-      for ( int index = 0; index < touchList.size(); index ++ ){
-        Touches curTouch = (Touches) touchList.get(index);   
-        if ( curTouch != null){
-          float xCoord = curTouch.getXPos() * width;    
-          float yCoord = height - curTouch.getYPos() * height;
-          if((xCoord >= startX)&&(xCoord <= (startX + startButton.width)))
-          {
-            if((yCoord >= startY)&&(yCoord <= (startY + startButton.height)))
-            {
-              stateId = stateId + 1;
-              return;
-            }
-          }
-        }
-      }
-    }*/
+    if((responseP1 == true)&&(responseP2 == true))
+    {
+      responseP1 = false;
+      responseP2 = false;
+      stateId++;
+    } 
+    
     return;
   }
   
