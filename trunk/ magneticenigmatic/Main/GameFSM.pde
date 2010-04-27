@@ -51,7 +51,9 @@ class GameFSM {
     speedSound = minim.loadFile("speedup.mp3");
     blindSound = minim.loadFile("blind.mp3");
     
-  
+    logo = loadImage("logo-2.png");
+    
+
     contP1Button = loadImage("contP1.jpg");
     contP2Button = loadImage("contP2.jpg");
     quitP1Button = loadImage("quitP1.jpg");
@@ -72,6 +74,9 @@ class GameFSM {
   public void startState()
   {
     background(backgroundPicture); //Arbitrary background color for the time being.
+
+    image(logo, width/2 - logo.width/2, height/2 - logo.height/2);
+    
     startPlayer1.drawit();
     startPlayer2.drawit();
     if((startPlayer1.checkBounds() == 1)&&(responseP1 == false))

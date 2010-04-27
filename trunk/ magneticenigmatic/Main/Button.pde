@@ -3,17 +3,33 @@ class Button
   PImage myImage;
   float myXcoord;
   float myYcoord;
+  int myWidth;
+  int myHeight;
+  
   public Button(PImage theImage, float theX, float theY)
   {
     myImage = theImage;
     myXcoord = theX;
     myYcoord = theY;
+    myWidth = theImage.width;
+    myHeight = theImage.height;  
   }
+  
+  public Button(PImage theImage, float theX, float theY, int theWidth, int theHeight)
+  {
+    myImage = theImage;
+    myXcoord = theX;
+    myYcoord = theY;
+    myWidth = theWidth;
+    myHeight = theHeight;  
+  }
+  
   
   void drawit()
   {
-    image(myImage, myXcoord, myYcoord);
+    image(myImage, myXcoord, myYcoord, myWidth, myHeight);
   }
+  
   
   int checkBounds()
   {
