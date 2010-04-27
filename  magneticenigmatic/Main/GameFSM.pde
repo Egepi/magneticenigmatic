@@ -59,9 +59,9 @@ class GameFSM {
     quitP1Button = loadImage("quitP1.jpg");
     quitP2Button = loadImage("quitP2.jpg");
     
-    balancedBG = minim.loadFile("POL_Balanced.mp3");
-    imbalancedBG = minim.loadFile("POL_Imbalanced.mp3");
-    dangerBG = minim.loadFile("POL_Danger.mp3");
+    balancedBG = minim.loadFile("POL_Balanced.mp3", 2048);
+    imbalancedBG = minim.loadFile("POL_Imbalanced.mp3", 2048);
+    dangerBG = minim.loadFile("POL_Danger.mp3", 2048);
     font1 = loadFont("ArialNarrow-48.vlw");
   
     makeButtons();
