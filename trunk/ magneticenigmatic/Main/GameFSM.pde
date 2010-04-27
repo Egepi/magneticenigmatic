@@ -42,7 +42,7 @@ class GameFSM {
     tileImageType[9] = loadImage(TILE9);
     tileImageType[10] = loadImage(TILE10);
     colorlessTile = loadImage(CLTILE);
-    backgroundPicture = loadImage("background2B.png");
+    backgroundPicture = loadImage("cut_background2B.png");
     backgroundPicture.resize(width,height);
     swap1 = minim.loadFile("Swap_Left.wav");
     swap2 = minim.loadFile("Swap_Right.wav");
@@ -259,6 +259,7 @@ class GameFSM {
   */
   public void endRound()
   {
+    background(backgroundPicture); //Arbitrary background color for the time being.
     if(whoWon == 1)
     {
       text("Player 1 won", 500, 200);
