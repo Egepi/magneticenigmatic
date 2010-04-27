@@ -19,13 +19,12 @@ class GameFSM {
   */
   public GameFSM()
   {
-    
     stateId = 1;
   }
   
   public void logoState()
   {
-    
+    background(50,125,150);
     /*Load images code*/
     if (TILE0 != null) //for debugging purposes, this may be an actual image for making empty tiles visible.
       tileImageType[0] = loadImage(TILE0);
@@ -59,18 +58,20 @@ class GameFSM {
     quitP1Button = loadImage("quitP1.jpg");
     quitP2Button = loadImage("quitP2.jpg");
     
-    backGround = minim.loadFile("POL_Balanced.mp3");
-
+    balancedBG = minim.loadFile("POL_Balanced.mp3");
+    imbalancedBG = minim.loadFile("POL_Imbalanced.mp3");
+    dangerBG = minim.loadFile("POL_Danger.mp3");
     font1 = loadFont("ArialNarrow-48.vlw");
   
     makeButtons();
-    backGround.loop();
+    balancedBG.loop();
     stateId++;
   }
   /************************************************************
   */
   public void startState()
   {
+    background(backgroundPicture); //Arbitrary background color for the time being.
     int startX = screen.width/2 - startButton.width/2;
     int startY = screen.height/2 - startButton.height/2;
     pushMatrix();
@@ -136,7 +137,7 @@ class GameFSM {
   */
   public void gameState()
   {
-
+    background(backgroundPicture); //Arbitrary background color for the time being.
     textFont(font1); //Set font to use for following text() calls
     textAlign(CENTER);
     
