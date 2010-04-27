@@ -156,7 +156,7 @@ PImage backgroundPicture;
 
  int lineOfGravity = MAX_R/2;
  PFont font1;
- 
+ PImage logo;
  Button startPlayer1;
  Button startPlayer2;
  PImage contP1Button;
