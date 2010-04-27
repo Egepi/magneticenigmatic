@@ -21,7 +21,7 @@ class Tile
   private int state;
   private Chain chainID;
   private double ax,ay,dr; //ax is the horizontal offset, ay is the vertical offset (viewing from short side of table)
-  private int myX;
+  private int myX,myY;
   public int depth;
   private double speedModifier,sizeModifier;
   
@@ -67,6 +67,8 @@ class Tile
     if ((state == HMARKED)||(state == VMARKED))
     {
       tileType = 0;
+      AnimationClear ac = new AnimationClear(tileImage,myX,myY);
+      animationList.add(ac);
       state = DONE_ANIMATING;
     }
     else if (state == DOUBLE_MARKED)
@@ -199,6 +201,7 @@ class Tile
   
   public void drawTile(int tempX, int tempY, boolean blind) {
     myX = tempX-(int)(ay*TILE_SIZE);
+    myY = tempY-(int)(ax*TILE_SIZE);
     if ((!blind)&&(tileImage != null))
     {
       image(tileImage,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),(int)(sizeModifier*TILE_SIZE),(int)(sizeModifier*TILE_SIZE));
