@@ -610,6 +610,19 @@ GameBoard(int theWidth, int theHeight)
         }
       }
     }
+    if(((tempLeft != null )&&(tempLeft.getMyX() < screen.width/DANGER_CUE))||((tempRight!= null )&&(tempRight.getMyX() >= screen.width-screen.width/DANGER_CUE - TILE_SIZE)))
+    {
+      swapSongs(dangerBG);
+    }
+    else if(((tempLeft != null)&&(tempLeft.getMyX() < screen.width/IMBALANCED_CUE)&&(tempLeft.getMyX() >= screen.width/DANGER_CUE))||
+           ((tempRight != null)&&(tempRight.getMyX() >= screen.width-screen.width/IMBALANCED_CUE - TILE_SIZE)&&(tempLeft.getMyX() < screen.width-screen.width/DANGER_CUE - TILE_SIZE)))
+    {
+      swapSongs(imbalancedBG);
+    }
+    else 
+    {
+      swapSongs(balancedBG);
+    }
     if((tempLeft != null )&&(tempLeft.getMyX() < 0))
     {
       println(player2.getName() + " Wins!!!");
@@ -625,6 +638,17 @@ GameBoard(int theWidth, int theHeight)
     //Debugging
     //print("\nno loss");
     return 0;
+  }
+  
+  public void swapSongs(AudioPlayer newSong)
+  {
+    if (currentlyPlaying != newSong)
+    {
+      newSong.play(currentlyPlaying.position());
+      //newSong.loop();
+      currentlyPlaying.pause();
+      currentlyPlaying = newSong;
+    }
   }
   
 }
