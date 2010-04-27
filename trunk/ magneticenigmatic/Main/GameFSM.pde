@@ -47,9 +47,11 @@ class GameFSM {
     backgroundPicture.resize(width,height);
     swap1 = minim.loadFile("Swap_Left.wav");
     swap2 = minim.loadFile("Swap_Right.wav");
+    
     slowSound = minim.loadFile("slow.mp3");
     speedSound = minim.loadFile("speedup.mp3");
     blindSound = minim.loadFile("blind.mp3");
+    
     startButton = loadImage("start.png");
   
     contP1Button = loadImage("contP1.jpg");
