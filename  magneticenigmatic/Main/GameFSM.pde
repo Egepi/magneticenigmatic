@@ -310,6 +310,8 @@ class GameFSM {
       {
         if(continueCount == 2)
         {
+          player1.reset();
+          player2.reset();
           theBoard = new GameBoard(TPR, MAX_R);
           theBoard.generateBoard();
           theMomentum = new Momentum();
