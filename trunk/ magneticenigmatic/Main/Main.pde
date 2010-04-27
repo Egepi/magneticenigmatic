@@ -82,17 +82,24 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
 
 //Images
  static final String TILE0 = null,//"diamond.jpg",
-                     TILE1 = "redball.png",
-                     TILE2 = "blueball.png",
-                     TILE3 = "greenball.png",
-                     TILE4 = "purpleball.png",
-                     TILE5 = "goldball.png",
+//                     TILE1 = "redball.png",
+//                     TILE2 = "blueball.png",
+//                     TILE3 = "greenball.png",
+//                     TILE4 = "purpleball.png",
+//                     TILE5 = "goldball.png",
+                     TILE1= "Red.png",
+                     TILE2= "Blue.png",
+                     TILE3= "Green.png",
+                     TILE4= "Purple.png",
+                     TILE5= "White.png",
                      TILE6 = "fire.png",
                      TILE7 = "icecube.png",
                      TILE8 = "clover.png",
                      TILE9 = "grapes.png",
                      TILE10 = "star.png",
-                     CLTILE = "silverball.png";
+                     CLTILE = "Colorless_patternless.png";
+                     //CLTILE = "silverball.png";
+                     
                      
 //For the sake of readability and code comprehension
 
@@ -150,7 +157,8 @@ PImage backgroundPicture;
  int lineOfGravity = MAX_R/2;
  PFont font1;
  
- PImage startButton;
+ Button startPlayer1;
+ Button startPlayer2;
  PImage contP1Button;
  PImage contP2Button;
  PImage quitP1Button;
