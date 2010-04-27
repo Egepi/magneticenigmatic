@@ -153,7 +153,9 @@ PImage backgroundPicture;
  PImage quitP1Button;
  PImage quitP2Button;
  
- AudioPlayer backGround;
+ AudioPlayer balancedBG;
+ AudioPlayer imbalancedBG;
+ AudioPlayer dangerBG;
  
 void setup()
 {
@@ -179,7 +181,6 @@ void draw()
   frameStartTime = frameEndTime;
   frameEndTime = millis();
   //background(50,125,150);
-  background(backgroundPicture); //Arbitrary background color for the time being.
   theGameFSM.action();
 }
 
