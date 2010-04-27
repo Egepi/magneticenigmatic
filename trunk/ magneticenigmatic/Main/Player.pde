@@ -26,6 +26,19 @@ class Player
     statPowerups = 0;
   }
   
+  public void reset()
+  {
+    speedModifier = 1;
+    speedEffectDuration = -1;
+    blind = false;
+    blindEffectDuration = -1;
+    freeze = false;
+    statSwaps = 0;
+    statClears = 0;
+    statChains = 0;
+    statPowerups = 0;
+  }
+  
   public String getName()
   {
     return name;
