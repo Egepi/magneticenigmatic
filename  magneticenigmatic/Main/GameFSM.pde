@@ -65,6 +65,7 @@ class GameFSM {
   
     makeButtons();
     balancedBG.loop();
+    currentlyPlaying = balancedBG;
     stateId++;
   }
   /************************************************************
