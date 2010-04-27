@@ -79,17 +79,38 @@ class GameFSM {
     
     startPlayer1.drawit();
     startPlayer2.drawit();
-    if((startPlayer1.checkBounds() == 1)&&(responseP1 == false))
+    if(startPlayer1.checkBounds() == 1)
     {
-      responseP1 = true;
+      if(responseP1 == false)
+      {
+        responseP1 = true;
+        startPlayer1.myImage.filter(INVERT);
+      }
+      else if(responseP1 == true)
+      {
+        responseP1 = false;
+        startPlayer1.myImage.filter(INVERT);
+      }
     }
-    if((startPlayer2.checkBounds() == 1)&&(responseP2 == false))
+    
+    if(startPlayer2.checkBounds() == 1)
     {
-      responseP2 = true;
+      if(responseP2 == false)
+      {
+        responseP2 = true;
+        startPlayer2.myImage.filter(INVERT);
+      }
+      else if(responseP2 == true)
+      {
+        responseP2 = false;
+        startPlayer2.myImage.filter(INVERT);
+      }
     }
     
     if((responseP1 == true)&&(responseP2 == true))
     {
+      startPlayer2.myImage.filter(INVERT);
+      startPlayer1.myImage.filter(INVERT);
       responseP1 = false;
       responseP2 = false;
       stateId++;
@@ -302,6 +323,8 @@ class GameFSM {
         }
         else
         {
+          responseP1 = false;
+          responseP2 = false;    
           stateId = 2;
         }
       }
