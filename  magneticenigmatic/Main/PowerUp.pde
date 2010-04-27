@@ -44,8 +44,8 @@ class PowerUp {
     otherPlayer(this.player).speedEffectDuration = SLOW_POWERUP_DURATION;
     picNum = 8;
     player = otherPlayer(player);
-    soundEffect = minim.loadFile("slow.mp3");
-    soundEffect.play();
+    slowSound.play();
+    slowSound.rewind();
     setTimer(SLOW_POWERUP_DURATION);
   }
   
@@ -60,8 +60,8 @@ class PowerUp {
     this.player.speedModifier = SPEED_POWERUP_MULTIPLIER;
     this.player.speedEffectDuration = SPEED_POWERUP_DURATION;
     picNum = 6;
-    soundEffect = minim.loadFile("speedup.mp3");
-    soundEffect.play();
+    speedSound.play();
+    speedSound.rewind();
     setTimer(SPEED_POWERUP_DURATION);
 
   }
@@ -103,6 +103,7 @@ class PowerUp {
     picNum = 9;
     player = otherPlayer(player);
     blindSound.play();
+    blindSound.rewind();
     setTimer(BLIND_POWERUP_DURATION);
   }
   
