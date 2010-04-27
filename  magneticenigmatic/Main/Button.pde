@@ -24,7 +24,6 @@ class Button
     myHeight = theHeight;  
   }
   
-  
   void drawit()
   {
     image(myImage, myXcoord, myYcoord, myWidth, myHeight);
