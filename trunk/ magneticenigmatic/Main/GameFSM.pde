@@ -227,6 +227,7 @@ class GameFSM {
     }*/
     theBoard.drawBoard();  //Draw the board
     drawChains();    
+    drawAnimations();
     player1.drawPlayer();
     player2.drawPlayer();
     if ((rowTimeDifference() > TIME_BETWEEN_ROWS)&&(ROW_GENERATION_ON))
@@ -368,6 +369,14 @@ class GameFSM {
       ch.removeIdleTiles();
       ch.redeemChain();
       
+    }
+  }
+  
+  void drawAnimations() {
+    for (int j=0;j<animationList.size();j++)
+    {
+      AnimationClear ac = (AnimationClear)animationList.get(j);
+      ac.step();
     }
   }
   

@@ -211,9 +211,15 @@ GameBoard(int theWidth, int theHeight)
     chainTiles[0] = tileBoard[b][row];
     chainTiles[1] = tileBoard[a][row];
     c.addTiles(chainTiles);
-    tileBoard[b][row].swapAnimate(b-a,p.speedModifier,p);
-    tileBoard[a][row].swapAnimate(a-b,p.speedModifier,p);
-    
+    if (tileAt(a,row).getTileType() == 0)
+      tileBoard[b][row].animate(b-a,0,p.speedModifier);
+    else if (tileAt(b,row).getTileType() == 0)
+      tileBoard[a][row].animate(a-b,0,p.speedModifier);  
+    else
+    {
+      tileBoard[b][row].swapAnimate(b-a,p.speedModifier,p);
+      tileBoard[a][row].swapAnimate(a-b,p.speedModifier,p);
+    }
     
     return true;
   }
