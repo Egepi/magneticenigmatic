@@ -645,7 +645,7 @@ GameBoard(int theWidth, int theHeight)
     if (currentlyPlaying != newSong)
     {
       newSong.play(currentlyPlaying.position());
-      //newSong.loop();
+      newSong.loop();
       currentlyPlaying.pause();
       currentlyPlaying = newSong;
     }
