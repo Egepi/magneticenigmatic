@@ -207,15 +207,23 @@ class Tile
       image(tileImage,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),(int)(sizeModifier*TILE_SIZE),(int)(sizeModifier*TILE_SIZE));
       if (isFrozen)
       {
+        strokeWeight(1);
+        stroke(0,40,200);
         fill(0,40,200,90);
-        rect(tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),TILE_SIZE,TILE_SIZE);
+        rect(tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),(int)(sizeModifier*TILE_SIZE),(int)(sizeModifier*TILE_SIZE));
         fill(0,0,0,255);
       }
+      stroke(0);
+      strokeWeight(2);
+      ellipseMode(CORNER);
+      noFill();
+      ellipse(tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),(int)(sizeModifier*TILE_SIZE),(int)(sizeModifier*TILE_SIZE));
     }
     else if ((blind)&&(tileImage != null))
     {
       image(colorlessTile,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),(int)(sizeModifier*TILE_SIZE),(int)(sizeModifier*TILE_SIZE));
     }
+    
     if ((chainID != null)&&(DEBUG_MODE_ON))
         line(tempX+10,tempY+10,chainList.indexOf(chainID)*20+10,10); 
   }
