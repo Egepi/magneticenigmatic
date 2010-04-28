@@ -62,8 +62,8 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                   STEAL_POWERUP_NUMBER_OF_ROWS = 1,
                   BLIND_POWERUP_DURATION = 10000,
                   FREEZE_POWERUP_NUMBER_OF_ROWS = 1,
-                  DANGER_CUE = 16, //Cues danger music when block reaches within 1/n of total gameboard size.
-                  IMBALANCED_CUE = 8; //Cues imba music when block reaches within 1/n of total gameboard size.
+                  DANGER_CUE = 10, //Cues danger music when block reaches within 1/n of total gameboard size.
+                  IMBALANCED_CUE = 5; //Cues imba music when block reaches within 1/n of total gameboard size.
  static final double MOMENTUM_COEFF = 1.9,
                      SPEED_POWERUP_MULTIPLIER = 2.0,
                      SLOW_POWERUP_MULTIPLIER = 0.5,
@@ -175,7 +175,6 @@ void setup()
 
   if (connectToTacTile)
     startTactile();
-  //Load resources into memory
   sel1 = new Selector();
   sel2 = new Selector();
 
