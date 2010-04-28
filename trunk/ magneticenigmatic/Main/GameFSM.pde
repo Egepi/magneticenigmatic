@@ -87,11 +87,6 @@ class GameFSM {
         responseP1 = true;
         startPlayer1.myImage.filter(INVERT);
       }
-      else if(responseP1 == true)
-      {
-        responseP1 = false;
-        startPlayer1.myImage.filter(INVERT);
-      }
     }
     
     if(startPlayer2.checkBounds() == 1)
@@ -99,11 +94,6 @@ class GameFSM {
       if(responseP2 == false)
       {
         responseP2 = true;
-        startPlayer2.myImage.filter(INVERT);
-      }
-      else if(responseP2 == true)
-      {
-        responseP2 = false;
         startPlayer2.myImage.filter(INVERT);
       }
     }
