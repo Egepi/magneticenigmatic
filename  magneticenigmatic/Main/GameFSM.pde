@@ -11,9 +11,8 @@ class GameFSM {
   boolean responseP2 = false;
   boolean exiting = false;
   Button cont1;
-  Button quit1;
+  Button quit;
   Button cont2;
-  Button quit2;
   Button settingsButton;
   int continueCount = 0;
   int whoWon = 0;
@@ -59,10 +58,7 @@ class GameFSM {
     logoX = width/2 - logo.width/2;
     logoY = height/2 - logo.height/2;
 
-    contP1Button = loadImage("contP1.jpg");
-    contP2Button = loadImage("contP2.jpg");
-    quitP1Button = loadImage("quitP1.jpg");
-    quitP2Button = loadImage("quitP2.jpg");
+
     
     balancedBG = minim.loadFile("POL_Balanced.mp3", 2048);
     imbalancedBG = minim.loadFile("POL_Imbalanced.mp3", 2048);
@@ -270,20 +266,16 @@ class GameFSM {
       text("Player 2 won", 500, 200);  
     }
     cont1.drawit();
-    quit1.drawit();
     cont2.drawit();
-    quit2.drawit();
+    quit.drawit();
+    
+
     if(!responseP1)
     {
       if(cont1.checkBounds() == 1)
       {
         responseP1 = true;
         continueCount = continueCount + 1;
-      }
-      if(quit1.checkBounds() == 1)
-      {
-        responseP1 = true;
-        exiting = true;
       }
     }
     if(!responseP2)
@@ -293,16 +285,19 @@ class GameFSM {
         responseP2 = true;
         continueCount = continueCount + 1;
       }
-      if(quit2.checkBounds() == 1)
-      {
-        responseP2 = true;
-        exiting = true;
-      }
+    }
+    if(quit.checkBounds() == 1)
+    {
+      exiting = true;
+      continueCount = 0;
     }
     if((responseP1 && responseP2) || exiting)
     {
       if(continueCount == 2)
       {
+        responseP1 = false;
+        responseP2 = false;
+        exiting = false;    
         stateId = 3;
         continueCount = 0;
       }
@@ -378,24 +373,25 @@ class GameFSM {
       PImage start2 = loadImage("start_black_2.png");
       PImage settings = loadImage("settings.png");
       
-      float contP1Xcord = (width)*0.2;
-      float contP1Ycord = (height/2) - contP1Button.height - 50;
-      float quitP1Xcord = (width)*0.2;
-      float quitP1Ycord = (height/2) + 50;
+      PImage contP1Button = loadImage("contP1.jpg");
+      PImage contP2Button = loadImage("contP2.jpg");
+      PImage quitButton = loadImage("quit.jpg");
+    
+      float contP1Xcord = (width)*0.15;
+      float contP1Ycord = (height/2) - contP1Button.height/2;
+      float contP2Xcord = (width)*0.85 - contP2Button.width;
+      float contP2Ycord = (height/2) - contP1Button.height/2;
+      float quitXcord = (width/2) - quitButton.width/2;
+      float quitYcord = (height/2) - quitButton.height/2;
       
       float start1Xcord = (width*0.15)-(start1.height)/2;
       float start2Xcord = (width*0.85)-(start2.height)/2;
       float startYcord = (height/2)-(start1.width)/2;
       
-      float contP2Xcord = (width)*0.8 - contP2Button.width;
-      float contP2Ycord = (height/2) - contP1Button.height - 50;
-      float quitP2Xcord = (width)*0.8 - contP2Button.width;
-      float quitP2Ycord = (height/2) + 50;
-      
       cont1 = new Button(contP1Button, contP1Xcord, contP1Ycord);
-      quit1 = new Button(quitP1Button, quitP1Xcord, quitP1Ycord);
       cont2 = new Button(contP2Button, contP2Xcord, contP2Ycord);
-      quit2 = new Button(quitP2Button, quitP2Xcord, quitP2Ycord);
+      quit = new Button(quitButton, quitXcord, quitYcord);
+      
       startPlayer1 = new Button(start1, start1Xcord, startYcord);
       startPlayer2 = new Button(start2, start2Xcord, startYcord);
       settingsButton = new Button(settings, logoX, logoY-200, 200, 200);
