@@ -82,7 +82,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
 
 //Images
  static final String TILE0 = null,//"diamond.jpg",
-                     TILE1 = "redball.png",
+                     TILE1 = "rust.png",
                      TILE2 = "blueball.png",
                      TILE3 = "greenball.png",
                      TILE4 = "purpleball.png",
