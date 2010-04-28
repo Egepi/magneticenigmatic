@@ -44,7 +44,7 @@ int msgPort = 7340;
  static final int TPR = 8, //Tiles per row
                   MAX_R = 31, //Maximum number of rows
                   START_R = 13, //Number of rows to start with
-                  PUZZLE_WIDTH = 500,
+                  PUZZLE_WIDTH = 640,
                   TILE_SIZE = PUZZLE_WIDTH/TPR;
                 
 final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
@@ -83,10 +83,10 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
 //Images
  static final String TILE0 = null,//"diamond.jpg",
                      TILE1 = "rust.png",
-                     TILE2 = "blueball.png",
-                     TILE3 = "greenball.png",
-                     TILE4 = "purpleball.png",
-                     TILE5 = "goldball.png",
+                     TILE2 = "ice.png",
+                     TILE3 = "oxycopper.png",
+                     TILE4 = "platinum.png",
+                     TILE5 = "nugget.png",
 //                     TILE1= "Red.png",
 //                     TILE2= "Blue.png",
 //                     TILE3= "Green.png",
