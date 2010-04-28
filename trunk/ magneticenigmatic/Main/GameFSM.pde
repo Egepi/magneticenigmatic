@@ -14,8 +14,11 @@ class GameFSM {
   Button quit1;
   Button cont2;
   Button quit2;
+  Button settingsButton;
   int continueCount = 0;
   int whoWon = 0;
+  int logoX;
+  int logoY;
   /************************************************************
   */
   public GameFSM()
@@ -53,7 +56,8 @@ class GameFSM {
     blindSound = minim.loadFile("blind.mp3");
     
     logo = loadImage("logo-2.png");
-    
+    logoX = width/2 - logo.width/2;
+    logoY = height/2 - logo.height/2;
 
     contP1Button = loadImage("contP1.jpg");
     contP2Button = loadImage("contP2.jpg");
@@ -80,6 +84,7 @@ class GameFSM {
     
     startPlayer1.drawit();
     startPlayer2.drawit();
+    settingsButton.drawit();
     if(startPlayer1.checkBounds() == 1)
     {
       if(responseP1 == false)
@@ -371,6 +376,7 @@ class GameFSM {
   {
       PImage start1 = loadImage("start_black_1.png");
       PImage start2 = loadImage("start_black_2.png");
+      PImage settings = loadImage("settings.png");
       
       float contP1Xcord = (width)*0.2;
       float contP1Ycord = (height/2) - contP1Button.height - 50;
@@ -392,6 +398,7 @@ class GameFSM {
       quit2 = new Button(quitP2Button, quitP2Xcord, quitP2Ycord);
       startPlayer1 = new Button(start1, start1Xcord, startYcord);
       startPlayer2 = new Button(start2, start2Xcord, startYcord);
+      settingsButton = new Button(settings, logoX, logoY-200, 200, 200);
   }
   
 }
