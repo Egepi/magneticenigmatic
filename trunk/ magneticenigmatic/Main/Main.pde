@@ -159,10 +159,6 @@ PImage backgroundPicture;
  PImage logo;
  Button startPlayer1;
  Button startPlayer2;
- PImage contP1Button;
- PImage contP2Button;
- PImage quitP1Button;
- PImage quitP2Button;
  
  AudioPlayer balancedBG;
  AudioPlayer imbalancedBG;
