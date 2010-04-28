@@ -57,14 +57,17 @@ class GameFSM {
     logo = loadImage("logo-2.png");
     logoX = width/2 - logo.width/2;
     logoY = height/2 - logo.height/2;
-
-
     
     balancedBG = minim.loadFile("POL_Balanced.mp3", 2048);
     imbalancedBG = minim.loadFile("POL_Imbalanced.mp3", 2048);
     dangerBG = minim.loadFile("POL_Danger.mp3", 2048);
     font1 = loadFont("ArialNarrow-48.vlw");
-  
+    
+    p1Win = loadImage("P1Win.png");
+    p2Win = loadImage("P2Win.png");
+    p1Lose = loadImage("P1Lose.png");
+    p2Lose = loadImage("P2Lose.png");  
+ 
     makeButtons();
     balancedBG.loop();
     currentlyPlaying = balancedBG;
@@ -259,11 +262,15 @@ class GameFSM {
     background(backgroundPicture); //Arbitrary background color for the time being.
     if(whoWon == 1)
     {
-      text("Player 1 won", 500, 200);
+      //text("Player 1 won", 500, 200);
+      image(p1Win, cont1.myXcoord + width*0.1, cont1.myYcoord);
+      image(p2Lose, cont2.myXcoord - width*0.1, cont2.myYcoord);
     }
     else if (whoWon == 2)
     {
-      text("Player 2 won", 500, 200);  
+      //text("Player 2 won", 500, 200); 
+      image(p1Lose, cont1.myXcoord + width*0.1, cont1.myYcoord);
+      image(p2Win, cont2.myXcoord - width*0.1, cont2.myYcoord); 
     }
     cont1.drawit();
     cont2.drawit();
@@ -275,6 +282,7 @@ class GameFSM {
       if(cont1.checkBounds() == 1)
       {
         responseP1 = true;
+        cont1.myImage.filter(INVERT);
         continueCount = continueCount + 1;
       }
     }
@@ -283,6 +291,7 @@ class GameFSM {
       if(cont2.checkBounds() == 1)
       {
         responseP2 = true;
+        cont2.myImage.filter(INVERT);
         continueCount = continueCount + 1;
       }
     }
@@ -380,7 +389,7 @@ class GameFSM {
       float contP1Xcord = (width)*0.15;
       float contP1Ycord = (height/2) - contP1Button.height/2;
       float contP2Xcord = (width)*0.85 - contP2Button.width;
-      float contP2Ycord = (height/2) - contP1Button.height/2;
+      float contP2Ycord = (height/2) - contP2Button.height/2;
       float quitXcord = (width/2) - quitButton.width/2;
       float quitYcord = (height/2) - quitButton.height/2;
       

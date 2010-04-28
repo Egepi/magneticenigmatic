@@ -164,6 +164,11 @@ PImage backgroundPicture;
  AudioPlayer imbalancedBG;
  AudioPlayer dangerBG;
  
+ PImage p1Win;
+ PImage p2Win;
+ PImage p1Lose;
+ PImage p2Lose;
+ 
 void setup()
 {
   minim = new Minim(this);
