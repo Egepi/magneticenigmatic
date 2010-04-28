@@ -613,25 +613,15 @@ GameBoard(int theWidth, int theHeight)
     if(((tempLeft != null )&&(tempLeft.getMyX() < screen.width/DANGER_CUE))||((tempRight!= null )&&(tempRight.getMyX() >= screen.width-screen.width/DANGER_CUE - TILE_SIZE)))
     {
       swapSongs(dangerBG);
-      
-      //dangerBG.loop();
-      //imbalancedBG.pause();
-      //balancedBG.pause();
     }
     else if(((tempLeft != null)&&(tempLeft.getMyX() < screen.width/IMBALANCED_CUE)&&(tempLeft.getMyX() >= screen.width/DANGER_CUE))||
            ((tempRight != null)&&(tempRight.getMyX() >= screen.width-screen.width/IMBALANCED_CUE - TILE_SIZE)&&(tempLeft.getMyX() < screen.width-screen.width/DANGER_CUE - TILE_SIZE)))
     {
       swapSongs(imbalancedBG);
-      //dangerBG.pause();
-      //imbalancedBG.loop();
-      //balancedBG.pause();
     }
     else 
     {
       swapSongs(balancedBG);
-      //dangerBG.pause();
-      //imbalancedBG.pause();
-      //balancedBG.loop();
     }
     if((tempLeft != null )&&(tempLeft.getMyX() < 0))
     {
@@ -645,8 +635,6 @@ GameBoard(int theWidth, int theHeight)
       player1.setRoundsWon(player1.getRoundsWon()+1);
       return 1;
     }
-    //Debugging
-    //print("\nno loss");
     return 0;
   }
   

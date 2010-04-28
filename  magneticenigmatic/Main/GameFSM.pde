@@ -9,6 +9,7 @@ class GameFSM {
   float theta = 0;
   boolean responseP1 = false;
   boolean responseP2 = false;
+  boolean exiting = false;
   Button cont1;
   Button quit1;
   Button cont2;
@@ -19,7 +20,7 @@ class GameFSM {
   */
   public GameFSM()
   {
-    stateId = 1;
+    stateId = 0;
   }
   
   public void logoState()
@@ -111,8 +112,6 @@ class GameFSM {
     {
       startPlayer2.myImage.filter(INVERT);
       startPlayer1.myImage.filter(INVERT);
-      responseP1 = false;
-      responseP2 = false;
       stateId++;
     } 
     
@@ -123,6 +122,15 @@ class GameFSM {
   */
   public void optionsState()
   {
+    stateId++;
+  }
+  
+  public void createNew()
+  {
+    player1.reset();
+    player2.reset();
+    responseP1 = false;
+    responseP2 = false;
     theBoard = new GameBoard(TPR, MAX_R);
     theBoard.generateBoard();
     theMomentum = new Momentum();
@@ -256,6 +264,7 @@ class GameFSM {
   */
   public void endRound()
   {
+    theBoard.swapSongs(balancedBG);
     background(backgroundPicture); //Arbitrary background color for the time being.
     if(whoWon == 1)
     {
@@ -265,68 +274,49 @@ class GameFSM {
     {
       text("Player 2 won", 500, 200);  
     }
-    else
+    cont1.drawit();
+    quit1.drawit();
+    cont2.drawit();
+    quit2.drawit();
+    if(!responseP1)
     {
+      if(cont1.checkBounds() == 1)
+      {
+        responseP1 = true;
+        continueCount = continueCount + 1;
+      }
+      if(quit1.checkBounds() == 1)
+      {
+        responseP1 = true;
+        exiting = true;
+      }
     }
-    //Display winner
-    if(true)
-    { 
-      if(!responseP1)
+    if(!responseP2)
+    {
+      if(cont2.checkBounds() == 1)
       {
-        cont1.drawit();
-        quit1.drawit();
+        responseP2 = true;
+        continueCount = continueCount + 1;
       }
-      if(!responseP2)
+      if(quit2.checkBounds() == 1)
       {
-        cont2.drawit();
-        quit2.drawit();
+        responseP2 = true;
+        exiting = true;
       }
-      
-      if(!responseP1)
+    }
+    if((responseP1 && responseP2) || exiting)
+    {
+      if(continueCount == 2)
       {
-        if(cont1.checkBounds() == 1)
-        {
-          responseP1 = true;
-          continueCount = continueCount + 1;
-        }
-        if(quit1.checkBounds() == 1)
-        {
-          responseP1 = true;
-        }
+        stateId = 3;
+        continueCount = 0;
       }
-      if(!responseP2)
+      else
       {
-        if(cont2.checkBounds() == 1)
-        {
-          responseP2 = true;
-          continueCount = continueCount + 1;
-        }
-        if(quit2.checkBounds() == 1)
-        {
-          responseP2 = true;
-        }
-      }
-      if(responseP1 && responseP2)
-      {
-        if(continueCount == 2)
-        {
-          player1.reset();
-          player2.reset();
-          theBoard = new GameBoard(TPR, MAX_R);
-          theBoard.generateBoard();
-          theMomentum = new Momentum();
-          startClock();
-          stateId --;
-          continueCount = 0;
-          responseP1 = false;
-          responseP2 = false;
-        }
-        else
-        {
-          responseP1 = false;
-          responseP2 = false;    
-          stateId = 2;
-        }
+        responseP1 = false;
+        responseP2 = false;
+        exiting = false;    
+        stateId = 1;
       }
       
     }
@@ -345,9 +335,10 @@ class GameFSM {
   public void action()
   {
     switch(stateId) {
-      case 1: logoState(); break;
-      case 2: startState(); break;
-      case 3: optionsState(); break;
+      case 0: logoState(); break;
+      case 1: startState(); break;
+      case 2: optionsState(); break;
+      case 3: createNew(); break;
       case 4: gameState(); break;
       case 5: endRound(); break;
       default: break;
