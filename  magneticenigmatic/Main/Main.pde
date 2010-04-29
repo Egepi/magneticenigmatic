@@ -41,15 +41,15 @@ int msgPort = 7340;
  
  //Board and tile size (careful with the commas here, I kept getting unexpected token errors because of having semi-colons instead of commas)
  
- static final int TPR = 8, //Tiles per row
-                  MAX_R = 31, //Maximum number of rows
+ int TPR = 8; 
+ int TILE_SIZE = PUZZLE_WIDTH/TPR;
+ int PUZZLE_ORIGIN_X;
+ int PUZZLE_ORIGIN_Y;
+ static final int MAX_R = 31, //Maximum number of rows
                   START_R = 13, //Number of rows to start with
-                  PUZZLE_WIDTH = 640,
-                  TILE_SIZE = PUZZLE_WIDTH/TPR;
-                
-final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
-          PUZZLE_ORIGIN_Y = (screen.height/2) - ((TPR * TILE_SIZE)/2),
-          HALF_MARK = (screen.width/2);
+                  PUZZLE_WIDTH = 640;
+
+final int HALF_MARK = (screen.width/2);
           
                 
 //Gameplay variables (change difficulty, speed, and other settings here)

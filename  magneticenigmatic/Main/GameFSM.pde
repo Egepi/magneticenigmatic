@@ -21,6 +21,9 @@ class GameFSM {
   Button backButton;
   Button checkButton;
   Button wrongButton;
+  Button fiveButton;
+  Button eightButton;
+  Button twelveButton;
 
   int continueCount = 0;
   int whoWon = 0;
@@ -155,12 +158,16 @@ class GameFSM {
     settingsButton.move();
     helpCreditsButton.move();
     text("MUSIC", width/2, height*0.15);
+    text("NUMBER OF ROWS", width/2, height*0.47);
     checkButton.myXcoord = width/2-250;
     checkButton.myYcoord = height*0.20;
     wrongButton.myXcoord = width/2+50;
     wrongButton.myYcoord = height*0.20;
     checkButton.drawit();
     wrongButton.drawit();
+    fiveButton.drawit();
+    eightButton.drawit();
+    twelveButton.drawit();
     
     if(wrongButton.checkBounds() == 1)
     {
@@ -176,6 +183,20 @@ class GameFSM {
     {
       stateId = START_STATE;
     }
+    if(fiveButton.checkBounds() == 1)
+    {
+      TPR = 5;
+    }
+    else if(eightButton.checkBounds() == 1)
+    {
+      TPR = 8;
+    }
+    else if(twelveButton.checkBounds() == 1)
+    {
+      TPR = 12;
+    }
+    PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2);
+    PUZZLE_ORIGIN_Y = (screen.height/2) - ((TPR * TILE_SIZE)/2);
   }
 
   /************************************************************
@@ -491,6 +512,9 @@ class GameFSM {
       backButton = new Button(HelpCredits, 0, height-200, 200, 200);
       checkButton = new Button(loadImage("check.png"), 200,200);
       wrongButton = new Button(loadImage("wrong.png"), 200,200);
+      fiveButton = new Button(loadImage("five.png"), width*0.20, height/2,200,200);
+      eightButton = new Button(loadImage("eight.png"), width*0.40, height/2,200,200);
+      twelveButton = new Button(loadImage("twelve.png"), width*0.60, height/2,200,200);
   }
   
 }
