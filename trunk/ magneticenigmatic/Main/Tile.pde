@@ -17,7 +17,7 @@ class Tile
   
   private PImage tileImage;
   private int tileType;
-  private boolean isMoving, isIdle, isFrozen, isSwapping, swapLeft;
+  private boolean isMoving, isIdle, isFrozen, isSwapping, swapLeft, swapUp;
   private int state;
   private Chain chainID;
   private double ax,ay,dr; //ax is the horizontal offset, ay is the vertical offset (viewing from short side of table)
@@ -41,6 +41,7 @@ class Tile
     sizeModifier = 1.0;
     chainID = null; //Chain currently associated with this tile
     state = IDLE;
+    swapUp = false;
     speedModifier = 1.0;
   }
   
@@ -57,6 +58,7 @@ class Tile
     sizeModifier = 1.0;
     chainID = null; //Chain currently associated with this tile
     state = IDLE;
+    swapUp = false;
     speedModifier = 1.0;
     if (freeze)
       isFrozen = true;
@@ -121,19 +123,39 @@ class Tile
         dr+=0.0031*MAX_TILE_V*timeDifference()*speedModifier;
         if (dr < PI)
         {
-          if (swapLeft)
+          if (swapUp)
           {
-            ax = 0.5+0.5*cos((float)dr);
-            ay = -0.25*sin((float)dr);
-            sizeModifier = 1.0-ay;
-            depth = 2;
+            if (swapLeft)
+            {
+              ax = 0.5+0.5*cos((float)dr);
+              ay = -0.25*sin((float)dr);
+              sizeModifier = 1.0+ay;
+              depth = 0;
+            }
+            else
+            {
+              ax = 0.5*cos((float)dr+PI)-0.5;
+              ay = 0.25*sin((float)dr);
+              sizeModifier = 1.0+ay;
+              depth = 2;
+            }
           }
-          else
+          if (!swapUp)
           {
-            ax = 0.5*cos((float)dr+PI)-0.5;
-            ay = 0.25*sin((float)dr);
-            sizeModifier = 1.0-ay;
-            depth = 0;
+            if (swapLeft)
+            {
+              ax = 0.5-0.5*cos((float)dr+PI);
+              ay = -0.25*sin((float)dr+PI);
+              sizeModifier = 1.0-ay;
+              depth = 0;
+            }
+            else
+            {
+              ax = -0.50*cos((float)dr)-0.5;
+              ay = 0.25*sin((float)dr+PI);
+              sizeModifier = 1.0-ay;
+              depth = 2;
+            }
           }
         }
         if (dr >= PI)
@@ -182,6 +204,10 @@ class Tile
       ax = (double)dx;
       ay = 0;
       dr = 0;
+      if (p == player1)
+        swapUp = true;
+      else
+        swapUp = false;  
       if (dx >0)
         swapLeft = true;
       else
