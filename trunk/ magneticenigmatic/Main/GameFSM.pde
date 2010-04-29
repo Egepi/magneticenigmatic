@@ -12,7 +12,6 @@ class GameFSM {
   boolean exiting = false;
   
   Button cont1;
-  Button quit;
   Button cont2;
   Button settingsButton;
   Button helpCreditsButton;
@@ -509,8 +508,8 @@ class GameFSM {
     displayScores();
     cont1.drawit();
     cont2.drawit();
-    quit.drawit();
-    
+    backButton.drawit();
+    backButton2.drawit();
 
     if(!responseP1)
     {
@@ -530,7 +529,7 @@ class GameFSM {
         continueCount = continueCount + 1;
       }
     }
-    if(quit.checkBounds() == 1)
+    if((backButton.checkBounds() == 1)||(backButton2.checkBounds() == 1))
     {
       if(TPR != 8)
       {
@@ -659,8 +658,6 @@ class GameFSM {
       float contP1Ycord = (height/2) - contP1Button.height/2;
       float contP2Xcord = (width)*0.90 - contP2Button.width;
       float contP2Ycord = (height/2) - contP2Button.height/2;
-      float quitXcord = (width/2) - quitButton.width/2;
-      float quitYcord = (height*0.80);
       
       float start1Xcord = (width*0.15)-(start1.height)/2;
       float start2Xcord = (width*0.85)-(start2.height)/2;
@@ -668,7 +665,6 @@ class GameFSM {
       
       cont1 = new Button(contP1Button, contP1Xcord, contP1Ycord);
       cont2 = new Button(contP2Button, contP2Xcord, contP2Ycord);
-      quit = new Button(quitButton, quitXcord, quitYcord);
       
       startPlayer1 = new Button(start1, start1Xcord, startYcord);
       startPlayer2 = new Button(start2, start2Xcord, startYcord);
@@ -692,26 +688,143 @@ class GameFSM {
   
   void calculateScores()
   {
-    swapStringP1      = "    Swaps made:         " + player1.statSwaps;
-    clearStringP1     = "    Clears made:        " + player1.statClears;
-    powerupStringP1   = "    Powerups used:      " + player1.statPowerups;
-    chainStringP1     = "    Chains caused:      " + player1.statChains;
-    bestChainStringP1 = "    Best chain:         " + player1.statBestChain;
+    if(player1.statSwaps < 10)
+    {
+      swapStringP1      = "   Swaps made:            " + player1.statSwaps;
+    }
+    else if(player1.statSwaps < 100)
+    {
+      swapStringP1      = "   Swaps made:           " + player1.statSwaps;     
+    }
+    else
+    {
+      swapStringP1      = "   Swaps made:          " + player1.statSwaps;        
+    }
+
+    if(player1.statClears < 10)
+    {
+      clearStringP1     = "   Clears made:           " + player1.statClears;
+    }
+    else if(player1.statClears < 100)
+    {
+      clearStringP1     = "   Clears made:          " + player1.statClears;
+    }
+    else
+    {
+      clearStringP1     = "   Clears made:         " + player1.statClears;
+    }
     
-    swapStringP2      = "    Swaps made:         " + player2.statSwaps;
-    clearStringP2     = "    Clears made:        " + player2.statClears;
-    powerupStringP2   = "    Powerups used:      " + player2.statPowerups;
-    chainStringP2     = "    Chains caused:      " + player2.statChains;
-    bestChainStringP2 = "    Best chain:         " + player2.statBestChain;
+    if(player1.statPowerups < 10)
+    {
+      powerupStringP1   = "   Powerups used:         " + player1.statPowerups;
+    }
+    else if(player1.statPowerups < 100)
+    {
+      powerupStringP1   = "   Powerups used:        " + player1.statPowerups;
+    }
+    else
+    {
+      powerupStringP1   = "   Powerups used:       " + player1.statPowerups;
+    }
     
+    if(player1.statChains < 10)
+    {
+      chainStringP1     = "   Chains caused:         " + player1.statChains;
+    }
+    else if(player1.statChains < 100)
+    {
+      chainStringP1     = "   Chains caused:        " + player1.statChains;
+    }
+    else
+    {
+       chainStringP1     = "   Chains caused:       " + player1.statChains;
+    }    
+    
+    if(player1.statBestChain < 10)
+    {
+      bestChainStringP1 = "   Best chain:            " + player1.statBestChain;      
+    }
+    else if(player1.statBestChain < 100)
+    {
+      bestChainStringP1 = "   Best chain:           " + player1.statBestChain;
+    }
+    else
+    {
+      bestChainStringP1 = "   Best chain:          " + player1.statBestChain;
+    }
+    
+    if(player2.statSwaps < 10)
+    {
+      swapStringP2      = "   Swaps made:            " + player2.statSwaps;
+    }
+    else if(player2.statSwaps < 100)
+    {
+      swapStringP2      = "   Swaps made:           " + player2.statSwaps;     
+    }
+    else
+    {
+      swapStringP2      = "   Swaps made:          " + player2.statSwaps;        
+    }
+
+    if(player2.statClears < 10)
+    {
+      clearStringP2     = "   Clears made:           " + player2.statClears;
+    }
+    else if(player2.statClears < 100)
+    {
+      clearStringP2     = "   Clears made:          " + player2.statClears;
+    }
+    else
+    {
+      clearStringP2     = "   Clears made:         " + player2.statClears;
+    }
+    
+    if(player2.statPowerups < 10)
+    {
+      powerupStringP2   = "   Powerups used:         " + player2.statPowerups;
+    }
+    else if(player2.statPowerups < 100)
+    {
+      powerupStringP2   = "   Powerups used:        " + player2.statPowerups;
+    }
+    else
+    {
+      powerupStringP2   = "   Powerups used:       " + player2.statPowerups;
+    }
+    
+    if(player2.statChains < 10)
+    {
+      chainStringP2     = "   Chains caused:         " + player2.statChains;
+    }
+    else if(player2.statChains < 100)
+    {
+      chainStringP2     = "   Chains caused:        " + player2.statChains;
+    }
+    else
+    {
+       chainStringP2     = "   Chains caused:       " + player2.statChains;
+    }    
+    
+    if(player2.statBestChain < 10)
+    {
+      bestChainStringP2 = "   Best chain:            " + player2.statBestChain;      
+    }
+    else if(player2.statBestChain < 100)
+    {
+      bestChainStringP2 = "   Best chain:           " + player2.statBestChain;
+    }
+    else
+    {
+      bestChainStringP2 = "   Best chain:          " + player2.statBestChain;
+    }    
   }
   void displayScores()
   {
     textFont(font2);
     pushMatrix();
     textAlign(LEFT);
-    image(scoreBG, cont1.myXcoord + cont1.myWidth + 5, height - quit.myYcoord + 5 , width - 2*(cont1.myXcoord + cont1.myWidth + 5), height - 2*(height - quit.myYcoord + 5)); 
-    float heightOffset = (height - 2*(height - quit.myYcoord + 5))/2;
+    image(scoreBG, cont1.myXcoord + cont1.myWidth + 5, height*0.2 , width - 2*(cont1.myXcoord + cont1.myWidth + 5), height*0.6); 
+    float heightOffset = (height*0.3);
     fill(255);
     rotate(PI/2);
     text(swapStringP1, 0.5*height - heightOffset, 0.45*-width);

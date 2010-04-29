@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Tactile stuff
  */
  
-boolean connectToTacTile = false;
+boolean connectToTacTile = true;
 //Touch API
 TouchAPI tacTile;
 //Names of machines you might use
@@ -151,9 +151,13 @@ static final int  LOGO_STATE = 0,
  Minim minim;  //Used for playing sound
  AudioPlayer swap1;
  AudioPlayer swap2;
+ 
  AudioPlayer slowSound;
  AudioPlayer speedSound;
  AudioPlayer blindSound;
+ AudioPlayer freezeSound;
+ AudioPlayer arrowSound;
+ 
  AudioPlayer currentlyPlaying;
  AudioPlayer balancedBG;
  AudioPlayer imbalancedBGP1;
