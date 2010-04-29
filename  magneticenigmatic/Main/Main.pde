@@ -72,7 +72,7 @@ final int HALF_MARK = (screen.width/2);
                   HIGH_MOMENTUM = 7;
                   
                   
- double MOMENTUM_COEFF = 1.90;
+ double MOMENTUM_COEFF = 1.00;
  int momentumAdd = 1;
  static final double SPEED_POWERUP_MULTIPLIER = 2.0,
                      SLOW_POWERUP_MULTIPLIER = 0.5,
