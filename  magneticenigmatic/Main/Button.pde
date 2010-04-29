@@ -6,6 +6,12 @@ class Button
   int myWidth;
   int myHeight;
   
+  //path stuff
+  int myPathMinX;
+  int myPathMaxX;
+  int myPathMinY;
+  int myPathMaxY;  
+  
   public Button(PImage theImage, float theX, float theY)
   {
     myImage = theImage;
@@ -31,7 +37,37 @@ class Button
   
   public void move()
   {
+
+    if(myXcoord < myPathMaxX && myYcoord == myPathMinY)
+    {
+      myXcoord = myXcoord + 5;
+      print("1\n");
+    }
+    else if(myXcoord > myPathMinX && myYcoord == myPathMaxY)
+    {
+      myXcoord = myXcoord - 5;
+      print("2\n");      
+    }
+    else if(myYcoord < myPathMaxY && myXcoord == myPathMaxX)
+    {
+      myYcoord = myYcoord + 5;
+      print("3\n");      
+    }
+    else if(myYcoord > myPathMinY && myXcoord == myPathMinX)
+    {
+      myYcoord = myYcoord - 5;
+      print("4\n");      
+    }
+    print("WTH");
   }
+  public void setPath(int leftX, int rightX, int topY, int bottomY)
+  {
+    myPathMinX = leftX;
+    myPathMaxX = rightX;
+    myPathMinY = topY;
+    myPathMaxY = bottomY;
+  }
+  
   int checkBounds()
   {
     

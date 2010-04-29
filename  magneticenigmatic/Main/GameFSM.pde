@@ -88,8 +88,10 @@ class GameFSM {
     
     startPlayer1.drawit();
     startPlayer2.drawit();
+    
     settingsButton.move();
     helpCreditsButton.move();
+    
     settingsButton.drawit();
     helpCreditsButton.drawit();
     if(startPlayer1.checkBounds() == 1)
@@ -414,7 +416,8 @@ class GameFSM {
       startPlayer2 = new Button(start2, start2Xcord, startYcord);
       settingsButton = new Button(settings, logoX -200, logoY-200, 200, 200);
       helpCreditsButton = new Button(HelpCredits, logoX + logo.width , logoY + logo.height ,200, 200);
-
+      settingsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
+      helpCreditsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
   }
   
 }
