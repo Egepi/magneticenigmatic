@@ -256,10 +256,10 @@ class GameFSM {
     
     if(lowButton.checkBounds() == 1)
     {
-      if(MOMENTUM_COEFF != 1.90)
+      if(momentumAdd != LOW_MOMENTUM)
       {
         lowButton.myImage.filter(INVERT);
-        if(MOMENTUM_COEFF == 2.50)
+        if(momentumAdd == MED_MOMENTUM)
         {
           medButton.myImage.filter(INVERT);
         }
@@ -267,15 +267,15 @@ class GameFSM {
         {
           highButton.myImage.filter(INVERT);
         }
-        MOMENTUM_COEFF = 1.90;
+        momentumAdd = LOW_MOMENTUM;
       }
     }
     else if(medButton.checkBounds() == 1)
     {
-      if(MOMENTUM_COEFF != 2.50)
+      if(momentumAdd != MED_MOMENTUM)
       {
         medButton.myImage.filter(INVERT);
-        if(MOMENTUM_COEFF == 1.90)
+        if(momentumAdd == LOW_MOMENTUM)
         {
           lowButton.myImage.filter(INVERT);
         }
@@ -283,15 +283,15 @@ class GameFSM {
         {
           highButton.myImage.filter(INVERT);
         }
-        MOMENTUM_COEFF = 2.50;
+        momentumAdd = MED_MOMENTUM;
       }
     }
     else if(highButton.checkBounds() == 1)
     {
-      if(MOMENTUM_COEFF != 3.40)
+      if(momentumAdd != HIGH_MOMENTUM)
       {
         highButton.myImage.filter(INVERT);
-        if(MOMENTUM_COEFF == 2.5)
+        if(momentumAdd == MED_MOMENTUM)
         {
           medButton.myImage.filter(INVERT);
         }
@@ -299,7 +299,7 @@ class GameFSM {
         {
           lowButton.myImage.filter(INVERT);
         }
-        MOMENTUM_COEFF = 3.40;
+        momentumAdd = HIGH_MOMENTUM;
       }
     }
   }
@@ -308,6 +308,7 @@ class GameFSM {
   */  
   public void createNew()
   {
+    TILE_SIZE = PUZZLE_WIDTH/TPR;
     PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2);
     PUZZLE_ORIGIN_Y = (screen.height/2) - ((TPR * TILE_SIZE)/2);
     player1.reset();
@@ -505,6 +506,36 @@ class GameFSM {
     }
     if(quit.checkBounds() == 1)
     {
+      if(TPR != 8)
+      {
+        eightButton.myImage.filter(INVERT);
+        if(TPR == 5)
+        {
+          fiveButton.myImage.filter(INVERT);
+        }
+        else
+        {
+          twelveButton.myImage.filter(INVERT);
+        }
+        TPR = 8;
+      }
+      
+      if(lowButton.checkBounds() == 1)
+      {
+        if(momentumAdd != LOW_MOMENTUM)
+        {
+          lowButton.myImage.filter(INVERT);
+          if(momentumAdd == MED_MOMENTUM)
+          {
+            medButton.myImage.filter(INVERT);
+          }
+          else
+          {
+            highButton.myImage.filter(INVERT);
+          }
+          momentumAdd = LOW_MOMENTUM;
+        }
+      }
       exiting = true;
       continueCount = 0;
     }

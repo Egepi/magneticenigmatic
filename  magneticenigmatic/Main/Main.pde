@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Tactile stuff
  */
  
-boolean connectToTacTile = false;
+boolean connectToTacTile = true;
 //Touch API
 TouchAPI tacTile;
 //Names of machines you might use
@@ -54,7 +54,7 @@ final int HALF_MARK = (screen.width/2);
                 
 //Gameplay variables (change difficulty, speed, and other settings here)
  static final int TILE_TYPES = 11, //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
-                  MAX_V = 100,
+                  MAX_V = 300,
                   MAX_TILE_V = 2,
                   TILE_COLORS = 6,
                   TIME_BETWEEN_DECAY = 1000,
@@ -66,8 +66,14 @@ final int HALF_MARK = (screen.width/2);
                   BLIND_POWERUP_DURATION = 10000,
                   FREEZE_POWERUP_NUMBER_OF_ROWS = 1,
                   DANGER_CUE = 10, //Cues danger music when block reaches within 1/n of total gameboard size.
-                  IMBALANCED_CUE = 5; //Cues imba music when block reaches within 1/n of total gameboard size.
+                  IMBALANCED_CUE = 5, //Cues imba music when block reaches within 1/n of total gameboard size.
+                  LOW_MOMENTUM = 1,
+                  MED_MOMENTUM = 3,
+                  HIGH_MOMENTUM = 7;
+                  
+                  
  double MOMENTUM_COEFF = 1.90;
+ int momentumAdd = 1;
  static final double SPEED_POWERUP_MULTIPLIER = 2.0,
                      SLOW_POWERUP_MULTIPLIER = 0.5,
                      MOMENTUM_DECAY = 0.15,
