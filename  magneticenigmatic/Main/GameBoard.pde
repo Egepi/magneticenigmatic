@@ -90,20 +90,20 @@ GameBoard(int theWidth, int theHeight)
         tileBoard[i][j] = new Tile(int(random(1,TILE_COLORS)));
       }
     }
-    for(int i = 0; i < TPR; i++)
+    boolean clean = false;
+    while (!clean)
     {
-      for(int j = lineOfGravity-START_R/2; j < lineOfGravity+START_R/2+1; j++)
+      clean = true;
+      for(int i = 0; i < TPR; i++)
       {
-        while (makesCombo(i,j) == true)
-          tileBoard[i][j] = new Tile(int(random(1,TILE_COLORS)));
-      }
-    }
-    for(int i = 0; i < TPR; i++)
-    {
-      for(int j = lineOfGravity-START_R/2; j < lineOfGravity+START_R/2+1; j++)
-      {
-        while (makesCombo(i,j) == true)
-          tileBoard[i][j] = new Tile(int(random(1,TILE_COLORS)));
+        for(int j = lineOfGravity-START_R/2; j < lineOfGravity+START_R/2+1; j++)
+        {
+          while (makesCombo(i,j) == true)
+          {
+            clean = false;
+            tileBoard[i][j] = new Tile(int(random(1,TILE_COLORS)));
+          }
+        }
       }
     }
   }
