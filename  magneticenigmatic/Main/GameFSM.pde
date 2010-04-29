@@ -93,13 +93,6 @@ class GameFSM {
     iceArray[3] = loadImage(PICE4);
     iceArray[4] = loadImage(PICE5);
     
-    swap1 = minim.loadFile("Swap_Left.wav");
-    swap2 = minim.loadFile("Swap_Right.wav");
-    
-    slowSound = minim.loadFile("slow.mp3");
-    speedSound = minim.loadFile("speedup.mp3");
-    blindSound = minim.loadFile("blind.mp3");
-    
     powerArray[0] = loadImage(POWER1);
     powerArray[1] = loadImage(POWER2);
     powerArray[2] = loadImage(POWER3);
@@ -125,14 +118,36 @@ class GameFSM {
     if(STEREO_ON)
     {
       imbalancedBGP1 = minim.loadFile("POL_ImbalancedP1.mp3", 2048);
-      dangerBGP1 = minim.loadFile("POL_DangerP1.mp3", 2048);
       imbalancedBGP2 = minim.loadFile("POL_ImbalancedP2.mp3", 2048);
+      
+      dangerBGP1 = minim.loadFile("POL_DangerP1.mp3", 2048);
       dangerBGP2 = minim.loadFile("POL_DangerP2.mp3", 2048);
+      
+      swap1 = minim.loadFile("swapP1.mp3");
+      swap2 = minim.loadFile("swapP2.mp3");
+      
+      freezeSoundP1 = minim.loadFile("bellsP1.mp3");
+      freezeSoundP2 = minim.loadFile("bellsP2.mp3");
+
+      blindSoundP1 = minim.loadFile("blindP1.mp3");
+      blindSoundP2 = minim.loadFile("blindP2.mp3");
+      
+      slowSoundP1 = minim.loadFile("slowP1.mp3");
+      slowSoundP2 = minim.loadFile("slowP2.mp3");
+      
+      speedSoundP1 = minim.loadFile("speedupP1.mp3");
+      speedSoundP2 = minim.loadFile("speedupP2.mp3"); 
     }
     else
     {
       imbalancedBG = minim.loadFile("POL_Imbalanced.mp3", 2048);
       dangerBG = minim.loadFile("POL_Danger.mp3", 2048);
+      
+      swap = minim.loadFile("swap.mp3");
+      freezeSound = minim.loadFile("bells.mp3");
+      slowSound = minim.loadFile("slow.mp3");
+      speedSound = minim.loadFile("speedup.mp3");
+      blindSound = minim.loadFile("blind.mp3");
     }
     
     
