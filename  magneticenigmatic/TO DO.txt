@@ -14,9 +14,9 @@ x-random generation is not perfect, occasional clear at the start
 O-it is possible to move a tile before it gets cleared causing only two tiles to clear (probably causes other glitches)
 
 BOOKENDS:
-O-credits
+x-credits (need lee and jeremy pics)
 O-allow game to pause
-O-options (optional)
+x-options (optional)
 
 
 ART:
