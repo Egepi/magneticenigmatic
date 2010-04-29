@@ -24,6 +24,9 @@ class GameFSM {
   Button fiveButton;
   Button eightButton;
   Button twelveButton;
+  Button lowButton;
+  Button medButton;
+  Button highButton;
 
   int continueCount = 0;
   int whoWon = 0;
@@ -86,9 +89,9 @@ class GameFSM {
     powerArray[1] = loadImage(POWER2);
     powerArray[2] = loadImage(POWER3);
     
-    //powerArray[0].resize(TILE_SIZE, TILE_SIZE);
-    //powerArray[1].resize(TILE_SIZE, TILE_SIZE);
-    //powerArray[2].resize(TILE_SIZE, TILE_SIZE);
+    powerArray[0].resize(TILE_SIZE, TILE_SIZE);
+    powerArray[1].resize(TILE_SIZE, TILE_SIZE);
+    powerArray[2].resize(TILE_SIZE, TILE_SIZE);
     
     logo = loadImage("logo-2.png");
     logoX = width/2 - logo.width/2;
@@ -169,17 +172,21 @@ class GameFSM {
     backButton.drawit();
     settingsButton.move();
     helpCreditsButton.move();
-    text("MUSIC", width/2, height*0.15);
-    text("NUMBER OF ROWS", width/2, height*0.47);
+    text("MUSIC", width/2, height*0.10);
+    text("NUMBER OF ROWS", width/2, height*0.43);
+    text("MOMENTUM", width/2, height*0.70);
     checkButton.myXcoord = width/2-250;
-    checkButton.myYcoord = height*0.20;
+    checkButton.myYcoord = height*0.15;
     wrongButton.myXcoord = width/2+50;
-    wrongButton.myYcoord = height*0.20;
+    wrongButton.myYcoord = height*0.15;
     checkButton.drawit();
     wrongButton.drawit();
     fiveButton.drawit();
     eightButton.drawit();
     twelveButton.drawit();
+    lowButton.drawit();
+    medButton.drawit();
+    highButton.drawit();
     
     if(wrongButton.checkBounds() == 1)
     {
@@ -241,6 +248,55 @@ class GameFSM {
           eightButton.myImage.filter(INVERT);
         }
         TPR = 12;
+      }
+    }
+    
+    if(lowButton.checkBounds() == 1)
+    {
+      if(MOMENTUM_COEFF != 1.90)
+      {
+        lowButton.myImage.filter(INVERT);
+        if(MOMENTUM_COEFF == 2.50)
+        {
+          medButton.myImage.filter(INVERT);
+        }
+        else
+        {
+          highButton.myImage.filter(INVERT);
+        }
+        MOMENTUM_COEFF = 1.90;
+      }
+    }
+    else if(medButton.checkBounds() == 1)
+    {
+      if(MOMENTUM_COEFF != 2.50)
+      {
+        medButton.myImage.filter(INVERT);
+        if(MOMENTUM_COEFF == 1.90)
+        {
+          lowButton.myImage.filter(INVERT);
+        }
+        else
+        {
+          highButton.myImage.filter(INVERT);
+        }
+        MOMENTUM_COEFF = 2.50;
+      }
+    }
+    else if(highButton.checkBounds() == 1)
+    {
+      if(MOMENTUM_COEFF != 3.40)
+      {
+        highButton.myImage.filter(INVERT);
+        if(MOMENTUM_COEFF == 2.5)
+        {
+          medButton.myImage.filter(INVERT);
+        }
+        else
+        {
+          lowButton.myImage.filter(INVERT);
+        }
+        MOMENTUM_COEFF = 3.40;
       }
     }
   }
@@ -354,9 +410,9 @@ class GameFSM {
         timer2--;
         oldSec = second();
       }
-      text(timer2, (-height/8)+15,     playerTwoY+65);
+      text(timer2, (-height/8)+15, playerTwoY+65);
       text(timer2, (-height/8)*7, playerTwoY+65);
-      image(imageTime2, (-height/8)-60, playerOneY+20);
+      image(imageTime2, (-height/8), playerTwoY+25);
       image(imageTime2, ((-height/8)*7)-75, playerTwoY+25);
     }
     text(player2.getName(), -height/8,     playerTwoY+8);
@@ -562,10 +618,14 @@ class GameFSM {
       backButton = new Button(HelpCredits, 0, height-200, 200, 200);
       checkButton = new Button(loadImage("check.png"), 200,200);
       wrongButton = new Button(loadImage("wrong.png"), 200,200);
-      fiveButton = new Button(loadImage("five.png"), width*0.20, height/2,200,200);
-      eightButton = new Button(loadImage("eight.png"), width*0.40, height/2,200,200);
-      twelveButton = new Button(loadImage("twelve.png"), width*0.60, height/2,200,200);
+      fiveButton = new Button(loadImage("five.png"), width*0.20, height*0.45,175,175);
+      eightButton = new Button(loadImage("eight.png"), width*0.40, height*0.45,175,175);
+      twelveButton = new Button(loadImage("twelve.png"), width*0.60, height*0.45,175,175);
       eightButton.myImage.filter(INVERT);
+      lowButton = new Button(loadImage("low.png"), width*0.15, height*0.70, 300,200);
+      medButton = new Button(loadImage("med.png"), width*0.40, height*0.70, 300,200);
+      highButton = new Button(loadImage("high.png"), width*0.65, height*0.70, 300,200);
+      lowButton.myImage.filter(INVERT);
   }
   
   void calculateScores()
