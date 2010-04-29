@@ -110,7 +110,15 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                   FAST = 106,
                   STEAL = 110,
                   BLIND = 109,
-                  FREEZE = 107; 
+                  FREEZE = 107;
+                 
+static final int  LOGO_STATE = 0,
+                  START_STATE = 1,
+                  OPTION_STATE = 2,
+                  CREATE_STATE = 3,
+                  GAME_STATE = 4,
+                  END_STATE = 5,
+                  HELP_STATE = 6;
                    
                       
 /**************************************************************

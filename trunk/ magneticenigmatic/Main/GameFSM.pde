@@ -18,6 +18,7 @@ class GameFSM {
   Button helpCreditsButton;
   Button startPlayer1;
   Button startPlayer2;
+  Button backButton;
 
   int continueCount = 0;
   int whoWon = 0;
@@ -124,9 +125,18 @@ class GameFSM {
     {
       startPlayer2.myImage.filter(INVERT);
       startPlayer1.myImage.filter(INVERT);
-      stateId++;
-    } 
-    
+      stateId = 3;
+    }
+   
+    if(settingsButton.checkBounds() == 1) 
+    {
+      stateId = OPTION_STATE;
+    }
+
+    if(helpCreditsButton.checkBounds() == 1)
+    {
+      stateId = HELP_STATE;
+    }    
     return;
   }
   
@@ -134,7 +144,14 @@ class GameFSM {
   */
   public void optionsState()
   {
-    stateId++;
+    background(backgroundPicture);
+    backButton.drawit();
+    settingsButton.move();
+    helpCreditsButton.move();
+    if(backButton.checkBounds() == 1)
+    {
+      stateId = START_STATE;
+    }
   }
   
   public void createNew()
@@ -147,9 +164,20 @@ class GameFSM {
     theBoard.generateBoard();
     theMomentum = new Momentum();
     startClock(); 
-    stateId++;
+    stateId = GAME_STATE;
   }
 
+  public void helpState()
+  {
+    background(backgroundPicture);
+    backButton.drawit();
+    settingsButton.move();
+    helpCreditsButton.move();
+    if(backButton.checkBounds() == 1)
+    {
+      stateId = START_STATE;
+    }
+  }
   
   /************************************************************
   */
@@ -362,6 +390,7 @@ class GameFSM {
       case 3: createNew(); break;
       case 4: gameState(); break;
       case 5: endRound(); break;
+      case 6: helpState(); break;
       default: break;
     }
   }
@@ -430,6 +459,7 @@ class GameFSM {
       helpCreditsButton = new Button(HelpCredits, logoX + logo.width , logoY + logo.height ,200, 200);
       settingsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       helpCreditsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
+      backButton = new Button(HelpCredits, 0, height-HelpCredits.width);
   }
   
 }
