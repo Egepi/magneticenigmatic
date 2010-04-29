@@ -17,7 +17,7 @@ void getTouches() {
         float yCoord = height - curTouch.getYPos() * height;
         int newx, newy;        
         newx = int((yCoord-PUZZLE_ORIGIN_Y)/TILE_SIZE);
-        newy = int((xCoord-PUZZLE_ORIGIN_X-(int)(theMomentum.incrementY()))/TILE_SIZE);
+        newy = int((xCoord-PUZZLE_ORIGIN_X-(int)(theMomentum.getY()))/TILE_SIZE);
 
         /*
         if (sel1.getX() == -1)
