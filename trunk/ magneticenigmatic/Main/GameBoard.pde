@@ -530,11 +530,13 @@ GameBoard(int theWidth, int theHeight)
     
     if(p == player1)
     {
-      pOneUp.add(new PowerUp(effect, p));   
+      PowerUp tempPow = new PowerUp(effect,p);
+      //pOneUp.add(new PowerUp(effect, p));   
     }
     else
     {
-      pTwoUp.add(new PowerUp(effect, p));
+      PowerUp tempPower = new PowerUp(effect,p);
+      //pTwoUp.add(new PowerUp(effect, p));
     }
   }
   

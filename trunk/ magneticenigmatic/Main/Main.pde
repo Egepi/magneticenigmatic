@@ -93,7 +93,10 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                      TILE9 = "eye.png",
                      TILE10 = "arrow.png",
                      //CLTILE = "Colorless_patternless.png";
-                     CLTILE = "silverball.png";
+                     CLTILE = "silverball.png",
+                     POWER1 = "lightning_time.png",
+                     POWER2 = "snow_time.png",
+                     POWER3 = "eye_time.png";
                      
                      
 //For the sake of readability and code comprehension
@@ -162,6 +165,8 @@ PImage backgroundPicture;
  PImage p2Win;
  PImage p1Lose;
  PImage p2Lose;
+ 
+ PImage[] powerArray = new PImage[3];
  
 void setup()
 {
