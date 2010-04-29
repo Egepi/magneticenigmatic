@@ -59,6 +59,7 @@ class GameFSM {
   {
     background(50,125,150);
     font1 = loadFont("ArialNarrow-48.vlw");
+    font2 = loadFont("Monospaced.plain-36.vlw");
     textFont(font1); //Set font to use for following text() calls
     textAlign(CENTER);
     
@@ -105,10 +106,7 @@ class GameFSM {
     imbalancedBG = minim.loadFile("POL_Imbalanced.mp3", 2048);
     dangerBG = minim.loadFile("POL_Danger.mp3", 2048);
     
-    p1Win = loadImage("P1Win.png");
-    p2Win = loadImage("P2Win.png");
-    p1Lose = loadImage("P1Lose.png");
-    p2Lose = loadImage("P2Lose.png");  
+    scoreBG = loadImage("scoreBackground.png");
  
     makeButtons();
     balancedBG.loop();
@@ -472,7 +470,7 @@ class GameFSM {
   {
     theBoard.swapSongs(balancedBG);
     background(backgroundPicture); //Arbitrary background color for the time being.
-    
+
     if(whoWon == 1)
     {
       player1Status = "You Win";
@@ -665,46 +663,49 @@ class GameFSM {
   
   void calculateScores()
   {
-    powerupStringP1 = "Powerups activated: " + player1.statPowerups;
-    swapStringP1 = "Swaps made: " + player1.statSwaps;
-    clearStringP1 = "Clears made: " + player1.statClears;
-    chainStringP1 = "Chains caused: " + player1.statChains;
-    bestChainStringP1 = "Best chain had " + player1.statBestChain + " clears";
-
-    powerupStringP2 = "Powerups activated: " + player2.statPowerups;
-    swapStringP2 = "Swaps made: " + player2.statSwaps;
-    clearStringP2 = "Clears made: " + player2.statClears;
-    chainStringP2 = "Chains caused: " + player2.statChains;
-    bestChainStringP2 = "Best chain had " + player2.statBestChain + " clears";
+    swapStringP1      = "    Swaps made:         " + player1.statSwaps;
+    clearStringP1     = "    Clears made:        " + player1.statClears;
+    powerupStringP1   = "    Powerups used:      " + player1.statPowerups;
+    chainStringP1     = "    Chains caused:      " + player1.statChains;
+    bestChainStringP1 = "    Best chain:         " + player1.statBestChain;
+    
+    swapStringP2      = "    Swaps made:         " + player2.statSwaps;
+    clearStringP2     = "    Clears made:        " + player2.statClears;
+    powerupStringP2   = "    Powerups used:      " + player2.statPowerups;
+    chainStringP2     = "    Chains caused:      " + player2.statChains;
+    bestChainStringP2 = "    Best chain:         " + player2.statBestChain;
     
   }
   void displayScores()
   {
-    
+    textFont(font2);
     pushMatrix();
-    fill(0);
-    tint(0,0,0,145);
-    rect(cont1.myXcoord + cont1.myWidth + 5, height - quit.myYcoord + 5 , width - 2*(cont1.myXcoord + cont1.myWidth + 5), height - 2*(height - quit.myYcoord + 5));
-    noTint();
+    textAlign(LEFT);
+    image(scoreBG, cont1.myXcoord + cont1.myWidth + 5, height - quit.myYcoord + 5 , width - 2*(cont1.myXcoord + cont1.myWidth + 5), height - 2*(height - quit.myYcoord + 5)); 
+    float heightOffset = (height - 2*(height - quit.myYcoord + 5))/2;
     fill(255);
     rotate(PI/2);
-    text(swapStringP1, 0.5*height, 0.45*-width);
-    text(clearStringP1, 0.5*height, 0.41*-width); 
-    text(powerupStringP1, 0.5*height, 0.37*-width); 
-    text(chainStringP1, 0.5*height, 0.33*-width); 
-    text(bestChainStringP1, 0.5*height, 0.29*-width);
+    text(swapStringP1, 0.5*height - heightOffset, 0.45*-width);
+    text(clearStringP1, 0.5*height - heightOffset, 0.41*-width); 
+    text(powerupStringP1, 0.5*height - heightOffset, 0.37*-width); 
+    text(chainStringP1, 0.5*height - heightOffset, 0.33*-width); 
+    text(bestChainStringP1, 0.5*height - heightOffset, 0.29*-width);
+    textAlign(CENTER);
     text(player1Status, 0.5*height, 0.21*-width); 
     popMatrix();
 
     pushMatrix();
+    textAlign(LEFT);
     rotate(-PI/2);
-    text(swapStringP2, 0.5*-height, 0.55*width);
-    text(clearStringP2, 0.5*-height, 0.59*width); 
-    text(powerupStringP2, 0.5*-height, 0.63*width); 
-    text(chainStringP2, 0.5*-height, 0.67*width); 
-    text(bestChainStringP2, 0.5*-height, 0.71*width);
+    text(swapStringP2, 0.5*-height - heightOffset, 0.55*width);
+    text(clearStringP2, 0.5*-height - heightOffset, 0.59*width); 
+    text(powerupStringP2, 0.5*-height - heightOffset, 0.63*width); 
+    text(chainStringP2, 0.5*-height - heightOffset, 0.67*width); 
+    text(bestChainStringP2, 0.5*-height - heightOffset, 0.71*width);
+    textAlign(CENTER);
     text(player2Status, 0.5*-height, 0.79*width);
     popMatrix();
+    textFont(font1);
 
   }
 }

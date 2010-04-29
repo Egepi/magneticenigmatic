@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Tactile stuff
  */
  
-boolean connectToTacTile = false;
+boolean connectToTacTile = true;
 //Touch API
 TouchAPI tacTile;
 //Names of machines you might use
@@ -173,13 +173,11 @@ PImage backgroundPicture;
  int lineOfGravity = MAX_R/2;
  int timeBetweenRows = MAX_TIME_BETWEEN_ROWS;
  PFont font1;
+ PFont font2;
  PImage logo;
 
  
- PImage p1Win;
- PImage p2Win;
- PImage p1Lose;
- PImage p2Lose;
+ PImage scoreBG;
  
  PImage[] powerArray = new PImage[3];
  
