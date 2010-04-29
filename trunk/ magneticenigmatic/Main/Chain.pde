@@ -91,6 +91,12 @@ class Chain
     {
       int c = count;
       count = 0;
+      p.statClears += c;
+      p.statChains += 1;
+      if (p.statBestChain < c)
+      {
+        p.statBestChain = c;
+      }
       //println("Chain redeemed with " + c + " combo(s) and " + totalTiles+ " tiles for " + p.getName() + ".");
       if (p == player1)
         theMomentum.evaluateChain(c,totalTiles,1);

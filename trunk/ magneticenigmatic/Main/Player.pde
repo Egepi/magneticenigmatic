@@ -7,7 +7,7 @@ class Player
   public boolean blind;
   public boolean freeze;
   //Statistics
-  public int statSwaps, statClears, statChains, statPowerups;
+  public int statSwaps, statClears, statChains, statPowerups, statBestChain;
   private String name;
   private int roundsWon;
   
