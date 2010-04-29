@@ -201,6 +201,16 @@ class GameFSM {
   */
   public void optionsState()
   {
+    if(responseP1 == true)
+    {
+      responseP1 = false;
+      startPlayer1.myImage.filter(INVERT);
+    }
+    if(responseP2 == true)
+    {
+      responseP2 = false;
+      startPlayer2.myImage.filter(INVERT);
+    }
     background(backgroundPicture);
     backButton.drawit();
     backButton2.drawit();
@@ -361,6 +371,16 @@ class GameFSM {
   */
   public void helpState()
   {
+    if(responseP1 == true)
+    {
+      responseP1 = false;
+      startPlayer1.myImage.filter(INVERT);
+    }
+    if(responseP2 == true)
+    {
+      responseP2 = false;
+      startPlayer2.myImage.filter(INVERT);
+    }
     textAlign(CENTER);
     background(backgroundPicture);
     backButton.drawit();
