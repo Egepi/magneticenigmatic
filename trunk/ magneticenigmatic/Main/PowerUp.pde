@@ -22,7 +22,7 @@ class PowerUp {
   {
     type = theType;
     player = thePlayer;
-    
+    player.addPowerups();
     switch(type) { //Determines which kind of powerup to make
       case SLOW: addSlow(); break;
       case FAST: addFast(); break;

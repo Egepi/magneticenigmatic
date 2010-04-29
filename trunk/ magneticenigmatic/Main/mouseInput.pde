@@ -16,11 +16,13 @@ void mouseInput()
       {
         swap1.play();
         swap1.rewind();
+        player1.addSwap();
       }
       else
       {
         swap2.play();
         swap2.rewind();
+        player2.addSwap();
       }
     }
     sel1.reset();

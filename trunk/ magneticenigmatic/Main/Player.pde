@@ -65,5 +65,21 @@ class Player
   {
     this.roundsWon = inc;
   }
+  public void addSwap()
+  {
+    this.statSwaps++;
+  }
+  public void addClear()
+  {
+    this.statClears++;
+  }
+  public void addPowerups()
+  {
+    this.statPowerups++;
+  }
+    public void addChains()
+  {
+    this.statChains++;
+  }
 }
 
