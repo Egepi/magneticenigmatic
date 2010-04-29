@@ -175,6 +175,7 @@ class GameFSM {
 
     if(helpCreditsButton.checkBounds() == 1)
     {
+      helpCreditsButton.myImage.filter(INVERT);
       stateId = HELP_STATE;
     }    
     return;
@@ -360,6 +361,7 @@ class GameFSM {
     image(leeImage, width*0.7, height*0.60);
     if((backButton.checkBounds() == 1)||(backButton2.checkBounds() == 1))
     {
+      helpCreditsButton.myImage.filter(INVERT);
       stateId = START_STATE;
     }
   }
@@ -669,7 +671,7 @@ class GameFSM {
       startPlayer1 = new Button(start1, start1Xcord, startYcord);
       startPlayer2 = new Button(start2, start2Xcord, startYcord);
       settingsButton = new Button(settings, logoX -200, logoY-200, 200, 200);
-      helpCreditsButton = new Button(HelpCredits, logoX + logo.width , logoY + logo.height ,200, 200);
+      helpCreditsButton = new Button(loadImage("copyright.png"), logoX + logo.width , logoY + logo.height ,200, 200);
       settingsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       helpCreditsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       backButton = new Button(loadImage("leftHome.png"), 0, height-200, 200, 200);
