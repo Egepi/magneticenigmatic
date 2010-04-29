@@ -95,7 +95,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                      //CLTILE = "Colorless_patternless.png";
                      CLTILE = "silverball.png",
                      POWER1 = "lightning_time.png",
-                     POWER2 = "snow_time.png",
+                     POWER2 = "turtle_time.png",
                      POWER3 = "eye_time.png";
                      
                      

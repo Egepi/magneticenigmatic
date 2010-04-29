@@ -27,6 +27,9 @@ GameBoard(int theWidth, int theHeight)
        tileBoard[i][j] = new Tile(0);
      }
    }
+   plyOneMove = 0;
+   plyTwoMove = 0;
+   lineOfGravity = MAX_R/2;
 }
   
   /************************************************************
