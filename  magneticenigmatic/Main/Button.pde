@@ -72,9 +72,9 @@ class Button
       {
         int xCoord = mouseX;
         int yCoord = mouseY;
-        if((xCoord >= myXcoord)&&(xCoord <= (myXcoord + myImage.width)))
+        if((xCoord >= myXcoord)&&(xCoord <= (myXcoord + myWidth)))
         {
-            if((yCoord >= myYcoord)&&(yCoord <= (myYcoord + myImage.height)))
+            if((yCoord >= myYcoord)&&(yCoord <= (myYcoord + myHeight)))
             {
               return 1;
             }
@@ -92,9 +92,9 @@ class Button
         if ( curTouch != null){
           float xCoord = curTouch.getXPos() * width;    
           float yCoord = height - curTouch.getYPos() * height;
-          if((xCoord >= myXcoord)&&(xCoord <= (myXcoord + myImage.width)))
+          if((xCoord >= myXcoord)&&(xCoord <= (myXcoord + myWidth)))
           {
-            if((yCoord >= myYcoord)&&(yCoord <= (myYcoord + myImage.height)))
+            if((yCoord >= myYcoord)&&(yCoord <= (myYcoord + myHeight)))
             {
               return 1;
             }
