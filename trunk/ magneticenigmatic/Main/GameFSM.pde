@@ -48,6 +48,11 @@ class GameFSM {
   
   String player1Status;
   String player2Status;
+  
+  PImage toddImage;
+  PImage karanImage;
+  PImage leeImage;
+  PImage jeremyImage;
   /************************************************************
   */
   public GameFSM()
@@ -97,6 +102,14 @@ class GameFSM {
     powerArray[0].resize(100 , 100);
     powerArray[1].resize(100, 100);
     powerArray[2].resize(60, 60);
+    
+    toddImage = loadImage("ToddS.png");
+    toddImage.resize(200,225);
+    karanImage = loadImage("KaranC.png");
+    leeImage = loadImage("star.png");
+    leeImage.resize(200,200);
+    jeremyImage = loadImage("star.png");
+    jeremyImage.resize(200,200);
     
     logo = loadImage("logo-2.png");
     logoX = width/2 - logo.width/2;
@@ -332,14 +345,20 @@ class GameFSM {
   */
   public void helpState()
   {
+    textAlign(CENTER);
     background(backgroundPicture);
     backButton.drawit();
     backButton2.drawit();
     settingsButton.move();
     helpCreditsButton.move();
-    text("Project Lead\nJeremy Meador\n", width/2, height*0.10);
-    text("Programmers\nTodd Silvia - UIC\nKaran Chakrapani - UIC\nJeremy Meador - LSU\n", width/2, height*0.30);
-    text("Artist\nLee Vanderlick\n", width/2, height*0.70);
+    image(toddImage, width*0.25, height/4 - 100);
+    text("Programmer - UIC\n", width*0.30, height/4 + 200);
+    text("Programmer - UIC\n", width*0.76, height/4 + 200);
+    text("Artist - LSU\n", width*0.32, height*0.60 + 275);
+    text("Project Lead\nProgrammer - LSU", width*0.74+ 50, height*0.60 + 250);
+    image(karanImage, width*0.7, height/4 - 100);
+    image(jeremyImage, width*0.25, height*0.60);
+    image(leeImage, width*0.7, height*0.60);
     if((backButton.checkBounds() == 1)||(backButton2.checkBounds() == 1))
     {
       stateId = START_STATE;
@@ -711,6 +730,7 @@ class GameFSM {
     textAlign(CENTER);
     text(player2Status, 0.5*-height, 0.79*width);
     popMatrix();
+    textAlign(CENTER);
     textFont(font1);
 
   }
