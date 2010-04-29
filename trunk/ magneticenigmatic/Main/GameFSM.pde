@@ -94,9 +94,9 @@ class GameFSM {
     powerArray[1] = loadImage(POWER2);
     powerArray[2] = loadImage(POWER3);
     
-    powerArray[0].resize(TILE_SIZE, TILE_SIZE);
-    powerArray[1].resize(TILE_SIZE, TILE_SIZE);
-    powerArray[2].resize(TILE_SIZE, TILE_SIZE);
+    powerArray[0].resize(100 , 100);
+    powerArray[1].resize(100, 100);
+    powerArray[2].resize(60, 60);
     
     logo = loadImage("logo-2.png");
     logoX = width/2 - logo.width/2;
@@ -320,6 +320,10 @@ class GameFSM {
     theBoard = new GameBoard(TPR, MAX_R);
     theBoard.generateBoard();
     theMomentum = new Momentum();
+    timer1 = -1;
+    timer2 = -1;
+    imageTime1 = null;
+    imageTime2 = null;
     startClock(); 
     stateId = GAME_STATE;
   }
@@ -398,8 +402,8 @@ class GameFSM {
       }
       text(timer1, height/8+20, playerOneY+65);  //Draw timer on board on top
       text(timer1, ((height/8)*7)+40, playerOneY+65);  //Draw timer on board on bottom
-      image(imageTime1, height/8 - TILE_SIZE, playerOneY + 20);
-      image(imageTime1, ((height/8)*7)-40, playerOneY + 20);
+      image(imageTime1, height/8 - TILE_SIZE-8, playerOneY);
+      image(imageTime1, ((height/8)*7)-80, playerOneY + 8);
     }
     text(player1.getName(), height/8,      playerOneY+8); //Don't ask how I got this number...
     text(player1.getName(), (height/8)*7,  playerOneY+8);
@@ -419,7 +423,7 @@ class GameFSM {
       }
       text(timer2, (-height/8)+15, playerTwoY+65);
       text(timer2, (-height/8)*7, playerTwoY+65);
-      image(imageTime2, (-height/8), playerTwoY+25);
+      image(imageTime2, (-height/8), playerTwoY);
       image(imageTime2, ((-height/8)*7)-75, playerTwoY+25);
     }
     text(player2.getName(), -height/8,     playerTwoY+8);
