@@ -74,7 +74,6 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                      PER_COMBO_BONUS = 0.25;
  static final boolean INFINITE_MODE = false, //NOT CURRENTLY USED (if true, game should continue despite a player losing)
                       DEBUG_MODE_ON = false, //if true, chain links are displayed, can also be used for other debugging purposes
-                      SOUNDS_ON = true, 
                       MOMENTUM_ON = true,
                       ANIMATIONS_ON = true,
                       ROW_GENERATION_ON = true,
@@ -127,7 +126,7 @@ static final int  LOGO_STATE = 0,
  
  
  
-
+ boolean SOUNDS_ON = true; 
  PImage[] tileImageType = new PImage[TILE_TYPES];
  PImage colorlessTile = new PImage();
  GameBoard theBoard;
