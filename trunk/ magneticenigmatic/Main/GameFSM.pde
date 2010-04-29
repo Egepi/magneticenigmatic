@@ -676,8 +676,8 @@ class GameFSM {
       helpCreditsButton = new Button(HelpCredits, logoX + logo.width , logoY + logo.height ,200, 200);
       settingsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       helpCreditsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
-      backButton = new Button(HelpCredits, 0, height-200, 200, 200);
-      backButton2 = new Button(HelpCredits, width-200, 0, 200,200);
+      backButton = new Button(loadImage("leftHome.png"), 0, height-200, 200, 200);
+      backButton2 = new Button(loadImage("rightHome.png"), width-200, 0, 200,200);
       checkButton = new Button(loadImage("check.png"), 200,200);
       wrongButton = new Button(loadImage("wrong.png"), 200,200);
       fiveButton = new Button(loadImage("five.png"), width*0.20, height*0.45,175,175);
