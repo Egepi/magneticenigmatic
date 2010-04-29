@@ -42,8 +42,8 @@ class PowerUp {
   {
     otherPlayer(this.player).speedModifier = SLOW_POWERUP_MULTIPLIER;
     otherPlayer(this.player).speedEffectDuration = SLOW_POWERUP_DURATION;
-    picNum = 8;
     player = otherPlayer(player);
+    this.setIcon(1);
     slowSound.play();
     slowSound.rewind();
     setTimer(SLOW_POWERUP_DURATION);
@@ -59,7 +59,7 @@ class PowerUp {
   {
     this.player.speedModifier = SPEED_POWERUP_MULTIPLIER;
     this.player.speedEffectDuration = SPEED_POWERUP_DURATION;
-    picNum = 6;
+    this.setIcon(0);
     speedSound.play();
     speedSound.rewind();
     setTimer(SPEED_POWERUP_DURATION);
@@ -100,8 +100,8 @@ class PowerUp {
   {
     otherPlayer(this.player).blind = true;
     otherPlayer(this.player).blindEffectDuration = BLIND_POWERUP_DURATION;
-    picNum = 9;
     player = otherPlayer(player);
+    this.setIcon(2);
     blindSound.play();
     blindSound.rewind();
     setTimer(BLIND_POWERUP_DURATION);
@@ -149,17 +149,31 @@ class PowerUp {
       {
         pTimer = dur/1000;
         timer1 = dur/1000;
-        imageTime1 = tileImageType[picNum];
         //pOneUp[0] = this;
       }
       else if(this.player.name == "Player 2")
       {
         timer2 = dur/1000;
         pTimer = dur/1000;
-        imageTime2 = tileImageType[picNum];
         //pTwoUp[0] = this;
       }
       oldSec = second();
+  }
+  
+  private void setIcon(int theIcon)
+  {
+    if(this.player.name == "Player 1")
+    {
+      print("the icon: " + theIcon + "\n");
+      imageTime1 = loadImage("star.png");
+      image(imageTime1, 50,50);
+    }
+    else if(this.player.name == "Player 2")
+    {
+      print("the icon: " + theIcon + "\n");
+      imageTime2 = loadImage("star.png");
+      image(imageTime2, 50,50);
+    }
   }
   
   public void setOldSec(int theNewSec)

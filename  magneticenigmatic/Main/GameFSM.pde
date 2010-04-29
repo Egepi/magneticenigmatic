@@ -59,6 +59,14 @@ class GameFSM {
     speedSound = minim.loadFile("speedup.mp3");
     blindSound = minim.loadFile("blind.mp3");
     
+    powerArray[0] = loadImage(POWER1);
+    powerArray[1] = loadImage(POWER2);
+    powerArray[2] = loadImage(POWER3);
+    
+    //powerArray[0].resize(TILE_SIZE, TILE_SIZE);
+    //powerArray[1].resize(TILE_SIZE, TILE_SIZE);
+    //powerArray[2].resize(TILE_SIZE, TILE_SIZE);
+    
     logo = loadImage("logo-2.png");
     logoX = width/2 - logo.width/2;
     logoY = height/2 - logo.height/2;
@@ -192,8 +200,9 @@ class GameFSM {
       }
     }*/
     
-    if(timer1 >= 0) //Check if timer has any time left to display
+    if(timer1 >= 0)//&&(imageTime1 != null)) //Check if timer has any time left to display
     {
+      print("timer 1 = " + timer1 + "\n");
       if(oldSec != second()) //Check if AT LEAST 1 second has passed
       {
         timer1--;
@@ -213,8 +222,9 @@ class GameFSM {
     rotate(-PI/2);
     int playerTwoY = width/2+TILE_SIZE+(int)(theMomentum.getY())+plyTwoMove;
   
-    if(timer2 >= 0)
+    if(timer2 >= 0)//&&(imageTime2 != null))
     {
+      print("timer 2 = " + timer2 + "\n");
       if(oldSec !=second())
       {
         timer2--;
@@ -222,7 +232,7 @@ class GameFSM {
       }
       text(timer2, (-height/8)+15,     playerTwoY+65);
       text(timer2, (-height/8)*7, playerTwoY+65);
-      image(imageTime2, (-height/8)-60, playerTwoY+20);
+      image(imageTime2, (-height/8)-60, playerOneY+20);
       image(imageTime2, ((-height/8)*7)-75, playerTwoY+25);
     }
     text(player2.getName(), -height/8,     playerTwoY+8);
