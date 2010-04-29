@@ -618,19 +618,47 @@ GameBoard(int theWidth, int theHeight)
     }
     if((tempLeft != null )&&(tempLeft.getMyX() < screen.width/DANGER_CUE))
     {
-      swapSongs(dangerBGP1);
+      if(STEREO_ON)
+      {
+        swapSongs(dangerBGP1);
+      }
+      else
+      {
+        swapSongs(dangerBG);
+      }
     }
     else if(tempRight!= null &&(tempRight.getMyX() >= screen.width-screen.width/DANGER_CUE - TILE_SIZE))
     {
-      swapSongs(dangerBGP2);
+      if(STEREO_ON)
+      {
+        swapSongs(dangerBGP2);
+      }
+      else
+      {
+        swapSongs(dangerBG);
+      }
     }
     else if((tempLeft != null)&&(tempLeft.getMyX() < screen.width/IMBALANCED_CUE)&&(tempLeft.getMyX() >= screen.width/DANGER_CUE))   
     {
-      swapSongs(imbalancedBGP1);
+      if(STEREO_ON)
+      {
+        swapSongs(imbalancedBGP1);
+      }
+      else
+      {
+        swapSongs(imbalancedBG);
+      }
     }
     else if((tempRight != null)&&(tempRight.getMyX() >= screen.width-screen.width/IMBALANCED_CUE - TILE_SIZE)&&(tempLeft.getMyX() < screen.width-screen.width/DANGER_CUE - TILE_SIZE))
     {
-      swapSongs(imbalancedBGP2);
+      if(STEREO_ON)
+      {
+        swapSongs(imbalancedBGP2);
+      }
+      else
+      {
+        swapSongs(imbalancedBG);
+      }
     }
     else 
     {

@@ -83,7 +83,8 @@ final int HALF_MARK = (screen.width/2);
                       MOMENTUM_ON = true,
                       ANIMATIONS_ON = true,
                       ROW_GENERATION_ON = true,
-                      MOMENTUM_DECAY_ON = true;
+                      MOMENTUM_DECAY_ON = true,
+                      STEREO_ON = false;
                       
 
 //Images
@@ -165,6 +166,10 @@ static final int  LOGO_STATE = 0,
  
  AudioPlayer currentlyPlaying;
  AudioPlayer balancedBG;
+ 
+ AudioPlayer imbalancedBG;
+ AudioPlayer dangerBG;
+ 
  AudioPlayer imbalancedBGP1;
  AudioPlayer dangerBGP1;
  AudioPlayer imbalancedBGP2;
