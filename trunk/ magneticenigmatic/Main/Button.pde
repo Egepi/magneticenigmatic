@@ -29,7 +29,9 @@ class Button
     image(myImage, myXcoord, myYcoord, myWidth, myHeight);
   }
   
-  
+  public void move()
+  {
+  }
   int checkBounds()
   {
     

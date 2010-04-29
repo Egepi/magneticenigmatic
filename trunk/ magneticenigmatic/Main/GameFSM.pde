@@ -10,10 +10,15 @@ class GameFSM {
   boolean responseP1 = false;
   boolean responseP2 = false;
   boolean exiting = false;
+  
   Button cont1;
   Button quit;
   Button cont2;
   Button settingsButton;
+  Button helpCreditsButton;
+  Button startPlayer1;
+  Button startPlayer2;
+
   int continueCount = 0;
   int whoWon = 0;
   int logoX;
@@ -83,7 +88,10 @@ class GameFSM {
     
     startPlayer1.drawit();
     startPlayer2.drawit();
+    settingsButton.move();
+    helpCreditsButton.move();
     settingsButton.drawit();
+    helpCreditsButton.drawit();
     if(startPlayer1.checkBounds() == 1)
     {
       if(responseP1 == false)
@@ -189,7 +197,7 @@ class GameFSM {
         timer1--;
         oldSec = second();
       }
-      text(timer1, height/8+20,     playerOneY+65);  //Draw timer on board on top
+      text(timer1, height/8+20, playerOneY+65);  //Draw timer on board on top
       text(timer1, ((height/8)*7)+40, playerOneY+65);  //Draw timer on board on bottom
       image(imageTime1, height/8 - TILE_SIZE, playerOneY + 20);
       image(imageTime1, ((height/8)*7)-40, playerOneY + 20);
@@ -381,11 +389,12 @@ class GameFSM {
       PImage start1 = loadImage("start_black_1.png");
       PImage start2 = loadImage("start_black_2.png");
       PImage settings = loadImage("settings.png");
+      PImage HelpCredits = loadImage("exitButton.png");
       
       PImage contP1Button = loadImage("contP1.jpg");
       PImage contP2Button = loadImage("contP2.jpg");
       PImage quitButton = loadImage("quit.jpg");
-    
+      
       float contP1Xcord = (width)*0.15;
       float contP1Ycord = (height/2) - contP1Button.height/2;
       float contP2Xcord = (width)*0.85 - contP2Button.width;
@@ -403,7 +412,9 @@ class GameFSM {
       
       startPlayer1 = new Button(start1, start1Xcord, startYcord);
       startPlayer2 = new Button(start2, start2Xcord, startYcord);
-      settingsButton = new Button(settings, logoX, logoY-200, 200, 200);
+      settingsButton = new Button(settings, logoX -200, logoY-200, 200, 200);
+      helpCreditsButton = new Button(HelpCredits, logoX + logo.width , logoY + logo.height ,200, 200);
+
   }
   
 }
