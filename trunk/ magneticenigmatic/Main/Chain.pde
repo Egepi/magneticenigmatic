@@ -92,7 +92,7 @@ class Chain
       int c = count;
       count = 0;
       p.statClears += c;
-      p.statChains += 1;
+      if (c > 1) p.statChains += 1;
       if (p.statBestChain < c)
       {
         p.statBestChain = c;

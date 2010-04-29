@@ -29,6 +29,18 @@ class GameFSM {
   int whoWon = 0;
   int logoX;
   int logoY;
+  
+  String powerupStringP1;
+  String swapStringP1;
+  String clearStringP1;
+  String chainStringP1;
+  String bestChainStringP1;
+
+  String powerupStringP2;
+  String swapStringP2;
+  String clearStringP2;
+  String chainStringP2;
+  String bestChainStringP2;
   /************************************************************
   */
   public GameFSM()
@@ -384,6 +396,7 @@ class GameFSM {
     if (whoWon > 0)
     {
       stateId ++;
+      calculateScores();
       return;
     }
     
@@ -396,6 +409,7 @@ class GameFSM {
   {
     theBoard.swapSongs(balancedBG);
     background(backgroundPicture); //Arbitrary background color for the time being.
+    displayScores();
     if(whoWon == 1)
     {
       //text("Player 1 won", 500, 200);
@@ -524,12 +538,12 @@ class GameFSM {
       PImage contP2Button = loadImage("contP2.jpg");
       PImage quitButton = loadImage("quit.jpg");
       
-      float contP1Xcord = (width)*0.15;
+      float contP1Xcord = (width)*0.10;
       float contP1Ycord = (height/2) - contP1Button.height/2;
-      float contP2Xcord = (width)*0.85 - contP2Button.width;
+      float contP2Xcord = (width)*0.90 - contP2Button.width;
       float contP2Ycord = (height/2) - contP2Button.height/2;
       float quitXcord = (width/2) - quitButton.width/2;
-      float quitYcord = (height/2) - quitButton.height/2;
+      float quitYcord = (height*0.80);
       
       float start1Xcord = (width*0.15)-(start1.height)/2;
       float start2Xcord = (width*0.85)-(start2.height)/2;
@@ -554,4 +568,41 @@ class GameFSM {
       eightButton.myImage.filter(INVERT);
   }
   
+  void calculateScores()
+  {
+    powerupStringP1 = "Powerups activated: " + player1.statPowerups;
+    swapStringP1 = "Swaps made:" + player1.statSwaps;
+    clearStringP1 = "Clears made:" + player1.statClears;
+    chainStringP1 = "Chains caused:" + player1.statChains;
+    bestChainStringP1 = "Best chain had " + player1.statBestChain + "clears";
+
+    powerupStringP2 = "Powerups activated: " + player2.statPowerups;
+    swapStringP2 = "Swaps made:" + player2.statSwaps;
+    clearStringP2 = "Clears made:" + player2.statClears;
+    chainStringP2 = "Chains caused:" + player2.statChains;
+    bestChainStringP2 = "Best chain had " + player2.statBestChain + "clears";
+    
+  }
+  void displayScores()
+  {
+    pushMatrix();
+    rotate(PI/2);
+    text(swapStringP1, 0.5*height, 0.47*-width);
+    text(clearStringP1, 0.5*height, 0.42*-width); 
+    text(powerupStringP1, 0.5*height, 0.37*-width); 
+    text(chainStringP1, 0.5*height, 0.32*-width); 
+    text(bestChainStringP1, 0.5*height, 0.27*-width); 
+    popMatrix();
+
+    pushMatrix();
+    rotate(-PI/2);
+    text(swapStringP2, 0.5*-height, 0.52*width);
+    text(clearStringP2, 0.5*-height, 0.57*width); 
+    text(powerupStringP2, 0.5*-height, 0.62*width); 
+    text(chainStringP2, 0.5*-height, 0.67*width); 
+    text(bestChainStringP2, 0.5*-height, 0.72*width);
+    popMatrix();
+
+  }
 }
+
