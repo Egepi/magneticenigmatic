@@ -103,8 +103,10 @@ class GameFSM {
     logoY = height/2 - logo.height/2;
     
     balancedBG = minim.loadFile("POL_Balanced.mp3", 2048);
-    imbalancedBG = minim.loadFile("POL_Imbalanced.mp3", 2048);
-    dangerBG = minim.loadFile("POL_Danger.mp3", 2048);
+    imbalancedBGP1 = minim.loadFile("POL_ImbalancedP1.mp3", 2048);
+    dangerBGP1 = minim.loadFile("POL_DangerP1.mp3", 2048);
+    imbalancedBGP2 = minim.loadFile("POL_ImbalancedP2.mp3", 2048);
+    dangerBGP2 = minim.loadFile("POL_DangerP2.mp3", 2048);
     
     scoreBG = loadImage("scoreBackground.png");
  
