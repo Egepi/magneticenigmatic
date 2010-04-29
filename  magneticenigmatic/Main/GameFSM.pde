@@ -678,24 +678,30 @@ class GameFSM {
   }
   void displayScores()
   {
+    
     pushMatrix();
+    fill(0);
+    tint(0,0,0,145);
+    rect(cont1.myXcoord + cont1.myWidth + 5, height - quit.myYcoord + 5 , width - 2*(cont1.myXcoord + cont1.myWidth + 5), height - 2*(height - quit.myYcoord + 5));
+    noTint();
+    fill(255);
     rotate(PI/2);
-    text(swapStringP1, 0.5*height, 0.47*-width);
-    text(clearStringP1, 0.5*height, 0.42*-width); 
+    text(swapStringP1, 0.5*height, 0.45*-width);
+    text(clearStringP1, 0.5*height, 0.41*-width); 
     text(powerupStringP1, 0.5*height, 0.37*-width); 
-    text(chainStringP1, 0.5*height, 0.32*-width); 
-    text(bestChainStringP1, 0.5*height, 0.27*-width);
-    text(player1Status, 0.5*height, 0.22*-width); 
+    text(chainStringP1, 0.5*height, 0.33*-width); 
+    text(bestChainStringP1, 0.5*height, 0.29*-width);
+    text(player1Status, 0.5*height, 0.21*-width); 
     popMatrix();
 
     pushMatrix();
     rotate(-PI/2);
-    text(swapStringP2, 0.5*-height, 0.52*width);
-    text(clearStringP2, 0.5*-height, 0.57*width); 
-    text(powerupStringP2, 0.5*-height, 0.62*width); 
+    text(swapStringP2, 0.5*-height, 0.55*width);
+    text(clearStringP2, 0.5*-height, 0.59*width); 
+    text(powerupStringP2, 0.5*-height, 0.63*width); 
     text(chainStringP2, 0.5*-height, 0.67*width); 
-    text(bestChainStringP2, 0.5*-height, 0.72*width);
-    text(player2Status, 0.5*-height, 0.77*width);
+    text(bestChainStringP2, 0.5*-height, 0.71*width);
+    text(player2Status, 0.5*-height, 0.79*width);
     popMatrix();
 
   }
