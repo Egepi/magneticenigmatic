@@ -61,7 +61,10 @@ class Tile
     swapUp = false;
     speedModifier = 1.0;
     if (freeze)
+    {
       isFrozen = true;
+      tileImage = iceArray[theType-1];
+    }
       
   }
   
@@ -233,15 +236,12 @@ class Tile
     myY = tempY-(int)(ax*TILE_SIZE);
     if ((!blind)&&(tileImage != null))
     {
-      image(tileImage,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),(int)(sizeModifier*TILE_SIZE),(int)(sizeModifier*TILE_SIZE));
-      if (isFrozen)
+      /*if (isFrozen)
       {
-        strokeWeight(1);
-        stroke(0,40,200);
-        fill(0,40,200,90);
-        rect(tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),(int)(sizeModifier*TILE_SIZE),(int)(sizeModifier*TILE_SIZE));
-        fill(0,0,0,255);
+        tileImage = tileImageType[theType];
       }
+      else*/
+        image(tileImage,tempX-(int)(ay*TILE_SIZE),tempY-(int)(ax*TILE_SIZE),(int)(sizeModifier*TILE_SIZE),(int)(sizeModifier*TILE_SIZE));
     }
     else if ((blind)&&(tileImage != null))
     {

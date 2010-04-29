@@ -87,6 +87,12 @@ class GameFSM {
     backgroundPicture = loadImage("cut_background2B.png");
     backgroundPicture.resize(width,height);
     
+    iceArray[0] = loadImage(PICE1);
+    iceArray[1] = loadImage(PICE2);
+    iceArray[2] = loadImage(PICE3);
+    iceArray[3] = loadImage(PICE4);
+    iceArray[4] = loadImage(PICE5);
+    
     swap1 = minim.loadFile("Swap_Left.wav");
     swap2 = minim.loadFile("Swap_Right.wav");
     

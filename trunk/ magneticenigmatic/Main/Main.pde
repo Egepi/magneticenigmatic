@@ -104,6 +104,11 @@ final int HALF_MARK = (screen.width/2);
                      POWER2 = "turtle_time.png",
                      POWER3 = "eye_time.png";
                      
+static final String PICE1 = "rustIce.png",
+                    PICE2 = "iceIce.png",
+                    PICE3 = "oxycopperIce.png",
+                    PICE4 = "platinumIce.png",
+                    PICE5 = "nuggetIce.png";                    
                      
 //For the sake of readability and code comprehension
 
@@ -186,6 +191,7 @@ PImage backgroundPicture;
  PImage scoreBG;
  
  PImage[] powerArray = new PImage[3];
+ PImage[] iceArray = new PImage[5];
  
 void setup()
 {
