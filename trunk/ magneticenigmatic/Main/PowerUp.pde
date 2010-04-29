@@ -149,13 +149,11 @@ class PowerUp {
       {
         pTimer = dur/1000;
         timer1 = dur/1000;
-        //pOneUp[0] = this;
       }
       else if(this.player.name == "Player 2")
       {
         timer2 = dur/1000;
         pTimer = dur/1000;
-        //pTwoUp[0] = this;
       }
       oldSec = second();
   }
@@ -164,15 +162,11 @@ class PowerUp {
   {
     if(this.player.name == "Player 1")
     {
-      print("the icon: " + theIcon + "\n");
-      imageTime1 = loadImage("star.png");
-      image(imageTime1, 50,50);
+      imageTime1 = powerArray[theIcon];
     }
     else if(this.player.name == "Player 2")
     {
-      print("the icon: " + theIcon + "\n");
-      imageTime2 = loadImage("star.png");
-      image(imageTime2, 50,50);
+      imageTime2 = powerArray[theIcon];
     }
   }
   

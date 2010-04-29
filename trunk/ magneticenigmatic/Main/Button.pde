@@ -41,24 +41,19 @@ class Button
     if(myXcoord < myPathMaxX && myYcoord == myPathMinY)
     {
       myXcoord = myXcoord + 5;
-      print("1\n");
     }
     else if(myXcoord > myPathMinX && myYcoord == myPathMaxY)
     {
-      myXcoord = myXcoord - 5;
-      print("2\n");      
+      myXcoord = myXcoord - 5;   
     }
     else if(myYcoord < myPathMaxY && myXcoord == myPathMaxX)
     {
-      myYcoord = myYcoord + 5;
-      print("3\n");      
+      myYcoord = myYcoord + 5;   
     }
     else if(myYcoord > myPathMinY && myXcoord == myPathMinX)
     {
-      myYcoord = myYcoord - 5;
-      print("4\n");      
+      myYcoord = myYcoord - 5;    
     }
-    print("WTH");
   }
   public void setPath(int leftX, int rightX, int topY, int bottomY)
   {

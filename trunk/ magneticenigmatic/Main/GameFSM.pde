@@ -202,7 +202,6 @@ class GameFSM {
     
     if(timer1 >= 0)//&&(imageTime1 != null)) //Check if timer has any time left to display
     {
-      print("timer 1 = " + timer1 + "\n");
       if(oldSec != second()) //Check if AT LEAST 1 second has passed
       {
         timer1--;
@@ -224,7 +223,6 @@ class GameFSM {
   
     if(timer2 >= 0)//&&(imageTime2 != null))
     {
-      print("timer 2 = " + timer2 + "\n");
       if(oldSec !=second())
       {
         timer2--;
