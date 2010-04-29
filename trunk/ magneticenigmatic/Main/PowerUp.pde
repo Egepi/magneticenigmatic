@@ -44,8 +44,24 @@ class PowerUp {
     otherPlayer(this.player).speedEffectDuration = SLOW_POWERUP_DURATION;
     player = otherPlayer(player);
     this.setIcon(1);
-    slowSound.play();
-    slowSound.rewind();
+    if(STEREO_ON)
+    {
+      if(player == player1)
+      {
+        slowSoundP1.play();
+        slowSoundP1.rewind();
+      }
+      else
+      {
+        slowSoundP2.play();
+        slowSoundP2.rewind();
+      }
+    }
+    else
+    {
+      slowSound.play();
+      slowSound.rewind();
+    }
     setTimer(SLOW_POWERUP_DURATION);
   }
   
@@ -60,8 +76,24 @@ class PowerUp {
     this.player.speedModifier = SPEED_POWERUP_MULTIPLIER;
     this.player.speedEffectDuration = SPEED_POWERUP_DURATION;
     this.setIcon(0);
-    speedSound.play();
-    speedSound.rewind();
+    if(STEREO_ON)
+    {
+      if(player == player1)
+      {
+        speedSoundP1.play();
+        speedSoundP1.rewind();
+      }
+      else
+      {
+        speedSoundP2.play();
+        speedSoundP2.rewind();
+      }
+    }
+    else
+    {
+      speedSound.play();
+      speedSound.rewind();
+    }
     setTimer(SPEED_POWERUP_DURATION);
 
   }
@@ -102,8 +134,24 @@ class PowerUp {
     otherPlayer(this.player).blindEffectDuration = BLIND_POWERUP_DURATION;
     player = otherPlayer(player);
     this.setIcon(2);
-    blindSound.play();
-    blindSound.rewind();
+    if(STEREO_ON)
+    {
+      if(player == player1)
+      {
+        blindSoundP1.play();
+        blindSoundP1.rewind();
+      }
+      else
+      {
+        blindSoundP2.play();
+        blindSoundP2.rewind();
+      }
+    }
+    else
+    {
+      blindSound.play();
+      blindSound.rewind();
+    }
     setTimer(BLIND_POWERUP_DURATION);
   }
   
@@ -115,6 +163,24 @@ class PowerUp {
   */
   private void addFreeze()
   {
+    if(STEREO_ON)
+    {
+      if(player == player1)
+      {
+        freezeSoundP1.play();
+        freezeSoundP1.rewind();
+      }
+      else
+      {
+        freezeSoundP2.play();
+        freezeSoundP2.rewind();
+      }
+    }
+    else
+    {
+      freezeSound.play();
+      freezeSound.rewind();
+    }
     otherPlayer(this.player).freeze = true;
      //not implemented yet
      //should make the next blocks that come in for opp. player appear differently when 

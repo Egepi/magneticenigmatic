@@ -66,14 +66,30 @@ void compareTouches()
           {
             if(selA.getY() < lineOfGravity )
             {
-              swap1.play();
-              swap1.rewind();
+              if(STEREO_ON)
+              {
+                swap1.play();
+                swap1.rewind();
+              }
+              else
+              {
+                swap.play();
+                swap.rewind();
+              }
               player1.addSwap();
             }
             else
             {
-              swap2.play();
-              swap2.rewind();
+              if(STEREO_ON)
+              {
+                swap2.play();
+                swap2.rewind();
+              }
+              else
+              {
+                swap.play();
+                swap.rewind();
+              }
               player2.addSwap();
             }
             //selList.remove(i);

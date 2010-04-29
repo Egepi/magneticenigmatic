@@ -84,7 +84,7 @@ final int HALF_MARK = (screen.width/2);
                       ANIMATIONS_ON = true,
                       ROW_GENERATION_ON = true,
                       MOMENTUM_DECAY_ON = true,
-                      STEREO_ON = false;
+                      STEREO_ON = true;
                       
 
 //Images
@@ -157,11 +157,24 @@ static final int  LOGO_STATE = 0,
  Minim minim;  //Used for playing sound
  AudioPlayer swap1;
  AudioPlayer swap2;
+ AudioPlayer swap;
+ 
+ AudioPlayer freezeSound;
+ AudioPlayer freezeSoundP1;
+ AudioPlayer freezeSoundP2;
  
  AudioPlayer slowSound;
+ AudioPlayer slowSoundP1;
+ AudioPlayer slowSoundP2;
+
  AudioPlayer speedSound;
+ AudioPlayer speedSoundP1;
+ AudioPlayer speedSoundP2;
+ 
  AudioPlayer blindSound;
- AudioPlayer freezeSound;
+ AudioPlayer blindSoundP1;
+ AudioPlayer blindSoundP2;
+
  AudioPlayer arrowSound;
  
  AudioPlayer currentlyPlaying;
@@ -169,7 +182,6 @@ static final int  LOGO_STATE = 0,
  
  AudioPlayer imbalancedBG;
  AudioPlayer dangerBG;
- 
  AudioPlayer imbalancedBGP1;
  AudioPlayer dangerBGP1;
  AudioPlayer imbalancedBGP2;
