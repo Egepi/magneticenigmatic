@@ -57,6 +57,9 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                   MAX_V = 100,
                   MAX_TILE_V = 2,
                   TILE_COLORS = 6,
+                  TIME_BETWEEN_DECAY = 1000,
+                  MAX_TIME_BETWEEN_ROWS = 15000,
+                  MIN_TIME_BETWEEN_ROWS = 5000,
                   SPEED_POWERUP_DURATION = 10000, //millis
                   SLOW_POWERUP_DURATION = 10000, // millis
                   STEAL_POWERUP_NUMBER_OF_ROWS = 1,
@@ -68,9 +71,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
                      SPEED_POWERUP_MULTIPLIER = 2.0,
                      SLOW_POWERUP_MULTIPLIER = 0.5,
                      MOMENTUM_DECAY = 0.15,
-                     PER_COMBO_BONUS = 0.25,
-                     TIME_BETWEEN_DECAY = 1000,
-                     TIME_BETWEEN_ROWS = 15000;
+                     PER_COMBO_BONUS = 0.25;
  static final boolean INFINITE_MODE = false, //NOT CURRENTLY USED (if true, game should continue despite a player losing)
                       DEBUG_MODE_ON = false, //if true, chain links are displayed, can also be used for other debugging purposes
                       SOUNDS_ON = true, 
@@ -157,6 +158,7 @@ PImage backgroundPicture;
 
 
  int lineOfGravity = MAX_R/2;
+ int timeBetweenRows = MAX_TIME_BETWEEN_ROWS;
  PFont font1;
  PImage logo;
 

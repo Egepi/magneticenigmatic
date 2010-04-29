@@ -251,10 +251,14 @@ class GameFSM {
     drawAnimations();
     player1.drawPlayer();
     player2.drawPlayer();
-    if ((rowTimeDifference() > TIME_BETWEEN_ROWS)&&(ROW_GENERATION_ON))
+    if ((rowTimeDifference() > timeBetweenRows)&&(ROW_GENERATION_ON))
     {
-      lastRowTime += TIME_BETWEEN_ROWS;
+      lastRowTime +=timeBetweenRows;
       theBoard.generateRow();
+      if (timeBetweenRows > MIN_TIME_BETWEEN_ROWS)
+      {
+        timeBetweenRows -= 500;
+      }
     }
     if ((decayTimeDifference() > TIME_BETWEEN_DECAY)&&(MOMENTUM_DECAY_ON))
     {

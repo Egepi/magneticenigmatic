@@ -30,6 +30,7 @@ GameBoard(int theWidth, int theHeight)
    plyOneMove = 0;
    plyTwoMove = 0;
    lineOfGravity = MAX_R/2;
+   timeBetweenRows = MAX_TIME_BETWEEN_ROWS;
 }
   
   /************************************************************
