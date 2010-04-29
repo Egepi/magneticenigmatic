@@ -25,7 +25,7 @@ o-powerup effect animations
 o-buttons
 o-logo
 o-text
-o-correct swapping animation (the one that pops out of the puzzle should move toward the player)
+x-correct swapping animation (the one that pops out of the puzzle should move toward the player)
 
 
 Add more if you think of them, mark the ones you've completed like this:
