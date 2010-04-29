@@ -46,7 +46,7 @@ class Momentum {
   public void evaluateChain(int comboTotal, int tileCount, int sign)
   {
     double x = sign*(tileCount*(1.0+(comboTotal-1.0)*PER_COMBO_BONUS))*MOMENTUM_COEFF;
-    increaseMomentum(x);
+    increaseMomentum(x*momentumAdd);
   }
   
   public double getY() {
