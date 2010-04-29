@@ -6,7 +6,7 @@ O-victory music
 GAMEPLAY:
 x-decrease time between added rows as time passes
 O-make all animations based on time, not on frames
-O-display stats at the end of the round (number of swaps, number of clears, number of powerups, best chain)
+x-display stats at the end of the round (number of swaps, number of clears, number of powerups, best chain)
 
 
 BUGS:
