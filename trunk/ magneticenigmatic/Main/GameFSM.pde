@@ -520,8 +520,7 @@ class GameFSM {
         TPR = 8;
       }
       
-      if(lowButton.checkBounds() == 1)
-      {
+
         if(momentumAdd != LOW_MOMENTUM)
         {
           lowButton.myImage.filter(INVERT);
@@ -535,7 +534,6 @@ class GameFSM {
           }
           momentumAdd = LOW_MOMENTUM;
         }
-      }
       exiting = true;
       continueCount = 0;
     }
