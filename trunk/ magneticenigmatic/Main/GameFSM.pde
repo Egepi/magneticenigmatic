@@ -19,6 +19,7 @@ class GameFSM {
   Button startPlayer1;
   Button startPlayer2;
   Button backButton;
+  Button backButton2;
   Button checkButton;
   Button wrongButton;
   Button fiveButton;
@@ -173,6 +174,7 @@ class GameFSM {
   {
     background(backgroundPicture);
     backButton.drawit();
+    backButton2.drawit();
     settingsButton.move();
     helpCreditsButton.move();
     text("MUSIC", width/2, height*0.10);
@@ -201,7 +203,7 @@ class GameFSM {
       currentlyPlaying.loop();
       SOUNDS_ON = true;
     }
-    if(backButton.checkBounds() == 1)
+    if((backButton.checkBounds() == 1)||(backButton2.checkBounds() == 1))
     {
       stateId = START_STATE;
     }
@@ -328,12 +330,13 @@ class GameFSM {
   {
     background(backgroundPicture);
     backButton.drawit();
+    backButton2.drawit();
     settingsButton.move();
     helpCreditsButton.move();
     text("Project Lead\nJeremy Meador\n", width/2, height*0.10);
     text("Programmers\nTodd Silvia - UIC\nKaran Chakrapani - UIC\nJeremy Meador - LSU\n", width/2, height*0.30);
     text("Artist\nLee Vanderlick\n", width/2, height*0.70);
-    if(backButton.checkBounds() == 1)
+    if((backButton.checkBounds() == 1)||(backButton2.checkBounds() == 1))
     {
       stateId = START_STATE;
     }
@@ -647,6 +650,7 @@ class GameFSM {
       settingsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       helpCreditsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       backButton = new Button(HelpCredits, 0, height-200, 200, 200);
+      backButton2 = new Button(HelpCredits, width-200, 0, 200,200);
       checkButton = new Button(loadImage("check.png"), 200,200);
       wrongButton = new Button(loadImage("wrong.png"), 200,200);
       fiveButton = new Button(loadImage("five.png"), width*0.20, height*0.45,175,175);
