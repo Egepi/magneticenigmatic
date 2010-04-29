@@ -153,7 +153,9 @@ class GameFSM {
       stateId = START_STATE;
     }
   }
-  
+
+  /************************************************************
+  */  
   public void createNew()
   {
     player1.reset();
@@ -167,6 +169,8 @@ class GameFSM {
     stateId = GAME_STATE;
   }
 
+  /************************************************************
+  */
   public void helpState()
   {
     background(backgroundPicture);
@@ -459,7 +463,7 @@ class GameFSM {
       helpCreditsButton = new Button(HelpCredits, logoX + logo.width , logoY + logo.height ,200, 200);
       settingsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       helpCreditsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
-      backButton = new Button(HelpCredits, 0, height-HelpCredits.width);
+      backButton = new Button(HelpCredits, 0, height-200, 200, 200);
   }
   
 }
