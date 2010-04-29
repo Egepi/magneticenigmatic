@@ -130,6 +130,7 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  Selector sel1, sel2;
  GameFSM theGameFSM;
  int gameStartTime, frameStartTime, frameEndTime, lastRowTime, lastDecayTime;
+
  Minim minim;  //Used for playing sound
  AudioPlayer swap1;
  AudioPlayer swap2;
@@ -137,7 +138,10 @@ final int PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2),
  AudioPlayer speedSound;
  AudioPlayer blindSound;
  AudioPlayer currentlyPlaying;
-
+ AudioPlayer balancedBG;
+ AudioPlayer imbalancedBG;
+ AudioPlayer dangerBG;
+ 
 int timer1 = -1;
 int timer2 = -1;
 PImage imageTime1;
@@ -152,12 +156,7 @@ PImage backgroundPicture;
  int lineOfGravity = MAX_R/2;
  PFont font1;
  PImage logo;
- Button startPlayer1;
- Button startPlayer2;
- 
- AudioPlayer balancedBG;
- AudioPlayer imbalancedBG;
- AudioPlayer dangerBG;
+
  
  PImage p1Win;
  PImage p2Win;
