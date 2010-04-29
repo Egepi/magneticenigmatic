@@ -1,4 +1,4 @@
-SOUND:
+left or SOUND:
 O-find ascending Sound effects for combos (first in a combo is a normal sound, then it gets higher in pitch or somethin as the combo gets higher)
 O-victory music
 
@@ -10,7 +10,7 @@ O-display stats at the end of the round (number of swaps, number of clears, numb
 
 
 BUGS:
-O-random generation is not perfect, occasional clear at the start
+x-random generation is not perfect, occasional clear at the start
 O-it is possible to move a tile before it gets cleared causing only two tiles to clear (probably causes other glitches)
 
 BOOKENDS:

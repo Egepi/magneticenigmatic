@@ -127,32 +127,35 @@ class Tile
           {
             if (swapLeft)
             {
-              ax = 0.5+0.5*cos((float)dr);
-              ay = -0.25*sin((float)dr);
+              ax = 0.5-0.5*cos((float)dr+PI);
+              ay = 0.25*sin((float)dr);
               sizeModifier = 1.0+ay;
-              depth = 0;
+              ay*=1.5;
+              depth = 2;
             }
             else
             {
               ax = 0.5*cos((float)dr+PI)-0.5;
-              ay = 0.25*sin((float)dr);
+              ay = -0.25*sin((float)dr);
               sizeModifier = 1.0+ay;
-              depth = 2;
+              ay*=1.5;
+              depth = 0;
             }
           }
           if (!swapUp)
           {
             if (swapLeft)
             {
-              ax = 0.5-0.5*cos((float)dr+PI);
-              ay = -0.25*sin((float)dr+PI);
+              
+              ax = 0.5+0.5*cos((float)dr);
+              ay = 0.25*sin((float)dr);
               sizeModifier = 1.0-ay;
               depth = 0;
             }
             else
             {
-              ax = -0.50*cos((float)dr)-0.5;
-              ay = 0.25*sin((float)dr+PI);
+              ax = -0.5*cos((float)dr)-0.5;
+              ay = -0.25*sin((float)dr);
               sizeModifier = 1.0-ay;
               depth = 2;
             }
