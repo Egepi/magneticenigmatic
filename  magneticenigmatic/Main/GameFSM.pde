@@ -107,7 +107,7 @@ class GameFSM {
     karanImage = loadImage("KaranC.png");
     leeImage = loadImage("star.png");
     leeImage.resize(200,200);
-    jeremyImage = loadImage("star.png");
+    jeremyImage = loadImage("jeremy.png");
     jeremyImage.resize(200,200);
     
     logo = loadImage("logo-2.png");
@@ -353,12 +353,12 @@ class GameFSM {
     helpCreditsButton.move();
     image(toddImage, width*0.25, height/4 - 100);
     text("Programmer - UIC\n", width*0.30, height/4 + 200);
-    text("Programmer - UIC\n", width*0.76, height/4 + 200);
-    text("Artist - LSU\n", width*0.32, height*0.60 + 275);
-    text("Project Lead\nProgrammer - LSU", width*0.74+ 50, height*0.60 + 250);
-    image(karanImage, width*0.7, height/4 - 100);
+    text("Programmer - UIC\n", width*0.70, height/4 + 200);
+    text("Artist - LSU\n", width*0.70, height*0.60 + 275);
+    text("Project Lead\nProgrammer - LSU", width*0.32, height*0.60 + 275);
+    image(karanImage, width*0.70-(karanImage.width/2), height/4 - 100);
     image(jeremyImage, width*0.25, height*0.60);
-    image(leeImage, width*0.7, height*0.60);
+    image(leeImage, width*0.7-(leeImage.width/2), height*0.60);
     if((backButton.checkBounds() == 1)||(backButton2.checkBounds() == 1))
     {
       helpCreditsButton.myImage.filter(INVERT);
