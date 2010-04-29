@@ -562,6 +562,10 @@ class GameFSM {
         }
       exiting = true;
       continueCount = 0;
+      settingsButton.myXcoord = settingsButton.myPathMinX;
+      settingsButton.myYcoord = settingsButton.myPathMaxY;
+      helpCreditsButton.myXcoord = helpCreditsButton.myPathMaxX;
+      helpCreditsButton.myYcoord = helpCreditsButton.myPathMinY;
     }
     if((responseP1 && responseP2) || exiting)
     {
