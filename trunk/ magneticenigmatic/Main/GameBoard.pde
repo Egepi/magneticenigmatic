@@ -616,19 +616,27 @@ GameBoard(int theWidth, int theHeight)
         }
       }
     }
-    if(((tempLeft != null )&&(tempLeft.getMyX() < screen.width/DANGER_CUE))||((tempRight!= null )&&(tempRight.getMyX() >= screen.width-screen.width/DANGER_CUE - TILE_SIZE)))
+    if((tempLeft != null )&&(tempLeft.getMyX() < screen.width/DANGER_CUE))
     {
-      swapSongs(dangerBG);
+      swapSongs(dangerBGP1);
     }
-    else if(((tempLeft != null)&&(tempLeft.getMyX() < screen.width/IMBALANCED_CUE)&&(tempLeft.getMyX() >= screen.width/DANGER_CUE))||
-           ((tempRight != null)&&(tempRight.getMyX() >= screen.width-screen.width/IMBALANCED_CUE - TILE_SIZE)&&(tempLeft.getMyX() < screen.width-screen.width/DANGER_CUE - TILE_SIZE)))
+    else if(tempRight!= null &&(tempRight.getMyX() >= screen.width-screen.width/DANGER_CUE - TILE_SIZE))
     {
-      swapSongs(imbalancedBG);
+      swapSongs(dangerBGP2);
+    }
+    else if((tempLeft != null)&&(tempLeft.getMyX() < screen.width/IMBALANCED_CUE)&&(tempLeft.getMyX() >= screen.width/DANGER_CUE))   
+    {
+      swapSongs(imbalancedBGP1);
+    }
+    else if((tempRight != null)&&(tempRight.getMyX() >= screen.width-screen.width/IMBALANCED_CUE - TILE_SIZE)&&(tempLeft.getMyX() < screen.width-screen.width/DANGER_CUE - TILE_SIZE))
+    {
+      swapSongs(imbalancedBGP2);
     }
     else 
     {
       swapSongs(balancedBG);
     }
+    
     if((tempLeft != null )&&(tempLeft.getMyX() < 0))
     {
       player2.setRoundsWon(player2.getRoundsWon()+1);
