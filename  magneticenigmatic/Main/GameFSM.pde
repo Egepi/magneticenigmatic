@@ -44,6 +44,9 @@ class GameFSM {
   String clearStringP2;
   String chainStringP2;
   String bestChainStringP2;
+  
+  String player1Status;
+  String player2Status;
   /************************************************************
   */
   public GameFSM()
@@ -465,19 +468,18 @@ class GameFSM {
   {
     theBoard.swapSongs(balancedBG);
     background(backgroundPicture); //Arbitrary background color for the time being.
-    displayScores();
+    
     if(whoWon == 1)
     {
-      //text("Player 1 won", 500, 200);
-      image(p1Win, cont1.myXcoord + width*0.1, cont1.myYcoord);
-      image(p2Lose, cont2.myXcoord - width*0.1, cont2.myYcoord);
+      player1Status = "You Win";
+      player2Status = "You Lose";
     }
     else if (whoWon == 2)
     {
-      //text("Player 2 won", 500, 200); 
-      image(p1Lose, cont1.myXcoord + width*0.1, cont1.myYcoord);
-      image(p2Win, cont2.myXcoord - width*0.1, cont2.myYcoord); 
+      player1Status = "You Lose";
+      player2Status = "You Win";
     }
+    displayScores();
     cont1.drawit();
     cont2.drawit();
     quit.drawit();
@@ -631,16 +633,16 @@ class GameFSM {
   void calculateScores()
   {
     powerupStringP1 = "Powerups activated: " + player1.statPowerups;
-    swapStringP1 = "Swaps made:" + player1.statSwaps;
-    clearStringP1 = "Clears made:" + player1.statClears;
-    chainStringP1 = "Chains caused:" + player1.statChains;
-    bestChainStringP1 = "Best chain had " + player1.statBestChain + "clears";
+    swapStringP1 = "Swaps made: " + player1.statSwaps;
+    clearStringP1 = "Clears made: " + player1.statClears;
+    chainStringP1 = "Chains caused: " + player1.statChains;
+    bestChainStringP1 = "Best chain had " + player1.statBestChain + " clears";
 
     powerupStringP2 = "Powerups activated: " + player2.statPowerups;
-    swapStringP2 = "Swaps made:" + player2.statSwaps;
-    clearStringP2 = "Clears made:" + player2.statClears;
-    chainStringP2 = "Chains caused:" + player2.statChains;
-    bestChainStringP2 = "Best chain had " + player2.statBestChain + "clears";
+    swapStringP2 = "Swaps made: " + player2.statSwaps;
+    clearStringP2 = "Clears made: " + player2.statClears;
+    chainStringP2 = "Chains caused: " + player2.statChains;
+    bestChainStringP2 = "Best chain had " + player2.statBestChain + " clears";
     
   }
   void displayScores()
@@ -651,7 +653,8 @@ class GameFSM {
     text(clearStringP1, 0.5*height, 0.42*-width); 
     text(powerupStringP1, 0.5*height, 0.37*-width); 
     text(chainStringP1, 0.5*height, 0.32*-width); 
-    text(bestChainStringP1, 0.5*height, 0.27*-width); 
+    text(bestChainStringP1, 0.5*height, 0.27*-width);
+    text(player1Status, 0.5*height, 0.22*-width); 
     popMatrix();
 
     pushMatrix();
@@ -661,6 +664,7 @@ class GameFSM {
     text(powerupStringP2, 0.5*-height, 0.62*width); 
     text(chainStringP2, 0.5*-height, 0.67*width); 
     text(bestChainStringP2, 0.5*-height, 0.72*width);
+    text(player2Status, 0.5*-height, 0.77*width);
     popMatrix();
 
   }
