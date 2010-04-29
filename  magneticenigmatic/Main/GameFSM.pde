@@ -185,24 +185,60 @@ class GameFSM {
     }
     if(fiveButton.checkBounds() == 1)
     {
-      TPR = 5;
+      if(TPR !=5)
+      {
+        fiveButton.myImage.filter(INVERT);
+        if(TPR == 8)
+        {
+          eightButton.myImage.filter(INVERT);
+        }
+        else
+        {
+          twelveButton.myImage.filter(INVERT);
+        }
+        TPR = 5;
+      }
     }
     else if(eightButton.checkBounds() == 1)
     {
-      TPR = 8;
+      if(TPR != 8)
+      {
+        eightButton.myImage.filter(INVERT);
+        if(TPR == 5)
+        {
+          fiveButton.myImage.filter(INVERT);
+        }
+        else
+        {
+          twelveButton.myImage.filter(INVERT);
+        }
+        TPR = 8;
+      }
     }
     else if(twelveButton.checkBounds() == 1)
     {
-      TPR = 12;
+      if(TPR != 12)
+      {
+        twelveButton.myImage.filter(INVERT);
+        if(TPR == 5)
+        {
+          fiveButton.myImage.filter(INVERT);
+        }
+        else
+        {
+          eightButton.myImage.filter(INVERT);
+        }
+        TPR = 12;
+      }
     }
-    PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2);
-    PUZZLE_ORIGIN_Y = (screen.height/2) - ((TPR * TILE_SIZE)/2);
   }
 
   /************************************************************
   */  
   public void createNew()
   {
+    PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2);
+    PUZZLE_ORIGIN_Y = (screen.height/2) - ((TPR * TILE_SIZE)/2);
     player1.reset();
     player2.reset();
     responseP1 = false;
@@ -515,6 +551,7 @@ class GameFSM {
       fiveButton = new Button(loadImage("five.png"), width*0.20, height/2,200,200);
       eightButton = new Button(loadImage("eight.png"), width*0.40, height/2,200,200);
       twelveButton = new Button(loadImage("twelve.png"), width*0.60, height/2,200,200);
+      eightButton.myImage.filter(INVERT);
   }
   
 }
