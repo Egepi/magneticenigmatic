@@ -157,7 +157,7 @@ class GameFSM {
     text("MUSIC", width/2, height*0.15);
     checkButton.myXcoord = width/2-250;
     checkButton.myYcoord = height*0.20;
-    wrongButton.myXcoord = width/2+250;
+    wrongButton.myXcoord = width/2+50;
     wrongButton.myYcoord = height*0.20;
     checkButton.drawit();
     wrongButton.drawit();
@@ -202,7 +202,7 @@ class GameFSM {
     settingsButton.move();
     helpCreditsButton.move();
     text("Project Lead\nJeremy Meador\n", width/2, height*0.10);
-    text("Programers\nTodd Silvia - UIC\nKaran Chakrapani - UIC\nJeremy Meador - LSU\n", width/2, height*0.30);
+    text("Programmers\nTodd Silvia - UIC\nKaran Chakrapani - UIC\nJeremy Meador - LSU\n", width/2, height*0.30);
     text("Artist\nLee Vanderlick\n", width/2, height*0.70);
     if(backButton.checkBounds() == 1)
     {
