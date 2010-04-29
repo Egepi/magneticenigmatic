@@ -1,0 +1,32 @@
+SOUND:
+O-find ascending Sound effects for combos (first in a combo is a normal sound, then it gets higher in pitch or somethin as the combo gets higher)
+O-victory music
+
+
+GAMEPLAY:
+O-decrease time between added rows as time passes
+O-make all animations based on time, not on frames
+O-display stats at the end of the round (number of swaps, number of clears, number of powerups, best chain)
+
+
+BUGS:
+O-random generation is not perfect, occasional clear at the start
+O-it is possible to move a tile before it gets cleared causing only two tiles to clear (probably causes other glitches)
+
+BOOKENDS:
+O-credits
+O-allow game to pause
+O-options (optional)
+
+
+ART:
+o-powerup ball animations
+o-powerup effect animations
+o-buttons
+o-logo
+o-text
+o-correct swapping animation (the one that pops out of the puzzle should move toward the player)
+
+
+Add more if you think of them, mark the ones you've completed like this:
+X-design a game
