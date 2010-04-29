@@ -646,7 +646,7 @@ GameBoard(int theWidth, int theHeight)
   
   public void swapSongs(AudioPlayer newSong)
   {
-    if (currentlyPlaying != newSong)
+    if ((currentlyPlaying != newSong)&&(SOUNDS_ON == true))
     {
       //newSong.play(currentlyPlaying.position());
       newSong.loop();

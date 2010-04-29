@@ -19,6 +19,8 @@ class GameFSM {
   Button startPlayer1;
   Button startPlayer2;
   Button backButton;
+  Button checkButton;
+  Button wrongButton;
 
   int continueCount = 0;
   int whoWon = 0;
@@ -34,6 +36,10 @@ class GameFSM {
   public void logoState()
   {
     background(50,125,150);
+    font1 = loadFont("ArialNarrow-48.vlw");
+    textFont(font1); //Set font to use for following text() calls
+    textAlign(CENTER);
+    
     /*Load images code*/
     if (TILE0 != null) //for debugging purposes, this may be an actual image for making empty tiles visible.
       tileImageType[0] = loadImage(TILE0);
@@ -53,6 +59,7 @@ class GameFSM {
     colorlessTile = loadImage(CLTILE);
     backgroundPicture = loadImage("cut_background2B.png");
     backgroundPicture.resize(width,height);
+    
     swap1 = minim.loadFile("Swap_Left.wav");
     swap2 = minim.loadFile("Swap_Right.wav");
     
@@ -75,7 +82,6 @@ class GameFSM {
     balancedBG = minim.loadFile("POL_Balanced.mp3", 2048);
     imbalancedBG = minim.loadFile("POL_Imbalanced.mp3", 2048);
     dangerBG = minim.loadFile("POL_Danger.mp3", 2048);
-    font1 = loadFont("ArialNarrow-48.vlw");
     
     p1Win = loadImage("P1Win.png");
     p2Win = loadImage("P2Win.png");
@@ -148,6 +154,24 @@ class GameFSM {
     backButton.drawit();
     settingsButton.move();
     helpCreditsButton.move();
+    text("MUSIC", width/2, height*0.15);
+    checkButton.myXcoord = width/2-250;
+    checkButton.myYcoord = height*0.20;
+    wrongButton.myXcoord = width/2+250;
+    wrongButton.myYcoord = height*0.20;
+    checkButton.drawit();
+    wrongButton.drawit();
+    
+    if(wrongButton.checkBounds() == 1)
+    {
+      currentlyPlaying.pause();
+      SOUNDS_ON = false;
+    }
+    if(checkButton.checkBounds() == 1)
+    {
+      currentlyPlaying.loop();
+      SOUNDS_ON = true;
+    }
     if(backButton.checkBounds() == 1)
     {
       stateId = START_STATE;
@@ -177,6 +201,9 @@ class GameFSM {
     backButton.drawit();
     settingsButton.move();
     helpCreditsButton.move();
+    text("Project Lead\nJeremy Meador\n", width/2, height*0.10);
+    text("Programers\nTodd Silvia - UIC\nKaran Chakrapani - UIC\nJeremy Meador - LSU\n", width/2, height*0.30);
+    text("Artist\nLee Vanderlick\n", width/2, height*0.70);
     if(backButton.checkBounds() == 1)
     {
       stateId = START_STATE;
@@ -188,8 +215,6 @@ class GameFSM {
   public void gameState()
   {
     background(backgroundPicture); //Arbitrary background color for the time being.
-    textFont(font1); //Set font to use for following text() calls
-    textAlign(CENTER);
     
     /*Rotate and draw player 1 name and a timer if neeed be*/
     pushMatrix();
@@ -464,6 +489,8 @@ class GameFSM {
       settingsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       helpCreditsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       backButton = new Button(HelpCredits, 0, height-200, 200, 200);
+      checkButton = new Button(loadImage("check.png"), 200,200);
+      wrongButton = new Button(loadImage("wrong.png"), 200,200);
   }
   
 }
