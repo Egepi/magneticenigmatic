@@ -14,17 +14,23 @@ class Momentum {
   private double v; //v stands for velocity (scale: -100 to 100 % of MAX_V)
   private double y; // the relative location (0 is center)
   private int state;
+  private int lastIncrement;
   
   public Momentum() 
   {
      v = 0;
      y = 0;
      state = 1;
+     lastIncrement = millis();
   }
   
   public double incrementY() {
     if ((state == ACTIVE)&&(MOMENTUM_ON)){
+      while (millis()-lastIncrement >= 15)
+      {
+        lastIncrement += 20;
         y += v*MAX_V*0.0001; 
+      }
     }
     return y;
   }
