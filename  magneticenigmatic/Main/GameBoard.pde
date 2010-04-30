@@ -183,14 +183,24 @@ GameBoard(int theWidth, int theHeight)
   *
   * Author: JM
   */
-  public boolean swap(int a, int b, int row) //Swap tile at xcoord a with tile at xcoord b on a row
+  public boolean swap(int x1, int x2, int y1, int y2)
+  {
+    if (x1==x2)
+      return swapC(y1,y2,x1);
+   else if (y1==y2)
+      return swapR(x1,x2,y1);   
+   else 
+      return false;   
+  }
+  
+  public boolean swapR(int a, int b, int row) //Swap tile at xcoord a with tile at xcoord b on a row
   {
     Player p = null;
     if ((a < 0)||(a>=TPR)||(b < 0)||(b>=TPR)||(row < 0)||(row >=MAX_R)||(row == lineOfGravity)) //if a, b, or row are out of range
       return false; //tell caller swap did not succeed
     if ((tileAt(a,row) == null)||(tileAt(b,row) == null)) //if these tiles somehow don't exist
       return false;
-    if (abs(a-b)!=1) //if a is not adjacent to b
+    if ((abs(a-b)!=1)) //if a is not adjacent to b
       return false;
     if (!((tileAt(a,row).swappable())&&(tileAt(b,row).swappable()))) //if either block is not swappable
       return false;
@@ -228,11 +238,47 @@ GameBoard(int theWidth, int theHeight)
     return true;
   }
   
+  public boolean swapC(int a, int b, int col) //Swap tile at ycoord a with tile at ycoord b on a col
+  {
+    Player p = null;
+    if ((a < 0)||(a>=MAX_R)||(b < 0)||(b>=MAX_R)||(col < 0)||(col >=TPR)||(a == lineOfGravity)||(b == lineOfGravity)) //if a, b, or row are out of range
+      return false; //tell caller swap did not succeed
+    if ((tileAt(col,a) == null)||(tileAt(col,b) == null)) //if these tiles somehow don't exist
+      return false;
+    if ((abs(a-b)!=1)) //if a is not adjacent to b
+      return false;
+    if (!((tileAt(col,a).swappable())&&(tileAt(col,b).swappable()))) //if either block is not swappable
+      return false;
+    if ((tileAt(col,a).getTileType() == 0)||(tileAt(col,b).getTileType() == 0))
+      return false;
+    Chain c = null;
+
+    if (a < lineOfGravity)
+    {
+      p = player1;
+    }   
+    else //(a > lineOfGravity)
+    {
+      p = player2;
+    }
+    c = new Chain(p);
+    Tile temp = tileAt(col,b);
+    tileBoard[col][b] = tileAt(col,a);
+    tileBoard[col][a] = temp;
+     //------------------------CHAIN
+    Tile[] chainTiles = new Tile[2];
+    chainTiles[0] = tileBoard[col][b];
+    chainTiles[1] = tileBoard[col][a];
+    c.addTiles(chainTiles);
+    tileBoard[col][b].animate(0,b-a,p.speedModifier);
+    tileBoard[col][a].animate(0,a-b,p.speedModifier); 
+    
+    return true;
+  }
+  
   public boolean swap(Selector s1, Selector s2) //attempt to swap the selected tiles if the selectors are on the same row
   {
-    if (s1.getY() != s2.getY())
-      return false;
-    return swap(s1.getX(),s2.getX(),s1.getY());
+    return swap(s1.getX(),s2.getX(),s1.getY(),s2.getY());
   }
     
     
