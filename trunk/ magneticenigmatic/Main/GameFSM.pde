@@ -786,6 +786,8 @@ class GameFSM {
     {
       if(continueCount == 2)
       {
+        cont1.myImage.filter(INVERT);
+        cont2.myImage.filter(INVERT);
         responseP1 = false;
         responseP2 = false;
         exiting = false;    
@@ -794,6 +796,8 @@ class GameFSM {
       }
       else
       {
+        if(responseP1) cont1.myImage.filter(INVERT);
+        if(responseP2) cont2.myImage.filter(INVERT);
         responseP1 = false;
         responseP2 = false;
         exiting = false;    
@@ -865,8 +869,8 @@ class GameFSM {
       PImage start2 = loadImage("startRight.png");
       PImage HelpCredits = loadImage("exitButton.png");
       
-      PImage contP1Button = loadImage("contP1.jpg");
-      PImage contP2Button = loadImage("contP2.jpg");
+      PImage contP1Button = loadImage("contP1.png");
+      PImage contP2Button = loadImage("contP2.png");
 
       float contP1Xcord = (width)*0.10;
       float contP1Ycord = (height/2) - contP1Button.height/2;
