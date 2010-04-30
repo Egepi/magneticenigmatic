@@ -176,6 +176,8 @@ static final int  LOGO_STATE = 0,
  AudioPlayer blindSoundP2;
 
  AudioPlayer[] clear = new AudioPlayer[6];
+ AudioPlayer[] clearP1 = new AudioPlayer[6];
+ AudioPlayer[] clearP2 = new AudioPlayer[6];
  
  AudioPlayer arrowSound;
  
