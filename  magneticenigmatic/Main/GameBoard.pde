@@ -308,6 +308,7 @@ GameBoard(int theWidth, int theHeight)
   public boolean fallTiles(int x, int y, int g) //
   {
     int lesser,greater,iter;
+    double speed = 1.0;
     boolean blockHasFallen = false;
     if (tileBoard[x][y].getTileType() != EMPTY)
       return blockHasFallen;
@@ -318,11 +319,13 @@ GameBoard(int theWidth, int theHeight)
       nearest = y-1; //the first block to iterate
       furthest = -1; //the one beyond the last block (out of array bounds)
       iter = -1; //the direction the iterator needs to go
+      speed = player1.speedModifier;
     }
     else if(g < y ){
       nearest = y+1;
       furthest = MAX_R;
       iter = 1;
+      speed = player1.speedModifier;
     }
     else
     {
@@ -347,12 +350,14 @@ GameBoard(int theWidth, int theHeight)
         nearest = y-1; //the first block to iterate
         furthest = -1; //the one beyond the last block (out of array bounds)
         iter = -1; //the direction the iterator needs to go
+        speed = player1.speedModifier;
       }
       else
       {
         nearest = y+1;
         furthest = MAX_R;
-        iter = 1;        
+        iter = 1;   
+        speed = player2.speedModifier;     
       }
     }
     int j;
@@ -370,7 +375,7 @@ GameBoard(int theWidth, int theHeight)
         ftc.addTile(fallingTile);
       }
       tileBoard[x][j-iter] = fallingTile; //Moves the falling tile into the empty tile's spot
-      fallingTile.animate(0,-iter); //Animates the falling tile to make it look as if it is falling from its original location
+      fallingTile.animate(0,-iter,speed); //Animates the falling tile to make it look as if it is falling from its original location
       if (tileBoard[x][j].getTileType() != EMPTY)
         blockHasFallen = true;
       //if (emptyTile.getTileType() == 0)  
