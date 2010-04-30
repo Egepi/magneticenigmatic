@@ -75,16 +75,49 @@ class Chain
 
   public int incrementChain()
   {
-    if (count < 5)
+    if(STEREO_ON)
     {
-      clear[count].play();
-      clear[count].rewind();  
+      if(p == player1)
+      {
+        if (count < 5)
+        {
+          clearP1[count].play();
+          clearP1[count].rewind();  
+        }
+        else
+        {
+          clearP1[5].play();
+          clearP1[5].rewind();  
+        }
+      }
+      else
+      {
+        if (count < 5)
+        {
+          clearP2[count].play();
+          clearP2[count].rewind();  
+        }
+        else
+        {
+          clearP2[5].play();
+          clearP2[5].rewind();  
+        }
+      }      
     }
-    else
-     {
-      clear[5].play();
-      clear[5].rewind();  
+    else//If no stereo
+    {
+      if (count < 5)
+      {
+        clear[count].play();
+        clear[count].rewind();  
+      }
+      else
+      {
+        clear[5].play();
+        clear[5].rewind();  
+      }
     }
+    
     count++;
     return count;
     
