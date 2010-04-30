@@ -211,7 +211,6 @@ class GameFSM {
     helpCreditsButton.move();
     
     settingsButton.drawit();
-    settingsButton.clickButton();
     helpCreditsButton.drawit();
     
     if((exitGameButtonP1.checkBounds() == 1) || holdingP1)
@@ -233,11 +232,6 @@ class GameFSM {
     startPlayer1.decrementSwitch();
     if(startPlayer1.checkBounds() == 1 && startPlayer1.switchCount == 0) 
     {
-      if(responseP1 == false)
-      {
-        responseP1 = true;
-        startPlayer1.myImage.filter(INVERT);
-      }
       //Switch the image
       PImage temp1 = startPlayer1.myImage;
       startPlayer1.myImage = startPlayer1.myImage2;
@@ -250,11 +244,6 @@ class GameFSM {
     startPlayer2.decrementSwitch();
     if(startPlayer2.checkBounds() == 1 && startPlayer2.switchCount == 0) 
     {
-      if(responseP2 == false)
-      {
-        responseP2 = true;
-        startPlayer2.myImage.filter(INVERT);
-      }
       //Switch the image
       PImage temp2 = startPlayer2.myImage;
       startPlayer2.myImage = startPlayer2.myImage2;
@@ -265,8 +254,6 @@ class GameFSM {
     
     if((responseP1 == true)&&(responseP2 == true))
     {
-      startPlayer2.myImage.filter(INVERT);
-      startPlayer1.myImage.filter(INVERT);
       PImage temp3 = startPlayer1.myImage;
       startPlayer1.myImage = startPlayer1.myImage2;
       startPlayer1.myImage2 = temp3;
@@ -306,12 +293,10 @@ class GameFSM {
     if(responseP1 == true)
     {
       responseP1 = false;
-      startPlayer1.myImage.filter(INVERT);
     }
     if(responseP2 == true)
     {
       responseP2 = false;
-      startPlayer2.myImage.filter(INVERT);
     }
     background(backgroundPicture);
     backButton.drawit();
@@ -669,14 +654,19 @@ class GameFSM {
     holdCountP1 = 0;
     holdingP2 = false;
     holdCountP2 = 0;
+    
     theBoard.swapSongs(balancedBG);
-
-    //theBoard.swapSongs(balancedBG);
-    if (currentlyPlaying != victorySound){
-      currentlyPlaying.pause();
-      victorySound.play();
-      currentlyPlaying = victorySound;
-    }
+/*
+    currentlyPlaying.pause();
+    victorySound.play();
+    
+   if(victorySound.isPlaying())
+   {
+     victorySound.pause();
+     currentlyPlaying = balancedBG;
+     balancedBG.loop();
+   }
+*/
 
     background(backgroundPicture); //Arbitrary background color for the time being.
 
@@ -830,8 +820,6 @@ class GameFSM {
   
   void makeButtons()
   {
-      PImage start1 = loadImage("start_black_1.png");
-      PImage start2 = loadImage("start_black_2.png");
       PImage start1 = loadImage("startLeft.png");
       PImage start2 = loadImage("startRight.png");
       PImage HelpCredits = loadImage("exitButton.png");
