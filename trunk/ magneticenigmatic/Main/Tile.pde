@@ -45,7 +45,7 @@ class Tile
     speedModifier = 1.0;
   }
   
-  Tile(int theType, boolean freeze)
+  Tile(int theType, boolean freeze, double sM)
   {
     tileImage = tileImageType[theType];
     tileType = theType;
@@ -59,7 +59,7 @@ class Tile
     chainID = null; //Chain currently associated with this tile
     state = IDLE;
     swapUp = false;
-    speedModifier = 1.0;
+    speedModifier = sM;
     if (freeze)
     {
       isFrozen = true;
