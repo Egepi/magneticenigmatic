@@ -132,7 +132,7 @@ GameBoard(int theWidth, int theHeight)
       j=0;
     for(int i = 0; i < TPR; i++)
     {
-        temp = new Tile(int(random(1,TILE_COLORS)),player1.freeze);
+        temp = new Tile(int(random(1,TILE_COLORS)),player1.freeze,player1.speedModifier);
         tileBoard[i][j] = temp;
         temp.animate(newRowAnimationX(i),newRowAnimationY(i));
         Chain newCh = new Chain(player1);
@@ -159,7 +159,7 @@ GameBoard(int theWidth, int theHeight)
       j = MAX_R-1;
     for(int i = 0; i < TPR; i++)
     {
-        temp = new Tile(int(random(1,TILE_COLORS)),player2.freeze);
+        temp = new Tile(int(random(1,TILE_COLORS)),player2.freeze,player2.speedModifier);
         tileBoard[i][j] = temp;
         temp.animate(newRowAnimationX(i),-newRowAnimationY(i));
         Chain newCh = new Chain(player2);
@@ -240,6 +240,8 @@ GameBoard(int theWidth, int theHeight)
   
   public boolean swapC(int a, int b, int col) //Swap tile at ycoord a with tile at ycoord b on a col
   {
+    if (VERTICAL_SWAPS_ON == false)
+      return false;
     Player p = null;
     if ((a < 0)||(a>=MAX_R)||(b < 0)||(b>=MAX_R)||(col < 0)||(col >=TPR)||(a == lineOfGravity)||(b == lineOfGravity)) //if a, b, or row are out of range
       return false; //tell caller swap did not succeed

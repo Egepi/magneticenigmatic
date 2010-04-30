@@ -139,6 +139,7 @@ static final int  LOGO_STATE = 0,
  
  
  boolean SOUNDS_ON = true; 
+ boolean VERTICAL_SWAPS_ON = true;
  PImage[] tileImageType = new PImage[TILE_TYPES];
  PImage colorlessTile = new PImage();
  GameBoard theBoard;
@@ -180,6 +181,7 @@ static final int  LOGO_STATE = 0,
  AudioPlayer[] clearP2 = new AudioPlayer[6];
  
  AudioPlayer arrowSound;
+ AudioPlayer victorySound;
  
  AudioPlayer currentlyPlaying;
  AudioPlayer balancedBG;

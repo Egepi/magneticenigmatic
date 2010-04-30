@@ -119,6 +119,7 @@ class GameFSM {
     logoY = height/2 - logo.height/2;
     
     balancedBG = minim.loadFile("POL_Balanced.mp3", 2048);
+    victorySound = minim.loadFile("POL_Victory.mp3");
     
     if(STEREO_ON)
     {
@@ -180,8 +181,7 @@ class GameFSM {
     scoreBG = loadImage("scoreBackground.png");
  
     makeButtons();
-    balancedBG.loop();
-    currentlyPlaying = balancedBG;
+    
     stateId++;
   }
   /************************************************************
@@ -189,7 +189,13 @@ class GameFSM {
   public void startState()
   {
     background(backgroundPicture); //Arbitrary background color for the time being.
-
+    if (currentlyPlaying != balancedBG)
+    {
+      balancedBG.loop();
+      currentlyPlaying = balancedBG;
+      victorySound.pause();
+      victorySound.rewind();
+    }
     image(logo, width/2 - logo.width/2, height/2 - logo.height/2);
     
     exitGameButtonP2.drawit();
@@ -589,7 +595,12 @@ class GameFSM {
   */
   public void endRound()
   {
-    theBoard.swapSongs(balancedBG);
+    //theBoard.swapSongs(balancedBG);
+    if (currentlyPlaying != victorySound){
+      currentlyPlaying.pause();
+      victorySound.play();
+      currentlyPlaying = victorySound;
+    }
     background(backgroundPicture); //Arbitrary background color for the time being.
 
     if(whoWon == 1)
