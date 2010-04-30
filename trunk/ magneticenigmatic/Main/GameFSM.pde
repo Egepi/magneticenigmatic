@@ -19,6 +19,8 @@ class GameFSM {
   Button startPlayer2;
   Button backButton;
   Button backButton2;
+  Button exitGameButtonP1;
+  Button exitGameButtonP2;
   Button checkButton;
   Button wrongButton;
   Button fiveButton;
@@ -400,6 +402,8 @@ class GameFSM {
     background(backgroundPicture);
     backButton.drawit();
     backButton2.drawit();
+    exitGameButtonP2.drawit();
+    exitGameButtonP1.drawit();
     settingsButton.move();
     helpCreditsButton.move();
     image(toddImage, width*0.25, height/4 - 100);
@@ -563,7 +567,9 @@ class GameFSM {
     cont2.drawit();
     backButton.drawit();
     backButton2.drawit();
-
+    exitGameButtonP2.drawit();
+    exitGameButtonP1.drawit();
+    
     if(!responseP1)
     {
       if(cont1.checkBounds() == 1)
@@ -705,8 +711,7 @@ class GameFSM {
       
       PImage contP1Button = loadImage("contP1.jpg");
       PImage contP2Button = loadImage("contP2.jpg");
-      PImage quitButton = loadImage("quit.jpg");
-      
+
       float contP1Xcord = (width)*0.10;
       float contP1Ycord = (height/2) - contP1Button.height/2;
       float contP2Xcord = (width)*0.90 - contP2Button.width;
@@ -737,6 +742,10 @@ class GameFSM {
       medButton = new Button(loadImage("med.png"), width*0.40, height*0.70, 300,200);
       highButton = new Button(loadImage("high.png"), width*0.65, height*0.70, 300,200);
       lowButton.myImage.filter(INVERT);
+      
+      exitGameButtonP1 = new Button(loadImage("exitButtonLeft.png"), 0, 0, 200, 200);
+      exitGameButtonP2 = new Button(loadImage("exitButtonRight.png"), width-200, height-200, 200, 200);
+      
   }
   
   void calculateScores()
