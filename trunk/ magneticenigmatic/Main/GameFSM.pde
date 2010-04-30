@@ -35,9 +35,12 @@ class GameFSM {
   int logoX;
   int logoY;
   
-  boolean holding = false;
-  int holdCount = 0;
+  boolean holdingP1 = false;
+  int holdCountP1 = 0;
   
+  boolean holdingP2 = false;
+  int holdCountP2 = 0;
+    
   String powerupStringP1;
   String swapStringP1;
   String clearStringP1;
@@ -210,20 +213,35 @@ class GameFSM {
     settingsButton.drawit();
     settingsButton.clickButton();
     helpCreditsButton.drawit();
-    if((exitGameButtonP1.checkBounds() == 1) || holding)
+    
+    if((exitGameButtonP1.checkBounds() == 1) || holdingP1)
     {
       if(exitGameButtonP1.checkBounds() == 1)
       {
-        holdCount++;
+        holdCountP1++;
       }
       else
       {
-        holding = false;
-        holdCount = 0;
+        holdingP1 = false;
+        holdCountP1 = 0;
       }
-      if(holdCount == 250) exit();
+      if(holdCountP1 == EXIT_TIME) exit();
     }
     
+    if((exitGameButtonP2.checkBounds() == 1) || holdingP2)
+    {
+      if(exitGameButtonP2.checkBounds() == 1)
+      {
+        holdCountP2++;
+      }
+      else
+      {
+        holdingP2 = false;
+        holdCountP2 = 0;
+      }
+      if(holdCountP2 == EXIT_TIME) exit();
+    }
+
     if(startPlayer1.checkBounds() == 1)
     {
       if(responseP1 == false)
@@ -423,6 +441,10 @@ class GameFSM {
   */  
   public void createNew()
   {
+    holdingP1 = false;
+    holdCountP1 = 0;
+    holdingP2 = false;
+    holdCountP2 = 0;   
     TILE_SIZE = PUZZLE_WIDTH/TPR;
     PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2);
     PUZZLE_ORIGIN_Y = (screen.height/2) - ((TPR * TILE_SIZE)/2);
@@ -483,6 +505,33 @@ class GameFSM {
     background(backgroundPicture); //Arbitrary background color for the time being.
     exitGameButtonP2.drawit();
     exitGameButtonP1.drawit();
+    if((exitGameButtonP1.checkBounds() == 1) || holdingP1)
+    {
+      if(exitGameButtonP1.checkBounds() == 1)
+      {
+        holdCountP1++;
+      }
+      else
+      {
+        holdingP1 = false;
+        holdCountP1 = 0;
+      }
+      if(holdCountP1 == EXIT_TIME) exit();
+    }
+    
+    if((exitGameButtonP2.checkBounds() == 1) || holdingP2)
+    {
+      if(exitGameButtonP2.checkBounds() == 1)
+      {
+        holdCountP2++;
+      }
+      else
+      {
+        holdingP2 = false;
+        holdCountP2 = 0;
+      }
+      if(holdCountP2 == EXIT_TIME) exit();
+    }    
     /*Rotate and draw player 1 name and a timer if neeed be*/
     pushMatrix();
     rotate(PI/2); //Rotate by 90 degrees
@@ -605,12 +654,20 @@ class GameFSM {
   */
   public void endRound()
   {
+
+    holdingP1 = false;
+    holdCountP1 = 0;
+    holdingP2 = false;
+    holdCountP2 = 0;
+    theBoard.swapSongs(balancedBG);
+
     //theBoard.swapSongs(balancedBG);
     if (currentlyPlaying != victorySound){
       currentlyPlaying.pause();
       victorySound.play();
       currentlyPlaying = victorySound;
     }
+
     background(backgroundPicture); //Arbitrary background color for the time being.
 
     if(whoWon == 1)

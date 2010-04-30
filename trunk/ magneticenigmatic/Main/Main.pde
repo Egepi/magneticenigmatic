@@ -69,7 +69,8 @@ final int HALF_MARK = (screen.width/2);
                   IMBALANCED_CUE = 5, //Cues imba music when block reaches within 1/n of total gameboard size.
                   LOW_MOMENTUM = 1,
                   MED_MOMENTUM = 3,
-                  HIGH_MOMENTUM = 7;
+                  HIGH_MOMENTUM = 7,
+                  EXIT_TIME = 115;
                   
                   
  double MOMENTUM_COEFF = 1.00;
