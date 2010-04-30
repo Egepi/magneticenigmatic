@@ -215,13 +215,14 @@ class PowerUp {
       {
         pTimer = dur/1000;
         timer1 = dur/1000;
+        oldSec1 = second();
       }
       else if(this.player.name == "Player 2")
       {
         timer2 = dur/1000;
         pTimer = dur/1000;
+        oldSec2 = second();
       }
-      oldSec = second();
   }
   
   private void setIcon(int theIcon)

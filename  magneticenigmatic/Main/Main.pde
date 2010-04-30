@@ -200,7 +200,8 @@ PImage imageTime1;
 PImage imageTime2;
 int plyOneMove = 0;
 int plyTwoMove = 0;
-int oldSec;
+int oldSec1;
+int oldSec2;
 int numOfPowerUps;
 PImage backgroundPicture;
 
