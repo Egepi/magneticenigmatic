@@ -868,7 +868,6 @@ class GameFSM {
   {
       PImage start1 = loadImage("startLeft.png");
       PImage start2 = loadImage("startRight.png");
-      PImage HelpCredits = loadImage("exitButton.png");
       
       PImage contP1Button = loadImage("contP1.png");
       PImage contP2Button = loadImage("contP2.png");
