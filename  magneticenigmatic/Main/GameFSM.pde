@@ -201,8 +201,6 @@ class GameFSM {
     {
       balancedBG.loop();
       currentlyPlaying = balancedBG;
-      victorySound.pause();
-      victorySound.rewind();
     }
     image(logo, width/2 - logo.width/2, height/2 - logo.height/2);
     
@@ -480,6 +478,9 @@ class GameFSM {
     holdCountP1 = 0;
     holdingP2 = false;
     holdCountP2 = 0;   
+    victoryStarted = false;
+    victorySound.pause();
+    victorySound.rewind();    
     TILE_SIZE = PUZZLE_WIDTH/TPR;
     PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2);
     PUZZLE_ORIGIN_Y = (screen.height/2) - ((TPR * TILE_SIZE)/2);
