@@ -37,10 +37,12 @@ class GameFSM {
   
   boolean holdingP1 = false;
   int holdCountP1 = 0;
+  int p1QuitTint = 255;
   
   boolean holdingP2 = false;
   int holdCountP2 = 0;
-    
+  int p2QuitTint = 255;
+  
   String powerupStringP1;
   String swapStringP1;
   String clearStringP1;
@@ -201,8 +203,13 @@ class GameFSM {
     }
     image(logo, width/2 - logo.width/2, height/2 - logo.height/2);
     
+    tint(255,p2QuitTint);
     exitGameButtonP2.drawit();
+    noTint();
+    
+    tint(255,p1QuitTint);
     exitGameButtonP1.drawit();
+    noTint();
     
     startPlayer1.drawit();
     startPlayer2.drawit();
@@ -218,17 +225,46 @@ class GameFSM {
       if(exitGameButtonP1.checkBounds() == 1)
       {
         holdCountP1++;
+        p1QuitTint = p1QuitTint - 2;
       }
       else
       {
         holdingP1 = false;
-        holdCountP1 = 0;
       }
       if(holdCountP1 == EXIT_TIME) exit();
     }
+    else
+    {
+      if(p1QuitTint < 254)
+      {
+        p1QuitTint = p1QuitTint + 2;
+        holdCountP1--;;
+      }
+    }
     
-    if(startPlayer1.checkBounds() == 1)
-
+    if((exitGameButtonP2.checkBounds() == 1) || holdingP2)
+    {
+      if(exitGameButtonP2.checkBounds() == 1)
+      {
+        holdCountP2++;
+        p2QuitTint = p2QuitTint - 2;
+      }
+      else
+      {
+        holdingP2 = false;
+      }
+      if(holdCountP2 == EXIT_TIME) exit();
+    }
+    else
+    {
+      if(p2QuitTint < 254)
+      {
+        p2QuitTint = p2QuitTint + 2;
+        holdCountP2++;
+      }
+    }
+  
+    
     startPlayer1.decrementSwitch();
     if(startPlayer1.checkBounds() == 1 && startPlayer1.switchCount == 0) 
     {
@@ -240,7 +276,6 @@ class GameFSM {
       responseP1 = !responseP1;
     }
     
-    if(startPlayer2.checkBounds() == 1)
     startPlayer2.decrementSwitch();
     if(startPlayer2.checkBounds() == 1 && startPlayer2.switchCount == 0) 
     {
@@ -498,20 +533,35 @@ class GameFSM {
   public void gameState()
   {
     background(backgroundPicture); //Arbitrary background color for the time being.
+    
+    tint(255,p2QuitTint);
     exitGameButtonP2.drawit();
+    noTint();
+    
+    tint(255,p1QuitTint);
     exitGameButtonP1.drawit();
+    noTint();
+    
     if((exitGameButtonP1.checkBounds() == 1) || holdingP1)
     {
       if(exitGameButtonP1.checkBounds() == 1)
       {
         holdCountP1++;
+        p1QuitTint = p1QuitTint - 2;
       }
       else
       {
         holdingP1 = false;
-        holdCountP1 = 0;
       }
       if(holdCountP1 == EXIT_TIME) exit();
+    }
+    else
+    {
+      if(p1QuitTint < 254)
+      {
+        p1QuitTint = p1QuitTint + 2;
+        holdCountP1--;;
+      }
     }
     
     if((exitGameButtonP2.checkBounds() == 1) || holdingP2)
@@ -519,14 +569,22 @@ class GameFSM {
       if(exitGameButtonP2.checkBounds() == 1)
       {
         holdCountP2++;
+        p2QuitTint = p2QuitTint - 2;
       }
       else
       {
         holdingP2 = false;
-        holdCountP2 = 0;
       }
       if(holdCountP2 == EXIT_TIME) exit();
-    }    
+    }
+    else
+    {
+      if(p2QuitTint < 254)
+      {
+        p2QuitTint = p2QuitTint + 2;
+        holdCountP2++;
+      }
+    }  
     /*Rotate and draw player 1 name and a timer if neeed be*/
     pushMatrix();
     rotate(PI/2); //Rotate by 90 degrees
