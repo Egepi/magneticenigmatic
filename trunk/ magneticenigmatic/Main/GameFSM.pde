@@ -76,6 +76,7 @@ class GameFSM {
     background(50,125,150);
     font1 = loadFont("ArialNarrow-48.vlw");
     font2 = loadFont("Monospaced.plain-36.vlw");
+    font3 = loadFont("Monospaced.bold-48.vlw");
     textFont(font1); //Set font to use for following text() calls
     textAlign(CENTER);
     
@@ -1051,9 +1052,11 @@ class GameFSM {
     text(chainStringP1, 0.5*height - heightOffset, 0.33*-width); 
     text(bestChainStringP1, 0.5*height - heightOffset, 0.29*-width);
     textAlign(CENTER);
+    textFont(font3);
     text(player1Status, 0.5*height, 0.21*-width); 
     popMatrix();
 
+    textFont(font2);
     pushMatrix();
     textAlign(LEFT);
     rotate(-PI/2);
@@ -1063,6 +1066,7 @@ class GameFSM {
     text(chainStringP2, 0.5*-height - heightOffset, 0.67*width); 
     text(bestChainStringP2, 0.5*-height - heightOffset, 0.71*width);
     textAlign(CENTER);
+    textFont(font3);
     text(player2Status, 0.5*-height, 0.79*width);
     popMatrix();
     textAlign(CENTER);

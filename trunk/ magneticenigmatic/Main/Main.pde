@@ -209,6 +209,7 @@ PImage backgroundPicture;
  int timeBetweenRows = MAX_TIME_BETWEEN_ROWS;
  PFont font1;
  PFont font2;
+ PFont font3;
  PImage logo;
 
  
