@@ -601,10 +601,10 @@ class GameFSM {
     
     if(timer1 >= 0)//&&(imageTime1 != null)) //Check if timer has any time left to display
     {
-      if(oldSec != second()) //Check if AT LEAST 1 second has passed
+      if(oldSec1 != second()) //Check if AT LEAST 1 second has passed
       {
         timer1--;
-        oldSec = second();
+        oldSec1 = second();
       }
       if(timer1 >= 0)
       {
@@ -625,10 +625,10 @@ class GameFSM {
   
     if(timer2 >= 0)//&&(imageTime2 != null))
     {
-      if(oldSec !=second())
+      if(oldSec2 !=second())
       {
         timer2--;
-        oldSec = second();
+        oldSec2 = second();
       }
       if(timer2 >= 0)
       {
