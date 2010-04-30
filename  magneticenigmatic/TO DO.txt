@@ -1,17 +1,17 @@
 left or SOUND:
-O-find ascending Sound effects for combos (first in a combo is a normal sound, then it gets higher in pitch or somethin as the combo gets higher)
-O-victory music
+x-find ascending Sound effects for combos (first in a combo is a normal sound, then it gets higher in pitch or somethin as the combo gets higher)
+x-victory music
 
 
 GAMEPLAY:
 x-decrease time between added rows as time passes
-O-make all animations based on time, not on frames
+x-make all animations based on time, not on frames
 x-display stats at the end of the round (number of swaps, number of clears, number of powerups, best chain)
 
 
 BUGS:
 x-random generation is not perfect, occasional clear at the start
-O-it is possible to move a tile before it gets cleared causing only two tiles to clear (probably causes other glitches)
+x-it is possible to move a tile before it gets cleared causing only two tiles to clear (probably causes other glitches)
 
 BOOKENDS:
 x-credits (need lee and jeremy pics)
@@ -20,9 +20,9 @@ x-options (optional)
 
 
 ART:
-o-powerup ball animations
-o-powerup effect animations
-o-buttons
+x(not doing)-powerup ball animations
+x(not doing)-powerup effect animations
+-buttons
 o-logo
 o-text
 x-correct swapping animation (the one that pops out of the puzzle should move toward the player)
