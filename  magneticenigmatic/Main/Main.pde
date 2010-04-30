@@ -68,8 +68,8 @@ final int HALF_MARK = (screen.width/2);
                   DANGER_CUE = 10, //Cues danger music when block reaches within 1/n of total gameboard size.
                   IMBALANCED_CUE = 5, //Cues imba music when block reaches within 1/n of total gameboard size.
                   LOW_MOMENTUM = 1,
-                  MED_MOMENTUM = 3,
-                  HIGH_MOMENTUM = 7,
+                  MED_MOMENTUM = 2,
+                  HIGH_MOMENTUM = 3,
                   EXIT_TIME = 85;
                   
                   
