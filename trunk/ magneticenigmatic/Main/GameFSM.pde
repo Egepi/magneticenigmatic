@@ -10,6 +10,8 @@ class GameFSM {
   boolean responseP1 = false;
   boolean responseP2 = false;
   boolean exiting = false;
+  boolean victoryStarted = false;
+  boolean notNormal = false;
   
   Button cont1;
   Button cont2;
@@ -225,7 +227,7 @@ class GameFSM {
       if(exitGameButtonP1.checkBounds() == 1)
       {
         holdCountP1++;
-        p1QuitTint = p1QuitTint - 2;
+        p1QuitTint = p1QuitTint - 3;
       }
       else
       {
@@ -237,7 +239,7 @@ class GameFSM {
     {
       if(p1QuitTint < 254)
       {
-        p1QuitTint = p1QuitTint + 2;
+        p1QuitTint = p1QuitTint + 3;
         holdCountP1--;;
       }
     }
@@ -247,7 +249,7 @@ class GameFSM {
       if(exitGameButtonP2.checkBounds() == 1)
       {
         holdCountP2++;
-        p2QuitTint = p2QuitTint - 2;
+        p2QuitTint = p2QuitTint - 3;
       }
       else
       {
@@ -259,7 +261,7 @@ class GameFSM {
     {
       if(p2QuitTint < 254)
       {
-        p2QuitTint = p2QuitTint + 2;
+        p2QuitTint = p2QuitTint + 3;
         holdCountP2++;
       }
     }
@@ -552,7 +554,7 @@ class GameFSM {
       if(exitGameButtonP1.checkBounds() == 1)
       {
         holdCountP1++;
-        p1QuitTint = p1QuitTint - 2;
+        p1QuitTint = p1QuitTint - 3;
       }
       else
       {
@@ -564,7 +566,7 @@ class GameFSM {
     {
       if(p1QuitTint < 254)
       {
-        p1QuitTint = p1QuitTint + 2;
+        p1QuitTint = p1QuitTint + 3;
         holdCountP1--;;
       }
     }
@@ -574,7 +576,7 @@ class GameFSM {
       if(exitGameButtonP2.checkBounds() == 1)
       {
         holdCountP2++;
-        p2QuitTint = p2QuitTint - 2;
+        p2QuitTint = p2QuitTint - 3;
       }
       else
       {
@@ -586,7 +588,7 @@ class GameFSM {
     {
       if(p2QuitTint < 254)
       {
-        p2QuitTint = p2QuitTint + 2;
+        p2QuitTint = p2QuitTint + 3;
         holdCountP2++;
       }
     }  
@@ -718,18 +720,23 @@ class GameFSM {
     holdingP2 = false;
     holdCountP2 = 0;
     
-    theBoard.swapSongs(balancedBG);
-/*
-    currentlyPlaying.pause();
-    victorySound.play();
-    
-   if(victorySound.isPlaying())
-   {
-     victorySound.pause();
-     currentlyPlaying = balancedBG;
-     balancedBG.loop();
-   }
-*/
+    if(!victoryStarted)
+    {
+      currentlyPlaying.pause();
+      victorySound.play();
+      victoryStarted = true;
+      notNormal = true;
+    }
+    else
+    {
+      if(!victorySound.isPlaying() && notNormal)
+     {
+       victorySound.pause();
+       currentlyPlaying = balancedBG;
+       balancedBG.loop();
+       notNormal = false;
+     }
+    }
 
     background(backgroundPicture); //Arbitrary background color for the time being.
 
