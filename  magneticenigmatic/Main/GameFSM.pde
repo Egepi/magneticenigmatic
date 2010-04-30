@@ -117,7 +117,7 @@ class GameFSM {
     toddImage = loadImage("ToddS.png");
     toddImage.resize(200,225);
     karanImage = loadImage("KaranC.png");
-    leeImage = loadImage("star.png");
+    leeImage = loadImage("lee.png");
     leeImage.resize(200,200);
     jeremyImage = loadImage("jeremy.png");
     jeremyImage.resize(200,200);
