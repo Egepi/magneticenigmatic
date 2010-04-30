@@ -109,8 +109,8 @@ class GameFSM {
     powerArray[1] = loadImage(POWER2);
     powerArray[2] = loadImage(POWER3);
     
-    powerArray[0].resize(100 , 100);
-    powerArray[1].resize(100, 100);
+    powerArray[0].resize(60 , 60);
+    powerArray[1].resize(60, 60);
     powerArray[2].resize(60, 60);
     
     toddImage = loadImage("ToddS.png");
@@ -596,42 +596,6 @@ class GameFSM {
     pushMatrix();
     rotate(PI/2); //Rotate by 90 degrees
     int playerOneY = (-width/2)+TILE_SIZE-(int)(theMomentum.getY())-plyOneMove;
-    /*if((pOneUp.length > 0)&&(pOneUp[0] != null))
-    {
-      PowerUp temp;
-      for(int i=0; i < pOneUp.length; i++)
-      {
-        temp = pOneUp[i];
-        if(temp.oldSec != second())
-        {
-          pOneUp[i].oldSec = second();
-          pOneUp[i].pTimer--;
-        }
-        int timer = pOneUp[i].pTimer;
-        text(timer, height/8, playerOneY+65);
-        text(timer, (height/8)*7, playerOneY+65);        
-      }
-    }*/
-    /*
-    if(pOneUp.size() > 0)
-    {
-      for(int i = 0; i < pOneUp.size(); i++)
-      {
-        PowerUp temp = (PowerUp) pOneUp.get(i);
-        if(temp.getOldSec() < 0)
-        {
-          pOneUp.remove(i);
-        }
-        else if(temp.oldSec != second())
-        {
-          temp.setOldSec(second());
-          temp.setNewTime(temp.getTime() - 1);
-          text(temp.getTime(), height/8+20,     playerOneY+65);
-          text(temp.getTime(), ((height/8)*7)+40, playerOneY+65);
-          pOneUp.set(i, temp);
-        }
-      }
-    }*/
     
     if(timer1 >= 0)//&&(imageTime1 != null)) //Check if timer has any time left to display
     {
@@ -640,10 +604,13 @@ class GameFSM {
         timer1--;
         oldSec = second();
       }
-      text(timer1, height/8+20, playerOneY+65);  //Draw timer on board on top
-      text(timer1, ((height/8)*7)+40, playerOneY+65);  //Draw timer on board on bottom
-      image(imageTime1, height/8 - TILE_SIZE-8, playerOneY);
-      image(imageTime1, ((height/8)*7)-80, playerOneY + 8);
+      if(timer1 >= 0)
+      {
+        text(timer1, height/8+20, playerOneY+65);  //Draw timer on board on top
+        text(timer1, ((height/8)*7)+40, playerOneY+65);  //Draw timer on board on bottom
+        image(imageTime1, height/8 - TILE_SIZE-8, playerOneY+25);
+        image(imageTime1, ((height/8)*7)-60, playerOneY + 25);
+      }
     }
     text(player1.getName(), height/8,      playerOneY+8); //Don't ask how I got this number...
     text(player1.getName(), (height/8)*7,  playerOneY+8);
