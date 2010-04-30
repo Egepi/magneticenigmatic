@@ -228,42 +228,52 @@ class GameFSM {
       if(holdCountP1 == EXIT_TIME) exit();
     }
     
-    if((exitGameButtonP2.checkBounds() == 1) || holdingP2)
-    {
-      if(exitGameButtonP2.checkBounds() == 1)
-      {
-        holdCountP2++;
-      }
-      else
-      {
-        holdingP2 = false;
-        holdCountP2 = 0;
-      }
-      if(holdCountP2 == EXIT_TIME) exit();
-    }
-
     if(startPlayer1.checkBounds() == 1)
+
+    startPlayer1.decrementSwitch();
+    if(startPlayer1.checkBounds() == 1 && startPlayer1.switchCount == 0) 
     {
       if(responseP1 == false)
       {
         responseP1 = true;
         startPlayer1.myImage.filter(INVERT);
       }
+      //Switch the image
+      PImage temp1 = startPlayer1.myImage;
+      startPlayer1.myImage = startPlayer1.myImage2;
+      startPlayer1.myImage2 = temp1;
+      startPlayer1.switchCount = 12;
+      responseP1 = !responseP1;
     }
     
     if(startPlayer2.checkBounds() == 1)
+    startPlayer2.decrementSwitch();
+    if(startPlayer2.checkBounds() == 1 && startPlayer2.switchCount == 0) 
     {
       if(responseP2 == false)
       {
         responseP2 = true;
         startPlayer2.myImage.filter(INVERT);
       }
+      //Switch the image
+      PImage temp2 = startPlayer2.myImage;
+      startPlayer2.myImage = startPlayer2.myImage2;
+      startPlayer2.myImage2 = temp2;
+      startPlayer2.switchCount = 12;
+      responseP2 = !responseP2;
     }
     
     if((responseP1 == true)&&(responseP2 == true))
     {
       startPlayer2.myImage.filter(INVERT);
       startPlayer1.myImage.filter(INVERT);
+      PImage temp3 = startPlayer1.myImage;
+      startPlayer1.myImage = startPlayer1.myImage2;
+      startPlayer1.myImage2 = temp3;
+      
+      PImage temp4 = startPlayer2.myImage;
+      startPlayer2.myImage = startPlayer2.myImage2;
+      startPlayer2.myImage2 = temp4;
       stateId = 3;
     }
    
@@ -822,6 +832,8 @@ class GameFSM {
   {
       PImage start1 = loadImage("start_black_1.png");
       PImage start2 = loadImage("start_black_2.png");
+      PImage start1 = loadImage("startLeft.png");
+      PImage start2 = loadImage("startRight.png");
       PImage HelpCredits = loadImage("exitButton.png");
       
       PImage contP1Button = loadImage("contP1.jpg");
@@ -841,6 +853,10 @@ class GameFSM {
       
       startPlayer1 = new Button(start1, start1Xcord, startYcord);
       startPlayer2 = new Button(start2, start2Xcord, startYcord);
+      startPlayer1.myImage2 = loadImage("startLeftP.png");
+      startPlayer2.myImage2 = loadImage("startRightP.png");
+      startPlayer1.secondPic = true;
+      startPlayer2.secondPic = true;
       settingsButton = new Button(loadImage("options.png"), logoX -200, logoY-200, 200, 200);
       settingsButton.myImage2 = loadImage("optionspressed.png");
       settingsButton.secondPic = true;
