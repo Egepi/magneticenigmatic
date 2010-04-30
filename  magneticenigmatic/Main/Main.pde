@@ -105,11 +105,11 @@ final int HALF_MARK = (screen.width/2);
                      POWER2 = "turtle_time.png",
                      POWER3 = "eye_time.png";
                      
-static final String PICE1 = "rustIce.png",
-                    PICE2 = "iceIce.png",
-                    PICE3 = "oxycopperIce.png",
-                    PICE4 = "platinumIce.png",
-                    PICE5 = "nuggetIce.png";                    
+static final String PICE1 = "redIce.png",
+                    PICE2 = "blueIce.png",
+                    PICE3 = "greenIce.png",
+                    PICE4 = "purpleIce.png",
+                    PICE5 = "goldIce.png";                    
                      
 //For the sake of readability and code comprehension
 

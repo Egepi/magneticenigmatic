@@ -5,6 +5,7 @@ class Button
   float myYcoord;
   int myWidth;
   int myHeight;
+  boolean secondPic;
   
   //path stuff
   int myPathMinX;
@@ -19,6 +20,7 @@ class Button
     myYcoord = theY;
     myWidth = theImage.width;
     myHeight = theImage.height;  
+    secondPic = false;
   }
   
   public Button(PImage theImage, float theX, float theY, int theWidth, int theHeight)
@@ -28,11 +30,15 @@ class Button
     myYcoord = theY;
     myWidth = theWidth;
     myHeight = theHeight;  
+    secondPic = false;
   }
   
   void drawit()
   {
-    image(myImage, myXcoord, myYcoord, myWidth, myHeight);
+    //if(secondPic == true)
+    //  image(myImage2, myXcoord, myYcoord, myWidth, myHeight);
+    //else
+      image(myImage, myXcoord, myYcoord, myWidth, myHeight);
   }
   
   public void move()

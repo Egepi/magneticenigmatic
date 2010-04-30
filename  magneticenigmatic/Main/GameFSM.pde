@@ -720,7 +720,6 @@ class GameFSM {
   {
       PImage start1 = loadImage("start_black_1.png");
       PImage start2 = loadImage("start_black_2.png");
-      PImage settings = loadImage("settings.png");
       PImage HelpCredits = loadImage("exitButton.png");
       
       PImage contP1Button = loadImage("contP1.jpg");
@@ -740,7 +739,7 @@ class GameFSM {
       
       startPlayer1 = new Button(start1, start1Xcord, startYcord);
       startPlayer2 = new Button(start2, start2Xcord, startYcord);
-      settingsButton = new Button(settings, logoX -200, logoY-200, 200, 200);
+      settingsButton = new Button(loadImage("options.png"), logoX -200, logoY-200, 200, 200);
       helpCreditsButton = new Button(loadImage("copyright.png"), logoX + logo.width , logoY + logo.height ,200, 200);
       settingsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       helpCreditsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
