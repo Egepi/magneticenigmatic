@@ -75,10 +75,15 @@ class Chain
 
   public int incrementChain()
   {
-    if (count == 1)
+    if (count < 5)
     {
-      clear1.play();
-      clear1.rewind();  
+      clear[count].play();
+      clear[count].rewind();  
+    }
+    else
+     {
+      clear[5].play();
+      clear[5].rewind();  
     }
     count++;
     return count;
