@@ -629,10 +629,13 @@ class GameFSM {
         timer2--;
         oldSec = second();
       }
-      text(timer2, (-height/8)+15, playerTwoY+65);
-      text(timer2, (-height/8)*7, playerTwoY+65);
-      image(imageTime2, (-height/8), playerTwoY);
-      image(imageTime2, ((-height/8)*7)-75, playerTwoY+25);
+      if(timer2 >= 0)
+      {
+        text(timer2, (-height/8)+25, playerTwoY+70);
+        text(timer2, (-height/8)*7 + 15, playerTwoY+65);
+        image(imageTime2, (-height/8)-65, playerTwoY + 25);
+        image(imageTime2, ((-height/8)*7)-75, playerTwoY+25);
+      }
     }
     text(player2.getName(), -height/8,     playerTwoY+8);
     text(player2.getName(), (-height/8)*7, playerTwoY+8);
