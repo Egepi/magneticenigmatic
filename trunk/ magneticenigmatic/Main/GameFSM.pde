@@ -898,9 +898,9 @@ class GameFSM {
       backButton2 = new Button(loadImage("rightHome.png"), width-200, 0, 200,200);
       checkButton = new Button(loadImage("check.png"), 200,200);
       wrongButton = new Button(loadImage("wrong.png"), 200,200);
-      fiveButton = new Button(loadImage("five.png"), width*0.20, height*0.45,175,175);
-      eightButton = new Button(loadImage("eight.png"), width*0.40, height*0.45,175,175);
-      twelveButton = new Button(loadImage("twelve.png"), width*0.60, height*0.45,175,175);
+      fiveButton = new Button(loadImage("5.png"), width*0.20, height*0.45,175,175);
+      eightButton = new Button(loadImage("8.png"), width*0.40, height*0.45,175,175);
+      twelveButton = new Button(loadImage("12.png"), width*0.60, height*0.45,175,175);
       eightButton.myImage.filter(INVERT);
       lowButton = new Button(loadImage("low.png"), width*0.15, height*0.70, 300,200);
       medButton = new Button(loadImage("med.png"), width*0.40, height*0.70, 300,200);
