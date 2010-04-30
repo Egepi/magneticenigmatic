@@ -7,8 +7,6 @@ class Button
   int myWidth;
   int myHeight;
   boolean secondPic;
-  boolean flipable;
-  int timer = 500;
   
   int switchCount = 0;
   
@@ -26,7 +24,6 @@ class Button
     myWidth = theImage.width;
     myHeight = theImage.height;  
     secondPic = false;
-    flipable = true;
   }
   
   public Button(PImage theImage, float theX, float theY, int theWidth, int theHeight)
@@ -37,7 +34,6 @@ class Button
     myWidth = theWidth;
     myHeight = theHeight;  
     secondPic = false;
-    flipable = true;
   }
   
   void drawit()
