@@ -609,7 +609,7 @@ class GameFSM {
       {
         text(timer1, height/8+20, playerOneY+65);  //Draw timer on board on top
         text(timer1, ((height/8)*7)+40, playerOneY+65);  //Draw timer on board on bottom
-        image(imageTime1, height/8 - 60, playerOneY+25);
+        image(imageTime1, height/8 - 75, playerOneY+25);
         image(imageTime1, ((height/8)*7)-60, playerOneY + 25);
       }
     }
