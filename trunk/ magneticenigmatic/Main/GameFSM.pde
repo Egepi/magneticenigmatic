@@ -122,7 +122,7 @@ class GameFSM {
     jeremyImage = loadImage("jeremy.png");
     jeremyImage.resize(200,200);
     
-    logo = loadImage("logo-2.png");
+    logo = loadImage("POL.png");
     logoX = width/2 - logo.width/2;
     logoY = height/2 - logo.height/2;
     
@@ -891,7 +891,7 @@ class GameFSM {
       startPlayer1.secondPic = true;
       startPlayer2.secondPic = true;
       settingsButton = new Button(loadImage("options.png"), logoX -200, logoY-200, 200, 200);
-      helpCreditsButton = new Button(loadImage("copyright.png"), logoX + logo.width , logoY + logo.height ,200, 200);
+      helpCreditsButton = new Button(loadImage("credits.png"), logoX + logo.width , logoY + logo.height ,200, 200);
       settingsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       helpCreditsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       backButton = new Button(loadImage("leftHome.png"), 0, height-200, 200, 200);

@@ -170,7 +170,7 @@ GameBoard(int theWidth, int theHeight)
   
   public int newRowAnimationX(int i) //Animation formulas
   {
-    return 2*(TPR/2-i);
+    return 2*(TPR/2-i)-1;
   }
   
   public int newRowAnimationY(int i)
