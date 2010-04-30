@@ -301,21 +301,14 @@ class GameFSM {
    
     if(settingsButton.checkBounds() == 1) 
     
-    settingsButton.decrementSwitch();
-    if(settingsButton.checkBounds() == 1 && settingsButton.switchCount == 0) 
+    if(settingsButton.checkBounds() == 1)
     {
       stateId = OPTION_STATE;
-      //Switch the image
-      PImage temp = settingsButton.myImage;
-      settingsButton.myImage = settingsButton.myImage2;
-      settingsButton.myImage2 = temp;
-      settingsButton.switchCount = 12;
-      //stateId = OPTION_STATE;
+      return;
     }
 
     if(helpCreditsButton.checkBounds() == 1)
     {
-      helpCreditsButton.myImage.filter(INVERT);
       stateId = HELP_STATE;
     }    
     return;
@@ -325,13 +318,21 @@ class GameFSM {
   */
   public void optionsState()
   {
+    startPlayer1.switchCount = 0;
+    startPlayer2.switchCount = 0;
     if(responseP1 == true)
     {
       responseP1 = false;
+      PImage temp = startPlayer1.myImage;
+      startPlayer1.myImage = startPlayer1.myImage2;
+      startPlayer1.myImage2 = temp;
     }
     if(responseP2 == true)
     {
       responseP2 = false;
+      PImage temp2 = startPlayer2.myImage;
+      startPlayer2.myImage = startPlayer2.myImage2;
+      startPlayer2.myImage2 = temp2;
     }
     background(backgroundPicture);
     backButton.drawit();
@@ -367,6 +368,7 @@ class GameFSM {
     if((backButton.checkBounds() == 1)||(backButton2.checkBounds() == 1))
     {
       stateId = START_STATE;
+      return;
     }
     if(fiveButton.checkBounds() == 1)
     {
@@ -500,12 +502,16 @@ class GameFSM {
     if(responseP1 == true)
     {
       responseP1 = false;
-      startPlayer1.myImage.filter(INVERT);
+      PImage temp = startPlayer1.myImage;
+      startPlayer1.myImage = startPlayer1.myImage2;
+      startPlayer1.myImage2 = temp;
     }
     if(responseP2 == true)
     {
       responseP2 = false;
-      startPlayer2.myImage.filter(INVERT);
+      PImage temp2 = startPlayer2.myImage;
+      startPlayer2.myImage = startPlayer2.myImage2;
+      startPlayer2.myImage2 = temp2;
     }
     textAlign(CENTER);
     background(backgroundPicture);
@@ -523,7 +529,6 @@ class GameFSM {
     image(leeImage, width*0.7-(leeImage.width/2), height*0.60);
     if((backButton.checkBounds() == 1)||(backButton2.checkBounds() == 1))
     {
-      helpCreditsButton.myImage.filter(INVERT);
       stateId = START_STATE;
     }
   }
@@ -904,8 +909,6 @@ class GameFSM {
       startPlayer1.secondPic = true;
       startPlayer2.secondPic = true;
       settingsButton = new Button(loadImage("options.png"), logoX -200, logoY-200, 200, 200);
-      settingsButton.myImage2 = loadImage("optionspressed.png");
-      settingsButton.secondPic = true;
       helpCreditsButton = new Button(loadImage("copyright.png"), logoX + logo.width , logoY + logo.height ,200, 200);
       settingsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       helpCreditsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
