@@ -70,7 +70,7 @@ final int HALF_MARK = (screen.width/2);
                   LOW_MOMENTUM = 1,
                   MED_MOMENTUM = 3,
                   HIGH_MOMENTUM = 7,
-                  EXIT_TIME = 115;
+                  EXIT_TIME = 85;
                   
                   
  double MOMENTUM_COEFF = 1.00;
