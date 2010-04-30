@@ -662,7 +662,7 @@ class GameFSM {
       theBoard.generateRow();
       if (timeBetweenRows > MIN_TIME_BETWEEN_ROWS)
       {
-        timeBetweenRows -= 500;
+        timeBetweenRows -= 1000;
       }
     }
     if ((decayTimeDifference() > TIME_BETWEEN_DECAY)&&(MOMENTUM_DECAY_ON))
