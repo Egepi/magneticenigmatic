@@ -139,6 +139,7 @@ class GameFSM {
       
       speedSoundP1 = minim.loadFile("speedupP1.mp3");
       speedSoundP2 = minim.loadFile("speedupP2.mp3"); 
+      
     }
     else
     {
@@ -150,6 +151,15 @@ class GameFSM {
       slowSound = minim.loadFile("slow.mp3");
       speedSound = minim.loadFile("speedup.mp3");
       blindSound = minim.loadFile("blind.mp3");
+      //for (int j =0;j<6;j++)
+      //  clear[j] = minim.loadFile("Effect-" + j+1 + ".mp3");
+      //clear[0] = minim.loadFile("Effect-1.mp3");
+      //clear[1] = minim.loadFile("Effect-2.mp3");
+      //clear[2] = minim.loadFile("Effect-3.mp3");
+      //clear[3] = minim.loadFile("Effect-4.mp3");
+      //clear[4] = minim.loadFile("Effect-5.mp3");
+      clear1 = minim.loadFile("Effect-1.mp3");
+      //clear[5] = minim.loadFile("Effect-6.mp3");
     }
     
     
