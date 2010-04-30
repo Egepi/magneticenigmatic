@@ -1,11 +1,16 @@
 class Button
 {
   PImage myImage;
+  PImage myImage2 = null;
   float myXcoord;
   float myYcoord;
   int myWidth;
   int myHeight;
   boolean secondPic;
+  boolean flipable;
+  int timer = 500;
+  
+  int switchCount = 0;
   
   //path stuff
   int myPathMinX;
@@ -21,6 +26,7 @@ class Button
     myWidth = theImage.width;
     myHeight = theImage.height;  
     secondPic = false;
+    flipable = true;
   }
   
   public Button(PImage theImage, float theX, float theY, int theWidth, int theHeight)
@@ -31,6 +37,7 @@ class Button
     myWidth = theWidth;
     myHeight = theHeight;  
     secondPic = false;
+    flipable = true;
   }
   
   void drawit()
@@ -111,5 +118,10 @@ class Button
     
     return 0;
     
+  }
+  
+  void decrementSwitch()
+  {
+    if(switchCount > 0) switchCount--;
   }
 }
