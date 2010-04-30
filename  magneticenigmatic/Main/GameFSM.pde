@@ -35,6 +35,9 @@ class GameFSM {
   int logoX;
   int logoY;
   
+  boolean holding = false;
+  int holdCount = 0;
+  
   String powerupStringP1;
   String swapStringP1;
   String clearStringP1;
@@ -138,7 +141,7 @@ class GameFSM {
       slowSoundP2 = minim.loadFile("slowP2.mp3");
       
       speedSoundP1 = minim.loadFile("speedupP1.mp3");
-      speedSoundP2 = minim.loadFile("speedupP2.mp3"); 
+      speedSoundP2 = minim.loadFile("speedupP2.mp3");
       
       clear[0] = minim.loadFile("Effect-1.mp3");
       clear[1] = minim.loadFile("Effect-2.mp3");
@@ -146,6 +149,7 @@ class GameFSM {
       clear[3] = minim.loadFile("Effect-4.mp3");
       clear[4] = minim.loadFile("Effect-5.mp3");
       clear[5] = minim.loadFile("Effect-6.mp3");
+
     }
     else
     {
@@ -182,6 +186,9 @@ class GameFSM {
 
     image(logo, width/2 - logo.width/2, height/2 - logo.height/2);
     
+    exitGameButtonP2.drawit();
+    exitGameButtonP1.drawit();
+    
     startPlayer1.drawit();
     startPlayer2.drawit();
     
@@ -190,6 +197,20 @@ class GameFSM {
     
     settingsButton.drawit();
     helpCreditsButton.drawit();
+    if((exitGameButtonP1.checkBounds() == 1) || holding)
+    {
+      if(exitGameButtonP1.checkBounds() == 1)
+      {
+        holdCount++;
+      }
+      else
+      {
+        holding = false;
+        holdCount = 0;
+      }
+      if(holdCount == 250) exit();
+    }
+    
     if(startPlayer1.checkBounds() == 1)
     {
       if(responseP1 == false)
@@ -416,8 +437,6 @@ class GameFSM {
     background(backgroundPicture);
     backButton.drawit();
     backButton2.drawit();
-    exitGameButtonP2.drawit();
-    exitGameButtonP1.drawit();
     settingsButton.move();
     helpCreditsButton.move();
     image(toddImage, width*0.25, height/4 - 100);
@@ -440,7 +459,8 @@ class GameFSM {
   public void gameState()
   {
     background(backgroundPicture); //Arbitrary background color for the time being.
-    
+    exitGameButtonP2.drawit();
+    exitGameButtonP1.drawit();
     /*Rotate and draw player 1 name and a timer if neeed be*/
     pushMatrix();
     rotate(PI/2); //Rotate by 90 degrees
@@ -581,9 +601,7 @@ class GameFSM {
     cont2.drawit();
     backButton.drawit();
     backButton2.drawit();
-    exitGameButtonP2.drawit();
-    exitGameButtonP1.drawit();
-    
+
     if(!responseP1)
     {
       if(cont1.checkBounds() == 1)
@@ -756,8 +774,8 @@ class GameFSM {
       highButton = new Button(loadImage("high.png"), width*0.65, height*0.70, 300,200);
       lowButton.myImage.filter(INVERT);
       
-      exitGameButtonP1 = new Button(loadImage("exitButtonLeft.png"), 0, 0, 200, 200);
-      exitGameButtonP2 = new Button(loadImage("exitButtonRight.png"), width-200, height-200, 200, 200);
+      exitGameButtonP1 = new Button(loadImage("exitButtonLeft.png"), 0, 0, 100, 100);
+      exitGameButtonP2 = new Button(loadImage("exitButtonRight.png"), width-100, height-100, 100, 100);
       
   }
   
