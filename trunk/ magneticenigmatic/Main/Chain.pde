@@ -75,8 +75,14 @@ class Chain
 
   public int incrementChain()
   {
+    if (count == 1)
+    {
+      clear1.play();
+      clear1.rewind();  
+    }
     count++;
     return count;
+    
   }
   
   public int increaseTotal(int x)

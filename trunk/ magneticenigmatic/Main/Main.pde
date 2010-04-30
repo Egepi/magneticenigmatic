@@ -89,11 +89,11 @@ final int HALF_MARK = (screen.width/2);
 
 //Images
  static final String TILE0 = null,//"diamond.jpg",
-                     TILE1 = "rust.png",
-                     TILE2 = "ice.png",
-                     TILE3 = "oxycopper.png",
-                     TILE4 = "platinum.png",
-                     TILE5 = "nugget.png",
+                     TILE1 = "redball.png",
+                     TILE2 = "blueball.png",
+                     TILE3 = "greenballtexture.png",
+                     TILE4 = "purpleballtexture.png",
+                     TILE5 = "goldballtexture.png",
                      TILE6 = "lightning.png",
                      TILE7 = "snow.png",
                      TILE8 = "slow.png",
@@ -175,6 +175,8 @@ static final int  LOGO_STATE = 0,
  AudioPlayer blindSoundP1;
  AudioPlayer blindSoundP2;
 
+ AudioPlayer clear1;
+ 
  AudioPlayer arrowSound;
  
  AudioPlayer currentlyPlaying;
