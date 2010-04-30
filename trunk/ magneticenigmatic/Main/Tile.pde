@@ -291,7 +291,7 @@ class Tile
   
   public boolean swappable()
   {
-    return ((!isMoving)&&(!isFrozen));
+    return ((isIdle)&&(!isMoving)&&(!isFrozen));
   }
   
   public boolean isIdle()
