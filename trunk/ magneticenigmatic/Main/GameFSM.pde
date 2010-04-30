@@ -208,6 +208,7 @@ class GameFSM {
     helpCreditsButton.move();
     
     settingsButton.drawit();
+    settingsButton.clickButton();
     helpCreditsButton.drawit();
     if((exitGameButtonP1.checkBounds() == 1) || holding)
     {
@@ -249,8 +250,17 @@ class GameFSM {
     }
    
     if(settingsButton.checkBounds() == 1) 
+    
+    settingsButton.decrementSwitch();
+    if(settingsButton.checkBounds() == 1 && settingsButton.switchCount == 0) 
     {
       stateId = OPTION_STATE;
+      //Switch the image
+      PImage temp = settingsButton.myImage;
+      settingsButton.myImage = settingsButton.myImage2;
+      settingsButton.myImage2 = temp;
+      settingsButton.switchCount = 12;
+      //stateId = OPTION_STATE;
     }
 
     if(helpCreditsButton.checkBounds() == 1)
@@ -775,6 +785,8 @@ class GameFSM {
       startPlayer1 = new Button(start1, start1Xcord, startYcord);
       startPlayer2 = new Button(start2, start2Xcord, startYcord);
       settingsButton = new Button(loadImage("options.png"), logoX -200, logoY-200, 200, 200);
+      settingsButton.myImage2 = loadImage("optionspressed.png");
+      settingsButton.secondPic = true;
       helpCreditsButton = new Button(loadImage("copyright.png"), logoX + logo.width , logoY + logo.height ,200, 200);
       settingsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       helpCreditsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
