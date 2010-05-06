@@ -31,6 +31,10 @@ GameBoard(int theWidth, int theHeight)
    plyTwoMove = 0;
    lineOfGravity = MAX_R/2;
    timeBetweenRows = MAX_TIME_BETWEEN_ROWS;
+   chainList = new ArrayList();
+   selList = new ArrayList();
+   pOneUp = new ArrayList();
+   pTwoUp = new ArrayList();
 }
   
   /************************************************************
@@ -325,7 +329,7 @@ GameBoard(int theWidth, int theHeight)
       nearest = y+1;
       furthest = MAX_R;
       iter = 1;
-      speed = player1.speedModifier;
+      speed = player2.speedModifier;
     }
     else
     {
