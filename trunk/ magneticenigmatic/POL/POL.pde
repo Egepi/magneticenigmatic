@@ -1,38 +1,36 @@
+/* Project: POL
+ * Authors: Jeremy Meador, Todd Silvia, 
+ *          Karan Chakrapani, Lee Vanderlick
+ * Date: March 3, 2010
+ * Class - Main: <Description goes here>
+*/               
+
+/**************************************************************
+ *  Imports
+ */
 import processing.opengl.*;
 
 import ddf.minim.*;
 import ddf.minim.signals.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
-
-/* Project: POL
- * Authors: Jeremy Meador, Todd Silvia, 
- *          Karan Chakrapani, Lee Vanderlick
- * Date: March 3, 2010
- * Class - Main: <Description goes here>
-*/
-
-/**************************************************************
- *  Imports
- */
  
 import hypermedia.net.*;
 import tacTile.net.*;
 import processing.net.*;
-import TouchEvents.*;
 import java.util.ArrayList;
 
 /**************************************************************
  * Tactile stuff
  */
  
-boolean connectToTacTile = true;
+boolean connectToTacTile = false;
 //Touch API
 TouchAPI tacTile;
 //Names of machines you might use
 ArrayList touchList = new ArrayList();
 String localMachine = "127.0.0.1";
-String tacTileMachine = "127.0.0.1";
+String tacTileMachine = "tactile.evl.uic.edu";
 //Port for data transfer
 int dataPort = 7100;
 int msgPort = 7340;
@@ -47,12 +45,10 @@ int msgPort = 7340;
  int TILE_SIZE = PUZZLE_WIDTH/TPR;
  int PUZZLE_ORIGIN_X;
  int PUZZLE_ORIGIN_Y;
- static final int MAX_R = 31, //Maximum number of rows
-                  START_R = 13, //Number of rows to start with
-                  PUZZLE_WIDTH = 640;
-
-final int HALF_MARK = (screen.width/2);
-          
+ static final int MAX_R = 115, //Maximum number of rows
+                  START_R = 35, //Number of rows to start with
+                  PUZZLE_WIDTH = 1030;
+       
                 
 //Gameplay variables (change difficulty, speed, and other settings here)
  static final int TILE_TYPES = 11, //To avoid out-of-bounds errors go to "//Load resources into memory" to make sure the number of loaded images is equal to the number of images+1 (for null)
@@ -75,7 +71,7 @@ final int HALF_MARK = (screen.width/2);
                   EXIT_TIME = 85;
                   
                   
- double MOMENTUM_COEFF = 1.00;
+ double MOMENTUM_COEFF = 2.00;
  int momentumAdd = 1;
  static final double SPEED_POWERUP_MULTIPLIER = 2.0,
                      SLOW_POWERUP_MULTIPLIER = 0.5,
@@ -224,7 +220,7 @@ PImage backgroundPicture;
 void setup()
 {
   minim = new Minim(this);
-  size(screen.width, screen.height,OPENGL);
+  size(screen.width, screen.height);
   readConfigFile("config.cfg");
   if (connectToTacTile)
     startTactile();
