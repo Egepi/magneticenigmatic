@@ -239,7 +239,7 @@ class GameFSM {
       if(p1QuitTint < 254)
       {
         p1QuitTint = p1QuitTint + 3;
-        holdCountP1--;;
+        holdCountP1--;
       }
     }
     
@@ -261,7 +261,7 @@ class GameFSM {
       if(p2QuitTint < 254)
       {
         p2QuitTint = p2QuitTint + 3;
-        holdCountP2++;
+        holdCountP2--;
       }
     }
   
@@ -340,13 +340,10 @@ class GameFSM {
     backButton2.drawit();
     settingsButton.move();
     helpCreditsButton.move();
-    text("MUSIC", width/2, height*0.10);
-    text("NUMBER OF ROWS", width/2, height*0.43);
-    text("MOMENTUM", width/2, height*0.70);
-    checkButton.myXcoord = width/2-250;
-    checkButton.myYcoord = height*0.15;
-    wrongButton.myXcoord = width/2+50;
-    wrongButton.myYcoord = height*0.15;
+    text("MUSIC", width/2, height*0.33);
+    text("NUMBER OF ROWS", width/2, height*0.53);
+    text("MOMENTUM", width/2, height*0.73);
+
     checkButton.drawit();
     wrongButton.drawit();
     fiveButton.drawit();
@@ -484,6 +481,15 @@ class GameFSM {
     TILE_SIZE = PUZZLE_WIDTH/TPR;
     PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2);
     PUZZLE_ORIGIN_Y = (screen.height/2) - ((TPR * TILE_SIZE)/2);
+    print("\nScreen height   " + screen.height + "\nTPR     " + TPR + "\nTile Size  " + TILE_SIZE + "\nPuzzle width    " + PUZZLE_WIDTH);
+    
+/*
+Screen height   2304
+TPR             8
+Tile Size       100
+Puzzle width    800
+*/
+
     player1.reset();
     player2.reset();
     responseP1 = false;
@@ -523,14 +529,20 @@ class GameFSM {
     backButton2.drawit();
     settingsButton.move();
     helpCreditsButton.move();
-    image(toddImage, width*0.25, height/4 - 100);
-    text("Programmer - UIC\n", width*0.30, height/4 + 200);
-    text("Programmer - UIC\n", width*0.70, height/4 + 200);
-    text("Artist - LSU\n", width*0.70, height*0.60 + 275);
-    text("Project Lead\nProgrammer - LSU", width*0.32, height*0.60 + 275);
-    image(karanImage, width*0.70-(karanImage.width/2), height/4 - 100);
-    image(jeremyImage, width*0.25, height*0.60);
-    image(leeImage, width*0.7-(leeImage.width/2), height*0.60);
+    imageMode(CENTER);
+    image(toddImage, width*0.30, height/4 + 50);
+    text("Todd Silvia\n Programmer - UIC\n", width*0.30, height/4 + 250);
+    
+    image(karanImage, width*0.70, height/4 + 50);
+    text("Karan Chakrapani\n Programmer - UIC\n", width*0.70, height/4 + 250);
+    
+    image(leeImage, width*0.70, height*0.60);
+    text("Lee Vanderlick\n Artist - LSU\n", width*0.70, height*0.60 + 200);
+    
+    image(jeremyImage, width*0.30, height*0.60);
+    text("Jeremy Meador\n Project Lead, Programmer - LSU", width*0.30, height*0.60 + 200);
+       
+    imageMode(CORNER);
     if((backButton.checkBounds() == 1)||(backButton2.checkBounds() == 1))
     {
       stateId = START_STATE;
@@ -569,7 +581,7 @@ class GameFSM {
       if(p1QuitTint < 254)
       {
         p1QuitTint = p1QuitTint + 3;
-        holdCountP1--;;
+        holdCountP1--;
       }
     }
     
@@ -591,7 +603,7 @@ class GameFSM {
       if(p2QuitTint < 254)
       {
         p2QuitTint = p2QuitTint + 3;
-        holdCountP2++;
+        holdCountP2--;
       }
     }  
     /*Rotate and draw player 1 name and a timer if neeed be*/
@@ -877,8 +889,8 @@ class GameFSM {
       float contP2Xcord = (width)*0.90 - contP2Button.width;
       float contP2Ycord = (height/2) - contP2Button.height/2;
       
-      float start1Xcord = (width*0.15)-(start1.height)/2;
-      float start2Xcord = (width*0.85)-(start2.height)/2;
+      float start1Xcord = (width*0.25)-(start1.height)/2;
+      float start2Xcord = (width*0.75)-(start2.height)/2;
       float startYcord = (height/2)-(start1.width)/2;
       
       cont1 = new Button(contP1Button, contP1Xcord, contP1Ycord);
@@ -895,20 +907,20 @@ class GameFSM {
       settingsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       helpCreditsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       backButton = new Button(loadImage("leftHome.png"), 0, height-200, 200, 200);
-      backButton2 = new Button(loadImage("rightHome.png"), width-200, 0, 200,200);
-      checkButton = new Button(loadImage("check.png"), 200,200);
-      wrongButton = new Button(loadImage("wrong.png"), 200,200);
-      fiveButton = new Button(loadImage("5.png"), width*0.20, height*0.45,175,175);
-      eightButton = new Button(loadImage("8.png"), width*0.40, height*0.45,175,175);
-      twelveButton = new Button(loadImage("12.png"), width*0.60, height*0.45,175,175);
+      backButton2 = new Button(loadImage("rightHome.png"), width-200, height-200, 200,200);
+      checkButton = new Button(loadImage("check.png"),width*0.45 ,height*0.35, 200,200);
+      wrongButton = new Button(loadImage("wrong.png"),width*0.55 -200 ,height*0.35, 200,200);
+      fiveButton = new Button(loadImage("5.png"), width*0.35-(175/2), height*0.55,175,175);
+      eightButton = new Button(loadImage("8.png"), width*0.50-(175/2), height*0.55,175,175);
+      twelveButton = new Button(loadImage("12.png"), width*0.65-(175/2), height*0.55,175,175);
       eightButton.myImage.filter(INVERT);
-      lowButton = new Button(loadImage("low.png"), width*0.15, height*0.70, 300,200);
-      medButton = new Button(loadImage("med.png"), width*0.40, height*0.70, 300,200);
-      highButton = new Button(loadImage("high.png"), width*0.65, height*0.70, 300,200);
+      lowButton = new Button(loadImage("low.png"), width*0.35-(300/2), height*0.75, 300,200);
+      medButton = new Button(loadImage("med.png"), width*0.50-(300/2), height*0.75, 300,200);
+      highButton = new Button(loadImage("high.png"), width*0.65-(300/2), height*0.75, 300,200);
       lowButton.myImage.filter(INVERT);
       
-      exitGameButtonP1 = new Button(loadImage("exitButtonLeft.png"), 0, 0, 100, 100);
-      exitGameButtonP2 = new Button(loadImage("exitButtonRight.png"), width-100, height-100, 100, 100);
+      exitGameButtonP1 = new Button(loadImage("exitButtonLeft.png"), 0, height-200, 200, 200);
+      exitGameButtonP2 = new Button(loadImage("exitButtonRight.png"), width-200, height-200, 200, 200);
       
   }
   
