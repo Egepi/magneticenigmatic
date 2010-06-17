@@ -30,7 +30,7 @@ TouchAPI tacTile;
 //Names of machines you might use
 ArrayList touchList = new ArrayList();
 String localMachine = "127.0.0.1";
-String tacTileMachine = "tactile.evl.uic.edu";
+String tacTileMachine = "131.193.77.211";
 //Port for data transfer
 int dataPort = 7100;
 int msgPort = 7340;
@@ -220,7 +220,7 @@ PImage backgroundPicture;
 void setup()
 {
   minim = new Minim(this);
-  size(screen.width, screen.height);
+  size(screen.width, screen.height,OPENGL);
   readConfigFile("config.cfg");
   if (connectToTacTile)
     startTactile();
