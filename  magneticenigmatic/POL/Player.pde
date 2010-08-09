@@ -37,6 +37,7 @@ class Player
     statClears = 0;
     statChains = 0;
     statPowerups = 0;
+    statBestChain = 0;
   }
   
   public String getName()

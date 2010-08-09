@@ -340,7 +340,7 @@ class GameFSM {
     backButton2.drawit();
     settingsButton.move();
     helpCreditsButton.move();
-    text("MUSIC", width/2, height*0.33);
+    text("MUSIC", width/2, height*0.38);
     text("NUMBER OF ROWS", width/2, height*0.53);
     text("MOMENTUM", width/2, height*0.73);
 
@@ -884,9 +884,9 @@ Puzzle width    800
       PImage contP1Button = loadImage("contP1.png");
       PImage contP2Button = loadImage("contP2.png");
 
-      float contP1Xcord = (width)*0.10;
+      float contP1Xcord = (width)*0.25;
       float contP1Ycord = (height/2) - contP1Button.height/2;
-      float contP2Xcord = (width)*0.90 - contP2Button.width;
+      float contP2Xcord = (width)*0.75 - contP2Button.width;
       float contP2Ycord = (height/2) - contP2Button.height/2;
       
       float start1Xcord = (width*0.25)-(start1.height)/2;
@@ -908,15 +908,15 @@ Puzzle width    800
       helpCreditsButton.setPath(logoX - 200, logoX + logo.width, logoY-200, logoY + logo.height);
       backButton = new Button(loadImage("leftHome.png"), 0, height-200, 200, 200);
       backButton2 = new Button(loadImage("rightHome.png"), width-200, height-200, 200,200);
-      checkButton = new Button(loadImage("check.png"),width*0.45 ,height*0.35, 200,200);
-      wrongButton = new Button(loadImage("wrong.png"),width*0.55 -200 ,height*0.35, 200,200);
+      checkButton = new Button(loadImage("check.png"),width*0.45 ,height*0.40, 200,200);
+      wrongButton = new Button(loadImage("wrong.png"),width*0.55 -200 ,height*0.40, 200,200);
       fiveButton = new Button(loadImage("5.png"), width*0.35-(175/2), height*0.55,175,175);
       eightButton = new Button(loadImage("8.png"), width*0.50-(175/2), height*0.55,175,175);
       twelveButton = new Button(loadImage("12.png"), width*0.65-(175/2), height*0.55,175,175);
       eightButton.myImage.filter(INVERT);
-      lowButton = new Button(loadImage("low.png"), width*0.35-(300/2), height*0.75, 300,200);
+      lowButton = new Button(loadImage("low.png"), width*0.36-(300/2), height*0.75, 300,200);
       medButton = new Button(loadImage("med.png"), width*0.50-(300/2), height*0.75, 300,200);
-      highButton = new Button(loadImage("high.png"), width*0.65-(300/2), height*0.75, 300,200);
+      highButton = new Button(loadImage("high.png"), width*0.64-(300/2), height*0.75, 300,200);
       lowButton.myImage.filter(INVERT);
       
       exitGameButtonP1 = new Button(loadImage("exitButtonLeft.png"), 0, height-200, 200, 200);
@@ -1058,39 +1058,70 @@ Puzzle width    800
   }
   void displayScores()
   {
-    textFont(font2);
-    pushMatrix();
-    textAlign(LEFT);
-    image(scoreBG, cont1.myXcoord + cont1.myWidth + 5, height*0.2 , width - 2*(cont1.myXcoord + cont1.myWidth + 5), height*0.6); 
-    float heightOffset = (height*0.3);
-    fill(255);
-    rotate(PI/2);
-    text(swapStringP1, 0.5*height - heightOffset, 0.45*-width);
-    text(clearStringP1, 0.5*height - heightOffset, 0.41*-width); 
-    text(powerupStringP1, 0.5*height - heightOffset, 0.37*-width); 
-    text(chainStringP1, 0.5*height - heightOffset, 0.33*-width); 
-    text(bestChainStringP1, 0.5*height - heightOffset, 0.29*-width);
-    textAlign(CENTER);
-    textFont(font3);
-    text(player1Status, 0.5*height, 0.21*-width); 
-    popMatrix();
+    if(NEC_WALL)
+    {
+      textFont(font2);
+      textAlign(LEFT);
+      image(scoreBG, cont1.myXcoord + cont1.myWidth + 5, height*0.2 , width - 2*(cont1.myXcoord + cont1.myWidth + 5), height*0.6); 
+      float heightOffset = (height*0.3);
+      fill(255);
+      text(swapStringP1, 0.35*width,0.3*height);
+      text(clearStringP1, 0.35*width,0.38*height); 
+      text(powerupStringP1, 0.35*width,0.46*height); 
+      text(chainStringP1, 0.35*width,0.54*height); 
+      text(bestChainStringP1, 0.35*width,0.62*height);
+      textAlign(CENTER);
+      textFont(font3);
+      text(player1Status,  0.40*width,0.7*height);
+    
+      textFont(font2);
+      textAlign(LEFT);
+      text(swapStringP2, 0.55*width,0.3*height);
+      text(clearStringP2, 0.55*width,0.38*height); 
+      text(powerupStringP2, 0.55*width,0.46*height); 
+      text(chainStringP2, 0.55*width,0.54*height); 
+      text(bestChainStringP2, 0.55*width,0.62*height);
+      textAlign(CENTER);
+      textFont(font3);
+      text(player2Status, 0.60*width,0.7*height);
+      textAlign(CENTER);
+      textFont(font1);
+    }
+    else
+    {
+      textFont(font2);
+      pushMatrix();
+      textAlign(LEFT);
+      image(scoreBG, cont1.myXcoord + cont1.myWidth + 5, height*0.2 , width - 2*(cont1.myXcoord + cont1.myWidth + 5), height*0.6); 
+      float heightOffset = (height*0.3);
+      fill(255);
+      rotate(PI/2);
+      text(swapStringP1, 0.5*height - heightOffset, 0.45*-width);
+      text(clearStringP1, 0.5*height - heightOffset, 0.41*-width); 
+      text(powerupStringP1, 0.5*height - heightOffset, 0.37*-width); 
+      text(chainStringP1, 0.5*height - heightOffset, 0.33*-width); 
+      text(bestChainStringP1, 0.5*height - heightOffset, 0.29*-width);
+      textAlign(CENTER);
+      textFont(font3);
+      text(player1Status, 0.5*height, 0.21*-width); 
+      popMatrix();
 
-    textFont(font2);
-    pushMatrix();
-    textAlign(LEFT);
-    rotate(-PI/2);
-    text(swapStringP2, 0.5*-height - heightOffset, 0.55*width);
-    text(clearStringP2, 0.5*-height - heightOffset, 0.59*width); 
-    text(powerupStringP2, 0.5*-height - heightOffset, 0.63*width); 
-    text(chainStringP2, 0.5*-height - heightOffset, 0.67*width); 
-    text(bestChainStringP2, 0.5*-height - heightOffset, 0.71*width);
-    textAlign(CENTER);
-    textFont(font3);
-    text(player2Status, 0.5*-height, 0.79*width);
-    popMatrix();
-    textAlign(CENTER);
-    textFont(font1);
-
+      textFont(font2);
+      pushMatrix();
+      textAlign(LEFT);
+      rotate(-PI/2);
+      text(swapStringP2, 0.5*-height - heightOffset, 0.55*width);
+      text(clearStringP2, 0.5*-height - heightOffset, 0.59*width); 
+      text(powerupStringP2, 0.5*-height - heightOffset, 0.63*width); 
+      text(chainStringP2, 0.5*-height - heightOffset, 0.67*width); 
+      text(bestChainStringP2, 0.5*-height - heightOffset, 0.71*width);
+      textAlign(CENTER);
+      textFont(font3);
+      text(player2Status, 0.5*-height, 0.79*width);
+      popMatrix();
+      textAlign(CENTER);
+      textFont(font1);
+    }
   }
 }
 
