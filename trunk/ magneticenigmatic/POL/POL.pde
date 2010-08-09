@@ -1,3 +1,5 @@
+
+
 /* Project: POL
  * Authors: Jeremy Meador, Todd Silvia, 
  *          Karan Chakrapani, Lee Vanderlick
@@ -25,12 +27,13 @@ import java.util.ArrayList;
  */
  
 boolean connectToTacTile = false;
+boolean NEC_WALL = true;
 //Touch API
 TouchAPI tacTile;
 //Names of machines you might use
 ArrayList touchList = new ArrayList();
 String localMachine = "127.0.0.1";
-String tacTileMachine = "131.193.77.211";
+String tacTileMachine = "131.193.77.104";
 //Port for data transfer
 int dataPort = 7100;
 int msgPort = 7340;
@@ -220,7 +223,9 @@ PImage backgroundPicture;
 void setup()
 {
   minim = new Minim(this);
-  size(screen.width, screen.height,OPENGL);
+  int w = screen.width;
+  int h = screen.height;
+  size(w, h);
   readConfigFile("config.cfg");
   if (connectToTacTile)
     startTactile();
@@ -237,10 +242,14 @@ void setup()
 
 void draw()
 {
+  
   frameStartTime = frameEndTime;
   frameEndTime = millis();
   //background(50,125,150);
   theGameFSM.action();
+  textAlign(LEFT);
+  debugCode();
+  textAlign(CENTER);
 }
 
 void startClock() {
