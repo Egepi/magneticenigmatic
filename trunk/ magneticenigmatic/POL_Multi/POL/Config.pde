@@ -55,6 +55,6 @@ void readConfigFile(String config_file){
       }
 
     }// for
-    println("Connecting to Tracker: '"+tacTileMachine+"' Data port: "+dataPort+" Message port: "+msgPort+".");
+    //println("Connecting to Tracker: '"+tacTileMachine+"' Data port: "+dataPort+" Message port: "+msgPort+".");
   }
 }// readConfigFile
