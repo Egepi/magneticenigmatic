@@ -23,8 +23,11 @@ String touchServer;
 /**************************************************************
  * Global Variables
  */
+int WIDTH = 800;  //Defaults size to 800 x 600 if not specified otherwise
+int HEIGHT = 600;
 boolean touchInput;
 GameFSM theGameFSM;
+ArrayList touchList = new ArrayList();
 
 
 /**************************************************************
@@ -32,8 +35,6 @@ GameFSM theGameFSM;
  */
 
 void setup() {
-  int WIDTH = 800;  //Defaults size to 800 x 600 if not specified otherwise
-  int HEIGHT = 600;
   readConfigFile("todd_laptop.cfg");
   size(WIDTH,HEIGHT);
   if(touchInput) { startTouches(); }
