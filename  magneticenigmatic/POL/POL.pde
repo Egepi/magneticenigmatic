@@ -27,7 +27,7 @@ import java.util.ArrayList;
  */
  
 boolean connectToTacTile = false;
-boolean NEC_WALL = true;
+boolean NEC_WALL = false;
 //Touch API
 TouchAPI tacTile;
 //Names of machines you might use
@@ -248,7 +248,7 @@ void draw()
   //background(50,125,150);
   theGameFSM.action();
   textAlign(LEFT);
-  debugCode();
+  //debugCode();
   textAlign(CENTER);
 }
 
