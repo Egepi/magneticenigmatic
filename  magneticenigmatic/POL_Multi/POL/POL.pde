@@ -11,6 +11,8 @@ import tacTile.net.*;
 /**************************************************************
  * Constants
  */
+ public int TILES_PER_ROW = 8;
+ public static final int MAX_ROWS = 115; 
 
 /**************************************************************
  * Connection information
