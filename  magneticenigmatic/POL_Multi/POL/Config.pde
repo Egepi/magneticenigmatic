@@ -53,8 +53,15 @@ void readConfigFile(String config_file){
         else { touchInput = false; }
         continue;
       }
-
+      if( rawConfig[i].contains("PLATFORM") ){
+        PLATFORM = rawConfig[i].substring( rawConfig[i].indexOf("=")+1, rawConfig[i].lastIndexOf(";") );
+        continue;
+      }
     }// for
+    if(PLATFORM.equals("")){
+      print("Wrong specification of platform now exiting");
+      exit();
+     }
     //println("Connecting to Tracker: '"+tacTileMachine+"' Data port: "+dataPort+" Message port: "+msgPort+".");
   }
 }// readConfigFile
