@@ -11,15 +11,18 @@ import tacTile.net.*;
 /**************************************************************
  * Constants
  */
- public int TILES_PER_ROW = 8;
- public static final int MAX_ROWS = 115; 
+ public static int TILES_PER_ROW = 8;
+ public static int TILE_SIZE = PUZZLE_WIDTH/TILES_PER_ROW;
+ public static final int MAX_ROWS = 115;
+ public static final int PUZZLE_WIDTH = 1030; 
+
 
 /**************************************************************
  * Connection information
  */
 TouchAPI touchInterface;
-int dataPort;
-int msgPort;
+int dataPort = 7000;
+int msgPort = 7340;
 String touchServer;
 
 /**************************************************************
@@ -27,7 +30,8 @@ String touchServer;
  */
 int WIDTH = 800;  //Defaults size to 800 x 600 if not specified otherwise
 int HEIGHT = 600;
-boolean touchInput;
+String PLATFORM = "";
+boolean touchInput = false;
 GameFSM theGameFSM;
 ArrayList touchList = new ArrayList();
 

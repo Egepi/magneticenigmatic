@@ -4,8 +4,6 @@
 
 class GameBoard {
   private Tile tileBoard[][]; //Data structure to hold the game board.
-  private int boardWidth;
-  private int boardHeight;
   
   public GameBoard(int theWidth, int theHeight) {
     tileBoard = new Tile[theWidth][theHeight];

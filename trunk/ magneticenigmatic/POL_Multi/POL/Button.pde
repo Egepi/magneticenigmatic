@@ -14,8 +14,8 @@ class Button {
     buttonImage = theImage;
     buttonX = theX;
     buttonY = theY;
-    buttonWidth = 100;
-    buttonHeight = 100;
+    buttonWidth = theImage.width;
+    buttonHeight = theImage.height;
   }//End Button(PImage, float, float)
   
   public Button(PImage theImage, float theX, float theY, int theWidth, int theHeight) {
