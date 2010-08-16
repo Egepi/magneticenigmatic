@@ -11,10 +11,11 @@ import tacTile.net.*;
 /**************************************************************
  * Constants
  */
- public static int TILES_PER_ROW = 8;
- public static int TILE_SIZE = PUZZLE_WIDTH/TILES_PER_ROW;
  public static final int MAX_ROWS = 115;
  public static final int PUZZLE_WIDTH = 1030; 
+ public static int TILES_PER_ROW = 8;
+ public static int TILE_SIZE = PUZZLE_WIDTH/TILES_PER_ROW;
+
 
 
 /**************************************************************
