@@ -18,7 +18,7 @@ import tacTile.net.*;
  public static int TILE_SIZE = PUZZLE_WIDTH/TILES_PER_ROW;
  
  public final String TILE0 = null,
-                     TILE1 = "redball1.png",
+                     TILE1 = "redball.png",
                      TILE2 = "blueball.png",
                      TILE3 = "greenballtexture.png",
                      TILE4 = "purpleballtexture.png",
