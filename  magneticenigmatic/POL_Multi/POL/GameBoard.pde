@@ -15,6 +15,26 @@ class GameBoard {
   }//End GameBoard()
   
   public void drawBoard() {
+    int tempX = PUZZLE_ORIGIN_X;
+    int tempY;
+    boolean blind;
+    for (int d = 0; d < 3; d++) {
+      tempX = PUZZLE_ORIGIN_X;
+      tempY = PUZZLE_ORIGIN_Y;
+      for(int x = 0; x < TILES_PER_ROW; x++){
+        for(int y = 0; y < MAX_ROWS; y++){
+          if (tileBoard[x][y].depth == d){
+            tileBoard[x][y].drawTile(tempX,tempY);
+          }
+          tempX = tempX + TILE_SIZE;
+        }
+        tempY = tempY + TILE_SIZE;
+        tempX = PUZZLE_ORIGIN_X;
+      }
+    }    
+   fill(0,0,0,128);
+   rect(PUZZLE_ORIGIN_X + LINE_OF_GRAVITY*TILE_SIZE, 0, TILE_SIZE, height);
+   fill(0,0,0,255);
     
   }//End drawBoard()
   

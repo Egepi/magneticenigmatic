@@ -481,15 +481,6 @@ class GameFSM {
     TILE_SIZE = PUZZLE_WIDTH/TPR;
     PUZZLE_ORIGIN_X = (screen.width/2) - ((MAX_R * TILE_SIZE)/2);
     PUZZLE_ORIGIN_Y = (screen.height/2) - ((TPR * TILE_SIZE)/2);
-    print("\nScreen height   " + screen.height + "\nTPR     " + TPR + "\nTile Size  " + TILE_SIZE + "\nPuzzle width    " + PUZZLE_WIDTH);
-    
-/*
-Screen height   2304
-TPR             8
-Tile Size       100
-Puzzle width    800
-*/
-
     player1.reset();
     player2.reset();
     responseP1 = false;
