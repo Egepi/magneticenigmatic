@@ -9,8 +9,8 @@ class Tile {
     tileType = theType;
   }//End Tile()
   
-  public void drawTile() {
-    
+  public void drawTile(theX, theY) {
+    image(tileImageType[tileType], theX, theY);
   }//End drawTile()
   
 }//End Tile{}
