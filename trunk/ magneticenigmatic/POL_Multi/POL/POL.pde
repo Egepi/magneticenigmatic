@@ -11,21 +11,25 @@ import tacTile.net.*;
 /**************************************************************
  * Constants
  */
- public static final int MAX_ROWS = 115,
-                         PUZZLE_WIDTH = 1030,
-                         TILE_TYPES = 11; 
- public static int TILES_PER_ROW = 8,
-                   TILE_SIZE = PUZZLE_WIDTH/TILES_PER_ROW,
-                   LINE_OF_GRAVITY = MAX_ROWS/2,
-                   TILE_COLORS = 5,
-                   START_ROWS = 35;
+ public static final int MAX_ROWS = 31,
+                         TILE_TYPES = 11,
+                         TILE_COLORS = 5,
+                         START_ROWS = 13,
+                         LINE_OF_GRAVITY = MAX_ROWS/2; 
+ public static int TILES_PER_ROW = 8;
+                   
+ public int PUZZLE_WIDTH = height/2,
+            TILE_SIZE = PUZZLE_WIDTH/TILES_PER_ROW,
+            PUZZLE_ORIGIN_X = (width/2) - ((MAX_ROWS * TILE_SIZE)/2),
+            PUZZLE_ORIGIN_Y = (height/2) - ((TILES_PER_ROW * TILE_SIZE)/2);
+
  
  public final String TILE0 = null,
                      TILE1 = "redball.png",
                      TILE2 = "blueball.png",
-                     TILE3 = "greenballtexture.png",
-                     TILE4 = "purpleballtexture.png",
-                     TILE5 = "goldballtexture.png",
+                     TILE3 = "greenball.png",
+                     TILE4 = "orangeball.png",
+                     TILE5 = "yellowball.png",
                      TILE6 = "lightning.png",
                      TILE7 = "snow.png",
                      TILE8 = "slow.png",
@@ -55,6 +59,7 @@ String PLATFORM = "";
 boolean touchInput = false,
         DEBUG_ON = false;
 GameFSM theGameFSM;
+GameBoard theBoard;
 ArrayList touchList = new ArrayList();
 PImage[] tileImageType = new PImage[TILE_TYPES];
 
@@ -64,7 +69,7 @@ PImage[] tileImageType = new PImage[TILE_TYPES];
  */
 
 void setup() {
-  readConfigFile("todd_laptop.cfg");
+  readConfigFile("karan_laptop.cfg");
   size(WIDTH,HEIGHT);
   if(touchInput) { startTouches(); }
   theGameFSM = new GameFSM();
