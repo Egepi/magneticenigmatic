@@ -14,8 +14,11 @@ import tacTile.net.*;
  public static final int MAX_ROWS = 115,
                          PUZZLE_WIDTH = 1030,
                          TILE_TYPES = 11; 
- public static int TILES_PER_ROW = 8;
- public static int TILE_SIZE = PUZZLE_WIDTH/TILES_PER_ROW;
+ public static int TILES_PER_ROW = 8,
+                   TILE_SIZE = PUZZLE_WIDTH/TILES_PER_ROW,
+                   LINE_OF_GRAVITY = MAX_ROWS/2,
+                   TILE_COLORS = 5,
+                   START_ROWS = 35;
  
  public final String TILE0 = null,
                      TILE1 = "redball.png",
