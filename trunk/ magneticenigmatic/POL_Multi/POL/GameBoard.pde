@@ -12,7 +12,6 @@ class GameBoard {
         tileBoard[i][j] = new Tile(0);
       } 
     }
-    createBoard();
   }//End GameBoard()
   
   public void drawBoard() {
@@ -20,6 +19,11 @@ class GameBoard {
   }//End drawBoard()
   
   private void createBoard() {
+    for(int i = 0; i < TILES_PER_ROW; i++) {
+      for(int j = LINE_OF_GRAVITY-START_ROWS/2; j < LINE_OF_GRAVITY+START_ROWS/2+1; j++) {
+        tileBoard[i][j] = new Tile(int(random(1,TILE_COLORS)));
+      }
+    }
    return;
   }//End createBoard()
   
