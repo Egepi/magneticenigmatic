@@ -63,13 +63,12 @@ GameBoard theBoard;
 ArrayList touchList = new ArrayList();
 PImage[] tileImageType = new PImage[TILE_TYPES];
 
-
 /**************************************************************
  * MAIN SECTION
  */
 
 void setup() {
-  readConfigFile("karan_laptop.cfg");
+  readConfigFile("todd_laptop.cfg");
   size(WIDTH,HEIGHT);
   if(touchInput) { startTouches(); }
   theGameFSM = new GameFSM();
@@ -80,6 +79,10 @@ void draw () {
   checkDebug();
 }//End draw
 
+
+/**************************************************************
+ * USED FOR DEBUGGING ONLY
+ */
 private void checkDebug() {
   if(DEBUG_ON) {
     debugCode();
