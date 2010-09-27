@@ -20,7 +20,7 @@ class GameFSM {
   /************************************************************
   */
   private void menuState() {
-    image(backgroundPicture,0,0);
+    //image(backgroundPicture,0,0);
     stateId = 4;
   }//End menuState()
   
@@ -39,7 +39,7 @@ class GameFSM {
   /************************************************************
   */
   private void boardInitState() {
-    image(backgroundPicture,0,0);
+    //image(backgroundPicture,0,0);
     stateId = 5;
     PUZZLE_WIDTH = height/2;
     TILE_SIZE = PUZZLE_WIDTH/TILES_PER_ROW;
@@ -47,9 +47,16 @@ class GameFSM {
     PUZZLE_ORIGIN_Y = (height/2) - ((TILES_PER_ROW * TILE_SIZE)/2);
     theBoard = new GameBoard(TILES_PER_ROW, MAX_ROWS);
     theBoard.createBoard();
-    for( int i = 0; i<6; i++)
-    {
-      tileImageType[i].resize(TILE_SIZE, TILE_SIZE);
+    if(TILE0 == null) {
+      for(int j = 1; j<6; j++)
+      {
+        tileImageType[j].resize(TILE_SIZE, TILE_SIZE);
+      }
+    } else {
+      for(int i = 0; i<6; i++)
+      {
+        tileImageType[i].resize(TILE_SIZE, TILE_SIZE);
+      }
     }
 
   }//End boardInitState()
@@ -83,8 +90,8 @@ class GameFSM {
   
   private void loadImages() {
     //Load background
-    backgroundPicture = loadImage("background1.png");
-    backgroundPicture.resize(width, height);
+    //backgroundPicture = loadImage("background1.png");
+    //backgroundPicture.resize(width, height);
     
     //Load images for Tiles
     if(TILE0 == null) {
